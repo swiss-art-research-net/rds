@@ -1,0 +1,2 @@
+shiroAuthenticationFilter=authcBasic,anon,authc
+securityConfigStorageId=rds-local-dev

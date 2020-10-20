@@ -1,0 +1,89 @@
+<style>
+  .component-page-toolbar {
+    display: none;
+  }
+</style>
+<div style="margin-top:10%;">
+  <div data-flex-layout="column center-center">
+    <div>
+      <h1>Welcome to RDS project</h1>
+      [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
+      <semantic-search
+        limit=1000
+        relations='{
+          "<https://sari1.ethz.ch/ontology/source/language>": [{
+            "kind": "literal"
+          }]
+        }'
+        search-profile='{
+          "categories": [{
+            "iri": "<http://rds-pages.swissartresearch.net/Resource>",
+            "label": "Resource"
+          }, {
+            "iri": "<http://www.w3.org/2000/01/rdf-schema#Literal>",
+            "label": "key"
+          }],
+          "relations": [{
+            "iri": "<http://rds-pages.swissartresearch.net/ResourceByKey>",
+            "label": "language",
+            "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
+            "hasRange": "<http://www.w3.org/2000/01/rdf-schema#Literal>"
+          }]
+        }'>
+        <semantic-search-query-keyword
+          placeholder="Search for something"
+          default-query='
+            SELECT ?subject ?property ?graph ?label WHERE {
+              GRAPH ?graph {
+                ?subject ?property ?label .
+                FILTER ISLITERAL(?label) .
+              }
+            }
+          '
+          query='
+            SELECT ?subject ?property ?graph ?label WHERE {
+              GRAPH ?graph {
+                ?subject ?property ?label .
+                FILTER ISLITERAL(?label) .
+                SERVICE <http://www.bigdata.com/rdf/search#search> {
+                  ?label <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+                  <http://www.bigdata.com/rdf/search#relevance> ?score ;
+                  <http://www.bigdata.com/rdf/search#minRelevance> "0.1" ;
+                  <http://www.bigdata.com/rdf/search#matchAllTerms> "true"  .
+                }
+              }
+            }
+          '
+        ></semantic-search-query-keyword>
+
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT ?subject ?property ?graph ?label WHERE { ?subject ?property ?label. }'
+              column-configuration='[
+                {"variableName": "subject", "displayName": "Resources"},
+                {"variableName": "property", "displayName": "Found by property"},
+                {"variableName": "label", "displayName": "key"},
+                {"variableName": "graph", "displayName": "Dataset", "cellTemplate": "{{> graph-label}}"}
+              ]'
+              number-of-displayed-rows=10
+              no-result-template='No Resources found'>
+              <template id="graph-label">
+                <semantic-link iri="{{graph.value}}"></semantic-link>
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </semantic-search>
+      <bs-panel header="Examples" collapsible="false">
+        <ul>
+            <li><semantic-link iri="[[resolvePrefix "Help:DataClientAutocompletion"]]"></semantic-link></li>
+            <li><semantic-link iri="[[resolvePrefix "Help:DataClientSimpleSearch"]]"></semantic-link></li>
+            <li><semantic-link iri="[[resolvePrefix "Help:DataClientStructuredSearch"]]"></semantic-link></li>
+        </ul>
+      </bs-panel>
+    </div>
+  </div>
+</div>
