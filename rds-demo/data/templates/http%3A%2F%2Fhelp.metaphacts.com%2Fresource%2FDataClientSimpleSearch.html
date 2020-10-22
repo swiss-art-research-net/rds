@@ -3,18 +3,37 @@
     <div>
       <h1>Welcome to RDS-demo</h1>
       [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
-    <semantic-simple-search
-      resource-binding-name="subject"
-      query='{
-        "type": "lookup",
-        "limit": 6
-      }'
-      template='{{> rowTemplate}}'
-      input-placeholder='Search for entities'
-    >
-    <template id='rowTemplate'>
-      <span style="color: blue;" title="{{subject.value}}">{{label.value}} ({{#if type}}<semantic-link iri="{{type.value}}"></semantic-link>,{{/if}} score: {{score.value}})</span>
-    </template></semantic-simple-search>
+      <semantic-simple-search
+        resource-binding-name="subject"
+        query='{
+          "type": "lookup",
+          "limit": 6
+        }'
+        template='{{> rowTemplate}}'
+        input-placeholder='Search for entities'>
+        <template id='rowTemplate'>
+          <div title="{{subject.value}}" style='display: flex; color: blue;'>
+            {{label.value}}
+            ({{#if type}}type:
+                {{#if typeLabel}}
+                    {{typeLabel.value}}
+                {{else}}
+                    {{type.value}}
+                {{/if}},&nbsp
+            {{/if}}
+            score: {{score.value}},&nbsp
+            dataset: {{#if datasetId}}
+                {{#if datasetLabel}}
+                    {{datasetLabel.value}}
+                {{else}}    
+                    {{datasetId.value}}
+                {{/if}}
+            {{else}}
+              wikidata
+            {{/if}})
+          </div>
+        </template>
+      </semantic-simple-search>
     </div>
   </div>
 </div>
