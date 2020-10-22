@@ -14,8 +14,7 @@
           "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>": [{
             "kind": "resource",
             "queryPattern": "
-              ?subject a ?facet .
-              FILTER (?facet = ?__value__) .
+              ?subject a ?__value__ .
             "
           }]
         }'
@@ -39,16 +38,27 @@
           domain='<http://rds-pages.swissartresearch.net/Resource>'
           placeholder="Search for something"
           query='
-            SELECT ?subject ?property ?graph ?label WHERE {
-              GRAPH ?graph {
-                ?subject ?property ?label .
-                FILTER ISLITERAL(?label) .
-                SERVICE <http://www.bigdata.com/rdf/search#search> {
-                  ?label <http://www.bigdata.com/rdf/search#search> ?__token__ ;
-                  <http://www.bigdata.com/rdf/search#relevance> ?score ;
-                  <http://www.bigdata.com/rdf/search#minRelevance> "0.1" ;
-                  <http://www.bigdata.com/rdf/search#matchAllTerms> "true"  .
+            SELECT ?subject ?property ?graph ?label ?score WHERE {
+              {
+                ?subject a ?type.
+                GRAPH ?graph {
+                  ?subject ?property ?label .
                 }
+                FILTER ISLITERAL(?label) .
+                FILTER (?graph != <http://vocab.getty.edu/ulan/graph>)
+              } UNION {
+                  ?subject a ?type.
+                  GRAPH <http://vocab.getty.edu/ulan/graph> {
+                    ?subject ((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) ?label .
+                  }
+                  BIND (gvp:prefLabelGVP as ?property)
+                  BIND (<http://vocab.getty.edu/ulan/graph> as ?graph)
+              }
+              SERVICE <http://www.bigdata.com/rdf/search#search> {
+                ?label <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+                <http://www.bigdata.com/rdf/search#relevance> ?score ;
+                <http://www.bigdata.com/rdf/search#minRelevance> "0.1" ;
+                <http://www.bigdata.com/rdf/search#matchAllTerms> "true"  .
               }
             }
           '
@@ -59,9 +69,8 @@
               "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>": {
                 "kind": "resource",
                 "valuesQuery": "
-                  SELECT ?value (COUNT(DISTINCT $subject) AS ?count) WHERE {
-                    ?subject a ?value.
-                  } GROUP BY ?value ORDER BY ?value
+                  SELECT (?type as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+                  } GROUP BY ?type ORDER BY ?type
                 ",
                 "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
               }
@@ -73,7 +82,7 @@
               <semantic-table
                 id='table'
                 options='{"showFilter": false}' 
-                query='SELECT ?subject ?property ?graph ?label WHERE { ?subject ?property ?label. }'
+                query='SELECT ?subject ?property ?graph ?label ?score WHERE { } ORDER BY DESC(?score)'
                 column-configuration='[
                   {"variableName": "subject", "displayName": "Resources"},
                   {"variableName": "property", "displayName": "Found by property"},
