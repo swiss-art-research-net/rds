@@ -14,7 +14,19 @@
           "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>": [{
             "kind": "resource",
             "queryPattern": "
-              ?subject a ?__value__ .
+              FILTER EXISTS {
+                ?subject a ?__value__ .
+              }
+            "
+          }],
+          "<http://swissartresearch.net#tgraph>": [{
+            "kind": "resource",
+            "queryPattern": "
+              FILTER EXISTS {
+                GRAPH ?__value__ {
+                  ?subject ?p ?o .
+                }
+              }
             "
           }]
         }'
@@ -26,12 +38,20 @@
           }, {
             "iri": "<http://rds-pages.swissartresearch.net/Type>",
             "label": "Type"
+          }, {
+            "iri": "<http://rds-pages.swissartresearch.net/Dataset>",
+            "label": "Dataset"
           }],
           "relations": [{
             "iri": "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>",
             "label": "Type",
             "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
             "hasRange": "<http://rds-pages.swissartresearch.net/Type>"
+          }, {
+            "iri": "<http://swissartresearch.net#tgraph>",
+            "label": "Dataset",
+            "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
+            "hasRange": "<http://rds-pages.swissartresearch.net/Dataset>"
           }]
         }'>
         <semantic-search-query-keyword
@@ -45,14 +65,18 @@
                   ?subject ?property ?label .
                 }
                 FILTER ISLITERAL(?label) .
-                FILTER (?graph != <http://vocab.getty.edu/ulan/graph>)
+                FILTER (?graph != <http://vocab.getty.edu/ulan/graph> && ?graph != <http://vocab.getty.edu/aat/graph>)
               } UNION {
-                  ?subject a ?type.
-                  GRAPH <http://vocab.getty.edu/ulan/graph> {
-                    ?subject ((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) ?label .
-                  }
-                  BIND (gvp:prefLabelGVP as ?property)
-                  BIND (<http://vocab.getty.edu/ulan/graph> as ?graph)
+                ?subject a ?type.
+                VALUES (?graph) {
+                  (<http://vocab.getty.edu/ulan/graph>)
+                  (<http://vocab.getty.edu/aat/graph>)
+                }
+                
+                GRAPH ?graph {
+                  ?subject ((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) ?label .
+                }
+                BIND (gvp:prefLabelGVP as ?property)
               }
               SERVICE <http://www.bigdata.com/rdf/search#search> {
                 ?label <http://www.bigdata.com/rdf/search#search> ?__token__ ;
@@ -71,6 +95,14 @@
                 "valuesQuery": "
                   SELECT (?type as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
                   } GROUP BY ?type ORDER BY ?type
+                ",
+                "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
+              },
+              "<http://swissartresearch.net#tgraph>": {
+                "kind": "resource",
+                "valuesQuery": "
+                  SELECT (?graph as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+                  } GROUP BY ?graph ORDER BY ?graph
                 ",
                 "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
               }

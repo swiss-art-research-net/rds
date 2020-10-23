@@ -28,14 +28,28 @@
         }
       """;
       lookup:searchBlockTemplate """
+{
+    GRAPH ?graph {
         ?candidate a ?type.
         ?candidate ?keyProp ?key.
-        FILTER ISLITERAL(?key)
-        SERVICE <http://www.bigdata.com/rdf/search#search> {
-             ?key <http://www.bigdata.com/rdf/search#search> ?__token__;
-             <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
-             <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\";
-             <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\".
-        }
+    }
+    FILTER ISLITERAL(?key)
+    FILTER (?graph != <http://vocab.getty.edu/ulan/graph> && ?graph != <http://vocab.getty.edu/aat/graph>)
+} UNION {
+    ?candidate a ?type.
+    VALUES (?graph) {
+      (<http://vocab.getty.edu/ulan/graph>)
+      (<http://vocab.getty.edu/aat/graph>)
+    }
+    GRAPH ?graph {
+        ?candidate ((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) ?key .
+    }
+}
+SERVICE <http://www.bigdata.com/rdf/search#search> {
+    ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+    <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+    <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
+    <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
+}
       """
     ] .
