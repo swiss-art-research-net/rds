@@ -20,11 +20,11 @@
   lookup:configuration [
       lookup:type "metaphacts:sparqlLookup";
       lookup:datasetQuery """
-        SELECT DISTINCT ?candidate ?dataset ?datsetLabel WHERE {
+        SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
           GRAPH ?dataset {
             ?candidate ?p ?o .
           }
-          OPTIONAL { ?dataset rdfs:label ?datsetLabel . }
+          OPTIONAL { ?dataset rdfs:label ?datasetLabel . }
         }
       """;
       lookup:searchBlockTemplate """
