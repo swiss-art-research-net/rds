@@ -14,7 +14,7 @@
   rdfs:label "Default HTTP SPARQL Repository";
   rep:repositoryImpl [
       rep:repositoryType "metaphactory:SPARQLRepository";
-      sparql:query-endpoint <http://rds-mph-blazegraph:8080/blazegraph/sparql>;
+      sparql:query-endpoint <http://rds-local-blazegraph:8080/blazegraph/sparql>;
       mph:quadMode true
     ];
   lookup:configuration [
@@ -37,5 +37,13 @@
              <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\";
              <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\".
         }
-      """
-    ] .
+      """;
+    lookup:typeBlockTemplate """
+      FILTER EXISTS {
+        GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
+          ?targetType rdfs:subClassOf? ?__type__.
+        }
+        ?candidate a ?targetType.
+      }
+    """
+    ].
