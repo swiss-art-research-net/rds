@@ -1,0 +1,75 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sparql: <http://www.openrdf.org/config/repository/sparql#> .
+@prefix lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#> .
+@prefix rep: <http://www.openrdf.org/config/repository#> .
+@prefix sail: <http://www.openrdf.org/config/sail#> .
+@prefix sr: <http://www.openrdf.org/config/repository/sail#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mph: <http://www.metaphacts.com/ontologies/platform/repository#> .
+@prefix ephedra: <http://www.metaphacts.com/ontologies/platform/ephedra#> .
+@prefix fedsail: <http://www.openrdf.org/config/sail/federation#> .
+
+[] a rep:Repository;
+  rep:repositoryID "wikidata-lookup";
+  rdfs:label "SPARQL repository";
+  rep:repositoryImpl [
+      rep:repositoryType "metaphactory:SPARQLRepository";
+      sparql:query-endpoint <https://query.wikidata.org/sparql>;
+      mph:quadMode true
+    ];
+  lookup:configuration [
+      lookup:type "metaphacts:sparqlLookup";
+      lookup:datasetQuery """
+        SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
+            ?candidate ?p ?o .
+            VALUES(?dataset ?datasetLabel) {
+                (<www.wikidata.org> \"wikidata\")
+            }
+        }
+      """;
+      lookup:searchBlockTemplate """
+        {SELECT ?candidate ?type ?score_private WHERE {
+            SERVICE wikibase:mwapi {
+                bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
+                                wikibase:api \"EntitySearch\";
+                                mwapi:language \"en\";
+                                mwapi:search ?__token__.
+                ?candidate wikibase:apiOutputItem mwapi:item.
+                ?score_private wikibase:apiOrdinal true.
+            }
+            ?candidate (wdt:P279|wdt:P31) ?type
+        }}
+    """;
+      lookup:typeBlockTemplate """
+      FILTER EXISTS {
+        BIND (?__type__ as ?boundType)
+        VALUES (?boundType ?targetType) {
+          (<http://schema.swissartresearch.net/ontology/rds#Event> <http://www.wikidata.org/entity/Q1190554>)
+
+          (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q154954>)
+          (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q1415187>)
+          (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q215627>)
+
+          (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q8436>)
+          (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q16334295>)
+          (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q5946290>)
+          (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q6256>)
+          (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q3778211>)
+
+          (<http://schema.swissartresearch.net/ontology/rds#BuiltWork> <http://www.wikidata.org/entity/Q570116>)
+          (<http://schema.swissartresearch.net/ontology/rds#BuiltWork> <http://www.wikidata.org/entity/Q811979>)
+          (<http://schema.swissartresearch.net/ontology/rds#BuiltWork> <http://www.wikidata.org/entity/Q17350442>)
+
+          (<http://schema.swissartresearch.net/ontology/rds#Artwork> <http://www.wikidata.org/entity/Q18593264>)
+          (<http://schema.swissartresearch.net/ontology/rds#Artwork> <http://www.wikidata.org/entity/Q838948>)
+
+          (<http://schema.swissartresearch.net/ontology/rds#BiliographicItem> <http://www.wikidata.org/entity/Q2342494>)
+          (<http://schema.swissartresearch.net/ontology/rds#BiliographicItem> <http://www.wikidata.org/entity/Q732577>)
+          (<http://schema.swissartresearch.net/ontology/rds#BiliographicItem> <http://www.wikidata.org/entity/Q47461344>)
+          
+          (<http://schema.swissartresearch.net/ontology/rds#Place> <http://www.wikidata.org/entity/Q27096213>)
+        }
+        ?candidate (wdt:P279|wdt:P31) ?targetType.
+      }
+    """
+    ] .
