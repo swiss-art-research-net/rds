@@ -49,6 +49,7 @@
           (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q154954>)
           (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q1415187>)
           (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q215627>)
+          (<http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q5>)
 
           (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q8436>)
           (<http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q16334295>)

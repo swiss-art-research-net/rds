@@ -16,7 +16,7 @@
                     lookup-query='{
                         "type": "lookup",
                         "entityType": "http://schema.swissartresearch.net/ontology/rds#BuiltWork",
-                        "limit": 5
+                        "limit": 20
                     }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -25,8 +25,8 @@
                     value-binding-name="subject"
                     lookup-query='{
                         "type": "lookup",
-                        "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
-                        "limit": 5
+                        "entityType": "http://schema.swissartresearch.net/ontology/rds#Group",
+                        "limit": 20
                     }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -35,8 +35,8 @@
                     value-binding-name="subject"
                     lookup-query='{
                         "type": "lookup",
-                        "entityType": "http://www.w3.org/ns/prov#Activity",
-                        "limit": 5
+                        "entityType": "http://vocab.getty.edu/ontology#Concept",
+                        "limit": 20
                         }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -45,8 +45,8 @@
                     value-binding-name="subject"
                     lookup-query='{
                         "type": "lookup",
-                        "entityType": "http://www.geonames.org/ontology#Feature",
-                        "limit": 5
+                        "entityType": "http://schema.swissartresearch.net/ontology/rds#Group",
+                        "limit": 20
                         }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -55,8 +55,8 @@
                     value-binding-name="subject"
                     lookup-query='{
                         "type": "lookup",
-                        "entityType": "http://www.geonames.org/ontology#Feature",
-                        "limit": 5
+                        "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                        "limit": 20
                         }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -66,7 +66,7 @@
                     lookup-query='{
                         "type": "lookup",
                         "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-                        "limit": 5
+                        "limit": 20
                         }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -75,8 +75,8 @@
                     value-binding-name="subject"
                     lookup-query='{
                         "type": "lookup",
-                        "entityType": "http://www.w3.org/ns/prov#Modify",
-                        "limit": 5
+                        "entityType": "http://vocab.getty.edu/ontology#Concept",
+                        "limit": 20
                         }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -85,8 +85,8 @@
                     value-binding-name="subject"
                     lookup-query='{
                         "type": "lookup",
-                        "entityType": "http://www.w3.org/ns/prov#Activity",
-                        "limit": 5
+                        "entityType": "http://vocab.getty.edu/ontology#Concept",
+                        "limit": 20
                         }'
                     template='{{> autocompletionTemplate}}'>
                     [[> autocompletionTemplate]]
@@ -103,23 +103,28 @@
   <template id='autocompletionTemplate'>
     <div title="{{subject.value}}" style='display: flex;'>
         {{label.value}}
-        ({{#if type}}type:
+
+        {{#if type}}
+            |&nbsp type:
             {{#if typeLabel}}
                 {{typeLabel.value}}
             {{else}}
                 {{type.value}}
-            {{/if}},&nbsp
+            {{/if}}
         {{/if}}
-        score: {{score.value}},&nbsp
-        dataset: {{#if datasetId}}
+
+        {{#if score}}
+            |&nbsp score: {{score.value}}
+        {{/if}}
+
+        {{#if datasetId}}
+            |&nbsp dataset: 
             {{#if datasetLabel}}
                 {{datasetLabel.value}}
             {{else}}    
                 {{datasetId.value}}
             {{/if}}
-        {{else}}
-          wikidata
-        {{/if}})
+        {{/if}}
     </div>
   </template>
 [[/inline]]
