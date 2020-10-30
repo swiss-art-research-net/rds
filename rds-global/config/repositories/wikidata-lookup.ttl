@@ -27,6 +27,17 @@
             }
         }
       """;
+      lookup:queryTemplate """
+        SELECT
+            ?candidate
+            (GROUP_CONCAT(DISTINCT ?type ; separator=\",\") as ?types)
+            (MAX(?score_private) as ?score)
+        WHERE {
+            {{type_block}}
+            {{search_block}}
+            {{properties_block}}
+        } GROUP BY ?candidate ORDER BY ?score {{limit_block}}
+      """;
       lookup:searchBlockTemplate """
         {SELECT ?candidate ?type ?score_private WHERE {
             SERVICE wikibase:mwapi {

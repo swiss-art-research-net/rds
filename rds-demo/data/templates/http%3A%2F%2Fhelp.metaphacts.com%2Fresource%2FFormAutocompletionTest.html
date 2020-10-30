@@ -100,33 +100,37 @@
 </div>
 
 [[#*inline "autocompletionTemplate"]]
-  <template id='autocompletionTemplate'>
-    <div title="{{subject.value}}" style='display: flex;'>
-        {{label.value}}
-
-        {{#if type}}
-            |&nbsp type:
-            {{#if typeLabel}}
-                {{typeLabel.value}}
-            {{else}}
-                {{type.value}}
+<template id='autocompletionTemplate'>
+    <div>
+        <div title="{{subject.value}}" style='display: flex;'>
+            {{label.value}}
+            {{#if type}}
+                |&nbsp type:
+                <b>
+                    {{#if typeLabel}}
+                        {{typeLabel.value}}
+                    {{else}}
+                        {{type.value}}
+                    {{/if}}
+                </b>
             {{/if}}
-        {{/if}}
 
-        {{#if score}}
-            |&nbsp score: {{score.value}}
-        {{/if}}
-
-        {{#if datasetId}}
-            |&nbsp dataset: 
-            {{#if datasetLabel}}
-                {{datasetLabel.value}}
-            {{else}}    
-                {{datasetId.value}}
+            {{#if score}}
+                |&nbsp score: {{score.value}}
             {{/if}}
-        {{/if}}
+
+            {{#if datasetId}}
+                |&nbsp dataset: 
+                {{#if datasetLabel}}
+                    {{datasetLabel.value}}
+                {{else}}    
+                    {{datasetId.value}}
+                {{/if}}
+            {{/if}}
+        </div>
+        {{#if description}}<div><i>Description: {{description.value}}</i></div>{{/if}}
     </div>
-  </template>
+</template>
 [[/inline]]
   
 [[#*inline "formFields"]]

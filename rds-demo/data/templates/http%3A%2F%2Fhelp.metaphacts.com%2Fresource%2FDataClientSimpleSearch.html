@@ -17,11 +17,13 @@
               {{label.value}}
               {{#if type}}
                   |&nbsp type:
-                  {{#if typeLabel}}
-                      {{typeLabel.value}}
-                  {{else}}
-                      {{type.value}}
-                  {{/if}}
+                  <b>
+                    {{#if typeLabel}}
+                        {{typeLabel.value}}
+                    {{else}}
+                        {{type.value}}
+                    {{/if}}
+                  </b>
               {{/if}}
 
               {{#if score}}
@@ -37,12 +39,10 @@
                   {{/if}}
               {{/if}}
             </div>
-            <iframe src="https://rds-mph.swissartresearch.net/rest/reconciliation/description?uri={{{subject.value}}}" frameborder="0"></iframe>
-            {{#if description}}<div>Description: {{description.value}}</div>{{/if}}
+            {{#if description}}<div><i>Description: {{description.value}}</i></div>{{/if}}
           </div>
         </template>
       </semantic-simple-search>
-      <iframe src="https://rds-mph.swissartresearch.net/rest/reconciliation/description?uri=http%3A%2F%2Fwww.wikidata.org%2Fentity%2FQ3078814" frameborder="0"></iframe>
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@
 @prefix wdv: <http://www.wikidata.org/value/> . 
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix gvp: <http://vocab.getty.edu/ontology#> .
-@prefix gnd: <http://d-nb.info/standards/elementset/gnd#> .
+@prefix gnd: <https://d-nb.info/standards/elementset/gnd#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix gn: <http://www.geonames.org/ontology#> .
 @prefix frbroo: <http://iflastandards.info/ns/fr/frbr/frbroo/> .
@@ -37,6 +37,8 @@ wd:Q215627 rdfs:subClassOf rds:Person . # person
 wd:Q154954 rdfs:subClassOf rds:Person . #natural person in wikidata
 wd:Q1415187 rdfs:subClassOf rds:Person . #economic agent in wikidata
 wd:Q5 rdfs:subClassOf rds:Person . #human
+gvp:UnknownPersonConcept rdfs:subClassOf rds:Person .
+gnd:DifferentiatedPerson rdfs:subClassOf rds:Person .
 
 
 crm:E21_Person rdf:type rdfs:Class ;
@@ -46,7 +48,9 @@ crm:E21_Person rdf:type rdfs:Class ;
     owl:equivalentClass wd:Q5 ; # human
     owl:equivalentClass wd:Q215627 ; # person
     owl:equivalentClass wd:Q154954 ;  #natural person in wikidata
-    owl:equivalentClass wd:Q1415187 . #economic agent in wikidata
+    owl:equivalentClass wd:Q1415187 ; #economic agent in wikidata
+    owl:equivalentClass gvp:UnknownPersonConcept ;
+    owl:equivalentClass gnd:DifferentiatedPerson .
 
 # Group equivalences 
 
