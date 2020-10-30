@@ -12,28 +12,37 @@
         template='{{> rowTemplate}}'
         input-placeholder='Search for entities'>
         <template id='rowTemplate'>
-          <div title="{{subject.value}}" style='display: flex; color: blue;'>
-            {{label.value}}
-            ({{#if type}}type:
-                {{#if typeLabel}}
-                    {{typeLabel.value}}
-                {{else}}
-                    {{type.value}}
-                {{/if}},&nbsp
-            {{/if}}
-            score: {{score.value}},&nbsp
-            dataset: {{#if datasetId}}
-                {{#if datasetLabel}}
-                    {{datasetLabel.value}}
-                {{else}}    
-                    {{datasetId.value}}
-                {{/if}}
-            {{else}}
-              wikidata
-            {{/if}})
+          <div>
+            <div title="{{subject.value}}" style='display: flex;'>
+              {{label.value}}
+              {{#if type}}
+                  |&nbsp type:
+                  {{#if typeLabel}}
+                      {{typeLabel.value}}
+                  {{else}}
+                      {{type.value}}
+                  {{/if}}
+              {{/if}}
+
+              {{#if score}}
+                  |&nbsp score: {{score.value}}
+              {{/if}}
+
+              {{#if datasetId}}
+                  |&nbsp dataset: 
+                  {{#if datasetLabel}}
+                      {{datasetLabel.value}}
+                  {{else}}    
+                      {{datasetId.value}}
+                  {{/if}}
+              {{/if}}
+            </div>
+            <iframe src="https://rds-mph.swissartresearch.net/rest/reconciliation/description?uri={{{subject.value}}}" frameborder="0"></iframe>
+            {{#if description}}<div>Description: {{description.value}}</div>{{/if}}
           </div>
         </template>
       </semantic-simple-search>
+      <iframe src="https://rds-mph.swissartresearch.net/rest/reconciliation/description?uri=http%3A%2F%2Fwww.wikidata.org%2Fentity%2FQ3078814" frameborder="0"></iframe>
     </div>
   </div>
 </div>
