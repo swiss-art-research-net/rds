@@ -1,0 +1,72 @@
+<div>
+    <div data-flex-layout="column center-center">
+      <div style='margin: 50px 50px 100px 50px'>
+          <h1>Type mappings test page</h1>
+  
+          [[> simpleSearch title="Search for BuiltWork" example='Sistine Chapel'
+              type="http://schema.swissartresearch.net/ontology/rds#BuiltWork"]]
+          [[> simpleSearch title="Search for BibliographicItem" example='To do...'
+              type="http://schema.swissartresearch.net/ontology/rds#BibliographicItem"]]
+          [[> simpleSearch title="Search for Artwork" example='To do...'
+              type="http://schema.swissartresearch.net/ontology/rds#Artwork"]]
+          [[> simpleSearch title="Search for Person" example='Michelangelo Buonarrotti'
+              type="http://schema.swissartresearch.net/ontology/rds#Person"]]
+          [[> simpleSearch title="Search for Group" example='To do...'
+              type="http://schema.swissartresearch.net/ontology/rds#Group"]]
+          [[> simpleSearch title="Search for Event" example='To do...'
+              type="http://schema.swissartresearch.net/ontology/rds#Event"]]
+          [[> simpleSearch title="Search for Place" example='Canada'
+              type="http://schema.swissartresearch.net/ontology/rds#Place"]]
+      </div>
+    </div>
+  </div>
+  
+  [[#*inline "autocompletionTemplate"]]
+  <template id='autocompletionTemplate'>
+      <div>
+          <div title="{{subject.value}}" style='display: flex;'>
+              {{label.value}}
+              {{#if type}}
+                  |&nbsp type:
+                  <b>
+                      {{#if typeLabel}}
+                          {{typeLabel.value}}
+                      {{else}}
+                          {{type.value}}
+                      {{/if}}
+                  </b>
+              {{/if}}
+  
+              {{#if score}}
+                  |&nbsp score: {{score.value}}
+              {{/if}}
+  
+              {{#if datasetId}}
+                  |&nbsp dataset: 
+                  {{#if datasetLabel}}
+                      {{datasetLabel.value}}
+                  {{else}}    
+                      {{datasetId.value}}
+                  {{/if}}
+              {{/if}}
+          </div>
+          {{#if description}}<div><i>Description: {{description.value}}</i></div>{{/if}}
+      </div>
+  </template>
+  [[/inline]]
+  
+  [[#*inline "simpleSearch"]]
+      <h3>[[title]]</h3>
+      <h4>Example: <i>[[example]]</i></h4>
+      <semantic-simple-search
+          resource-binding-name="subject"
+          query='{
+            "type": "lookup",
+            "entityType": "[[type]]",
+            "limit": 60
+          }'
+          template='{{> autocompletionTemplate}}'
+          input-placeholder='Search for entities'>
+          [[> autocompletionTemplate]]
+      </semantic-simple-search>
+  [[/inline]]

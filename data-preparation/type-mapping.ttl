@@ -135,15 +135,15 @@ rds:crmArtwork rdfs:subClassOf rds:Artwork .
 
 # Bibliographic item equivalences 
 
-rds:BiliographicItem a rdfs:Class;
+rds:BibliographicItem a rdfs:Class;
     rdfs:label "Bibliographic Item"@en ;
     rdfs:comment "A bibliographic item entity type expressed in RDS. The bibliographic item class is expressed as superclass of a series of classes from various ontology in the heritage domain"@en .
 
-gnd:Work rdfs:subClassOf rds:BiliographicItem .
-wd:Q2342494 rdfs:subClassOf rds:BiliographicItem .
-wd:Q732577 rdfs:subClassOf rds:BiliographicItem .
-wd:Q47461344 rdfs:subClassOf rds:BiliographicItem .
-frbroo:F24_Publication_Expression rdfs:subClassOf rds:BiliographicItem .
+gnd:Work rdfs:subClassOf rds:BibliographicItem .
+wd:Q2342494 rdfs:subClassOf rds:BibliographicItem .
+wd:Q732577 rdfs:subClassOf rds:BibliographicItem .
+wd:Q47461344 rdfs:subClassOf rds:BibliographicItem .
+frbroo:F24_Publication_Expression rdfs:subClassOf rds:BibliographicItem .
 
 frbroo:F24_Publication_Expression rdf:type rdfs:Class;
     owl:equivalentClass wd:Q47461344 ; # written work
