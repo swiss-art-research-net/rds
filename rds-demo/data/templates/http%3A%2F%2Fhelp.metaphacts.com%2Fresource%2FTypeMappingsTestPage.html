@@ -5,15 +5,15 @@
   
           [[> simpleSearch title="Search for BuiltWork" example='Sistine Chapel'
               type="http://schema.swissartresearch.net/ontology/rds#BuiltWork"]]
-          [[> simpleSearch title="Search for BibliographicItem" example='To do...'
+          [[> simpleSearch title="Search for BibliographicItem" example='Persistencia de la memoria'
               type="http://schema.swissartresearch.net/ontology/rds#BibliographicItem"]]
-          [[> simpleSearch title="Search for Artwork" example='To do...'
+          [[> simpleSearch title="Search for Artwork" example='Easter egg'
               type="http://schema.swissartresearch.net/ontology/rds#Artwork"]]
-          [[> simpleSearch title="Search for Person" example='Michelangelo Buonarrotti'
+          [[> simpleSearch title="Search for Person" example='Michelangelo Buonarroti'
               type="http://schema.swissartresearch.net/ontology/rds#Person"]]
-          [[> simpleSearch title="Search for Group" example='To do...'
+          [[> simpleSearch title="Search for Group" example='Yale University'
               type="http://schema.swissartresearch.net/ontology/rds#Group"]]
-          [[> simpleSearch title="Search for Event" example='To do...'
+          [[> simpleSearch title="Search for Event" example='human migration'
               type="http://schema.swissartresearch.net/ontology/rds#Event"]]
           [[> simpleSearch title="Search for Place" example='Canada'
               type="http://schema.swissartresearch.net/ontology/rds#Place"]]
@@ -24,31 +24,8 @@
   [[#*inline "autocompletionTemplate"]]
   <template id='autocompletionTemplate'>
       <div>
-          <div title="{{subject.value}}" style='display: flex;'>
-              {{label.value}}
-              {{#if type}}
-                  |&nbsp type:
-                  <b>
-                      {{#if typeLabel}}
-                          {{typeLabel.value}}
-                      {{else}}
-                          {{type.value}}
-                      {{/if}}
-                  </b>
-              {{/if}}
-  
-              {{#if score}}
-                  |&nbsp score: {{score.value}}
-              {{/if}}
-  
-              {{#if datasetId}}
-                  |&nbsp dataset: 
-                  {{#if datasetLabel}}
-                      {{datasetLabel.value}}
-                  {{else}}    
-                      {{datasetId.value}}
-                  {{/if}}
-              {{/if}}
+          <div title="{{subject.value}}">
+            {{label.value}}<span>{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}</span>{{#if score}}<span> | score: {{score.value}}</span>{{/if}}{{#if datasetId}}<span> | dataset: {{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</span>{{/if}}
           </div>
           {{#if description}}<div><i>Description: {{description.value}}</i></div>{{/if}}
       </div>
