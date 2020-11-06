@@ -42,7 +42,7 @@
       (<http://vocab.getty.edu/aat/graph>)
     }
     GRAPH ?graph {
-        ?candidate ((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) ?key .
+        ?candidate (((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) | rdfs:label) ?key .
     }
 }
 SERVICE <http://www.bigdata.com/rdf/search#search> {

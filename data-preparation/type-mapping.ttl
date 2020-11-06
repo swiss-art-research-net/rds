@@ -36,7 +36,6 @@ gvp:PersonConcept rdfs:subClassOf rds:Person .
 wd:Q215627 rdfs:subClassOf rds:Person . # person
 wd:Q154954 rdfs:subClassOf rds:Person . #natural person in wikidata
 wd:Q1415187 rdfs:subClassOf rds:Person . #economic agent in wikidata
-wd:Q5 rdfs:subClassOf rds:Person . #human
 gvp:UnknownPersonConcept rdfs:subClassOf rds:Person .
 gnd:DifferentiatedPerson rdfs:subClassOf rds:Person .
 
@@ -45,7 +44,6 @@ crm:E21_Person rdf:type rdfs:Class ;
     owl:equivalentClass gnd:Person ; 
     owl:equivalentClass gnd:UndifferentiatedPerson ;
     owl:equivalentClass gvp:PersonConcept ;
-    owl:equivalentClass wd:Q5 ; # human
     owl:equivalentClass wd:Q215627 ; # person
     owl:equivalentClass wd:Q154954 ;  #natural person in wikidata
     owl:equivalentClass wd:Q1415187 ; #economic agent in wikidata

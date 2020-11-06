@@ -15,6 +15,6 @@ SELECT ?wikidataValues WHERE {
     }
   }}
   BIND (
-  	CONCAT ("VALUES(?boundType ?targetType) {\n", ?valueRows, "\n}") as 
+  	CONCAT ("VALUES(?boundType ?mappedType) {\n", ?valueRows, "\n}") as 
   ?wikidataValues)
 }
