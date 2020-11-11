@@ -95,8 +95,25 @@
               }
             ]
           }'>
-          <semantic-search-query-builder resource-selector-relations='{
+          <semantic-search-query-builder
+            resource-selector-relations='{
               "<http://xmlns.com/foaf/0.1/topic_interest>": {
+                  "query": {
+                      "type": "lookup",
+                      "limit": 3
+                  },
+                  "suggestionVariable": "subject",
+                  "suggestionTupleTemplate": "<span style=\"color: blue;\" title=\"{{resource.value}}({{typeLabel.value}})\">{{label.value}} ({{typeLabel.value}}, score: {{score.value}}) <span style=\"color: gray\" title=\"{{datasetId.value}}\">from {{datasetLabel.value}}</span></span>"
+              },
+              "<http://xmlns.com/foaf/0.1/knows>": {
+                  "query": {
+                      "type": "lookup",
+                      "limit": 3
+                  },
+                  "suggestionVariable": "subject",
+                  "suggestionTupleTemplate": "<span style=\"color: blue;\" title=\"{{resource.value}}({{typeLabel.value}})\">{{label.value}} ({{typeLabel.value}}, score: {{score.value}}) <span style=\"color: gray\" title=\"{{datasetId.value}}\">from {{datasetLabel.value}}</span></span>"
+              },
+              "<http://www.metaphacts.com/ontology/sample/fan_of>": {
                   "query": {
                       "type": "lookup",
                       "limit": 3
