@@ -1,0 +1,23 @@
+@prefix rs: <http://www.researchspace.org/ontology/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://vocab.getty.edu/ulan/graph> rs:displayLabel "ulan";
+ rdfs:label "ulan";
+ skos:prefLabel "ulan" .
+
+<http://vocab.getty.edu/aat/graph> rs:displayLabel "aat";
+ rdfs:label "aat";
+ skos:prefLabel "aat" .
+
+<https://d-nb.info/gnd/bibliographicdata/graph> rs:displayLabel "bibliographic-data";
+ rdfs:label "bibliographic-data";
+ skos:prefLabel "bibliographic-data" .
+
+<https://d-nb.info/gnd/entityfacts/graph> rs:displayLabel "entity-facts";
+ rdfs:label "entity-facts";
+ skos:prefLabel "entity-facts" .
+
+<http://sws.geonames.org/graph> rs:displayLabel "geonames";
+ rdfs:label "geonames";
+ skos:prefLabel "geonames" .
