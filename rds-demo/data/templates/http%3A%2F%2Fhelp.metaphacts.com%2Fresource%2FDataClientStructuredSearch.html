@@ -103,7 +103,7 @@
                       "limit": 3
                   },
                   "suggestionVariable": "subject",
-                  "suggestionTupleTemplate": "<span style=\"color: blue;\" title=\"{{resource.value}}({{typeLabel.value}})\">{{label.value}} ({{typeLabel.value}}, score: {{score.value}}) <span style=\"color: gray\" title=\"{{datasetId.value}}\">from {{datasetLabel.value}}</span></span>"
+                  "suggestionTupleTemplate": "{{> candidateTemplate}}"
               },
               "<http://xmlns.com/foaf/0.1/knows>": {
                   "query": {
@@ -111,7 +111,7 @@
                       "limit": 3
                   },
                   "suggestionVariable": "subject",
-                  "suggestionTupleTemplate": "<span style=\"color: blue;\" title=\"{{resource.value}}({{typeLabel.value}})\">{{label.value}} ({{typeLabel.value}}, score: {{score.value}}) <span style=\"color: gray\" title=\"{{datasetId.value}}\">from {{datasetLabel.value}}</span></span>"
+                  "suggestionTupleTemplate": "{{> candidateTemplate}}"
               },
               "<http://www.metaphacts.com/ontology/sample/fan_of>": {
                   "query": {
@@ -119,9 +119,12 @@
                       "limit": 3
                   },
                   "suggestionVariable": "subject",
-                  "suggestionTupleTemplate": "<span style=\"color: blue;\" title=\"{{resource.value}}({{typeLabel.value}})\">{{label.value}} ({{typeLabel.value}}, score: {{score.value}}) <span style=\"color: gray\" title=\"{{datasetId.value}}\">from {{datasetLabel.value}}</span></span>"
+                  "suggestionTupleTemplate": "{{> candidateTemplate}}"
               }
           }'>
+            <template id="candidateTemplate">
+              [[> mpp:LookupCandidateTemplate]]
+            </template>
           </semantic-search-query-builder>
           <div data-flex-layout="row stretch-stretch">
               <div data-flex-self="size-1of3" style="flex: 0 0 20px;">
