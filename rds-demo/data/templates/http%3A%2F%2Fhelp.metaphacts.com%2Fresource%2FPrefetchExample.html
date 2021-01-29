@@ -1,0 +1,88 @@
+<style>
+  .DataTable--table>thead>tr>th {
+    background-color: transparent;
+  }
+  p.match b {
+    color: #dc8a4b;
+    font-weight: normal;
+  }
+
+  p.match b:after {
+    content: " ";
+  }
+
+  .searchinput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .searchinput i {
+    position: relative;
+    left: 12px;
+  }
+  .searchinput .input {
+    flex: 1;
+    margin-left: -12px;
+    box-shadow: 0px 0px 2px #4a9eba;
+    border-color: #4a9eba;
+  }
+  .searchinput input {
+    padding-left: 28px;
+  }
+  .searchinput .form-group {
+    margin-bottom: 0;
+  }
+</style>
+
+<div style="margin-top:10%;">
+  <div data-flex-layout="column center-center">
+    <div>
+      <h1>Google like search with DataClient</h1>
+      [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
+      <semantic-search limit=1000>
+          <semantic-search-keyword-prefetch
+            query='{
+              "type": "lookup",
+              "limit": 20
+            }'>
+          </semantic-search-keyword-prefetch>
+        
+          <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+            <div style='max-width: 90vw'>
+            <semantic-search-result-holder>
+              <semantic-search-result>
+                <semantic-table
+                  id='table'
+                  options='{"showFilter": false}' 
+                  query='SELECT ?subject ?property ?graph ?label ?score WHERE { } ORDER BY DESC(?score)'
+                  number-of-displayed-rows=10
+                  no-result-template='No Resources found'
+                  column-configuration='[
+                      {"variableName": "subject", "displayName": "Result", "cellTemplate": "{{> subjectCellTemplate}}" }
+                  ]'>
+                  <template id="subjectCellTemplate">
+                    <h4><b>
+                      <semantic-link iri='{{{subject.value}}}'>
+                        <mp-highlight
+                          highlight='{{searchToken.value}}'
+                          split-token='true'>
+                          {{label.value}}
+                        </mp-highlight>
+                      </semantic-link>
+                    </b></h4>
+                    <p style="font-style:italic;">[[> mpp:LookupCandidateTemplate]]</p>
+                  </template>
+                </semantic-table>
+              </semantic-search-result>
+            </semantic-search-result-holder>
+            </div>
+          </div>
+      </semantic-search>
+    </div>
+  </div>
+</div>
+
+<div class="page" style="padding: 100px">
+
+</div>
