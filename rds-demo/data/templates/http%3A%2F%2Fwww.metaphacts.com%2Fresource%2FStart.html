@@ -20,16 +20,7 @@
           "<http://swissartresearch.net#graph>": [{
             "kind": "resource",
             "queryPattern": "
-              FILTER (
-                (EXISTS {
-                  GRAPH ?__value__ { ?subject ?p ?o. }
-                }) || (
-                  (NOT EXISTS {
-                    ?subject a ?type.
-                  }) &&
-                  (?__value__ = <http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org>)
-                )
-              )
+              GRAPH ?__value__ { ?subject ?p ?o. }
             "
           }]
         }'
@@ -62,29 +53,32 @@
           placeholder="Search for something"
           query='{
             "type": "lookup",
-            "limit": 20
+            "limit": 20,
+            "lookupServiceName_disabled": "default-lookup"
           }'>
         </semantic-search-keyword-prefetch>
         <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
           <div data-flex-self="size-1of3" style="flex: 0 0 20px;">
-            <semantic-search-facet value-relations='{
+            <semantic-search-facet-disabled value-relations='{
               "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>": {
                 "kind": "resource",
                 "valuesQuery": "
-                  SELECT (?type as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
-                  } GROUP BY ?type ORDER BY ?type
+                  SELECT ?value (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+                    ?subject a ?value
+                  } GROUP BY ?value ORDER BY ?value
                 ",
                 "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
               },
               "<http://swissartresearch.net#graph>": {
                 "kind": "resource",
                 "valuesQuery": "
-                  SELECT (?datasetId as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
-                  } GROUP BY ?datasetId ORDER BY ?datasetId
+                  SELECT ?value (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+                    GRAPH ?value { ?subject ?p ?o. }
+                  } GROUP BY ?value ORDER BY ?value
                 ",
                 "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
               }
-            }'></semantic-search-facet>
+            }'></semantic-search-facet-disabled>
           </div>
           <div style='max-width: 90vw'>
             <semantic-search-result-holder>
