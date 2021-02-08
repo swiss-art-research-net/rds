@@ -70,3 +70,4 @@ dcterms = http://purl.org/dc/terms/
 graph-aat = http://aat-explicit
 ontolex = http://www.w3.org/ns/lemon/ontolex#
 lexinfo	= http://www.lexinfo.net/ontology/2.0/lexinfo#
+sari = http://w3id.org/sari/

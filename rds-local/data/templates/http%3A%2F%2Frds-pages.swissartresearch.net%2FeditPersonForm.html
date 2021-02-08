@@ -1,0 +1,250 @@
+[[#if (hasPermission "forms:ldp:*")]] 
+
+<div class="page">
+    <div class='row'>
+        <div class="text-center col-md-2">
+            <br>
+            <font size="+2">
+                Add a new <b>Person</b>
+            </font>
+            <br>
+            <img src="https://cdn3.iconfinder.com/data/icons/faticons/32/user-01-512.png" width="50%">
+        </div>
+        <div class="col-md-8" style="margin-bottom: 100px">
+            <semantic-form 
+                new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
+                browser-persistence=true
+                persistence='ldp' 
+                form-id='persons'
+                post-action='redirect'               
+                fields='[[fieldDefinitions
+                    type="http://www.metaphacts.com/fieldDefinition/RdfType"
+                    Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
+                    Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
+                    Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+                    Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
+                    Mph_Person_Birth_Place="http://www.metaphacts.com/fieldDefinition/Person_Birth_Place"
+                    Mph_Person_Death_Place="http://www.metaphacts.com/fieldDefinition/Person_Death_Place"
+                    Occupation_General_Role="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role"
+                    
+                    Mph_Short_Biography="http://www.metaphacts.com/fieldDefinition/Short_Biography"
+                    Mph_Long_Biography="http://www.metaphacts.com/fieldDefinition/Long_Biography"
+
+                    Mph_Person_GND_URL="http://www.metaphacts.com/fieldDefinition/Person_GND_URL"
+                    Mph_Person_Wikidata_URL="http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL"
+                    Mph_Person_ULAN_URL="http://www.metaphacts.com/fieldDefinition/Person_ULAN_URL"
+
+                    Mph_Person_Name_Honorific="http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific"
+                    Person_Father="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father"
+                    Person_Mother="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother"
+
+                    Person_Social_Relations="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations"
+                ]]'>
+                <semantic-form-hidden-input for="type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
+
+                <semantic-form-composite-input 
+                    for="Person_Name"
+                    new-subject-template="."
+                    fields='[[fieldDefinitions
+                        Mph_Person_Name="http://www.metaphacts.com/fieldDefinition/Person_Name"
+                        Person_Name_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Part"
+                    ]]'>
+                    <semantic-form-text-input
+                        for="Mph_Person_Name" 
+                        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+                    </semantic-form-text-input>
+                    <semantic-form-text-input for="Person_Name_Part"></semantic-form-text-input>
+                </semantic-form-composite-input>
+
+                <semantic-form-text-input
+                    for="Mph_Person_Name_Honorific"
+                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+                </semantic-form-text-input>
+
+                <semantic-form-composite-input 
+                    for="Mph_Identifier"
+                    new-subject-template=""
+                    fields='[[fieldDefinitions
+                        Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
+                        Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
+                        Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+                        Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
+                    ]]'>
+                    <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
+                    <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
+                    <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
+                    <semantic-form-text-input for="Mph_Identifier_Provider"></semantic-form-text-input>
+                </semantic-form-composite-input>  
+
+                <semantic-form-text-input
+                    for="Mph_Identifier_Provider"
+                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+                </semantic-form-text-input>
+                    
+                <semantic-form-select-input 
+                    for="Person_Gender">
+                </semantic-form-select-input>
+
+                <semantic-form-composite-input 
+                    for="Mph_Person_Birth_Place"
+                    new-subject-template="/birth"
+                    fields='[[fieldDefinitions
+                        Mph_Birth_Place="http://www.metaphacts.com/fieldDefinition/Birth_Place"
+                        Person_Birth_Date_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest"
+                        Person_Birth_Date_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_latest"
+                    ]]'>
+                    <semantic-form-autocomplete-input 
+                        for="Mph_Birth_Place">
+                    </semantic-form-autocomplete-input>
+                    <semantic-form-datetime-input 
+                        for="Person_Birth_Date_earliest">
+                    </semantic-form-datetime-input>
+                    <semantic-form-datetime-input 
+                        for="Person_Birth_Date_latest">
+                    </semantic-form-datetime-input>
+                </semantic-form-composite-input>
+
+                <semantic-form-composite-input 
+                    for="Mph_Person_Death_Place"
+                    new-subject-template="/death"
+                    fields='[[fieldDefinitions
+                        Death_Place="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place"
+                        Death_Date_Earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Earliest"
+                        Death_Date_Latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Latest"
+                    ]]'>
+                    <semantic-form-autocomplete-input 
+                        for="Death_Place">
+                    </semantic-form-autocomplete-input>
+                    <semantic-form-datetime-input 
+                        for="Death_Date_Earliest">
+                    </semantic-form-datetime-input>
+                    <semantic-form-datetime-input 
+                        for="Death_Date_Latest">
+                    </semantic-form-datetime-input>
+                </semantic-form-composite-input>
+
+                <semantic-form-autocomplete-input
+                  for="Person_Father"
+                  value-binding-name="subject"
+                  lookup-query='{
+                    "type": "lookup",
+                    "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                    "limit": 20
+                  }'>
+                  [[> new-sub-person]]
+                </semantic-form-autocomplete-input>
+                <semantic-form-autocomplete-input
+                  for="Person_Mother"
+                  value-binding-name="subject"
+                  lookup-query='{
+                    "type": "lookup",
+                    "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                    "limit": 20
+                  }'>
+                  [[> new-sub-person]]
+                </semantic-form-autocomplete-input>
+                
+                <semantic-form-autocomplete-input 
+                    for="Occupation_General_Role">
+                </semantic-form-autocomplete-input>
+
+                <semantic-form-text-input 
+                    for="Mph_Short_Biography"
+                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'
+                    multiline=true>
+                </semantic-form-text-input>
+
+                <semantic-form-text-input 
+                    for="Mph_Long_Biography"
+                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'
+                    multiline=true>
+                </semantic-form-text-input>
+
+                <semantic-form-composite-input 
+                    for="Person_Social_Relations"
+                    new-subject-template="."
+                    fields='[[fieldDefinitions
+                        Person_Social_Relations_-_Relation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation"
+                        Person_Social_Relations_-_Relation_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type"
+                    ]]'>
+                    <semantic-form-autocomplete-input
+                      for="Person_Social_Relations_-_Relation"
+                      value-binding-name="subject"
+                      lookup-query='{
+                        "type": "lookup",
+                        "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                        "limit": 20
+                      }'>
+                      [[> new-sub-person]]
+                    </semantic-form-autocomplete-input>
+                    <semantic-form-text-input 
+                    for="Person_Social_Relations_-_Relation_Type">
+                    </semantic-form-text-input>
+                </semantic-form-composite-input>
+
+                <semantic-form-errors></semantic-form-errors>
+                <!-- save and reset button for form -->
+                <button name='submit' class='btn btn-secondary'>Save</button>
+                <button name='reset' class='btn btn-secondary'>Reset</button>
+            </semantic-form>
+        </div>
+    </div>
+</div>
+
+[[/if]]
+
+[[#*inline "new-sub-person"]]
+  <semantic-form
+    form-id='new-person'
+    new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
+    fields='[[fieldDefinitions
+      Rdf_type="http://www.metaphacts.com/fieldDefinition/RdfType"
+      Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
+      Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
+      Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+      Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
+    ]]'>
+    <semantic-form-hidden-input for="type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
+
+    <semantic-form-composite-input 
+        for="Person_Name"
+        new-subject-template="."
+        fields='[[fieldDefinitions
+            Mph_Person_Name="http://www.metaphacts.com/fieldDefinition/Person_Name"
+            Person_Name_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Part"
+        ]]'>
+        <semantic-form-text-input
+            for="Mph_Person_Name" 
+            languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+        </semantic-form-text-input>
+        <semantic-form-text-input for="Person_Name_Part"></semantic-form-text-input>
+    </semantic-form-composite-input>
+
+    <semantic-form-composite-input
+        for="Mph_Identifier"
+        new-subject-template=""
+        fields='[[fieldDefinitions
+            Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
+            Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
+            Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+            Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
+        ]]'>
+        <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
+    </semantic-form-composite-input>  
+
+    <semantic-form-text-input
+        for="Mph_Identifier_Provider"
+        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+    </semantic-form-text-input>
+
+    <semantic-form-select-input  for="Person_Gender"></semantic-form-select-input>
+
+    <semantic-form-errors></semantic-form-errors>
+
+    <button name='submit' class='btn btn-secondary'>Create person</button>
+    <button name='reset' class='btn btn-secondary'>Reset person</button>
+  </semantic-form>
+[[/inline]]
