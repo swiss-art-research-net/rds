@@ -263,14 +263,14 @@
   
   <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role>
     a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167022;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167019;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167021;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167298;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167297;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167295;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    prov:generatedAtTime "2021-02-05T15:07:07.422Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-02-09T08:39:57.977Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
     <http://www.metaphacts.com/ontology/fields#domain> crm:E21_Person;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1167020;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1167296;
     rdfs:label "Occupation / General Role"@undefined .
 }
 
@@ -495,6 +495,18 @@
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Value/context> {
   Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Value> .
+  
+  <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Value>
+    a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167061;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167062;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> rdf:langString;
+    prov:generatedAtTime "2021-02-05T15:07:12.228Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
+    rdfs:comment "This field is used to indicate the main name attributed to the documented person. No part break down of name is here implied. The full name of an individual is expected here where available.";
+    rdfs:label "Person Name Value" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Part/context> {
@@ -516,11 +528,11 @@
   
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father>
     a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167215;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167216;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167217;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    prov:generatedAtTime "2021-02-08T12:36:00.537Z"^^xsd:dateTime;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167289;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167288;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167287;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    prov:generatedAtTime "2021-02-09T08:34:32.304Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
@@ -533,11 +545,11 @@
   
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother>
     a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167223;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167222;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167221;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    prov:generatedAtTime "2021-02-08T12:38:01.117Z"^^xsd:dateTime;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167284;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167286;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167285;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    prov:generatedAtTime "2021-02-09T08:32:55.671Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
@@ -565,11 +577,11 @@
   
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation>
     a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167228;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167227;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167229;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    prov:generatedAtTime "2021-02-08T12:39:36.847Z"^^xsd:dateTime;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167290;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167292;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167291;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    prov:generatedAtTime "2021-02-09T08:34:56.811Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
@@ -606,23 +618,6 @@
     prov:generatedAtTime "2021-02-05T15:07:04.512Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
     rdfs:label "Honorific Name"@en .
-}
-
-<http://localhost:10214/container/fieldDefinitionContainer/Person_Father/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://localhost:10214/container/fieldDefinitionContainer/Person_Father> .
-  
-  <http://localhost:10214/container/fieldDefinitionContainer/Person_Father> a <http://www.metaphacts.com/ontology/fields#Field>,
-      ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1166992;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1166994;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1166993;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    prov:generatedAtTime "2021-02-05T15:07:04.150Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
-    rdfs:comment "This field is used to indicate the biological father of the documented person.";
-    rdfs:label "Person Father" .
 }
 
 <http://localhost:10214/container/fieldDefinitionContainer/Honorific_Name/context> {
@@ -674,24 +669,16 @@
 <http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier/context> {
   Platform:fieldDefinitionContainer ldp:contains <http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier> .
   
-  <http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:t1167017 .
-}
-
-<http://localhost:10214/container/fieldDefinitionContainer/Occupation_/_General_Role/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://localhost:10214/container/fieldDefinitionContainer/Occupation_/_General_Role> .
-  
-  <http://localhost:10214/container/fieldDefinitionContainer/Occupation_/_General_Role>
-    a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167026;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167023;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167025;
+  <http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier> a <http://www.metaphacts.com/ontology/fields#Field>,
+      ldp:Resource, prov:Entity;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167017;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167018;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167016;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    prov:generatedAtTime "2021-02-05T15:07:07.926Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-02-05T15:07:07.105Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#domain> crm:E21_Person;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1167024;
-    rdfs:label "Occupation / General Role"@undefined .
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    rdfs:label "GND Identifier"@undefined .
 }
 
 <http://localhost:10214/container/fieldDefinitionContainer/Person_Death/context> {
@@ -958,6 +945,13 @@
 
 <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT/context> {
   Platform:fieldDefinitionContainer ldp:contains <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT> .
+  
+  <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167129;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167130;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167132;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    prov:generatedAtTime "2021-02-08T10:42:55.564Z"^^xsd:dateTime .
 }
 
 <http://localhost:10214/container/fieldDefinitionContainer/NEGYwbXSOthnomykvzWwyAmPjnlBqkZpMFypDrLJ/context> {
@@ -1331,78 +1325,9 @@
     rdfs:label "Person Social Relations - Relation" .
 }
 
-<http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier/context> {
-  <http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier> a <http://www.metaphacts.com/ontology/fields#Field>,
-      ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167018;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167016;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    prov:generatedAtTime "2021-02-05T15:07:07.105Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    rdfs:label "GND Identifier"@undefined .
-  
-  _:t1167017 a sp:Query;
-    sp:text "DELETE { $subject ?predicate $value} WHERE {}" .
-  
-  _:t1167018 a sp:Query;
-    sp:text "INSERT { $subject ?predicate ?value } WHERE { }" .
-  
-  _:t1167016 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?id_iri.
-  ?id_iri a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
-  ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
-  ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
-  ?provider <http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> ?value.
-  ?value a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object> .
-  ?value rdfs:label ?id_label .
-   ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
-  ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
-  ?provider <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://d-nb.info/>. 
-}""" .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Value/context> {
-  <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Value>
-    a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167061;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167062;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> rdf:langString;
-    prov:generatedAtTime "2021-02-05T15:07:12.228Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
-    rdfs:comment "This field is used to indicate the main name attributed to the documented person. No part break down of name is here implied. The full name of an individual is expected here where available.";
-    rdfs:label "Person Name Value" .
-  
-  _:t1167062 a sp:Query;
-    sp:text """INSERT { 
-  ?subject rdfs:label ?value.
-  ?subject crm:P72_has_language ?language_iri.
-} WHERE {
-  ?language_iri crm:P3_has_note ?lang.
-  BIND(lang(?value) as ?lang).
-}""" .
-  
-  _:t1167061 a sp:Query;
-    sp:text """DELETE {
-  ?subject rdfs:label ?value.
-}
-WHERE {
-  ?subject rdfs:label ?value.
-  ?subject crm:P72_has_language ?language_iri.
-}""" .
-}
-
 <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT/context> {
   <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT>
     a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167129;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167130;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167132;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    prov:generatedAtTime "2021-02-08T10:42:55.564Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
@@ -1960,7 +1885,14 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father/context> {
-  _:t1167216 a sp:Query;
+  _:t1167287 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?birth_uri a crm:E67_Birth .
+  ?birth_uri crm:P97_from_father ?value.
+}""" .
+  
+  _:t1167288 a sp:Query;
     sp:text """INSERT { 
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
@@ -1970,19 +1902,12 @@ WHERE {
   BIND(IRI(CONCAT(STR($subject),\"/birth\")) as ?birth_uri).  
 } """ .
   
-  _:t1167215 a sp:Query;
+  _:t1167289 a sp:Query;
     sp:text """DELETE {
   #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri crm:P97_from_father ?father_uri.
 }
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?value.
-}""" .
-  
-  _:t1167217 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
@@ -2091,14 +2016,18 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother/context> {
-  _:t1167221 a sp:Query;
-    sp:text """SELECT ?value WHERE {
+  _:t1167284 a sp:Query;
+    sp:text """DELETE {
+  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
+  ?birth_uri crm:P96_by_mother ?mother_uri.
+}
+WHERE {
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
 }""" .
   
-  _:t1167222 a sp:Query;
+  _:t1167286 a sp:Query;
     sp:text """INSERT { 
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
@@ -2108,12 +2037,8 @@ WHERE {
   BIND(IRI(CONCAT(STR($subject),\"/birth\")) as ?birth_uri).  
 } """ .
   
-  _:t1167223 a sp:Query;
-    sp:text """DELETE {
-  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri crm:P96_by_mother ?mother_uri.
-}
-WHERE {
+  _:t1167285 a sp:Query;
+    sp:text """SELECT ?value WHERE {
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
@@ -2391,43 +2316,6 @@ WHERE {
   
   _:t1167134 a sp:Query;
     sp:text "INSERT { $subject ?predicate $value} WHERE {}" .
-}
-
-<http://localhost:10214/container/fieldDefinitionContainer/Person_Father/context> {
-  _:t1166992 a sp:Query;
-    sp:text """DELETE {
-  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri crm:P97_from_father ?father_uri.
-}
-WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?father_uri.
-  ?father_uri a crm:E21_Person .
-  ?father_uri rdfs:label ?value.
-}""" .
-  
-  _:t1166993 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?father_uri.
-  ?father_uri a crm:E21_Person .
-  ?father_uri rdfs:label ?value.
-}""" .
-  
-  _:t1166994 a sp:Query;
-    sp:text """INSERT { 
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?father_uri.
-  ?father_uri a crm:E21_Person .
-  ?father_uri rdfs:label ?value.
-} 
-WHERE { 
-  BIND(IRI(CONCAT(STR($subject),\"/birth\")) as ?birth_uri).  
-  BIND(IRI(CONCAT(REPLACE(STR(?subject),\"person/[a-zA-Z0-9_-]*\",\"person/\"), MD5(str(?value)))) as ?father_uri).
-} """ .
 }
 
 <http://localhost:10214/container/fieldDefinitionContainer/ECWZDcWEETNMHaVgsnMsqlQCDeknUqjLclNYNnLS/context> {
@@ -3150,29 +3038,21 @@ WHERE {
 }
 
 <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role/context> {
-  _:t1167022 a sp:Query;
-    sp:text """DELETE { ?value rdfs:label ?label}
- WHERE { 
-  ?subject <http://grp.swissartresearch.net/hadOccupation> ?value .
-      ?value rdfs:label ?label
-}""" .
-  
-  _:t1167021 a sp:Query;
-    sp:text """SELECT distinct ?value ?label
-WHERE {
+  _:t1167297 a sp:Query;
+    sp:text """INSERT { 
   ?subject <http://grp.swissartresearch.net/hadOccupation> ?value.
-  ?value <http://www.w3.org/2008/05/skos-xl#altLabel> ?label_iri.
-  ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#number> <https://resources.swissartresearch.net/vocab/term/singular>.
-  OPTIONAL{
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender.
-  }
-  BIND(exists{?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender} as ?genderEx).
-  BIND(IF(?genderEx, (IF(?gender=<http://vocab.getty.edu/aat/300411836>, <https://resources.swissartresearch.net/vocab/term/masculine>, <https://resources.swissartresearch.net/vocab/term/feminine>) ), <https://resources.swissartresearch.net/vocab/term/masculine>) as ?gender_iri).
-    ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#gender> ?gender_iri.
-  ?label_iri <http://www.w3.org/ns/lemon/ontolex#writtenRep> ?label.
+  ?value rdfs:label ?label 
+} WHERE {}
+""" .
+  
+  _:t1167298 a sp:Query;
+    sp:text """DELETE {
+?subject <http://grp.swissartresearch.net/hadOccupation> ?value .
+} WHERE { 
+  ?subject <http://grp.swissartresearch.net/hadOccupation> ?value .
 }""" .
   
-  _:t1167020 a sp:Query;
+  _:t1167296 a sp:Query;
     sp:text """prefix bds: <http://www.bigdata.com/rdf/search#>
 prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> 
 prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
@@ -3186,15 +3066,20 @@ SELECT ?value ?label WHERE {
     ?label bds:search ?__token__.
 } LIMIT 10""" .
   
-  _:t1167019 a sp:Query;
-    sp:text """INSERT { 
+  _:t1167295 a sp:Query;
+    sp:text """SELECT distinct ?value ?label
+WHERE {
   ?subject <http://grp.swissartresearch.net/hadOccupation> ?value.
-  ?value rdfs:label ?label 
-} WHERE {
-      
-      
-      }
-""" .
+  ?value <http://www.w3.org/2008/05/skos-xl#altLabel> ?label_iri.
+  ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#number> <https://resources.swissartresearch.net/vocab/term/singular>.
+  OPTIONAL{
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender.
+  }
+  BIND(exists{?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender} as ?genderEx).
+  BIND(IF(?genderEx, (IF(?gender=<http://vocab.getty.edu/aat/300411836>, <https://resources.swissartresearch.net/vocab/term/masculine>, <https://resources.swissartresearch.net/vocab/term/feminine>) ), <https://resources.swissartresearch.net/vocab/term/masculine>) as ?gender_iri).
+    ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#gender> ?gender_iri.
+  ?label_iri <http://www.w3.org/ns/lemon/ontolex#writtenRep> ?label.
+}""" .
 }
 
 <http://localhost:10214/container/fieldDefinitionContainer/YuoGSZLyXvlYcDngdpqjaFxbNRBeRFvWOcfvGlVe/context> {
@@ -3279,54 +3164,6 @@ WHERE {
   ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
   ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
   ?lang rdfs:label ?lang_label.
-}""" .
-}
-
-<http://localhost:10214/container/fieldDefinitionContainer/Occupation_/_General_Role/context> {
-  _:t1167023 a sp:Query;
-    sp:text """INSERT { 
-  ?subject <http://grp.swissartresearch.net/hadOccupation> ?value.
-  ?value rdfs:label ?label 
-} WHERE {
-      
-      
-      }
-""" .
-  
-  _:t1167024 a sp:Query;
-    sp:text """prefix bds: <http://www.bigdata.com/rdf/search#>
-prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> 
-prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
-prefix skos:  <http://www.w3.org/2004/02/skos/core#>
-
-SELECT ?value ?label WHERE {
- ?value a skos:Concept.
- ?value a ontolex:lexicalConcept.
- ?value a crm:E55_Type. 
- ?value skos:prefLabel ?label.
-    ?label bds:search ?__token__.
-} LIMIT 10""" .
-  
-  _:t1167025 a sp:Query;
-    sp:text """SELECT distinct ?value ?label
-WHERE {
-  ?subject <http://grp.swissartresearch.net/hadOccupation> ?value.
-  ?value <http://www.w3.org/2008/05/skos-xl#altLabel> ?label_iri.
-  ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#number> <https://resources.swissartresearch.net/vocab/term/singular>.
-  OPTIONAL{
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender.
-  }
-  BIND(exists{?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender} as ?genderEx).
-  BIND(IF(?genderEx, (IF(?gender=<http://vocab.getty.edu/aat/300411836>, <https://resources.swissartresearch.net/vocab/term/masculine>, <https://resources.swissartresearch.net/vocab/term/feminine>) ), <https://resources.swissartresearch.net/vocab/term/masculine>) as ?gender_iri).
-    ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#gender> ?gender_iri.
-  ?label_iri <http://www.w3.org/ns/lemon/ontolex#writtenRep> ?label.
-}""" .
-  
-  _:t1167026 a sp:Query;
-    sp:text """DELETE { ?value rdfs:label ?label}
- WHERE { 
-  ?subject <http://grp.swissartresearch.net/hadOccupation> ?value .
-      ?value rdfs:label ?label
 }""" .
 }
 
@@ -3627,24 +3464,24 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation/context> {
-  _:t1167229 a sp:Query;
-    sp:text """SELECT ?value WHERE {
-  ?subject crm:P02_has_range ?value.
+  _:t1167290 a sp:Query;
+    sp:text """DELETE {
+  $subject crm:P02_has_range ?value.
+}
+WHERE {
+  $subject crm:P02_has_range ?value.
 }""" .
   
-  _:t1167227 a sp:Query;
+  _:t1167292 a sp:Query;
     sp:text """INSERT { 
   ?subject crm:P02_has_range ?value.
 } 
 WHERE { 
 } """ .
   
-  _:t1167228 a sp:Query;
-    sp:text """DELETE {
-  $subject crm:P02_has_range ?value.
-}
-WHERE {
-  $subject crm:P02_has_range ?value.
+  _:t1167291 a sp:Query;
+    sp:text """SELECT ?value WHERE {
+  ?subject crm:P02_has_range ?value.
 }""" .
 }
 
@@ -3775,6 +3612,48 @@ WHERE {
 }""" .
 }
 
+<http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier/context> {
+  _:t1167017 a sp:Query;
+    sp:text "DELETE { $subject ?predicate $value} WHERE {}" .
+  
+  _:t1167018 a sp:Query;
+    sp:text "INSERT { $subject ?predicate ?value } WHERE { }" .
+  
+  _:t1167016 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?id_iri.
+  ?id_iri a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
+  ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
+  ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
+  ?provider <http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> ?value.
+  ?value a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object> .
+  ?value rdfs:label ?id_label .
+   ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
+  ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
+  ?provider <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://d-nb.info/>. 
+}""" .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Value/context> {
+  _:t1167062 a sp:Query;
+    sp:text """INSERT { 
+  ?subject rdfs:label ?value.
+  ?subject crm:P72_has_language ?language_iri.
+} WHERE {
+  ?language_iri crm:P3_has_note ?lang.
+  BIND(lang(?value) as ?lang).
+}""" .
+  
+  _:t1167061 a sp:Query;
+    sp:text """DELETE {
+  ?subject rdfs:label ?value.
+}
+WHERE {
+  ?subject rdfs:label ?value.
+  ?subject crm:P72_has_language ?language_iri.
+}""" .
+}
+
 <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer/context> {
-  _:node1eu0qlft2x127 ldp:contains Platform:fieldDefinitionContainer .
+  _:node1eu2tqd0ox179 ldp:contains Platform:fieldDefinitionContainer .
 }
