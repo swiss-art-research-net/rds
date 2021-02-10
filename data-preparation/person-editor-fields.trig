@@ -134,22 +134,6 @@
     rdfs:label "Identifier Provider"@undefined .
 }
 
-<http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL> .
-  
-  <http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL> a <http://www.metaphacts.com/ontology/fields#Field>,
-      ldp:Resource, prov:Entity;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167002;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167001;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167003;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    prov:generatedAtTime "2021-02-05T15:07:05.346Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
-    rdfs:label "Wikidata Identifier"@undefined .
-}
-
 <http://www.metaphacts.com/fieldDefinition/Birth_Place_getty_select/context> {
   Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Place_getty_select> .
   
@@ -389,6 +373,20 @@
     prov:wasAttributedTo User:admin;
     rdfs:comment "This field is used to indicate additional names under which the documented person is known. This can be linked to the additional name type and earliest and latest date of use of that name.";
     rdfs:label "Alternate Name"@undefined .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Name/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name> .
+  
+  <http://www.metaphacts.com/fieldDefinition/Person_Name> a <http://www.metaphacts.com/ontology/fields#Field>,
+      ldp:Resource, prov:Entity;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1167328;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167329;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167327;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> rdf:langString;
+    prov:generatedAtTime "2021-02-09T14:18:19.642Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    rdfs:label "Person Name"@en .
 }
 
 <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_latest/context> {
@@ -951,7 +949,9 @@
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1167130;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1167132;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    prov:generatedAtTime "2021-02-08T10:42:55.564Z"^^xsd:dateTime .
+    prov:generatedAtTime "2021-02-08T10:42:55.564Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
 }
 
 <http://localhost:10214/container/fieldDefinitionContainer/NEGYwbXSOthnomykvzWwyAmPjnlBqkZpMFypDrLJ/context> {
@@ -1328,8 +1328,6 @@
 <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT/context> {
   <http://localhost:10214/container/fieldDefinitionContainer/yCwhSyNuymqtwHPFFtikmluYwksBcrpUIvwWiWTT>
     a <http://www.metaphacts.com/ontology/fields#Field>, ldp:Resource, prov:Entity;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1167131;
     rdfs:comment "This field is used to indicate the place of birth of the documented person.";
@@ -3327,6 +3325,61 @@ WHERE {
 }""" .
 }
 
+<http://www.metaphacts.com/fieldDefinition/Person_Name/context> {
+  _:t1167329 a sp:Query;
+    sp:text """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+INSERT {
+  $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?name_identifier.
+  ?name_identifier a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.
+  ?name_identifier rdfs:label ?value.
+  ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/type/preffered%20name>.
+  ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
+  ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
+  ?lang rdfs:label ?lang_label
+} WHERE { 
+  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
+      {SELECT ?lang WHERE {
+        BIND(LANG(?value) as ?langTag)
+        VALUES ( ?lang ?langTag ?lang_label) {
+          (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
+          (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
+          (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
+          (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
+          (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+        }
+	} LIMIT 1}
+}""" .
+  
+  _:t1167328 a sp:Query;
+    sp:text """DELETE {
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?name_identifier.
+  ?name_identifier a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.
+  ?name_identifier rdfs:label ?value.
+} WHERE {
+  $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?name_identifier.
+  ?name_identifier a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.
+  ?name_identifier rdfs:label ?value.
+  ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/type/preffered%20name>.
+  ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
+  ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
+  ?lang rdfs:label ?lang_label.
+}""" .
+  
+  _:t1167327 a sp:Query;
+    sp:text """SELECT DISTINCT ?value WHERE {
+  $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?name_identifier.
+  ?name_identifier a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.
+  ?name_identifier rdfs:label ?value.
+  ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/type/preffered_name>.
+  ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
+  ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
+  ?lang rdfs:label ?lang_label
+}""" .
+}
+
 <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Latest/context> {
   _:t1167101 a sp:Query;
     sp:text """INSERT {
@@ -3587,31 +3640,6 @@ WHERE {
     sp:text "INSERT { $subject ?predicate ?value } WHERE { }" .
 }
 
-<http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL/context> {
-  _:t1167001 a sp:Query;
-    sp:text """INSERT { $subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> $value.
-?value <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?assignee. 
-  ?assignee <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://www.wikidata.org/wiki/>.} WHERE {
-  BIND(IRI(CONCAT(STR($subject),\"/id_assignee/\", MD5(str(?value)))) as ?assignee).
-}""" .
-  
-  _:t1167002 a sp:Query;
-    sp:text """DELETE { $subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> $value} WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?value.
-  ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
-  ?value <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?assignee. 
-  ?assignee <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://www.wikidata.org/wiki/>.
-}""" .
-  
-  _:t1167003 a sp:Query;
-    sp:text """SELECT ?value ?label  WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?value.
-  ?value <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?assign_id.
-  ?assign_id a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
-  ?assign_id <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://www.wikidata.org/wiki/>. 
-}""" .
-}
-
 <http://localhost:10214/container/fieldDefinitionContainer/GND_Identifier/context> {
   _:t1167017 a sp:Query;
     sp:text "DELETE { $subject ?predicate $value} WHERE {}" .
@@ -3655,5 +3683,5 @@ WHERE {
 }
 
 <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer/context> {
-  _:node1eu2tqd0ox179 ldp:contains Platform:fieldDefinitionContainer .
+  _:node1eu5d8s8bx470 ldp:contains Platform:fieldDefinitionContainer .
 }

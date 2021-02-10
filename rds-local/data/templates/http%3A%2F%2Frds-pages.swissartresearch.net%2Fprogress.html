@@ -1,0 +1,38 @@
+<div class="page">
+  <div class='row' style='max-width: 100%;'>
+    <div class="col-md-8 offset-md-2" style="margin-bottom: 20px">
+      <h2>Records to proceed on</h2>
+      <semantic-table query='
+        PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+        PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+
+        SELECT DISTINCT ?subject ?assignee ?step WHERE {
+            OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+            ?workflow workflow:subject ?subject .
+            ?workflow workflow:currentState ?currentState .
+            ?currentState workflow:step ?step .
+            OPTIONAL { ?currentState workflow:assignee ?assignee . }
+            FILTER (
+                (
+                    (
+                        (!BOUND(?assignee)) &&
+                        BOUND(?userGroup) &&
+                        (
+                            (
+                                ?userGroup = <https://resources.swissartresearch.net/workflow/editor> &&
+                                (?step = wf_steps:inProgress || ?step = wf_steps:readyToReview)
+                            ) || (
+                                ?userGroup = <https://resources.swissartresearch.net/workflow/reviewer> &&
+                                ?step != wf_steps:inProgress
+                            )
+                        )
+                    )
+                ) || (?assignee = ?__useruri__)
+            )
+        }'
+        no-result-template='No records for you.'
+      ></semantic-table>
+    </div>
+  </div>
+</div>

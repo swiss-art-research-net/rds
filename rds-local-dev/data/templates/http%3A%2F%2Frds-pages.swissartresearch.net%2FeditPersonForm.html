@@ -1,19 +1,20 @@
-[[#if (hasPermission "forms:ldp:*")]] 
+[[#if (hasPermission "forms:ldp:*")]]
+  <div class="page">
+  [[#if edit]]
+    [[> edit-person-form]]
+  [[else]]
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        
+        [[> search-for-existing]]
 
-<div class="page">
-<mp-event-target-template-render id='event-target' template='{{> template}}'>
-  <template id='template'>
-    
-    [[> search-for-existing]]
-
-    {{#if newPerson}}
-      [[> edit-person-form]]
-    {{/if}}
-  </template>
-</mp-event-target-template-render>
-
-</div>
-
+        {{#if newPerson}}
+          [[> edit-person-form]]
+        {{/if}}
+      </template>
+    </mp-event-target-template-render>
+  [[/if]]
+  </div>
 [[/if]]
 
 [[#*inline "search-for-existing"]]
@@ -91,17 +92,33 @@
 [[/inline]]
 
 [[#*inline "edit-person-form"]]
+[[#if edit]]
+<div class='row'>
+  <div class="offset-md-4 col-md-4">
+    <mp-workflow-manager
+      iris='[[jsonArrayFromSelect "SELECT ?workflow WHERE { ?workflow <http://www.metaphacts.com/ontologies/platform/workflow#subject> ?? . }" ]]'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      readonly=[[> cant-edit-workflow]]>
+    </mp-workflow-manager>
+  </div>
+</div>
+[[/if]]
 <div class='row'>
   <div class="text-center col-md-2">
     <br>
     <font size="+2">
-        Add a new <b>Person</b>
+        [[#if edit]]
+          Edit <b><mp-label iri='[[this]]'></mp-label></b>
+        [[else]]
+          Add a new <b>Person</b>
+        [[/if]]
     </font>
     <br>
     <img src="https://cdn3.iconfinder.com/data/icons/faticons/32/user-01-512.png" width="50%">
   </div>
   <div class="col-md-8" style="margin-bottom: 100px">
-    <semantic-form 
+    <semantic-form
+        id="newPerson"
         new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
         [[#if edit]]
           subject='[[this]]'
@@ -109,7 +126,7 @@
         browser-persistence=true
         persistence='ldp' 
         form-id='persons'
-        post-action='redirect'               
+        post-action='event'              
         fields='[[fieldDefinitions
             type="http://www.metaphacts.com/fieldDefinition/RdfType"
             Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
@@ -285,6 +302,31 @@
         <button name='submit' class='btn btn-secondary'>Save</button>
         <button name='reset' class='btn btn-secondary'>Reset</button>
     </semantic-form>
+
+    <mp-workflow-create id='source-workflow'
+      new-subject-template='http://schema.swissartresearch.net/workflow-source-{{UUID}}'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      first-step='http://schema.swissartresearch.net/step/inProgress'
+      assignee='[[jsonValueFromSelect "SELECT ?assignee WHERE { BIND (?__useruri__ as ?assignee) }"]]'
+      use-event-system=true>
+    </mp-workflow-create>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceCreated'
+      proxy-event-type='Workflow.Create'
+      proxy-targets='["source-workflow"]'>
+    </mp-event-proxy>
+
+    <mp-event-proxy id='workflow-proxy'
+      on-event-type='Workflow.SubjectGetInWorkflow'
+      proxy-event-type='RedirectAction.perform'
+      proxy-targets='["redirect-to-resource"]'>
+    </mp-event-proxy>
+
+    <mp-event-target-redirect
+      id='redirect-to-resource'
+      action='redirect'>
+    </mp-event-target-redirect>
   </div>
 </div>
 [[/inline]]
@@ -343,4 +385,31 @@
     <button name='submit' class='btn btn-secondary'>Create person</button>
     <button name='reset' class='btn btn-secondary'>Reset person</button>
   </semantic-form>
+[[/inline]]
+
+[[#*inline "cant-edit-workflow"]]
+  [[!--
+  PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+  PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+  ASK { ?workflow workflow:subject ??.
+    ?workflow workflow:currentState ?state.
+    ?state workflow:step ?step.
+    OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+    FILTER(
+        (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
+          ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
+    ) || (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>) &&
+          (?step != wf_steps:inProgress)
+    )
+    )
+  }
+  --]]
+  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || ((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>) && (?step != wf_steps:inProgress)))}")]]  
+    false
+  [[else]]
+    true
+  [[/if]]
 [[/inline]]
