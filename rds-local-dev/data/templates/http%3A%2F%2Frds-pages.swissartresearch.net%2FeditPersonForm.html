@@ -38,8 +38,19 @@
                 number-of-displayed-rows=10
                 no-result-template='No existing people with this name'
                 column-configuration='[
-                    {"variableName": "subject", "displayName": "Existing people with provided name" }
+                    {"variableName": "subject", "displayName": "Existing people with provided name", "cellTemplate": "{{> link-to-subject}}" },
+                    {"variableName": "description", "displayName": "Description" },
+                    {"variableName": "type", "displayName": "Type" },
+                    {"variableName": "datasetLabel", "displayName": "Dataset" }
                 ]'>
+                <template id="link-to-subject">
+                  <semantic-query
+                    query='SELECT * WHERE { {{subject}} a ?type }'
+                    template='<semantic-link iri={{subject.value}}></semantic-link>'
+                    no-result-template='<semantic-link iri="[[resolvePrefix "Default:RemotePersonVisualisation"]]" urlqueryparam-person-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                  ></semantic-query>
+
+                </template>
               </semantic-table>
             </semantic-search-result>
           </semantic-search-result-holder>
@@ -128,7 +139,7 @@
         form-id='persons'
         post-action='event'              
         fields='[[fieldDefinitions
-            type="http://www.metaphacts.com/fieldDefinition/RdfType"
+            Rdf_type="http://www.metaphacts.com/fieldDefinition/RdfType"
             Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
             Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
             Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
@@ -150,7 +161,7 @@
 
             Person_Social_Relations="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations"
         ]]'>
-        <semantic-form-hidden-input for="type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
+        <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
 
         <semantic-form-composite-input 
             for="Person_Name"
@@ -307,7 +318,7 @@
       new-subject-template='http://schema.swissartresearch.net/workflow-source-{{UUID}}'
       definition='http://schema.swissartresearch.net/workflow_definition'
       first-step='http://schema.swissartresearch.net/step/inProgress'
-      assignee='[[jsonValueFromSelect "SELECT ?assignee WHERE { BIND (?__useruri__ as ?assignee) }"]]'
+      assignee_disabled='[[jsonValueFromSelect "SELECT ?assignee WHERE { BIND (?__useruri__ as ?assignee) }"]]'
       use-event-system=true>
     </mp-workflow-create>
 
@@ -342,7 +353,7 @@
       Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
       Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
     ]]'>
-    <semantic-form-hidden-input for="type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
+    <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
 
     <semantic-form-composite-input 
         for="Person_Name"
