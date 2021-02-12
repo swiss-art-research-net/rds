@@ -28,17 +28,18 @@
         }
       """;
       lookup:searchBlockTemplate """
-        ?candidate a ?type.
-        ?candidate ?keyProp ?key.
-        FILTER ISLITERAL(?key)
-        SERVICE <http://www.bigdata.com/rdf/search#search> {
-             ?key <http://www.bigdata.com/rdf/search#search> ?__token__;
-             <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
-             <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\";
-             <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\".
-        }
-      """;
-    lookup:typeBlockTemplate """
+      ?candidate a ?type .
+			?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?identifier .
+    	?identifier a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.
+    	?identifier <http://www.w3.org/2000/01/rdf-schema#label> ?key .  
+SERVICE <http://www.bigdata.com/rdf/search#search> {
+    ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+    <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+    <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
+    <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
+}
+    """;
+      lookup:typeBlockTemplate """
       FILTER EXISTS {
         GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
           ?targetType rdfs:subClassOf? ?__type__.
@@ -46,4 +47,4 @@
         ?candidate a ?targetType.
       }
     """
-    ].
+    ] .

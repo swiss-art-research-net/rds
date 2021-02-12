@@ -1,19 +1,24 @@
+[[> "http://rds-pages.swissartresearch.net/editPersonFormFields"]]
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+
 [[#if (hasPermission "forms:ldp:*")]]
   <div class="page">
-  [[#if edit]]
-    [[> edit-person-form]]
-  [[else]]
     <mp-event-target-template-render id='event-target' template='{{> template}}'>
       <template id='template'>
-        
-        [[> search-for-existing]]
-
-        {{#if newPerson}}
+        [[#if edit]]
           [[> edit-person-form]]
-        {{/if}}
+        [[else]]
+          [[> search-for-existing]]
+          {{#if newPerson}}
+            [[> edit-person-form]]
+          {{/if}}
+        [[/if]]
       </template>
     </mp-event-target-template-render>
-  [[/if]]
   </div>
 [[/if]]
 
@@ -41,15 +46,27 @@
                     {"variableName": "subject", "displayName": "Existing people with provided name", "cellTemplate": "{{> link-to-subject}}" },
                     {"variableName": "description", "displayName": "Description" },
                     {"variableName": "type", "displayName": "Type" },
-                    {"variableName": "datasetLabel", "displayName": "Dataset" }
+                    {"variableName": "datasetLabel", "displayName": "Dataset", "cellTemplate": "{{> dataset-label}}" },
+                    {"variableName": "action", "displayName": "action", "cellTemplate": "{{> create-button}}"  }
                 ]'>
+                <template id="dataset-label">
+                  <semantic-link iri="{{datasetId.value}}">{{datasetLabel.value}}</semantic-link>
+                </template>
                 <template id="link-to-subject">
                   <semantic-query
                     query='SELECT * WHERE { {{subject}} a ?type }'
                     template='<semantic-link iri={{subject.value}}></semantic-link>'
-                    no-result-template='<semantic-link iri="[[resolvePrefix "Default:RemotePersonVisualisation"]]" urlqueryparam-person-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                    no-result-template='<semantic-link iri="[[resolvePrefix "Default:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
                   ></semantic-query>
-
+                </template>
+                <template id="create-button">
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newPerson": true, "sameAs": "{{subject.value}}"}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Create the same</button>
+                  </mp-event-trigger>
                 </template>
               </semantic-table>
             </semantic-search-result>
@@ -81,15 +98,6 @@
                 <template id="tuple-template">
                   <div class="text-center">
                     This person already exists, do you still want to create a new person?
-                  </div>
-                  <div style="width: 100%; justify-content: center; display: flex;">
-                    <mp-event-trigger
-                      id='event-trigger-de'
-                      type='Component.TemplateUpdate'
-                      data='{"newPerson": true}'
-                      targets='["event-target"]'>
-                      <button class='btn btn-primary'>Create new person</button>
-                    </mp-event-trigger>
                   </div>
                 </template>
               </semantic-table>
@@ -136,46 +144,59 @@
         [[/if]]
         browser-persistence=true
         persistence='ldp' 
-        form-id='persons'
+        form-id='persons'             
         post-action='event'              
-        fields='[[fieldDefinitions
-            Rdf_type="http://www.metaphacts.com/fieldDefinition/RdfType"
-            Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
-            Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
-            Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-            Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
-            Mph_Person_Birth_Place="http://www.metaphacts.com/fieldDefinition/Person_Birth_Place"
-            Mph_Person_Death_Place="http://www.metaphacts.com/fieldDefinition/Person_Death_Place"
-            Occupation_General_Role="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role"
-            
-            Mph_Short_Biography="http://www.metaphacts.com/fieldDefinition/Short_Biography"
-            Mph_Long_Biography="http://www.metaphacts.com/fieldDefinition/Long_Biography"
-
-            Mph_Person_GND_URL="http://www.metaphacts.com/fieldDefinition/Person_GND_URL"
-            Mph_Person_Wikidata_URL="http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL"
-            Mph_Person_ULAN_URL="http://www.metaphacts.com/fieldDefinition/Person_ULAN_URL"
-
-            Mph_Person_Name_Honorific="http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific"
-            Person_Father="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father"
-            Person_Mother="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother"
-
-            Person_Social_Relations="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations"
-        ]]'>
+        fields='[
+            [[> Same_as]],
+            [[> Rdf_type]],
+            [[> Mph_Person_Name]],
+            [[> Mph_Identifier]],
+            [[> Mph_Identifier_Provider]],
+            [[> Person_Gender]],
+            [[> Mph_Person_Birth_Place]],
+            [[> Mph_Person_Death_Place]],
+            [[> Occupation_General_Role]],
+            [[> Mph_Short_Biography]],
+            [[> Mph_Long_Biography]],
+            [[> Mph_Person_GND_URL]],
+            [[> Mph_Person_Name_Honorific]],
+            [[> Person_Father]],
+            [[> Person_Mother]],
+            [[> Person_Social_Relations]]
+        ]'>
         <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
 
-        <semantic-form-composite-input 
-            for="Person_Name"
-            new-subject-template="."
-            fields='[[fieldDefinitions
-                Mph_Person_Name="http://www.metaphacts.com/fieldDefinition/Person_Name"
-                Person_Name_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Part"
-            ]]'>
-            <semantic-form-text-input
-                for="Mph_Person_Name" 
-                languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
-            </semantic-form-text-input>
-            <semantic-form-text-input for="Person_Name_Part"></semantic-form-text-input>
-        </semantic-form-composite-input>
+        {{#if sameAs}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+            "limit": 20
+          }'
+          template='{{> autocompletionTemplate}}'
+          default-value='{{sameAs}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+        {{else}}
+          <semantic-form-autocomplete-input
+            for="Same_as"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+          </semantic-form-autocomplete-input>
+        {{/if}}
+
+        <semantic-form-text-input
+            for="Mph_Person_Name" 
+            languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+        </semantic-form-text-input>
 
         <semantic-form-text-input
             for="Mph_Person_Name_Honorific"
@@ -185,12 +206,12 @@
         <semantic-form-composite-input 
             for="Mph_Identifier"
             new-subject-template=""
-            fields='[[fieldDefinitions
-                Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-                Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-                Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-                Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
-            ]]'>
+            fields='[
+                [[> Identifier_Source]],
+                [[> Identifier_Type]],
+                [[> Mph_Identifier_Provider]],
+                [[> Identifier_Value]]
+            ]'>
             <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
             <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
             <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
@@ -209,11 +230,11 @@
         <semantic-form-composite-input 
             for="Mph_Person_Birth_Place"
             new-subject-template="/birth"
-            fields='[[fieldDefinitions
-                Mph_Birth_Place="http://www.metaphacts.com/fieldDefinition/Birth_Place"
-                Person_Birth_Date_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest"
-                Person_Birth_Date_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_latest"
-            ]]'>
+            fields='[
+              [[> Mph_Birth_Place]], 
+              [[> Person_Birth_Date_earliest]],
+              [[> Person_Birth_Date_latest]]
+            ]'>
             <semantic-form-autocomplete-input 
                 for="Mph_Birth_Place">
             </semantic-form-autocomplete-input>
@@ -228,11 +249,11 @@
         <semantic-form-composite-input 
             for="Mph_Person_Death_Place"
             new-subject-template="/death"
-            fields='[[fieldDefinitions
-                Death_Place="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place"
-                Death_Date_Earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Earliest"
-                Death_Date_Latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Latest"
-            ]]'>
+            fields='[
+                [[> Death_Place]],
+                [[> Death_Date_Earliest]],
+                [[> Death_Date_Latest]]
+            ]'>
             <semantic-form-autocomplete-input 
                 for="Death_Place">
             </semantic-form-autocomplete-input>
@@ -244,6 +265,7 @@
             </semantic-form-datetime-input>
         </semantic-form-composite-input>
 
+
         <semantic-form-autocomplete-input
           for="Person_Father"
           value-binding-name="subject"
@@ -251,7 +273,9 @@
             "type": "lookup",
             "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
             "limit": 20
-          }'>
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
           [[> new-sub-person]]
         </semantic-form-autocomplete-input>
         <semantic-form-autocomplete-input
@@ -261,7 +285,9 @@
             "type": "lookup",
             "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
             "limit": 20
-          }'>
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
           [[> new-sub-person]]
         </semantic-form-autocomplete-input>
         
@@ -286,13 +312,14 @@
             multiline=true>
         </semantic-form-text-input>
 
+        [[!--
         <semantic-form-composite-input 
             for="Person_Social_Relations"
             new-subject-template="."
-            fields='[[fieldDefinitions
-                Person_Social_Relations_-_Relation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation"
-                Person_Social_Relations_-_Relation_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type"
-            ]]'>
+            fields='[
+              [[> Person_Social_Relations_-_Relation]],
+              [[> Person_Social_Relations_-_Relation_Type]]
+            ]'>
             <semantic-form-autocomplete-input
               for="Person_Social_Relations_-_Relation"
               value-binding-name="subject"
@@ -307,6 +334,7 @@
             for="Person_Social_Relations_-_Relation_Type">
             </semantic-form-text-input>
         </semantic-form-composite-input>
+        --]]
 
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
@@ -328,6 +356,23 @@
       proxy-targets='["source-workflow"]'>
     </mp-event-proxy>
 
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceUpdated'
+      proxy-event-type='Component.TemplateUpdate'
+      proxy-targets='["event-target"]'
+      data='{"updated": true}'>
+    </mp-event-proxy>
+
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        {{#if updated}}
+        <bs-alert variant="info">
+          Resource has been updated.
+        </bs-alert>
+        {{/if}}
+      </template>
+    </mp-event-target-template-render>
+
     <mp-event-proxy id='workflow-proxy'
       on-event-type='Workflow.SubjectGetInWorkflow'
       proxy-event-type='RedirectAction.perform'
@@ -346,38 +391,29 @@
   <semantic-form
     form-id='new-person'
     new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
-    fields='[[fieldDefinitions
-      Rdf_type="http://www.metaphacts.com/fieldDefinition/RdfType"
-      Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
-      Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
-      Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-      Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
-    ]]'>
+    fields='[
+      [[> Rdf_type]],
+      [[> Mph_Person_Name]],
+      [[> Mph_Identifier]],
+      [[> Mph_Identifier_Provider]],
+      [[> Person_Gender]]
+    ]'>
     <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
 
-    <semantic-form-composite-input 
-        for="Person_Name"
-        new-subject-template="."
-        fields='[[fieldDefinitions
-            Mph_Person_Name="http://www.metaphacts.com/fieldDefinition/Person_Name"
-            Person_Name_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Part"
-        ]]'>
-        <semantic-form-text-input
-            for="Mph_Person_Name" 
-            languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
-        </semantic-form-text-input>
-        <semantic-form-text-input for="Person_Name_Part"></semantic-form-text-input>
-    </semantic-form-composite-input>
+    <semantic-form-text-input
+        for="Mph_Person_Name" 
+        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+    </semantic-form-text-input>
 
     <semantic-form-composite-input
         for="Mph_Identifier"
         new-subject-template=""
-        fields='[[fieldDefinitions
-            Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-            Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-            Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-            Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
-        ]]'>
+        fields='[
+          [[> Identifier_Source]],
+          [[> Identifier_Type]],
+          [[> Mph_Identifier_Provider]],
+          [[> Identifier_Value]]
+        ]'>
         <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
@@ -412,15 +448,20 @@
           (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
           ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
     ) || (
-          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>) &&
-          (?step != wf_steps:inProgress)
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
     )
     )
   }
   --]]
-  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || ((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>) && (?step != wf_steps:inProgress)))}")]]  
+  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>))}")]]  
     false
   [[else]]
     true
   [[/if]]
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> mpp:LookupCandidateTemplate]]
+</template>
 [[/inline]]
