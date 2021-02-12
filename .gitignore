@@ -4,3 +4,13 @@
 /data-preparation/update-scripts/gnd-facts-data/*
 /data-preparation/update-scripts/ulan-data/*
 *.DS_Store
+.gradle
+.settings
+target
+.project
+.classpath
+.vscode
+bin
+tmp
+runtime*
+gradle.properties
