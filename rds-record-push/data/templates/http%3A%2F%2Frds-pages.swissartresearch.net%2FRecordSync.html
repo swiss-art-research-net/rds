@@ -1,0 +1,57 @@
+<style>
+  .push-result { }
+</style>
+
+
+<div class="page">
+  <div class='page__body'>
+
+    <h1>Record Sync</h1>
+
+    <h3>Records</h3>
+
+    <p>The following tables lists all records in the local system</p>
+
+    <semantic-table 
+      query="PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+    PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+
+    SELECT DISTINCT ?subject ?assignee ?step ?currentState WHERE {
+
+      ?workflow workflow:subject ?subject .
+      ?workflow workflow:currentState ?currentState .
+      ?workflow workflow:hasState ?anyState .
+      ?currentState workflow:step ?step .
+
+      OPTIONAL { ?currentState workflow:assignee ?assignee . }
+      # OPTIONAL { ?currentState workflow:assignee ?assignee . }
+    }"
+    ></semantic-table>
+
+    <h3>Push data to RDS-Global</h3>
+    <p>
+      All approved records will be pushed to RDS-Global. 
+    </p>
+    <mp-collapsible-div expanded=false>
+      <mp-collapsible-div-trigger>
+        <span>Record Push Configuration</span>
+      </mp-collapsible-div-trigger>
+      <mp-collapsible-div-content>
+        <div>
+          <mp-admin-config-manager editable=true group="record-push"></mp-admin-config-manager>
+        </div>
+      </mp-collapsible-div-content>
+    </mp-collapsible-div>
+    <br>
+
+    <form method="POST" action="/rest/extension/records/push" target="pushResults">
+      <button name="submit" class="btn btn-primary">Push records</button>
+    </form>
+    <p>
+      <h4>Push Result</h4>
+      <iframe name="pushResults" height="30" width="300" class="push-result"></iframe>
+    </p>
+
+  </div>
+</div>
+    
