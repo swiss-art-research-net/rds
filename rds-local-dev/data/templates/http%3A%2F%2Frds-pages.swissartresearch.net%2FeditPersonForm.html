@@ -98,6 +98,13 @@
                 <template id="tuple-template">
                   <div class="text-center">
                     This person already exists, do you still want to create a new person?
+                    <mp-event-trigger
+                      id='event-trigger-de'
+                      type='Component.TemplateUpdate'
+                      data='{"newPerson": true}'
+                      targets='["event-target"]'>
+                      <button class='btn btn-primary'>Create new person</button>
+                    </mp-event-trigger>
                   </div>
                 </template>
               </semantic-table>

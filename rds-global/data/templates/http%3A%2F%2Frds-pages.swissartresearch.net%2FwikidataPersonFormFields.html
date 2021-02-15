@@ -1,0 +1,48 @@
+[[#*inline "name"]]
+{
+    "id": "name",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/Name",
+    "selectPattern" : "SELECT DISTINCT ?value WHERE {
+        ?subject <https://d-nb.info/standards/elementset/gnd#preferredName> ?value .
+        FILTER ISLITERAL(?value)
+    }",
+    "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+    "domain" : [ ],
+    "range" : [ ],
+    "defaultValues" : [ ],
+    "label" : "Name",
+    "order" : 0
+}
+[[/inline]]
+
+[[#*inline "gender"]]
+{
+    "id": "gender",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/Gender",
+    "selectPattern" : "SELECT DISTINCT ?value WHERE {
+        ?subject <https://d-nb.info/standards/elementset/gnd#gender> ?value .
+    }",
+    "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+    "domain" : [ ],
+    "range" : [ ],
+    "defaultValues" : [ ],
+    "label" : "Gender",
+    "order" : 0
+}
+[[/inline]]
+
+[[#*inline "dateBirth"]]
+{
+    "id": "dateBirth",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/DateBirth",
+    "selectPattern" : "SELECT DISTINCT ?value WHERE {
+        ?subject <https://d-nb.info/standards/elementset/gnd#dateOfBirth> ?value .
+    }",
+    "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+    "domain" : [ ],
+    "range" : [ ],
+    "defaultValues" : [ ],
+    "label" : "Date birth",
+    "order" : 0
+}
+[[/inline]]
