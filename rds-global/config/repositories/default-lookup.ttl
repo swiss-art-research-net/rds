@@ -13,12 +13,14 @@
   rep:repositoryID "default-lookup";
   rdfs:label "Default HTTP SPARQL Repository";
   rep:repositoryImpl [
-      rep:repositoryType "metaphactory:SPARQLRepository";
-      sparql:query-endpoint <http://rds-global-blazegraph:8080/blazegraph/sparql>;
-      mph:quadMode true
+      rep:repositoryType "openrdf:SailRepository";
+      sr:sailImpl [
+          sail:sailType "openrdf:MemoryStore"
+        ]
     ];
   lookup:configuration [
       lookup:type "metaphacts:sparqlLookup";
+      lookup:targetRepository "default";
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
           GRAPH ?dataset {
