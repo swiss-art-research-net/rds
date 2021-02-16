@@ -1,13 +1,16 @@
 [[> name]],
 [[> gender]],
-[[> dateBirth]]
+[[> placeOfBirth]]
 
 [[#*inline "name"]]
 {
     "id": "name",
     "iri" : "http://www.metaphacts.com/fieldDefinition/Name",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        BIND (\"Undefined in wikidata\" as ?value)
+        ?subject (
+          <http://www.w3.org/2000/01/rdf-schema#label> |
+          (^<http://wikiba.se/ontology#directClaim>/<http://www.w3.org/2000/01/rdf-schema#label>)
+        ) ?value .
         FILTER ISLITERAL(?value)
     }",
     "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
@@ -24,7 +27,7 @@
     "id": "gender",
     "iri" : "http://www.metaphacts.com/fieldDefinition/Gender",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        BIND (<http://example.com/undefined-in-wikidata> as ?value)
+      ?subject <http://www.wikidata.org/prop/direct/P21> ?value.
     }",
     "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
     "domain" : [ ],
@@ -35,18 +38,18 @@
 }
 [[/inline]]
 
-[[#*inline "dateBirth"]]
+[[#*inline "placeOfBirth"]]
 {
-    "id": "dateBirth",
-    "iri" : "http://www.metaphacts.com/fieldDefinition/DateBirth",
+    "id": "placeOfBirth",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/PlaceOfBirth",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        BIND (\"Undefined in wikidata\" as ?value)
+      ?subject <http://www.wikidata.org/prop/direct/P19> ?value .
     }",
-    "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+    "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
     "domain" : [ ],
     "range" : [ ],
     "defaultValues" : [ ],
-    "label" : "Date birth",
+    "label" : "Place of birth",
     "order" : 0
 }
 [[/inline]]

@@ -1,6 +1,7 @@
 [[> name]],
-[[> gender]],
-[[> dateBirth]]
+[[> colleagueOf]],
+[[> assistedBy]],
+[[> assistantOf]]
 
 [[#*inline "name"]]
 {
@@ -19,34 +20,50 @@
 }
 [[/inline]]
 
-[[#*inline "gender"]]
+[[#*inline "colleagueOf"]]
 {
-    "id": "gender",
-    "iri" : "http://www.metaphacts.com/fieldDefinition/Gender",
+    "id": "colleagueOf",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/ColleagueOf",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        BIND (<http://example.com/undefined-in-getty> as ?value)
+        ?subject <http://vocab.getty.edu/ontology#ulan1301_colleague_of> ?value.
     }",
     "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
     "domain" : [ ],
     "range" : [ ],
     "defaultValues" : [ ],
-    "label" : "Gender",
+    "label" : "Colleague of",
     "order" : 0
 }
 [[/inline]]
 
-[[#*inline "dateBirth"]]
+[[#*inline "assistedBy"]]
 {
     "id": "dateBirth",
-    "iri" : "http://www.metaphacts.com/fieldDefinition/DateBirth",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/AssistedBy",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        BIND (\"Undefined in getty\" as ?value)
+        ?subject <http://vocab.getty.edu/ontology#ulan1308_assisted_by> ?value .
     }",
-    "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+    "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
     "domain" : [ ],
     "range" : [ ],
     "defaultValues" : [ ],
-    "label" : "Date birth",
+    "label" : "Assisted by",
+    "order" : 0
+}
+[[/inline]]
+
+[[#*inline "assistantOf"]]
+{
+    "id": "assistantOf",
+    "iri" : "http://www.metaphacts.com/fieldDefinition/AssistantOf",
+    "selectPattern" : "SELECT DISTINCT ?value WHERE {
+        ?subject <http://vocab.getty.edu/ontology#ulan1308_assisted_by> ?value .
+    }",
+    "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+    "domain" : [ ],
+    "range" : [ ],
+    "defaultValues" : [ ],
+    "label" : "Assistant of",
     "order" : 0
 }
 [[/inline]]
