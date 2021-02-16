@@ -64,13 +64,11 @@
                   <template id="subjectCellTemplate">
                     <div title="{{subject.value}}">
                       <h4><b>
-                        <semantic-link iri='{{{subject.value}}}'>
-                          <mp-highlight
-                            highlight='{{searchToken.value}}'
-                            split-token='true'>
-                            {{label.value}}
-                          </mp-highlight>
-                        </semantic-link>
+                        <semantic-query
+                          query='SELECT * WHERE { {{subject}} a ?type }'
+                          template='<semantic-link iri={{subject.value}}></semantic-link>'
+                          no-result-template='<semantic-link iri="[[resolvePrefix "RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                        ></semantic-query>
                       </b></h4>
                       <div style="font-style:italic; font-size: 16px;">
                         {{#if score}}<span style="color: gray"> (score: {{score.value}})</span>{{/if}}&nbsp;

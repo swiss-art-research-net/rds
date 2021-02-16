@@ -16,7 +16,7 @@
 [[/inline]]
 
 <style>
-  .knowledge-panel__uri {
+  .panel__uri {
     display: flex;
     align-items: center;
   }
@@ -28,12 +28,12 @@
     transition: opacity 0.3s;
   }
 
-  .knowledge-panel__uri:hover .knowledge-panel__uri-copy-button {
+  .panel__uri:hover .panel__uri-copy-button {
     opacity: 1;
     visibility: visible;
   }
 
-  .knowledge-panel__uri-text {
+  .panel__uri-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -52,12 +52,12 @@
 <div class="page">
 <div class="page__header page__header--no-image" style="display:block; margin-bottom: 40px;">
   <h2><mp-label iri="[[this]]"></mp-label></h2>
-  <div class='knowledge-panel__uri'>
-    <div title='[[this]]' class='knowledge-panel__uri-text'>
+  <div class='panel__uri'>
+    <div title='[[this]]' class='panel__uri-text'>
       <b>URI:</b> [[this]]
     </div>
     <mp-copy-to-clipboard text='[[this]]'>
-      <button class='btn btn-link btn-sm knowledge-panel__uri-copy-button'>
+      <button class='btn btn-link btn-sm panel__uri-copy-button'>
         <i class='fa fa-clipboard'></i>
       </button>
     </mp-copy-to-clipboard>
