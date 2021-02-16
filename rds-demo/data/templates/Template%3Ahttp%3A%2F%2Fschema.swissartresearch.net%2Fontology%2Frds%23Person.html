@@ -1,35 +1,43 @@
 
+[[#*inline "dataset-fields"]]
 [[#if (ask "ASK {?? a <https://d-nb.info/standards/elementset/gnd#Person>}")]]
   [[> "http://rds-pages.swissartresearch.net/gndPersonFormFields"]]
-  [[> person-page]]
 [[else]]
   [[#if (ask "ASK {?? a <http://vocab.getty.edu/ontology#PersonConcept>}")]]
     [[> "http://rds-pages.swissartresearch.net/gettyPersonFormFields"]]
-    [[> person-page]]
   [[else]]
-    [[#if (wikidata)]]
+    [[#if wikidata]]
       [[> "http://rds-pages.swissartresearch.net/wikidataPersonFormFields"]]
-      [[> person-page]]
     [[else]]
       [[> "http://rds-pages.swissartresearch.net/gndPersonFormFields"]]
-      [[> person-page]]
     [[/if]]
   [[/if]]
 [[/if]]
+[[/inline]]
 
-
-[[#*inline "person-page"]]
 <ol class="page-breadcrumb">
 <li>
   <mp-link title="Home" url="/">Home</mp-link>
 </li>
- <li class="active">
+<li class="active">
   <mp-label iri='[[this]]'></mp-label>
 </li>
 </ol>
 
 <div class="page">
-<div class="page__header page__header--no-image"><h2><mp-label iri="[[this]]"></mp-label></h2></div>
+<div class="page__header page__header--no-image" style="display:block; margin-bottom: 40px;">
+  <h2><mp-label iri="[[this]]"></mp-label></h2>
+  <div>Description</div>
+  <i><mp-description iri="[[this]]"></mp-description></i>
+  <div>
+    <b>Types: </b>
+    <semantic-query
+      style='display:inline;'
+      query='SELECT ?type WHERE { ?? a ?type}'
+      no-result-template='-'>
+    </semantic-query>
+  </div>
+</div>  
 <div class='page__body' >
   <div data-flex-layout='row top-stretch'>
     <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
@@ -47,9 +55,7 @@
           <mp-field-visualization
             subject='[[this]]'
             fields='[
-              [[> name]],
-              [[> gender]],
-              [[> dateBirth]]
+              [[> dataset-fields]]
             ]'
             template='{{> property-table}}'>
             <template id="property-table">
@@ -59,8 +65,5 @@
         </table>
     </div>
   </div>
-  <h4 style="margin-top: 30px">Description</h4>
-  <i><mp-description iri="[[this]]"></mp-description></i>
 </div>
 </div>
-[[/inline]]  

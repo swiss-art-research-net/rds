@@ -1,9 +1,13 @@
+[[> name]],
+[[> gender]],
+[[> dateBirth]]
+
 [[#*inline "name"]]
 {
     "id": "name",
     "iri" : "http://www.metaphacts.com/fieldDefinition/Name",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        ?subject <https://d-nb.info/standards/elementset/gnd#preferredName> ?value .
+        ?subject (((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) | rdfs:label) ?value .
         FILTER ISLITERAL(?value)
     }",
     "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
@@ -20,7 +24,7 @@
     "id": "gender",
     "iri" : "http://www.metaphacts.com/fieldDefinition/Gender",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        ?subject <https://d-nb.info/standards/elementset/gnd#gender> ?value .
+        BIND (<http://example.com/undefined-in-getty> as ?value)
     }",
     "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
     "domain" : [ ],
@@ -36,7 +40,7 @@
     "id": "dateBirth",
     "iri" : "http://www.metaphacts.com/fieldDefinition/DateBirth",
     "selectPattern" : "SELECT DISTINCT ?value WHERE {
-        ?subject <https://d-nb.info/standards/elementset/gnd#dateOfBirth> ?value .
+        BIND (\"Undefined in getty\" as ?value)
     }",
     "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
     "domain" : [ ],

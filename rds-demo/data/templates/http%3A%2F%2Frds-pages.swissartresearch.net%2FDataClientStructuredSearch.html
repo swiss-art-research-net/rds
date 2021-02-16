@@ -1,10 +1,10 @@
 <div style="margin-top:10%;">
   <div data-flex-layout="column center-center">
-    <div>
-      <h1>Welcome to RDS-global project</h1>
+    <div style="margin-bottom: 100px">
+      <h1>Structured search example</h1>
       [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
 
-            <semantic-search categories='{
+      <semantic-search categories='{
         "<http://www.w3.org/2001/XMLSchema#Decimal>": [{
           "kind": "numeric-range",
           "queryPattern": "{
@@ -12,44 +12,43 @@
             FILTER(?literal >= ?__numericRangeBeginValue__) .
             FILTER(?literal <= ?__numericRangeEndValue__) .
           }"
-        }],
-        "<http://www.w3.org/2001/XMLSchema#date>": [{
-          "kind": "date-range",
-          "datatype": "http://www.w3.org/2001/XMLSchema#date",
-          "queryPattern": "
-            {
-              $subject ?__relation__ ?date .
-              FILTER(?date <= ?__dateEndValue__) .
-              FILTER(?date >= ?__dateBeginValue__) .
-            }"
-          }]
+        }]        
         }'
         relations='{
-          "<http://www.metaphacts.com/ontology/sample/fan_of>": [
+          "<http://rds#birthYear>": [
             {
-              "kind": "resource",
+              "kind": "numeric-range",
               "queryPattern": "
               {
-                $subject <http://xmlns.com/foaf/0.1/topic_interest>/<http://purl.org/dc/terms/creator> ?__value__ .
+                $subject foaf:focus/gvp:biographyPreferred/gvp:estStart ?literal .
+                FILTER(?literal >= ?__numericRangeBeginValue__) .
+                FILTER(?literal <= ?__numericRangeEndValue__) .
               }
               "
             }
           ],
-          "<http://xmlns.com/foaf/0.1/topic_interest>": [
+          "<http://rds#deathYear>": [
             {
-              "kind": "text"
+              "kind": "numeric-range",
+              "queryPattern": "
+              {
+                $subject foaf:focus/gvp:biographyPreferred/gvp:estEnd ?literal .
+                FILTER(?literal >= ?__numericRangeBeginValue__) .
+                FILTER(?literal <= ?__numericRangeEndValue__) .
+              }
+              "
             }
           ]
         }'
         search-profile='{
             "categories": [{
-                "iri": "<http://xmlns.com/foaf/0.1/Person>",
+                "iri": "<http://vocab.getty.edu/ontology#PersonConcept>",
                 "label": "Person",
                 "thumbnail": "../images/help/thenounproject/noun_1113333.svg"
               },
               {
-                "iri": "<http://dbpedia.org/ontology/Artwork>",
-                "label": "Artwork",
+                "iri": "<http://vocab.getty.edu/ontology#GroupConcept>",
+                "label": "Group",
                 "thumbnail": "../images/help/thenounproject/noun_1285331.svg"
               },
               {
@@ -64,64 +63,83 @@
               }
             ],
             "relations": [{
-                "iri": "<http://xmlns.com/foaf/0.1/knows>",
-                "label": "knows",
-                "hasDomain": "<http://xmlns.com/foaf/0.1/Person>",
-                "hasRange": "<http://xmlns.com/foaf/0.1/Person>"
+                "iri": "<http://vocab.getty.edu/ontology#ulan1101_teacher_of>",
+                "label": "teacher of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
               },
               {
-                "iri": "<http://xmlns.com/foaf/0.1/topic_interest>",
-                "label": "interested in",
-                "hasDomain": "<http://xmlns.com/foaf/0.1/Person>",
-                "hasRange": "<http://dbpedia.org/ontology/Artwork>"
+                "iri": "<http://vocab.getty.edu/ontology#ulan1102_student_of>",
+                "label": "student of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
               },
               {
-                "iri": "<http://www.metaphacts.com/ontology/sample/fan_of>",
-                "label": "fan of",
-                "hasDomain": "<http://xmlns.com/foaf/0.1/Person>",
-                "hasRange": "<http://xmlns.com/foaf/0.1/Person>"
+                "iri": "<http://vocab.getty.edu/ontology#ulan1501_sibling_of>",
+                "label": "sibling of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1512_parent_of>",
+                "label": "parent of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1511_child_of>",
+                "label": "child of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1303_collaborated_with>",
+                "label": "collaborated with",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1305_worked_with>",
+                "label": "worked with",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1318_member_was>",
+                "label": "member was",
+                "hasDomain": "<http://vocab.getty.edu/ontology#GroupConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1317_member_of>",
+                "label": "member of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#GroupConcept>"
               },
               {
-                "iri": "<http://schema.org/birthDate>",
-                "label": "birth date",
-                "hasDomain": "<http://xmlns.com/foaf/0.1/Person>",
-                "hasRange": "<http://www.w3.org/2001/XMLSchema#date>"
+                "iri": "<http://rds#birthYear>",
+                "label": "birth year",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
               },
               {
-                "iri": "<http://dbpedia.org/ontology/height>",
-                "label": "height",
-                "hasDomain": "<http://xmlns.com/foaf/0.1/Person>",
+                "iri": "<http://rds#deathYear>",
+                "label": "death year",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
                 "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
               }
             ]
           }'>
           <semantic-search-query-builder
-            resource-selector-relations='{
-              "<http://xmlns.com/foaf/0.1/topic_interest>": {
-                  "query": {
-                      "type": "lookup",
-                      "limit": 3
-                  },
-                  "suggestionVariable": "subject",
-                  "suggestionTupleTemplate": "{{> candidateTemplate}}"
-              },
-              "<http://xmlns.com/foaf/0.1/knows>": {
-                  "query": {
-                      "type": "lookup",
-                      "limit": 3
-                  },
-                  "suggestionVariable": "subject",
-                  "suggestionTupleTemplate": "{{> candidateTemplate}}"
-              },
-              "<http://www.metaphacts.com/ontology/sample/fan_of>": {
-                  "query": {
-                      "type": "lookup",
-                      "limit": 3
-                  },
-                  "suggestionVariable": "subject",
-                  "suggestionTupleTemplate": "{{> candidateTemplate}}"
-              }
-          }'>
+              id='qb'
+              resource-selector='{
+                "query": {
+                    "type": "lookup",
+                    "limit": 3
+                },
+                "suggestionVariable": "subject",
+                "suggestionTupleTemplate": "{{> candidateTemplate}}"
+              }'>
             <template id="candidateTemplate">
               [[> mpp:LookupCandidateTemplate]]
             </template>
