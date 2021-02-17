@@ -24,38 +24,37 @@
     <http://schema.swissartresearch.net/step/inProgress> a workflow:WorkflowStep ;
         rdfs:label "In progress" ;
         workflow:nextStep <http://schema.swissartresearch.net/step/readyToReview> ;
-        workflow:assigneeQuery <http://schema.swissartresearch.net/editorAssigneeQuery> .
+        workflow:assigneeQuery <http://schema.swissartresearch.net/anyAssigneeQuery> .
     <http://schema.swissartresearch.net/step/readyToReview> a workflow:WorkflowStep ;
         rdfs:label "Ready to review" ;
         workflow:nextStep <http://schema.swissartresearch.net/step/inProgress> ;
         workflow:nextStep <http://schema.swissartresearch.net/step/inReview> ;
-        workflow:assigneeQuery <http://schema.swissartresearch.net/reviewerAssigneeQuery> .
+        workflow:assigneeQuery <http://schema.swissartresearch.net/editorAssigneeQuery> .
     <http://schema.swissartresearch.net/step/inReview> a workflow:WorkflowStep ;
         rdfs:label "In review" ;
         workflow:nextStep <http://schema.swissartresearch.net/step/inProgress> ;
         workflow:nextStep <http://schema.swissartresearch.net/step/accepted> ;
         workflow:nextStep <http://schema.swissartresearch.net/step/rejected> ;
-        workflow:assigneeQuery <http://schema.swissartresearch.net/reviewerAssigneeQuery> .
+        workflow:assigneeQuery <http://schema.swissartresearch.net/editorAssigneeQuery> .
     <http://schema.swissartresearch.net/step/accepted> a workflow:WorkflowStep ;
         rdfs:label "Accepted" ;
         workflow:nextStep <http://schema.swissartresearch.net/step/inReview> ;
-        workflow:assigneeQuery <http://schema.swissartresearch.net/reviewerAssigneeQuery> .
+        workflow:assigneeQuery <http://schema.swissartresearch.net/editorAssigneeQuery> .
     <http://schema.swissartresearch.net/step/rejected> a workflow:WorkflowStep ;
         rdfs:label "Rejected" ;
         workflow:nextStep <http://schema.swissartresearch.net/step/inReview> ;
-        workflow:assigneeQuery <http://schema.swissartresearch.net/reviewerAssigneeQuery> .
+        workflow:assigneeQuery <http://schema.swissartresearch.net/editorAssigneeQuery> .
 
+    <http://schema.swissartresearch.net/anyAssigneeQuery> a sp:Query ;
+        sp:text """PREFIX Platform: <http://www.metaphacts.com/ontologies/platform#>
+            SELECT DISTINCT ?assignee WHERE {
+                ?assignee a Platform:User .
+            }""" .
     <http://schema.swissartresearch.net/editorAssigneeQuery> a sp:Query ;
         sp:text """PREFIX Platform: <http://www.metaphacts.com/ontologies/platform#>
             SELECT DISTINCT ?assignee WHERE {
                 ?assignee a Platform:User ;
                     Platform:hasGroup <https://resources.swissartresearch.net/workflow/editor> .
-            }""" .
-    <http://schema.swissartresearch.net/reviewerAssigneeQuery> a sp:Query ;
-        sp:text """PREFIX Platform: <http://www.metaphacts.com/ontologies/platform#>
-            SELECT DISTINCT ?assignee WHERE {
-                ?assignee a Platform:User ;
-                    Platform:hasGroup <https://resources.swissartresearch.net/workflow/reviewer> .
             }""" .
 }
 

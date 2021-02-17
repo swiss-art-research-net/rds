@@ -4,15 +4,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix crm: <http://www.cidoc-crm.org/cidoc-crm/>.
 
-  User:admin a Platform:User;
-  	Platform:hasGroup <https://resources.swissartresearch.net/workflow/reviewer>.
-  User:editor a Platform:User;
-  	Platform:hasGroup <https://resources.swissartresearch.net/workflow/editor>.
+User:editor a Platform:User;
+      Platform:hasGroup <https://resources.swissartresearch.net/workflow/editor>.
 
+User:admin a Platform:User;
+      Platform:hasGroup <https://resources.swissartresearch.net/workflow/editor>.
 
-<https://resources.swissartresearch.net/workflow/reviewer> a foaf:Agent, crm:E39_Actor;
-      foaf:member User:admin;
-      rdfs:label "Reviewer".
 <https://resources.swissartresearch.net/workflow/editor> a foaf:Agent, crm:E39_Actor;
       foaf:member User:editor;
+      foaf:member User:admin;
       rdfs:label "Editor".

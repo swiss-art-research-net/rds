@@ -6,10 +6,14 @@
   [[#if (ask "ASK {?? a <http://vocab.getty.edu/ontology#PersonConcept>}")]]
     [[> "http://rds-pages.swissartresearch.net/gettyPersonFormFields"]]
   [[else]]
-    [[#if wikidata]]
-      [[> "http://rds-pages.swissartresearch.net/wikidataPersonFormFields"]]
+    [[#if (ask "ASK {?? a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>}")]]
+      [[> "http://rds-pages.swissartresearch.net/e21PersonFormFields"]]
     [[else]]
-      [[> "http://rds-pages.swissartresearch.net/gndPersonFormFields"]]
+      [[#if wikidata]]
+        [[> "http://rds-pages.swissartresearch.net/wikidataPersonFormFields"]]
+      [[else]]
+        [[> "http://rds-pages.swissartresearch.net/gndPersonFormFields"]]
+      [[/if]]
     [[/if]]
   [[/if]]
 [[/if]]
@@ -41,64 +45,64 @@
 </style>
 
 <ol class="page-breadcrumb">
-<li>
-  <mp-link title="Home" url="/">Home</mp-link>
-</li>
-<li class="active">
-  <mp-label iri='[[this]]'></mp-label>
-</li>
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+    <mp-label iri='[[this]]'></mp-label>
+  </li>
 </ol>
 
 <div class="page">
-<div class="page__header page__header--no-image" style="display:block; margin-bottom: 40px;">
-  <h2><mp-label iri="[[this]]"></mp-label></h2>
-  <div class='panel__uri'>
-    <div title='[[this]]' class='panel__uri-text'>
-      <b>URI:</b> [[this]]
+  <div class="page__header page__header--no-image" style="display:block; margin-bottom: 40px;">
+    <h2><mp-label iri="[[this]]"></mp-label></h2>
+    <div class='panel__uri'>
+      <div title='[[this]]' class='panel__uri-text'>
+        <b>URI:</b> [[this]]
+      </div>
+      <mp-copy-to-clipboard text='[[this]]'>
+        <button class='btn btn-link btn-sm panel__uri-copy-button'>
+          <i class='fa fa-clipboard'></i>
+        </button>
+      </mp-copy-to-clipboard>
     </div>
-    <mp-copy-to-clipboard text='[[this]]'>
-      <button class='btn btn-link btn-sm panel__uri-copy-button'>
-        <i class='fa fa-clipboard'></i>
-      </button>
-    </mp-copy-to-clipboard>
-  </div>
-  <div><b>Description: </b></div>
-  <i><mp-description iri="[[this]]"></mp-description></i>
-  <div>
-    <b>Types: </b>
-    <semantic-query
-      style='display:inline;'
-      query='SELECT ?type WHERE { ?? a ?type}'
-      no-result-template='-'>
-    </semantic-query>
-  </div>
-</div>  
-<div class='page__body' >
-  <div data-flex-layout='row top-stretch'>
-    <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
-        [[> RecordImage]]
+    <div><b>Description: </b></div>
+    <i><mp-description iri="[[this]]"></mp-description></i>
+    <div>
+      <b>Types: </b>
+      <semantic-query
+        style='display:inline;'
+        query='SELECT ?type WHERE { ?? a ?type}'
+        no-result-template='-'>
+      </semantic-query>
     </div>
-    <div class='table-responsive'>
-      <table class='table'>
-        <thead role='header'>
-          <tr>
-            <th>Field</th>
-            <th>Value</th>
-          </tr>
-        </thead>
+  </div>  
+  <div class='page__body' >
+    <div data-flex-layout='row top-stretch'>
+      <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+          [[> RecordImage]]
+      </div>
+      <div class='table-responsive'>
+        <table class='table'>
+          <thead role='header'>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+          </thead>
 
-          <mp-field-visualization
-            subject='[[this]]'
-            fields='[
-              [[> dataset-fields]]
-            ]'
-            template='{{> property-table}}'>
-            <template id="property-table">
-              [[> FieldBasedVisualization]]
-            </template>
-          </mp-field-visualization>
-        </table>
+            <mp-field-visualization
+              subject='[[this]]'
+              fields='[
+                [[> dataset-fields]]
+              ]'
+              template='{{> property-table}}'>
+              <template id="property-table">
+                [[> FieldBasedVisualization]]
+              </template>
+            </mp-field-visualization>
+          </table>
+      </div>
     </div>
   </div>
-</div>
 </div>
