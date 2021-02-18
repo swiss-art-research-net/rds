@@ -431,7 +431,7 @@
             ?bio <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type.
             ?type rdfs:label \"Long Biography\"
         }",
-       "selectPattern" : "SELECT ?value ?label WHERE {
+       "selectPattern" : "SELECT ?value WHERE {
             ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
             ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>. 
             ?info_iri <http://www.cidoc-crm.org/cidoc-crm/P129_is_about> ?bio.
@@ -458,7 +458,7 @@
             BIND(IRI(CONCAT(STR($subject),\"/info/\", MD5(str(?value)))) as ?info_iri).
             BIND(IRI(CONCAT(STR($subject),\"/long_bio/\", MD5(str(?value)))) as ?bio).
             BIND(lang(?value) as ?lang)
-            ?language_iri <http://www.cidoc-crm.org/cidoc-crm/P3_has_note> ?lang.
+            OPTIONAL { ?language_iri <http://www.cidoc-crm.org/cidoc-crm/P3_has_note> ?lang. }
         
         }",
        "order" : 0 }  
