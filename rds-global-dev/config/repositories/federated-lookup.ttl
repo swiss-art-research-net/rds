@@ -21,5 +21,13 @@
     ];
   lookup:configuration [
       lookup:type "metaphacts:federatedLookup";
-      lookup:serviceMember "wikidata-lookup", "default-lookup"
+      lookup:serviceMember [
+          lookup:name "default-lookup"
+        ], [
+          lookup:name "wikidata-lookup";
+          lookup:scoreOffset 5.0E-1;
+          lookup:scoreFactor -1.0E0
+        ], [
+          lookup:name "records-lookup"
+        ]
     ] .
