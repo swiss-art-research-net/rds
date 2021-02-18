@@ -183,26 +183,31 @@
 [[/inline]]
 
 [[#*inline "Mph_Person_GND_URL"]]
-    { "id": "Mph_Person_GND_URL",
-       "iri" : "http://www.metaphacts.com/fieldDefinition/Person_GND_URL",
-       "deletePattern" : "DELETE { $subject ?predicate $value} WHERE {}",
-       "selectPattern" : "SELECT ?value ?label WHERE {
-    ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?id_iri.
-    ?id_iri a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
-    ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
-    ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
-    ?provider <http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> ?value.
-    ?value a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object> .
-    ?value rdfs:label ?id_label .
-    ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
-    ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
-    ?provider <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://d-nb.info/>. 
-    }",
-       "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
-       "domain" : [ ], "range" : [ ], "defaultValues" : [ ], "maxOccurs" : "1",
-       "label" : "GND Identifier",
-       "insertPattern" : "INSERT { $subject ?predicate ?value } WHERE { }",
-       "order" : 0 }
+    {
+        "id": "Mph_Person_GND_URL",
+        "iri" : "http://www.metaphacts.com/fieldDefinition/Person_GND_URL",
+        "deletePattern" : "DELETE { $subject ?predicate $value} WHERE {}",
+        "selectPattern" : "SELECT ?value ?label WHERE {
+            ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?id_iri.
+            ?id_iri a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
+            ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
+            ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
+            ?provider <http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object> ?value.
+            ?value a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object> .
+            ?value rdfs:label ?id_label .
+            ?id_iri <http://www.cidoc-crm.org/cidoc-crm/P37i_was_assigned_by> ?provider.
+            ?provider a <http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment>.
+            ?provider <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> <https://d-nb.info/>. 
+        }",
+        "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+        "domain" : [ ],
+        "range" : [ ],
+        "defaultValues" : [ ],
+        "maxOccurs" : "1",
+        "label" : "GND Identifier",
+        "insertPattern" : "INSERT { $subject ?predicate ?value } WHERE { }",
+        "order" : 0
+    }
 [[/inline]]
 
 [[#*inline "Person_Gender"]]
@@ -211,50 +216,37 @@
         "iri" : "https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender",
         "deletePattern" : "DELETE {
             ?subject crm:P2_has_type ?value.
-            } WHERE {
+        } WHERE {
             ?subject crm:P2_has_type ?value.
             ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>. 
-            }",
+        }",
        "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
             ?subject crm:P2_has_type ?value.
-            ?value rdfs:label ?label
-            } LIMIT 1",
+            ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>. 
+            VALUES (?value ?label) {
+                (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)
+                (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)
+                (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)
+            }
+        } LIMIT 1",
        "description" : "The type of the alternative name of a person",
        "range" : [ ], "label" : "Person Gender",
        "insertPattern" : "INSERT {
             ?subject crm:P2_has_type ?value.
-            ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>.
-            ?value rdfs:label ?label_en.
-            ?value rdfs:label ?label_de.
-            }WHERE{
-            SELECT ?label_de ?label_en WHERE{
-            {
-            BIND(\"Male\"@en AS ?label_en)
-            BIND(\"Männlich\"@de AS ?label_de)
-            FILTER (?value=<http://vocab.getty.edu/aat/300411836>)
-            } UNION {
-            BIND(\"Female\"@en AS ?label_en)
-            BIND(\"Weiblich\"@de AS ?label_de)
-            FILTER (?value=<http://vocab.getty.edu/aat/300411837>)
-            } UNION {
-            BIND(\"Neutral\"@en AS ?label_en)
-            BIND(\"Neutrale\"@de AS ?label_de)
-            FILTER (?value=<http://vocab.getty.edu/aat/300417541>)
-            }
-            }
-            }",
+        } WHERE { }",
        "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
-       "domain" : [ ], "valueSetPattern" : "SELECT ?value ?label WHERE {
-            SELECT ?value ?label WHERE {
-            VALUES (?value ?label ) {
-            (<http://vocab.getty.edu/aat/300411836> \"Female\"@en)
+       "domain" : [ ],
+       "valueSetPattern" : "SELECT ?value ?label WHERE {
+          VALUES (?value ?label ) {
+            (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)
             (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)
             (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)
-            }
-            }
-            }",
-       "defaultValues" : [ ], "maxOccurs" : "1",
-       "order" : 0 }
+          }
+        }",
+       "defaultValues" : [ ],
+       "maxOccurs" : "1",
+       "order" : 0
+    }
 [[/inline]]
 
 [[#*inline "Occupation_General_Role"]]
@@ -279,17 +271,17 @@
             } LIMIT 10",
        "selectPattern" : "SELECT distinct ?value ?label
             WHERE {
-            ?subject <http://grp.swissartresearch.net/hadOccupation> ?value.
-            ?value <http://www.w3.org/2008/05/skos-xl#altLabel> ?label_iri.
-            ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#number> <https://resources.swissartresearch.net/vocab/term/singular>.
-            OPTIONAL{
-            ?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender.
-            }
-            BIND(exists{?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender} as ?genderEx).
-            BIND(IF(?genderEx, (IF(?gender=<http://vocab.getty.edu/aat/300411836>, <https://resources.swissartresearch.net/vocab/term/masculine>, <https://resources.swissartresearch.net/vocab/term/feminine>) ), <https://resources.swissartresearch.net/vocab/term/masculine>) as ?gender_iri).
-            ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#gender> ?gender_iri.
-            ?label_iri <http://www.w3.org/ns/lemon/ontolex#writtenRep> ?label.
-            }",
+                ?subject <http://grp.swissartresearch.net/hadOccupation> ?value.
+                ?value <http://www.w3.org/2008/05/skos-xl#altLabel> ?label_iri.
+                ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#number> <https://resources.swissartresearch.net/vocab/term/singular>.
+                OPTIONAL{
+                    ?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender.
+                }
+                BIND(exists{?subject <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?gender} as ?genderEx).
+                BIND(IF(?genderEx, (IF(?gender=<http://vocab.getty.edu/aat/300411836>, <https://resources.swissartresearch.net/vocab/term/masculine>, <https://resources.swissartresearch.net/vocab/term/feminine>) ), <https://resources.swissartresearch.net/vocab/term/masculine>) as ?gender_iri).
+                ?label_iri <http://www.lexinfo.net/ontology/2.0/lexinfo#gender> ?gender_iri.
+                ?label_iri <http://www.w3.org/ns/lemon/ontolex#writtenRep> ?label.
+        }",
        "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
        "domain" : [ "http://www.cidoc-crm.org/cidoc-crm/E21_Person" ], "range" : [ ], "defaultValues" : [ ], "label" : "Occupation / General Role",
        "insertPattern" : "INSERT { 
