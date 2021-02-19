@@ -2,49 +2,42 @@
   <div data-flex-layout="column center-center">
     <div style="margin-bottom: 100px">
       <h1>Structured search example</h1>
+      <bs-alert variant="info">
+        <b>Note:</b> Page is not a part of the rds-global application and presented only for example reasons.
+      </bs-alert>
       [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
 
-      <semantic-search
-        
-        categories='{
-          "<http://rds#birthDate>": [{
-            "kind": "date-range",
-            "queryPattern": "{
-              ?subject
-                crm:P98i_was_brought_into_life /
-                  crm:P4_has_time-span /
-                    (crm:P82a_begin_of_the_begin | crm:P82b_end_of_the_end)
-                      ?date.
-            }"
-          }],
-          "<http://rds#deathDate>": [{
-            "kind": "date-range",
-            "queryPattern": "{
-              ?subject
-                crm:P100i_died_in /
-                  crm:P4_has_time-span /
-                    (crm:P82a_begin_of_the_begin | crm:P82b_end_of_the_end)
-                      ?date.
-            }"
-          }]
+      <semantic-search categories='{
+        "<http://www.w3.org/2001/XMLSchema#Decimal>": [{
+          "kind": "numeric-range",
+          "queryPattern": "{
+            $subject ?__relation__ ?literal .
+            FILTER(?literal >= ?__numericRangeBeginValue__) .
+            FILTER(?literal <= ?__numericRangeEndValue__) .
+          }"
+        }]        
         }'
         relations='{
-          "<http://www.cidoc-crm.org/cidoc-crm/P96_by_mother>": [
+          "<http://rds#birthYear>": [
             {
-              "kind": "resource",
+              "kind": "numeric-range",
               "queryPattern": "
               {
-                ?subject crm:P98i_was_brought_into_life / crm:P96_by_mother ?value.
+                $subject foaf:focus/gvp:biographyPreferred/gvp:estStart ?literal .
+                FILTER(?literal >= ?__numericRangeBeginValue__) .
+                FILTER(?literal <= ?__numericRangeEndValue__) .
               }
               "
             }
           ],
-           "<http://www.cidoc-crm.org/cidoc-crm/P97_from_father>": [
+          "<http://rds#deathYear>": [
             {
-              "kind": "resource",
+              "kind": "numeric-range",
               "queryPattern": "
               {
-                ?subject crm:P98i_was_brought_into_life / crm:P97_from_father ?value.
+                $subject foaf:focus/gvp:biographyPreferred/gvp:estEnd ?literal .
+                FILTER(?literal >= ?__numericRangeBeginValue__) .
+                FILTER(?literal <= ?__numericRangeEndValue__) .
               }
               "
             }
@@ -52,44 +45,91 @@
         }'
         search-profile='{
             "categories": [{
-                "iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
+                "iri": "<http://vocab.getty.edu/ontology#PersonConcept>",
                 "label": "Person",
                 "thumbnail": "../images/help/thenounproject/noun_1113333.svg"
               },
               {
-                "iri": "<http://rds#birthDate>",
-                "label": "Birth date",
-                "thumbnail": "../images/help/thenounproject/noun_873049.svg"
+                "iri": "<http://vocab.getty.edu/ontology#GroupConcept>",
+                "label": "Group",
+                "thumbnail": "../images/help/thenounproject/noun_1285331.svg"
               },
               {
-                "iri": "<http://rds#deathDate>",
-                "label": "Death date",
+                "iri": "<http://www.w3.org/2001/XMLSchema#Decimal>",
+                "label": "Height",
+                "thumbnail": "../images/help/thenounproject/noun_739855.svg"
+              },
+              {
+                "iri": "<http://www.w3.org/2001/XMLSchema#date>",
+                "label": "Time",
                 "thumbnail": "../images/help/thenounproject/noun_873049.svg"
               }
             ],
             "relations": [{
-                "iri": "<http://www.cidoc-crm.org/cidoc-crm/P96_by_mother>",
-                "label": "Mother",
-                "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
-                "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>"
+                "iri": "<http://vocab.getty.edu/ontology#ulan1101_teacher_of>",
+                "label": "teacher of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
               },
               {
-                "iri": "<http://www.cidoc-crm.org/cidoc-crm/P97_from_father>",
-                "label": "Father",
-                "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
-                "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>"
+                "iri": "<http://vocab.getty.edu/ontology#ulan1102_student_of>",
+                "label": "student of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
               },
               {
-                "iri": "<http://rds#wasBorn>",
-                "label": "Birth date",
-                "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
-                "hasRange": "<http://rds#birthDate>"
+                "iri": "<http://vocab.getty.edu/ontology#ulan1501_sibling_of>",
+                "label": "sibling of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1512_parent_of>",
+                "label": "parent of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1511_child_of>",
+                "label": "child of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1303_collaborated_with>",
+                "label": "collaborated with",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1305_worked_with>",
+                "label": "worked with",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1318_member_was>",
+                "label": "member was",
+                "hasDomain": "<http://vocab.getty.edu/ontology#GroupConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#PersonConcept>"
+              },
+               {
+                "iri": "<http://vocab.getty.edu/ontology#ulan1317_member_of>",
+                "label": "member of",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://vocab.getty.edu/ontology#GroupConcept>"
               },
               {
-                "iri": "<http://rds#died>",
-                "label": "Death date",
-                "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
-                "hasRange": "<http://rds#deathDate>"
+                "iri": "<http://rds#birthYear>",
+                "label": "birth year",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
+              },
+              {
+                "iri": "<http://rds#deathYear>",
+                "label": "death year",
+                "hasDomain": "<http://vocab.getty.edu/ontology#PersonConcept>",
+                "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
               }
             ]
           }'>

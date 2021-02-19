@@ -1,80 +1,78 @@
 [[#*inline "Mph_Short_Biography"]]
-    { "id": "Mph_Short_Biography",
-       "iri" : "http://www.metaphacts.com/fieldDefinition/Short_Biography",
-       "deletePattern" : "DELETE {
-    ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-    ?info_iri rdfs:value ?value
-    } 
-    WHERE 
-    {
+{
+  "id": "Mph_Short_Biography",
+  "iri" : "http://www.metaphacts.com/fieldDefinition/Short_Biography",
+  "deletePattern" : "DELETE {
+      ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
+      ?info_iri rdfs:value ?value
+    } WHERE {
+      ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
+      ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
+      ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
+      ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/biographical_note>.
+      ?info_iri rdfs:value ?value
+  }",
+  "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
     ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
     ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
     ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
     ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/biographical_note>.
     ?info_iri rdfs:value ?value
-    }",
-       "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
+  }",
+  "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+  "domain" : [ ], "range" : [ ], "defaultValues" : [ ], "label" : "Biography",
+  "insertPattern" : "INSERT { 
     ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-    ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-    ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
-    ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/biographical_note>.
-    ?info_iri rdfs:value ?value
-    }",
-       "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
-       "domain" : [ ], "range" : [ ], "defaultValues" : [ ], "label" : "Biography",
-       "insertPattern" : "INSERT { 
-    ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-    ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-    ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
-    ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/biographical_note>.
-    ?info_iri rdfs:value ?value.
-    ?infor_iri <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
-    ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
-    ?lang rdfs:label ?lang_label
-    } 
-    WHERE {
-    BIND(IRI(CONCAT(STR($subject),\"/biography/\", MD5(str(?value)))) as ?info_iri).
-    {SELECT ?lang WHERE {
-    BIND(LANG(?value) as ?langTag)
-    BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
-    VALUES ( ?lang ?langTag ?lang_label) {
-    (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
-    (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
-    (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
-    (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
-    (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
-    }
-        } LIMIT 1}
-    }",
-       "order" : 0 }
+      ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
+      ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
+      ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/biographical_note>.
+      ?info_iri rdfs:value ?value.
+      ?infor_iri <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
+      ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
+      ?lang rdfs:label ?lang_label
+    } WHERE {
+      BIND(IRI(CONCAT(STR($subject),\"/biography/\", MD5(str(?value)))) as ?info_iri).
+      {SELECT ?lang WHERE {
+        BIND(LANG(?value) as ?langTag)
+        BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
+        VALUES ( ?lang ?langTag ?lang_label) {
+        (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
+        (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
+        (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
+        (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
+        (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+      }} LIMIT 1}
+  }",
+  "order" : 0
+}
 [[/inline]]
 
 [[#*inline "Mph_Identifier_Provider"]]
-    {
-        "id" : "Mph_Identifier_Provider",
-        "iri" : "http://www.metaphacts.com/fieldDefinition/Identifier_Provider",
-        "deletePattern" : "DELETE {
-        ?subject <http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by> ?attr_assignment.
-        ?attr_assignment <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?actor.
-        ?actor rdfs:label ?value.
-    } WHERE {
-        ?subject <http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by> ?attr_assignment.
-        ?attr_assignment a <http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment>.
-        ?attr_assignment <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?actor.
-        ?actor a <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>.
-        ?actor rdfs:label ?value.
-    }",
-       "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
-        ?subject crm:P140i_was_attributed_by ?attr_assignment.
-        ?attr_assignment a crm:E13_Attribute_Assignment.
-        ?attr_assignment crm:P14_carried_out_by ?actor.
-        ?actor a crm:E39_Actor.
-        ?actor rdfs:label ?value
-    }",
-       "minOccurs" : "0",
-       "description" : "This field is used to indicate the provider of the identifier attributed to the documented entity",
-       "range" : [ ], "label" : "Identifier Provider",
-       "insertPattern" : "INSERT {
+{
+  "id" : "Mph_Identifier_Provider",
+  "iri" : "http://www.metaphacts.com/fieldDefinition/Identifier_Provider",
+  "deletePattern" : "DELETE {
+    ?subject <http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by> ?attr_assignment.
+    ?attr_assignment <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?actor.
+    ?actor rdfs:label ?value.
+  } WHERE {
+    ?subject <http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by> ?attr_assignment.
+    ?attr_assignment a <http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment>.
+    ?attr_assignment <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?actor.
+    ?actor a <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>.
+    ?actor rdfs:label ?value.
+  }",
+    "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
+    ?subject crm:P140i_was_attributed_by ?attr_assignment.
+    ?attr_assignment a crm:E13_Attribute_Assignment.
+    ?attr_assignment crm:P14_carried_out_by ?actor.
+    ?actor a crm:E39_Actor.
+    ?actor rdfs:label ?value
+  }",
+  "minOccurs" : "0",
+  "description" : "This field is used to indicate the provider of the identifier attributed to the documented entity",
+  "range" : [ ], "label" : "Identifier Provider",
+  "insertPattern" : "INSERT {
         ?subject crm:P140i_was_attributed_by ?attr_assignment.
         ?attr_assignment a crm:E13_Attribute_Assignment.
         ?attr_assignment crm:P14_carried_out_by ?actor.
@@ -84,102 +82,106 @@
     ?person <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?subject.
     BIND(IRI(CONCAT(STR(?person),\"/identifier_assignment/\",STR(?subject))) AS ?attr_assignment)
     BIND (UUID() AS ?actor)
-    }",
-       "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
-       "domain" : [ "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier" ], "defaultValues" : [ ], "maxOccurs" : "1",
-       "order" : 0 }
+  }",
+  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+  "domain" : [ "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier" ], "defaultValues" : [ ], "maxOccurs" : "1",
+  "order" : 0
+}
 [[/inline]]
 
 [[#*inline "Mph_Identifier"]]
-    {
-        "id": "Mph_Identifier",
-        "iri" : "http://www.metaphacts.com/fieldDefinition/Identifier",
-        "deletePattern" : "DELETE {
-            ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
-            } WHERE {
-            ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
-            ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
-            
-            }",
-       "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
-            ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
-            ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier> .
-            }",
-        "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
-        "domain" : [ "http://www.cidoc-crm.org/cidoc-crm/E21_Person" ], "description" : "An identifier for the person",
-        "range" : [ ], "defaultValues" : [ ], "label" : "Identifier",
-        "insertPattern" : "INSERT {
-            ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
-            ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier> .
-            } WHERE {}
-        ",
-       "order" : 0 }  
+{
+  "id": "Mph_Identifier",
+  "iri" : "http://www.metaphacts.com/fieldDefinition/Identifier",
+  "deletePattern" : "DELETE {
+      ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
+      } WHERE {
+      ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
+      ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
+      
+      }",
+  "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
+      ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
+      ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier> .
+      }",
+  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+  "domain" : [ "http://www.cidoc-crm.org/cidoc-crm/E21_Person" ], "description" : "An identifier for the person",
+  "range" : [ ], "defaultValues" : [ ], "label" : "Identifier",
+  "insertPattern" : "INSERT {
+      ?subject <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?value.
+      ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier> .
+      } WHERE {}
+  ",
+  "order" : 0
+}  
 [[/inline]]
 
 [[#*inline "Death_Date_Earliest"]]
-    { "id": "Death_Date_Earliest",
-       "iri" : "https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Earliest",
-       "deletePattern" : "DELETE { 
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
-            } 
-            WHERE {
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri a crm:E52_Time-Span.
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
-            }",
-            "selectPattern" : "SELECT DISTINCT ?value ?label 
-            WHERE {
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri a crm:E52_Time-Span.
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+{
+  "id": "Death_Date_Earliest",
+  "iri" : "https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Earliest",
+  "deletePattern" : "DELETE { 
+        ?subject crm:P4_has_time-span ?timespan_uri. 
+        ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+        } 
+        WHERE {
+        ?subject crm:P4_has_time-span ?timespan_uri. 
+        ?timespan_uri a crm:E52_Time-Span.
+        ?timespan_uri crm:P82a_begin_of_the_begin ?value.
         }",
-       "minOccurs" : "0",
-       "description" : "This field is used to indicate the earliest known date for the death of the documented person.",
-       "range" : [ ], "label" : "Person Death Date (earliest)",
-       "insertPattern" : "INSERT {
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri a crm:E52_Time-Span.
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
-            } WHERE {
-            BIND(IRI(CONCAT(STR($subject),\"/death_timespan/\", MD5(str($subject)))) as ?timespan_uri)
-        }",
-       "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#date",
-       "domain" : [ ], "defaultValues" : [ ], "maxOccurs" : "1",
-       "order" : 0 }
+        "selectPattern" : "SELECT DISTINCT ?value ?label 
+        WHERE {
+        ?subject crm:P4_has_time-span ?timespan_uri. 
+        ?timespan_uri a crm:E52_Time-Span.
+        ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+    }",
+  "minOccurs" : "0",
+  "description" : "This field is used to indicate the earliest known date for the death of the documented person.",
+  "range" : [ ], "label" : "Person Death Date (earliest)",
+  "insertPattern" : "INSERT {
+      ?subject crm:P4_has_time-span ?timespan_uri. 
+      ?timespan_uri a crm:E52_Time-Span.
+      ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+      } WHERE {
+      BIND(IRI(CONCAT(STR($subject),\"/death_timespan/\", MD5(str($subject)))) as ?timespan_uri)
+  }",
+  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#date",
+  "domain" : [ ], "defaultValues" : [ ], "maxOccurs" : "1",
+  "order" : 0
+}
 [[/inline]]
 
 [[#*inline "Person_Birth_Date_earliest"]]
-    { "id": "Person_Birth_Date_earliest",
-       "iri" : "https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest",
-       "deletePattern" : "DELETE { 
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value
-            } 
-            WHERE {
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri a crm:E52_Time-Span.
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
-            }",
-        "selectPattern" : "SELECT DISTINCT ?value ?label 
-            WHERE {
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri a crm:E52_Time-Span.
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
-        }",
-       "minOccurs" : "0",
-       "description" : "This field is used to indicate the earliest known date for the birth of the documented person.",
-       "range" : [ ], "label" : "Person Birth Date (earliest)",
-       "insertPattern" : "INSERT {
-            ?subject crm:P4_has_time-span ?timespan_uri. 
-            ?timespan_uri a crm:E52_Time-Span.
-            ?timespan_uri crm:P82a_begin_of_the_begin ?value.
-            } WHERE {
-            BIND(IRI(CONCAT(STR($subject),\"/birth_timespan/\", MD5(str($subject)))) as ?timespan_uri)
-        }",
-       "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#date",
-       "domain" : [ ], "defaultValues" : [ ], "maxOccurs" : "1",
-       "order" : 0 }
+{
+  "id": "Person_Birth_Date_earliest",
+  "iri" : "https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest",
+  "deletePattern" : "DELETE { 
+      ?subject crm:P4_has_time-span ?timespan_uri. 
+      ?timespan_uri crm:P82a_begin_of_the_begin ?value
+    } WHERE {
+      ?subject crm:P4_has_time-span ?timespan_uri. 
+      ?timespan_uri a crm:E52_Time-Span.
+      ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+  }",
+  "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
+    ?subject crm:P4_has_time-span ?timespan_uri. 
+    ?timespan_uri a crm:E52_Time-Span.
+    ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+  }",
+  "minOccurs" : "0",
+  "description" : "This field is used to indicate the earliest known date for the birth of the documented person.",
+  "range" : [ ], "label" : "Person Birth Date (earliest)",
+  "insertPattern" : "INSERT {
+      ?subject crm:P4_has_time-span ?timespan_uri. 
+      ?timespan_uri a crm:E52_Time-Span.
+      ?timespan_uri crm:P82a_begin_of_the_begin ?value.
+    } WHERE {
+      BIND(IRI(CONCAT(STR($subject),\"/birth_timespan/\", MD5(str($subject)))) as ?timespan_uri)
+  }",
+  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#date",
+  "domain" : [ ], "defaultValues" : [ ], "maxOccurs" : "1",
+  "order" : 0
+}
 [[/inline]]
 
 [[#*inline "Mph_Person_GND_URL"]]
@@ -550,32 +552,32 @@
 [[/inline]]
 
 [[#*inline "Mph_Person_Birth_Place"]]
-    {
-        "id": "Mph_Person_Birth_Place",
-        "iri" : "http://www.metaphacts.com/fieldDefinition/Person_Birth_Place",
-       "deletePattern" : "DELETE { 
-    ?subject crm:P98i_was_brought_into_life ?value . 
-    } 
-    WHERE {
+{
+  "id": "Mph_Person_Birth_Place",
+  "iri" : "http://www.metaphacts.com/fieldDefinition/Person_Birth_Place",
+    "deletePattern" : "DELETE { 
+      ?subject crm:P98i_was_brought_into_life ?value . 
+    } WHERE {
+      ?subject crm:P98i_was_brought_into_life ?value . 
+      ?value a crm:E67_Birth.
+    }",
+  "selectPattern" : "SELECT DISTINCT ?value ?label WHERE {
     ?subject crm:P98i_was_brought_into_life ?value . 
     ?value a crm:E67_Birth.
-    }",
-       "selectPattern" : "SELECT DISTINCT ?value ?label 
-    WHERE {
-    ?subject crm:P98i_was_brought_into_life ?value . 
-    ?value a crm:E67_Birth.
-    }",
-       "minOccurs" : "0",
-       "description" : "This field is used to indicate the birth of the documented person.",
-       "range" : [ ], "label" : "Person Birth",
-       "insertPattern" : "INSERT {
+  }",
+  "minOccurs" : "0",
+  "description" : "This field is used to indicate the birth of the documented person.",
+  "range" : [ ], "label" : "Person Birth",
+  "insertPattern" : "INSERT {
     ?subject crm:P98i_was_brought_into_life ?value. 
     ?value a crm:E67_Birth.
-    } 
-    WHERE { }",
-       "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
-       "domain" : [ ], "defaultValues" : [ ], "maxOccurs" : "1",
-       "order" : 0 }  
+  } WHERE { }",
+  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+  "domain" : [ ],
+  "defaultValues" : [ ],
+  "maxOccurs" : "1",
+  "order" : 0
+}  
 [[/inline]]
 
 [[#*inline "Mph_Person_Death_Place"]]
