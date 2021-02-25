@@ -1,0 +1,6 @@
+ecrm = http://erlangen-crm.org/current/
+efrbroo = http://erlangen-crm.org/efrbroo/
+rds = http://schema.swissartresearch.net/ontology/rds#
+sphaera = http://ontologies.mpiwg-berlin.mpg.de/sphaera/
+sphType = http://sphaera.mpiwg-berlin.mpg.de/id/thes/type/
+sphRole = http://sphaera.mpiwg-berlin.mpg.de/id/thes/role/

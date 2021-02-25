@@ -1,0 +1,161 @@
+[[> "http://rds-pages.swissartresearch.net/editBookFormFields"]]
+[[> "http://rds-pages.swissartresearch.net/editPersonFormFields"]]
+
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+
+<div class="page">
+  <div class='row'>
+    <div class="offset-md-4 col-md-4" style="margin-bottom: 100px">
+      [[#if edit]]<h2>Edit book</h2>[[else]]<h2>Create new book</h2>[[/if]]
+      
+      <semantic-form
+        [[#if edit]]subject="[[this]]"[[/if]]
+        persistence='LDP'
+        browser-persistence='false'
+        post-action='redirect'
+        form-id='books'
+        fields='[
+          [[> Short_Title]],
+          [[> Author]],
+          [[> Translator]],
+
+          [[> DOI]],
+          [[> Book_Record_Type]],
+
+          [[> Custom_Identifier]],
+          [[> Book_Title]],
+          
+          [[> Book_Type]],
+          [[> Book_Material]],
+          [[> Language]]
+        ]'
+        new-subject-template='https://resource.swissartresearch.net/book/{{UUID}}'
+      >
+        <semantic-form-text-input for="Short_Title"></semantic-form-text-input>
+        <semantic-form-text-input for="Book_Title" multiline="true"></semantic-form-text-input>
+
+        <semantic-form-autocomplete-input
+          for="Author"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+            "limit": 20
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+          [[> new-sub-person]]
+        </semantic-form-autocomplete-input>
+
+        <semantic-form-autocomplete-input
+          for="Translator"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+            "limit": 20
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]] 
+          [[> new-sub-person]]
+        </semantic-form-autocomplete-input>
+
+        <semantic-form-text-input for="DOI"></semantic-form-text-input>
+        <semantic-form-select-input for="Book_Record_Type"></semantic-form-select-input>
+
+        <semantic-form-text-input for="Custom_Identifier"></semantic-form-text-input>
+
+        <semantic-form-select-input for="Book_Type"></semantic-form-select-input>
+        <semantic-form-select-input for="Book_Material"></semantic-form-select-input>
+        <semantic-form-select-input for="Language"></semantic-form-select-input>
+
+        <div class="text-right form-submit">
+          <button name="submit" class="btn btn-primary btn-md">Save</button>
+        </div>
+      </semantic-form>
+    </div>
+  </div>
+</div>
+
+[[#*inline "new-sub-person"]]
+  <semantic-form
+    form-id='new-person'
+    new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
+    fields='[
+      [[> Rdf_type]],
+      [[> Mph_Person_Name]],
+      [[> Mph_Identifier]],
+      [[> Mph_Identifier_Provider]],
+      [[> Person_Gender]]
+    ]'>
+    <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
+
+    <semantic-form-text-input
+        for="Mph_Person_Name" 
+        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+    </semantic-form-text-input>
+
+    <semantic-form-composite-input
+        for="Mph_Identifier"
+        new-subject-template=""
+        fields='[
+          [[> Identifier_Source]],
+          [[> Identifier_Type]],
+          [[> Mph_Identifier_Provider]],
+          [[> Identifier_Value]]
+        ]'>
+        <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
+    </semantic-form-composite-input>  
+
+    <semantic-form-text-input
+        for="Mph_Identifier_Provider"
+        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+    </semantic-form-text-input>
+
+    <semantic-form-select-input  for="Person_Gender"></semantic-form-select-input>
+
+    <semantic-form-errors></semantic-form-errors>
+
+    <button name='submit' class='btn btn-secondary'>Create person</button>
+    <button name='reset' class='btn btn-secondary'>Reset person</button>
+  </semantic-form>
+[[/inline]]
+
+[[#*inline "cant-edit-workflow"]]
+  [[!--
+  PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+  PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+  ASK { ?workflow workflow:subject ??.
+    ?workflow workflow:currentState ?state.
+    ?state workflow:step ?step.
+    OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+    FILTER(
+        (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
+          ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
+    ) || (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
+    )
+    )
+  }
+  --]]
+  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>))}")]]  
+    false
+  [[else]]
+    true
+  [[/if]]
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> mpp:LookupCandidateTemplate]]
+</template>
+[[/inline]]
