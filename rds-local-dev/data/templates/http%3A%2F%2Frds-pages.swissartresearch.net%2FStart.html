@@ -44,28 +44,17 @@
   <bs-tab-container
     id="start-page"
     class="bs-left-vertical-tabs"
-    default-active-key="Global">
-
+    default-active-key="Local">
     <div data-flex-layout="row top-center">
       <div style="width: auto; margin: 10px; min-width: 200px  "><!--first column of flex layout-->
         <div class="sidebar" >
           <bs-nav bs-style="tabs" stacked="true">
             <bs-nav-item style='border-bottom: 1px solid rgb(3 101 201 / 38%)'>
-              <bs-nav-link event-key="Global"><h3><b>All types</b></h3></bs-nav-link>
+              <bs-nav-link event-key="Local"><h3><b>RDS-Local</b></h3></bs-nav-link>
             </bs-nav-item>
             <bs-nav-item>
-              <bs-nav-link event-key="Persons">
-                Persons
-              </bs-nav-link>
-            </bs-nav-item>
-            <bs-nav-item>
-              <bs-nav-link event-key="Books">
-                Books
-              </bs-nav-link>
-            </bs-nav-item>
-            <bs-nav-item>
-              <bs-nav-link event-key="Examples">
-                Examples
+              <bs-nav-link event-key="Global">
+                RDS-Global
               </bs-nav-link>
             </bs-nav-item>
           </bs-nav>
@@ -74,12 +63,8 @@
 
       <div style="width: 80%; margin: 30px; min-width: 800px; max-width: 1200px"><!--second column of flex layout-->
         <bs-tab-content animation="false">
-          <bs-tab-pane event-key="Global">[[> search  label="All types"]] </bs-tab-pane>
-          <bs-tab-pane event-key="Persons">[[> search type="http://schema.swissartresearch.net/ontology/rds#Person" label="Persons"]] </bs-tab-pane>
-          <bs-tab-pane event-key="Books">[[> search type="http://schema.swissartresearch.net/ontology/rds#BiliographicItem" label="Books"]] </bs-tab-pane>
-          <bs-tab-pane event-key="Examples">
-            [[> (resolvePrefix "StartExample")]]
-          </bs-tab-pane>
+          <bs-tab-pane event-key="Local">[[> search lookupServiceName="default-lookup" label="Local datasets"]] </bs-tab-pane>
+          <bs-tab-pane event-key="Global">[[> search lookupServiceName="federated-lookup" label="RDS-Global datasets"]] </bs-tab-pane>
         </bs-tab-content>
       </div>
     </div>
@@ -97,8 +82,7 @@
             query='{
               "type": "lookup",
               "limit": 20,
-              [[#if type]]"entityType": "[[type]]",[[/if]]
-              "lookupServiceName": "default-lookup"
+              "lookupServiceName": "[[lookupServiceName]]"
             }'>
           </semantic-search-keyword-prefetch>
           <semantic-link style="margin-top: -10px; float: right;" iri="[[resolvePrefix "DataClientStructuredSearch"]]">Advanced search</semantic-link>

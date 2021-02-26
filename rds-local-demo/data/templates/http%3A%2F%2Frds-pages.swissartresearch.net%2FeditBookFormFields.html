@@ -45,15 +45,15 @@
 [[#*inline "Book_Record_Type"]]
 {
     "iri" : "http://www.metaphacts.com/fieldDefinition/book_record_type",
-    "selectPattern" : "SELECT $value WHERE {  BIND(?subject as ?dummy)  VALUES ($value) {  (<http://ontologies.mpiwg-berlin.mpg.de/sphaera/Book>) } }",
+    "selectPattern" : "SELECT $value WHERE {  BIND(?subject as ?dummy)  VALUES ($value) {  (<http://schema.swissartresearch.net/ontology/rds#BiliographicItem>) } }",
     "minOccurs" : "1",
     "description" : "Defaults to the book record type",
     "range" : [ ],
     "label" : "Book Record Type",
-    "insertPattern" : "INSERT { $subject rdf:type $value} WHERE {}",
+    "insertPattern" : "INSERT { $subject rdf:type $value } WHERE {}",
     "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
     "domain" : [ ],
-    "valueSetPattern" : "SELECT $value $label WHERE {  VALUES ($value $label)     {  (<http://ontologies.mpiwg-berlin.mpg.de/sphaera/Book> \"Book\")  } }",
+    "valueSetPattern" : "SELECT $value $label WHERE {  VALUES ($value $label)     {  (<http://schema.swissartresearch.net/ontology/rds#BiliographicItem> \"Book\")  } }",
     "defaultValues" : [ ],
     "maxOccurs" : "1",
     "id" : "Book_Record_Type",

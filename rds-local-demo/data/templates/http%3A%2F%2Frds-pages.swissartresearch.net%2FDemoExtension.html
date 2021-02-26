@@ -1,0 +1,25 @@
+
+[[#*inline "additional-tabs"]]
+<bs-tab event-key="1" title="Books">
+  <div style="margin-bottom: 25px;">
+      <semantic-table
+        options='{"showFilter": false}' 
+        query='SELECT DISTINCT ?subject (SAMPLE(?authors) as ?author) WHERE {
+          ?subject a <http://schema.swissartresearch.net/ontology/rds#BiliographicItem> .
+          ?subject ecrm:P128_carries ?publication_expression .
+            ?publication_expression ecrm:P165_incorporates/efrbroo:R17i_was_created_by/ecrm:PC01_is_domain_of ?carried_out_by .
+            ?carried_out_by ecrm:PC02_has_range ?authors  ;
+                ecrm:P14.1_in_the_role_of sphRole:author .
+        } GROUP BY ?subject'
+        number-of-displayed-rows=20
+        no-result-template='No Resources found'>
+      </semantic-table>
+  </div>
+</bs-tab>
+[[/inline]]
+
+[[#*inline "additional-forms"]]
+  <mp-resource-link-container propagate-link="true" iri='[[resolvePrefix "EditBook"]]'>
+    <bs-menu-item>Book</bs-menu-item>
+  </mp-resource-link-container>
+[[/inline]]
