@@ -1,0 +1,140 @@
+
+<style>
+  .DataTable--table>thead>tr>th {
+    background-color: transparent;
+  }
+  p.match b {
+    color: #dc8a4b;
+    font-weight: normal;
+  }
+
+  p.match b:after {
+    content: " ";
+  }
+
+  .searchinput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .searchinput i {
+    position: relative;
+    left: 12px;
+  }
+  .searchinput .input {
+    flex: 1;
+    margin-left: -12px;
+    box-shadow: 0px 0px 2px #4a9eba;
+    border-color: #4a9eba;
+  }
+  .searchinput input {
+    padding-left: 28px;
+  }
+  .searchinput .form-group {
+    margin-bottom: 0;
+  }
+
+  .nav {
+    flex-direction: column;
+  }
+</style>
+
+<div class="page">
+  <bs-tab-container
+    id="start-page"
+    class="bs-left-vertical-tabs"
+    default-active-key="Local">
+    <div data-flex-layout="row top-center">
+      <div style="width: auto; margin: 10px; min-width: 200px  "><!--first column of flex layout-->
+        <div class="sidebar" >
+          <bs-nav bs-style="tabs" stacked="true">
+            <bs-nav-item style='border-bottom: 1px solid rgb(3 101 201 / 38%)'>
+              <bs-nav-link event-key="Local"><h3><b>RDS-Local</b></h3></bs-nav-link>
+            </bs-nav-item>
+            <bs-nav-item>
+              <bs-nav-link event-key="Global">
+                RDS-Global
+              </bs-nav-link>
+            </bs-nav-item>
+          </bs-nav>
+        </div>
+      </div>
+
+      <div style="width: 80%; margin: 30px; min-width: 800px; max-width: 1200px"><!--second column of flex layout-->
+        <bs-tab-content animation="false">
+          <bs-tab-pane event-key="Local">[[> search lookupServiceName="default-lookup" label="Local datasets"]] </bs-tab-pane>
+          <bs-tab-pane event-key="Global">[[> search lookupServiceName="federated-lookup" label="RDS-Global datasets"]] </bs-tab-pane>
+        </bs-tab-content>
+      </div>
+    </div>
+  </bs-tab-container>
+</div>
+
+[[#*inline "search"]]
+<div>
+  <div data-flex-layout="column center-center">
+    <div style="width: 100%">
+      <h1>Welcome to RDS project ([[label]])</h1>
+      [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
+      <semantic-search limit=1000>
+          <semantic-search-keyword-prefetch
+            query='{
+              "type": "lookup",
+              "limit": 20,
+              "lookupServiceName": "[[lookupServiceName]]"
+            }'>
+          </semantic-search-keyword-prefetch>
+          <semantic-link style="margin-top: -10px; float: right;" iri="[[resolvePrefix "DataClientStructuredSearch"]]">Advanced search</semantic-link>
+        
+          <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+            <div style='max-width: 90vw'>
+            <semantic-search-result-holder>
+              <semantic-search-result>
+                <semantic-table
+                  id='table'
+                  options='{"showFilter": false}' 
+                  query='SELECT * WHERE {
+                    BIND(IF(?datasetId = <http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org>, true, false) as ?isWikidata).
+                  } ORDER BY DESC(?score)'
+                  number-of-displayed-rows=10
+                  no-result-template='No Resources found'
+                  column-configuration='[
+                      {"variableName": "subject", "displayName": "Result", "cellTemplate": "{{> subjectCellTemplate}}" }
+                  ]'>
+                  <template id="subjectCellTemplate">
+                    <div title="{{subject.value}}">
+                      <h4><b>
+                        {{#ifCond isWikidata.value "==" "true"}}
+                          <semantic-link
+                            iri={{subject.value}}
+                            urlqueryparam-repository="wikidata-lookup">
+                          </semantic-link>
+                        {{else}}
+                          <semantic-query
+                            query='SELECT * WHERE { {{subject}} a ?type }'
+                            template='<semantic-link iri={{subject.value}}></semantic-link>'
+                            no-result-template='<semantic-link iri="[[resolvePrefix "RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                          </semantic-query>
+                        {{/ifCond}}
+                      </b></h4>
+                      <div style="font-style:italic; font-size: 16px;">
+                        {{#if score}}<span style="color: gray"> (score: {{score.value}})</span>{{/if}}&nbsp;
+                        <semantic-link iri="{{subject.value}}" getlabel=false></semantic-link>
+                      </div>
+                      <p>
+                        <span>{{#if type}}Type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}</span>{{#if datasetId}}<span> | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b></span>{{/if}}
+                        {{#if description}}<div><i>Description: {{description.value}}</i></div>{{/if}}
+                      </p>
+                    </div>
+                  </template>
+                </semantic-table>
+              </semantic-search-result>
+            </semantic-search-result-holder>
+            </div>
+          </div>
+      </semantic-search>
+    </div>
+  </div>
+</div>
+[[/inline]]

@@ -1,0 +1,179 @@
+[[> Default:DemoExtension]]
+
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+<style>
+  .decrease-font-size-of-h1 h1 {
+    font-size: 24px;
+  }
+</style>
+
+<div class="page">
+  <bs-tabs id="tabs" class='page__body-navtabs' style="padding-top: 20px; background-color: #f9f9f9;" unmount-on-exit=true>
+    <bs-tab event-key="0" title="Work progress">
+      <div style="margin-bottom: 25px;">
+      <h2>Records</h2>
+      <span>
+        <bs-nav>
+          <bs-nav-dropdown title='Create' id='assets-bg-nested-dropdown' data-align-right='true' style="width: 160px;">
+            <mp-resource-link-container propagate-link="true" iri='[[resolvePrefix "EditPersonForm"]]'>
+              <bs-menu-item>Person</bs-menu-item>
+            </mp-resource-link-container>
+            [[> additional-forms]]
+          </bs-nav-dropdown>
+        </bs-nav>
+      </span>
+      <semantic-search
+        relations='{
+          "<http://swissartresearch.net#hasStep>": [{
+            "kind": "resource",
+            "queryPattern": "
+              ?workflow workflow:subject ?subject .
+              ?workflow workflow:currentState ?currentState .
+              ?currentState workflow:step ?__value__ .
+            "
+          }],
+          "<http://swissartresearch.net#hasAssignee>": [{
+            "kind": "resource",
+            "queryPattern": "
+              ?workflow workflow:subject ?subject .
+              ?workflow workflow:currentState ?currentState .
+
+              OPTIONAL { ?currentState workflow:assignee ?assignee . }
+              FILTER(!BOUND(?assignee) && ?__value__ = <http://swissartresearch.net#unassigned> || ?assignee = ?__value__)
+            "
+          }]
+        }'
+        search-profile='{
+          "categories": [{
+            "iri": "<http://rds-pages.swissartresearch.net/Resource>",
+            "label": "Resource"
+          }, {
+            "iri": "<http://swissartresearch.net#assignee>",
+            "label": "Assignee"
+          }, {
+            "iri": "<http://swissartresearch.net#Step>",
+            "label": "Step"
+          }],
+          "relations": [{
+            "iri": "<http://swissartresearch.net#hasStep>",
+            "label": "Step",
+            "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
+            "hasRange": "<http://swissartresearch.net#Step>"
+          }, {
+            "iri": "<http://swissartresearch.net#hasAssignee>",
+            "label": "Assignee",
+            "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
+            "hasRange": "<http://swissartresearch.net#assignee>"
+          }]
+        }'
+        limit=1000>
+        <semantic-search-query-constant
+          domain='<http://rds-pages.swissartresearch.net/Resource>'
+          query='
+            PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+
+            SELECT DISTINCT ?subject ?assignee ?step ?currentState WHERE {
+              ?workflow workflow:subject ?subject .
+              ?workflow workflow:currentState ?currentState .
+              ?currentState workflow:step ?step .
+
+              OPTIONAL { ?currentState workflow:assignee ?assignee . }
+            }
+          '
+        ></semantic-search-query-constant>
+      
+        <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+          <div data-flex-self="size-1of3" style="flex: 0 0 20px;">
+            <semantic-search-facet
+              value-relations='{
+                "<http://swissartresearch.net#hasStep>": {
+                  "kind": "resource",
+                  "valuesQuery": "
+                    PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+
+                    SELECT (?step as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+                      ?workflow workflow:subject ?subject .
+                      ?workflow workflow:currentState ?currentState .
+                      ?currentState workflow:step ?step .
+                    } GROUP BY ?step ORDER BY ?step
+                  ",
+                  "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
+                },
+                "<http://swissartresearch.net#hasAssignee>": {
+                  "kind": "resource",
+                  "valuesQuery": "
+                    PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+
+                    SELECT (?assignee as ?value) (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+                      ?workflow workflow:subject ?subject .
+                      ?workflow workflow:currentState ?currentState .
+
+                      OPTIONAL { ?currentState workflow:assignee ?_assignee . }
+                      BIND(IF(BOUND(?_assignee), ?_assignee, <http://swissartresearch.net#unassigned>) as ?assignee)
+                    } GROUP BY ?assignee ORDER BY ?assignee
+                  ",
+                  "tupleTemplate": "<span><semantic-context repository=\"assets\"><mp-label iri=\"{{value.value}}\" highlight=\"{{highlight}}\"></mp-label></semantic-context> ({{count.value}})</span>"
+                }
+              }'
+            ></semantic-search-facet>
+          </div>
+          <div style='max-width: 90vw'>
+            <semantic-search-result-holder>
+              <semantic-search-result>
+                <semantic-table
+                  id='table'
+                  options='{"showFilter": false}' 
+                  query='SELECT DISTINCT ?subject ?assignee ?step WHERE {
+                  } ORDER BY DESC(?score)'
+                  number-of-displayed-rows=20
+                  no-result-template='No Resources found'>
+                </semantic-table>
+              </semantic-search-result>
+            </semantic-search-result-holder>
+          </div>
+        </div>
+      </semantic-search>
+
+      <semantic-table-o query='
+        PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+        PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+
+        SELECT DISTINCT ?subject ?assignee ?step WHERE {
+            OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+            ?workflow workflow:subject ?subject .
+            ?workflow workflow:currentState ?currentState .
+            ?currentState workflow:step ?step .
+
+            ?workflow workflow:hasState ?anyState .
+            OPTIONAL { ?anyState workflow:assignee ?assignee . }
+
+            # ?workflow workflow:currentState ?currentState .
+            # OPTIONAL { ?currentState workflow:assignee ?assignee . }
+            FILTER (
+                (
+                    (
+                        (!BOUND(?assignee)) &&
+                        BOUND(?userGroup) &&
+                        (
+                            (
+                                ?userGroup = <https://resources.swissartresearch.net/workflow/editor> &&
+                                (?step = wf_steps:inProgress || ?step = wf_steps:readyToReview)
+                            ) || (
+                                ?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>
+                            )
+                        )
+                    )
+                ) || (?assignee = ?__useruri__)
+            )
+        }'
+        no-result-template='No records for you.'
+      ></semantic-table>
+    </bs-tab>
+    [[> additional-tabs]]
+  </bs-tabs>
+</div>
