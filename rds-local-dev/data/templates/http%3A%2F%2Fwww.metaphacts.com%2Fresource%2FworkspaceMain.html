@@ -1,5 +1,3 @@
-[[> Default:DemoExtension]]
-
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
@@ -13,19 +11,15 @@
 
 <div class="page">
   <bs-tabs id="tabs" class='page__body-navtabs' style="padding-top: 20px; background-color: #f9f9f9;" unmount-on-exit=true>
-    <bs-tab event-key="0" title="Work progress">
+    <bs-tab event-key="0" title="Persons">
       <div style="margin-bottom: 25px;">
       <h2>Records</h2>
-      <span>
-        <bs-nav>
-          <bs-nav-dropdown title='Create' id='assets-bg-nested-dropdown' data-align-right='true' style="width: 160px;">
-            <mp-resource-link-container propagate-link="true" iri='[[resolvePrefix "EditPersonForm"]]'>
-              <bs-menu-item>Person</bs-menu-item>
-            </mp-resource-link-container>
-            [[> additional-forms]]
-          </bs-nav-dropdown>
-        </bs-nav>
-      </span>
+
+      <semantic-link
+        iri="[[resolvePrefix "EditPersonForm"]]">
+        <button class="btn btn-secondary">Create person</button>
+      </semantic-link>
+
       <semantic-search
         relations='{
           "<http://swissartresearch.net#hasStep>": [{
@@ -174,6 +168,6 @@
         no-result-template='No records for you.'
       ></semantic-table>
     </bs-tab>
-    [[> additional-tabs]]
+    [[> Default:DemoExtension]]
   </bs-tabs>
 </div>

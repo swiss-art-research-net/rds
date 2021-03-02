@@ -32,13 +32,15 @@
       </mp-event-trigger>
     {{else}}
       [[> person-view]]
-      <mp-event-trigger
-        id='edit-trigger'
-        type='Component.TemplateUpdate'
-        data='{"edit": true}'
-        targets='["page-body"]'>
-        <button class='btn btn-primary' style="margin: 15px; width: 100px;">Edit</button>
-      </mp-event-trigger>
+      [[#if (hasPermission "edit:entities")]]
+        <mp-event-trigger
+          id='edit-trigger'
+          type='Component.TemplateUpdate'
+          data='{"edit": true}'
+          targets='["page-body"]'>
+          <button class='btn btn-primary' style="margin: 15px; width: 100px;">Edit</button>
+        </mp-event-trigger>
+      [[/if]]
     {{/if}}
   </template>
 </mp-event-target-template-render>

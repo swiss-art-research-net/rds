@@ -48,13 +48,15 @@
           </mp-resource-link-container>
         </bs-nav-dropdown>
 
-        <bs-nav title='Data Import & Export'>
-          <bs-nav-item>
-            <mp-resource-link-container propagate-link="true" iri='http://www.metaphacts.com/resource/workspaceMain'>
-              <bs-nav-link>Workspace</bs-nav-link>
-            </mp-resource-link-container>
-          </bs-nav-item>
-        </bs-nav>
+        <mp-has-permission permission='edit:entities'>
+          <bs-nav title='Data Import & Export'>
+            <bs-nav-item>
+              <mp-resource-link-container propagate-link="true" iri='http://www.metaphacts.com/resource/workspaceMain'>
+                <bs-nav-link>Workspace</bs-nav-link>
+              </mp-resource-link-container>
+            </bs-nav-item>
+          </bs-nav>
+        </mp-has-permission>
 
         <bs-nav title='Data Import & Export'>
           <bs-nav-item>

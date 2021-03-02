@@ -1,28 +1,25 @@
-[[> "http://rds-pages.swissartresearch.net/editPersonFormFields"]]
+[[> "http://rds-pages.swissartresearch.net/editBookFormFields"]]
 
 [[#*inline "dataset-fields"]]
-  [[> Same_as]],
-  [[> Rdf_type]],
-  [[> Mph_Person_Name]],
-  [[> Mph_Identifier]],
-  [[> Mph_Identifier_Provider]],
-  [[> Person_Gender]],
-  [[> Mph_Person_Birth_Place]],
-  [[> Mph_Person_Death_Place]],
-  [[> Occupation_General_Role]],
-  [[> Mph_Short_Biography]],
-  [[> Mph_Long_Biography]],
-  [[> Mph_Person_GND_URL]],
-  [[> Mph_Person_Name_Honorific]],
-  [[> Person_Father]],
-  [[> Person_Mother]],
-  [[> Person_Social_Relations]]
+  [[> Short_Title]],
+  [[> Author]],
+  [[> Translator]],
+
+  [[> DOI]],
+  [[> Book_Record_Type]],
+
+  [[> Custom_Identifier]],
+  [[> Book_Title]],
+  
+  [[> Book_Type]],
+  [[> Book_Material]],
+  [[> Language]]
 [[/inline]]
 
 <mp-event-target-template-render id='page-body' template='{{> template}}'>
   <template id='template'>
     {{#if edit}}
-      [[> EditPersonForm edit=true]]
+      [[> EditBook edit=true]]
       <mp-event-trigger
         id='edit-trigger'
         type='Component.TemplateUpdate'
@@ -31,19 +28,21 @@
         <button class='btn btn-primary' style="margin: 15px; width: 100px;">View</button>
       </mp-event-trigger>
     {{else}}
-      [[> person-view]]
-      <mp-event-trigger
-        id='edit-trigger'
-        type='Component.TemplateUpdate'
-        data='{"edit": true}'
-        targets='["page-body"]'>
-        <button class='btn btn-primary' style="margin: 15px; width: 100px;">Edit</button>
-      </mp-event-trigger>
+      [[> book-view]]
+      [[#if (hasPermission "edit:entities")]]
+        <mp-event-trigger
+          id='edit-trigger'
+          type='Component.TemplateUpdate'
+          data='{"edit": true}'
+          targets='["page-body"]'>
+          <button class='btn btn-primary' style="margin: 15px; width: 100px;">Edit</button>
+        </mp-event-trigger>
+      [[/if]]
     {{/if}}
   </template>
 </mp-event-target-template-render>
 
-[[#*inline "person-view"]]
+[[#*inline "book-view"]]
 <style>
   .panel__uri {
     display: flex;
