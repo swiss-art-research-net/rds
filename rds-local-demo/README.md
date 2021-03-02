@@ -1,0 +1,1 @@
+Change parameter `plugin.dependencies=rds-local-dev` in the `plugin.properties` app configuration file o use this app on the development server.
