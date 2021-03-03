@@ -1,12 +1,16 @@
+[[#*inline "rdsGlobalUrlTemplate"]]
+  https://rds-mph.swissartresearch.net/resource?uri=
+[[/inline]]
+
 [[#*inline "readMoreOnRdsGlobal_frontendTemplate"]]
 
 [[!-- you should provide '{{resourceIri}}' to this template to be able to render redirectLink correctly,{{isWikidata}} flag can be provided as well --]]
 <template id="readMoreOnRdsGlobal">
   <button class="btn btn-secondary">
     {{#ifCond isWikidata "==" "true"}}
-      <a href="https://rds-mph.swissartresearch.net/resource?uri={{encodeUriComponent resourceIri}}&repository=wikidata-lookup">Read moreon RDS Global</a>
+      <a href="[[> rdsGlobalUrlTemplate]]{{encodeUriComponent resourceIri}}&repository=wikidata-lookup">Read moreon RDS Global</a>
     {{else}}
-      <a href="https://rds-mph.swissartresearch.net/resource?uri={{encodeUriComponent resourceIri}}">Read moreon RDS Global</a>
+      <a href="[[> rdsGlobalUrlTemplate]]{{encodeUriComponent resourceIri}}">Read moreon RDS Global</a>
     {{/ifCond}}
   </button>
 </template>
@@ -17,7 +21,7 @@
   [[!-- you should provide '[[resourceIri]]' to this template to be able to render redirectLink correctly, isWikidata=true flag can be provided as well --]]
   <semantic-query
     query='SELECT ?isWikidata WHERE {
-      BIND("[[isWikidata]]" as ?isWikidata)
+      BIND("[[#if isWikidata]][[isWikidata]][[else]]false[[/if]]" as ?isWikidata)
     }'
     template='{{> readMoreOnRdsGlobal
       resourceIri="[[resourceIri]]"
