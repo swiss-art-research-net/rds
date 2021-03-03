@@ -1,11 +1,10 @@
 <bs-tab event-key="1" title="Books">
   <semantic-link
     iri="[[resolvePrefix "EditBook"]]">
-    <button class="btn btn-secondary" style="margin-bottom: 10px">Create person</button>
+    <button class="btn btn-secondary" style="margin-bottom: 10px">Create book</button>
   </semantic-link>
   <div style="margin-bottom: 25px;">
       <semantic-table
-        options='{"showFilter": false}' 
         query='SELECT DISTINCT ?subject (SAMPLE(?authors) as ?author) WHERE {
           ?subject a <http://schema.swissartresearch.net/ontology/rds#BiliographicItem> .
           OPTIONAL {

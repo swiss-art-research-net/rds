@@ -48,32 +48,6 @@
               }
               "
             }
-          ],
-          "<http://rds#writtenBy>": [
-            {
-              "kind": "resource",
-              "queryPattern": "
-              {
-                ?subject ecrm:P128_carries ?publication_expression .
-                ?publication_expression ecrm:P165_incorporates/efrbroo:R17i_was_created_by/ecrm:PC01_is_domain_of ?carried_out_by .
-                ?carried_out_by ecrm:PC02_has_range ?__value__ ;
-                  ecrm:P14.1_in_the_role_of sphRole:author .
-              }
-              "
-            }
-          ],
-          "<http://rds#authorOf>": [
-            {
-              "kind": "resource",
-              "queryPattern": "
-              {
-                ?__value__ ecrm:P128_carries ?publication_expression .
-                ?publication_expression ecrm:P165_incorporates/efrbroo:R17i_was_created_by/ecrm:PC01_is_domain_of ?carried_out_by .
-                ?carried_out_by ecrm:PC02_has_range ?subject ;
-                  ecrm:P14.1_in_the_role_of sphRole:author .
-              }
-              "
-            }
           ]
         }'
         search-profile='{
@@ -82,10 +56,6 @@
               "iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
               "label": "Person",
               "thumbnail": "../images/help/thenounproject/noun_1113333.svg"
-            },
-            {
-              "iri": "<http://schema.swissartresearch.net/ontology/rds#BiliographicItem>",
-              "label": "Book"
             },
             {
               "iri": "<http://rds#birthDate>",
@@ -122,18 +92,6 @@
               "label": "Death date",
               "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
               "hasRange": "<http://rds#deathDate>"
-            },
-            {
-              "iri": "<http://rds#writtenBy>",
-              "label": "Author",
-              "hasDomain": "<http://schema.swissartresearch.net/ontology/rds#BiliographicItem>",
-              "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>"
-            },
-            {
-              "iri": "<http://rds#authorOf>",
-              "label": "Author of",
-              "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
-              "hasRange": "<http://schema.swissartresearch.net/ontology/rds#BiliographicItem>"
             }
           ]
         }'>
