@@ -8,7 +8,7 @@
 
 <div class="page">
   <div class='row'>
-    <div class="offset-md-4 col-md-4" style="margin-bottom: 100px">
+    <div class="offset-md-4 col-md-4" style="margin-bottom: 100px; margin-top: 100px">
       [[#if edit]]<h2>Edit book</h2>[[else]]<h2>Create new book</h2>[[/if]]
       
       <semantic-form
@@ -52,7 +52,7 @@
             </semantic-form-autocomplete-input>
           [[/newSubPerson]]
         [[/showOnRdsGlobalPersonFor]]
-        
+
         [[#> showOnRdsGlobalPersonFor fieldName="Translator"]]
           [[#> newSubPerson]]
             <semantic-form-autocomplete-input
@@ -73,9 +73,6 @@
         <semantic-form-select-input for="Book_Record_Type"></semantic-form-select-input>
 
         <semantic-form-text-input for="Custom_Identifier"></semantic-form-text-input>
-
-        <semantic-form-select-input for="Book_Type"></semantic-form-select-input>
-        <semantic-form-select-input for="Book_Material"></semantic-form-select-input>
         <semantic-form-select-input for="Language"></semantic-form-select-input>
 
         <div class="text-right form-submit">
@@ -93,7 +90,7 @@
   </div>
   <div>
     <semantic-link
-      iri="[[resolvePrefix "EditPersonForm"]]">
+      iri="[[resolvePrefix "EditPersonForm"]]" target="_blank">
       <button class='btn btn-secondary'>Create new</button>
     </semantic-link>
   </div>
@@ -150,12 +147,12 @@
     OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
 
     FILTER(
-        (
-          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
-          ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
-    ) || (
-          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
-    )
+      (
+        (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
+        ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
+      ) || (
+        (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
+      )
     )
   }
   --]]

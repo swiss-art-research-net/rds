@@ -157,7 +157,12 @@
       <div style="margin-bottom: 25px;">
       <h2>Records</h2>
 
-   <semantic-search
+      <semantic-link
+        iri="[[resolvePrefix "EditPersonForm"]]">
+        <button class="btn btn-secondary">Create person</button>
+      </semantic-link>
+
+      <semantic-search
         relations='{
           "<http://swissartresearch.net#hasStep>": [{
             "kind": "resource",

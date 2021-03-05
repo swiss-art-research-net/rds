@@ -51,7 +51,7 @@
         <div class="sidebar" >
           <bs-nav bs-style="tabs" stacked="true">
             <bs-nav-item style='border-bottom: 1px solid rgb(3 101 201 / 38%)'>
-              <bs-nav-link event-key="Global"><h3><b>Global</b></h3></bs-nav-link>
+              <bs-nav-link event-key="Global"><h3><b>All datasets</b></h3></bs-nav-link>
             </bs-nav-item>
             <bs-nav-item>
               <bs-nav-link event-key="Local">
@@ -126,7 +126,7 @@
                       </b></h4>
                       <div style="font-style:italic; font-size: 16px;">
                         {{#if score}}<span style="color: gray"> (score: {{score.value}})</span>{{/if}}&nbsp;
-                        <semantic-link iri="{{subject.value}}" getlabel=false></semantic-link>
+                        <i style="color: blue">{{subject.value}}</i>
                       </div>
                       <p>
                         <span>{{#if type}}Type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}</span>{{#if datasetId}}<span> | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b></span>{{/if}}

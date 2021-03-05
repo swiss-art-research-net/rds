@@ -270,14 +270,46 @@
   "iri" : "http://www.metaphacts.com/fieldDefinition/book_language",
   "deletePattern" : "DELETE {  ?expression ecrm:P72_has_language $value .} WHERE { BIND(URI(CONCAT(STR($subject), \"/expression\")) as ?expression)}",
   "autosuggestionPattern" : "SELECT ?value ?label WHERE { ?value a ecrm:E56_Language ;          ecrm:P3_has_note ?label . FILTER REGEX(STR(?label), \"?token\", \"i\" ) } LIMIT 10",
-  "selectPattern" : "SELECT ?value ?label WHERE {    $subject ecrm:P128_carries ?publication_expression .    ?publication_expression a efrbroo:F24_Publication_Expression ;        ecrm:P165_incorporates ?expression . ?expression a efrbroo:F22_Self-Contained_Expression ; ecrm:P72_has_language ?value .    ?value ecrm:P3_has_note ?label .}",
+  "selectPattern" : "SELECT ?value ?label WHERE {
+    $subject ecrm:P128_carries ?publication_expression .
+    ?publication_expression ecrm:P72_has_language ?value .
+    VALUES (?value ?label) {
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/german> \"German\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/italian> \"Italian\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/latin> \"Latin\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/spanish> \"Spanish\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/arabic> \"Arabic\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/english> \"English\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/french> \"French\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/greek> \"Greek\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/hebrew> \"Hebrew\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/portuguese> \"Portuguese\")
+    }
+  }",
   "description" : "The language of the publication",
   "range" : [ ],
   "label" : "Language",
-  "insertPattern" : "INSERT {     ?expression ecrm:P72_has_language $value .} WHERE { BIND(URI(CONCAT(STR($subject), \"/expression\")) as ?expression)}",
+  "insertPattern" : "INSERT {
+    ?publication_expression ecrm:P72_has_language $value .
+  } WHERE {
+    BIND(URI(CONCAT(STR($subject), \"/publication/expression\")) as ?publication_expression)
+  }",
   "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
   "domain" : [ ],
-  "valueSetPattern" : "SELECT ?value ?label WHERE { ?value a ecrm:E56_Language ;     ecrm:P3_has_note ?label .}",
+  "valueSetPattern" : "SELECT ?value ?label WHERE {
+    VALUES (?value ?label) {
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/german> \"German\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/italian> \"Italian\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/latin> \"Latin\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/spanish> \"Spanish\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/arabic> \"Arabic\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/english> \"English\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/french> \"French\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/greek> \"Greek\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/hebrew> \"Hebrew\")
+      (<http://sphaera.mpiwg-berlin.mpg.de/id/thes/language/portuguese> \"Portuguese\")
+    }
+  }",
   "defaultValues" : [ ],
   "maxOccurs" : "unbound",
   "id" : "Language",
