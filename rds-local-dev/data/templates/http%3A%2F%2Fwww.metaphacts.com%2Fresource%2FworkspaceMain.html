@@ -157,12 +157,7 @@
       <div style="margin-bottom: 25px;">
       <h2>Records</h2>
 
-      <semantic-link
-        iri="[[resolvePrefix "EditPersonForm"]]">
-        <button class="btn btn-secondary">Create person</button>
-      </semantic-link>
-
-      <semantic-search
+   <semantic-search
         relations='{
           "<http://swissartresearch.net#hasStep>": [{
             "kind": "resource",
@@ -170,6 +165,16 @@
               ?workflow workflow:subject ?subject .
               ?workflow workflow:currentState ?currentState .
               ?currentState workflow:step ?__value__ .
+            "
+          }],
+          "<http://swissartresearch.net#hasAssignee>": [{
+            "kind": "resource",
+            "queryPattern": "
+              ?workflow workflow:subject ?subject .
+              ?workflow workflow:currentState ?currentState .
+
+              OPTIONAL { ?currentState workflow:assignee ?assignee . }
+              FILTER(!BOUND(?assignee) && ?__value__ = <http://swissartresearch.net#unassigned> || ?assignee = ?__value__)
             "
           }]
         }'
@@ -189,6 +194,11 @@
             "label": "Step",
             "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
             "hasRange": "<http://swissartresearch.net#Step>"
+          }, {
+            "iri": "<http://swissartresearch.net#hasAssignee>",
+            "label": "Assignee",
+            "hasDomain": "<http://rds-pages.swissartresearch.net/Resource>",
+            "hasRange": "<http://swissartresearch.net#assignee>"
           }]
         }'
         limit=1000>

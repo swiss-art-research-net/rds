@@ -41,12 +41,15 @@
     <div style="
       display: flex;
       flex-direction: column;
-      align-items: center;">
+      align-items: center;
+      width: 50%;
+      align-items: stretch;">
       <h1>Global search</h1>
+      <p>The search will be executed on the RDS-G system (Global system) to fetch all relevant results from the datasets hosted there.</p>
       [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
       <semantic-search limit=1000 >
           <semantic-search-keyword-prefetch
-            style="width: 450px"
+            style="min-width: 450px"
             query='{
               "type": "lookup",
               "limit": 20
@@ -71,7 +74,7 @@
                   <template id="subjectCellTemplate">
                     <div title="{{subject.value}}">
                       <div style="float: right;">
-                      {{> readMoreOnRdsGlobal resourceIri=subject.value isWikidata=isWikidata}}
+                      {{> readMoreOnRdsGlobal resourceIri=subject.value isWikidata=isWikidata.value}}
                       </div>
                       <h4><b>
                         <semantic-query
@@ -86,7 +89,7 @@
                       </b></h4>
                       <div style="font-style:italic; font-size: 16px;">
                         {{#if score}}<span style="color: gray"> (score: {{score.value}})</span>{{/if}}&nbsp;
-                        <semantic-link iri="{{subject.value}}" getlabel=false></semantic-link>
+                        <i style="color: blue">{{subject.value}}</i>
                       </div>
                       <p>
                         <span>{{#if type}}Type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}</span>{{#if datasetId}}<span> | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b></span>{{/if}}
