@@ -25,7 +25,11 @@
 [[#*inline "search-for-existing"]]
 <div class='row' style='max-width: 100%;'>
   <div class="col-md-8 offset-md-2" style="margin-bottom: 20px">
-    <h2>Check if person exists</h2>
+    <h2>Creation of a new person</h2>
+    <p>
+      Before approach to a creation of a new person, check if the person is already exists on RDS-Global or even locally.
+      If you want to update existing person just link the person from the list.
+    </p>
     <semantic-search limit=1000>
       <semantic-search-keyword-prefetch
         query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#Person" }'
@@ -65,7 +69,7 @@
                     type='Component.TemplateUpdate'
                     data='{"newPerson": true, "sameAs": "{{subject.value}}"}'
                     targets='["event-target"]'>
-                    <button class='btn btn-primary'>Create the same</button>
+                    <button class='btn btn-primary'>Link</button>
                   </mp-event-trigger>
                 </template>
               </semantic-table>
@@ -91,7 +95,7 @@
                       type='Component.TemplateUpdate'
                       data='{"newPerson": true}'
                       targets='["event-target"]'>
-                      <button class='btn btn-primary'>Create new person</button>
+                      <button class='btn btn-primary'>Create a new person</button>
                     </mp-event-trigger>
                   </div>
                 </template>
@@ -274,33 +278,36 @@
         </semantic-form-composite-input>
 
         [[#> showOnRdsGlobalPersonFor fieldName="Person_Father"]]
-          <semantic-form-autocomplete-input
-            for="Person_Father"
-            value-binding-name="subject"
-            lookup-query='{
-              "type": "lookup",
-              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-              "limit": 20
-            }'
-            template='{{> autocompletionTemplate}}'>
-            [[> autocompletionTemplate]]
-            [[> new-sub-person]]
-          </semantic-form-autocomplete-input>
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Person_Father"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]]
+              
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
         [[/showOnRdsGlobalPersonFor]]
 
         [[#> showOnRdsGlobalPersonFor fieldName="Person_Mother"]]
-          <semantic-form-autocomplete-input
-            for="Person_Mother"
-            value-binding-name="subject"
-            lookup-query='{
-              "type": "lookup",
-              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-              "limit": 20
-            }'
-            template='{{> autocompletionTemplate}}'>
-            [[> autocompletionTemplate]]
-            [[> new-sub-person]]
-          </semantic-form-autocomplete-input>
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Person_Mother"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]]
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
         [[/showOnRdsGlobalPersonFor]]
         
         <semantic-form-autocomplete-input 
@@ -323,30 +330,6 @@
             languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'
             multiline=true>
         </semantic-form-text-input>
-
-        [[!--
-        <semantic-form-composite-input 
-            for="Person_Social_Relations"
-            new-subject-template="."
-            fields='[
-              [[> Person_Social_Relations_-_Relation]],
-              [[> Person_Social_Relations_-_Relation_Type]]
-            ]'>
-            <semantic-form-autocomplete-input
-              for="Person_Social_Relations_-_Relation"
-              value-binding-name="subject"
-              lookup-query='{
-                "type": "lookup",
-                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-                "limit": 20
-              }'>
-              [[> new-sub-person]]
-            </semantic-form-autocomplete-input>
-            <semantic-form-text-input 
-            for="Person_Social_Relations_-_Relation_Type">
-            </semantic-form-text-input>
-        </semantic-form-composite-input>
-        --]]
 
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
@@ -399,51 +382,18 @@
 </div>
 [[/inline]]
 
-[[#*inline "new-sub-person"]]
-  <semantic-form
-    form-id='new-person'
-    new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
-    fields='[
-      [[> Rdf_type]],
-      [[> Mph_Person_Name]],
-      [[> Mph_Identifier]],
-      [[> Mph_Identifier_Provider]],
-      [[> Person_Gender]]
-    ]'>
-    <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
-
-    <semantic-form-text-input
-        for="Mph_Person_Name" 
-        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
-    </semantic-form-text-input>
-
-    <semantic-form-composite-input
-        for="Mph_Identifier"
-        new-subject-template=""
-        fields='[
-          [[> Identifier_Source]],
-          [[> Identifier_Type]],
-          [[> Mph_Identifier_Provider]],
-          [[> Identifier_Value]]
-        ]'>
-        <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
-        <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
-        <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
-        <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
-    </semantic-form-composite-input>  
-
-    <semantic-form-text-input
-        for="Mph_Identifier_Provider"
-        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
-    </semantic-form-text-input>
-
-    <semantic-form-select-input  for="Person_Gender"></semantic-form-select-input>
-
-    <semantic-form-errors></semantic-form-errors>
-
-    <button name='submit' class='btn btn-secondary'>Create person</button>
-    <button name='reset' class='btn btn-secondary'>Reset person</button>
-  </semantic-form>
+[[#*inline "newSubPerson"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "EditPersonForm"]]">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
 [[/inline]]
 
 [[#*inline "cant-edit-workflow"]]
@@ -481,7 +431,7 @@
 [[#*inline "showOnRdsGlobalPersonFor"]]
 [[> Default:ReadMoreButton]]
 <div style="display: flex; align-items: flex-end;">
-  <div style="flex-grow: 1">
+  <div style="flex-grow: 1; min-width: 50%;">
     [[> @partial-block ]]
   </div>
   <div style='padding: 5px'>

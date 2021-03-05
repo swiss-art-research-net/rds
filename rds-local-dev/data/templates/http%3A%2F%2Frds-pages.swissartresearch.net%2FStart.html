@@ -82,10 +82,22 @@
             query='{
               "type": "lookup",
               "limit": 20,
-              "lookupServiceName": "[[lookupServiceName]]"
+              [[#if type]]"entityType": "[[type]]",[[/if]]
+              "lookupServiceName": "default-lookup"
             }'>
           </semantic-search-keyword-prefetch>
-          <semantic-link style="margin-top: -10px; float: right;" iri="[[resolvePrefix "DataClientStructuredSearch"]]">Advanced search</semantic-link>
+          <div style="margin-top: -10px; float: left; margin-right: 10px">
+            <semantic-link
+              iri="[[resolvePrefix "DataClientStructuredSearch"]]">
+              Advanced search
+            </semantic-link>
+            |
+            <semantic-link
+              iri="[[resolvePrefix "PrefetchExample"]]">
+              Global search
+            </semantic-link>
+          </div>
+         
         
           <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
             <div style='max-width: 90vw'>

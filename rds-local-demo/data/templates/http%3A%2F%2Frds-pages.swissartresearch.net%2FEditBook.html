@@ -1,5 +1,4 @@
 [[> "http://rds-pages.swissartresearch.net/editBookFormFields"]]
-[[> "http://rds-pages.swissartresearch.net/editPersonFormFields"]]
 
 <ol class="page-breadcrumb">
   <li>
@@ -38,31 +37,37 @@
         <semantic-form-text-input for="Short_Title"></semantic-form-text-input>
         <semantic-form-text-input for="Book_Title" multiline="true"></semantic-form-text-input>
 
-        <semantic-form-autocomplete-input
-          for="Author"
-          value-binding-name="subject"
-          lookup-query='{
-            "type": "lookup",
-            "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-            "limit": 20
-          }'
-          template='{{> autocompletionTemplate}}'>
-          [[> autocompletionTemplate]]
-          [[> new-sub-person]]
-        </semantic-form-autocomplete-input>
-
-        <semantic-form-autocomplete-input
-          for="Translator"
-          value-binding-name="subject"
-          lookup-query='{
-            "type": "lookup",
-            "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-            "limit": 20
-          }'
-          template='{{> autocompletionTemplate}}'>
-          [[> autocompletionTemplate]] 
-          [[> new-sub-person]]
-        </semantic-form-autocomplete-input>
+        [[#> showOnRdsGlobalPersonFor fieldName="Author"]]
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Author"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]]
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
+        [[/showOnRdsGlobalPersonFor]]
+        
+        [[#> showOnRdsGlobalPersonFor fieldName="Translator"]]
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Translator"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]] 
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
+        [[/showOnRdsGlobalPersonFor]]
 
         <semantic-form-text-input for="DOI"></semantic-form-text-input>
         <semantic-form-select-input for="Book_Record_Type"></semantic-form-select-input>
@@ -81,51 +86,58 @@
   </div>
 </div>
 
-[[#*inline "new-sub-person"]]
-  <semantic-form
-    form-id='new-person'
-    new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
-    fields='[
-      [[> Rdf_type]],
-      [[> Mph_Person_Name]],
-      [[> Mph_Identifier]],
-      [[> Mph_Identifier_Provider]],
-      [[> Person_Gender]]
-    ]'>
-    <semantic-form-hidden-input for="Rdf_type" default-value='http://www.cidoc-crm.org/cidoc-crm/E21_Person'></semantic-form-hidden-input>
+[[#*inline "newSubPerson"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "EditPersonForm"]]">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
+[[/inline]]
 
-    <semantic-form-text-input
-        for="Mph_Person_Name" 
-        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
-    </semantic-form-text-input>
-
-    <semantic-form-composite-input
-        for="Mph_Identifier"
-        new-subject-template=""
-        fields='[
-          [[> Identifier_Source]],
-          [[> Identifier_Type]],
-          [[> Mph_Identifier_Provider]],
-          [[> Identifier_Value]]
-        ]'>
-        <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
-        <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
-        <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
-        <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
-    </semantic-form-composite-input>  
-
-    <semantic-form-text-input
-        for="Mph_Identifier_Provider"
-        languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
-    </semantic-form-text-input>
-
-    <semantic-form-select-input  for="Person_Gender"></semantic-form-select-input>
-
-    <semantic-form-errors></semantic-form-errors>
-
-    <button name='submit' class='btn btn-secondary'>Create person</button>
-    <button name='reset' class='btn btn-secondary'>Reset person</button>
-  </semantic-form>
+[[#*inline "showOnRdsGlobalPersonFor"]]
+[[> Default:ReadMoreButton]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1; min-width: 50%;">
+    [[> @partial-block ]]
+  </div>
+  <div style='padding: 5px'>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <mp-description iri="{{node.value}}"></mp-description>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+  <div>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <semantic-query
+                query='SELECT * WHERE { {{node}} a ?type } LIMIT 1'
+                template=' '
+                no-result-template='{{> readMoreOnRdsGlobal resourceIri=node.value}}'>
+                [[> readMoreOnRdsGlobal_frontendTemplate]]
+              </semantic-query>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+</div>
 [[/inline]]
 
 [[#*inline "cant-edit-workflow"]]
