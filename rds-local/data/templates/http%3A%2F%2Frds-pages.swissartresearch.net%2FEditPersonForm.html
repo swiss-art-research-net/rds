@@ -12,7 +12,9 @@
         [[#if edit]]
           [[> edit-person-form]]
         [[else]]
-          [[> search-for-existing]]
+          {{#if hideSearch}}{{else}}
+            [[> search-for-existing]]
+          {{/if}}
           {{#if newPerson}}
             [[> edit-person-form]]
           {{/if}}
@@ -24,12 +26,41 @@
 
 [[#*inline "search-for-existing"]]
 <div class='row' style='max-width: 100%;'>
-  <div class="col-md-8 offset-md-2" style="margin-bottom: 20px">
+  <div class="col-md-8 offset-md-2" style="margin-bottom: 20px; margin-top: 100px">
     <h2>Creation of a new person</h2>
     <p>
       Before creating a new person, please type in the name to check if such person already exists on RDF-Global or locally. If you'd like to create an instance of the existing person locally, press the "link" button next to the relevant match in the table below.
     </p>
     <semantic-search limit=1000>
+      <div style="margin-bottom: 10px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-person-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-person-template">
+                
+              </template>
+              <template id="tuple-template">
+                <div class="text-center">
+                  This person already exists, do you still want to create a new person?
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newPerson": true, "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Create new person</button>
+                  </mp-event-trigger>
+                </div>
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
       <semantic-search-keyword-prefetch
         query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#Person" }'
         placeholder='Input the name of the person you want to create'>
@@ -53,7 +84,7 @@
                     {"variableName": "action", "displayName": "action", "cellTemplate": "{{> create-button}}"  }
                 ]'>
                 <template id="dataset-label">
-                  <semantic-link iri="{{datasetId.value}}">{{datasetLabel.value}}</semantic-link>
+                  {{datasetLabel.value}}
                 </template>
                 <template id="link-to-subject">
                   <semantic-query
@@ -66,7 +97,7 @@
                   <mp-event-trigger
                     id='event-trigger-de'
                     type='Component.TemplateUpdate'
-                    data='{"newPerson": true, "sameAs": "{{subject.value}}"}'
+                    data='{"newPerson": true, "sameAs": "{{subject.value}}", "hideSearch": true}'
                     targets='["event-target"]'>
                     <button class='btn btn-primary'>Link</button>
                   </mp-event-trigger>
@@ -74,46 +105,34 @@
               </semantic-table>
             </semantic-search-result>
           </semantic-search-result-holder>
-          <semantic-search-result-holder>
-            <semantic-search-result>
-              <semantic-table
-                id='table'
-                options='{"showFilter": false}' 
-                query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
-                number-of-displayed-rows=10
-                no-result-template='{{> no-person-template}}'
-                tuple-template='{{> tuple-template}}'>
-                <template id="no-person-template">
-                  <div class="text-center">
-                    There is not exiting person with provided name.<br/>
-                    Do you want to create a new person?
-                  </div>
-                  <div style="width: 100%; justify-content: center; display: flex;">
-                    <mp-event-trigger
-                      id='event-trigger-de'
-                      type='Component.TemplateUpdate'
-                      data='{"newPerson": true}'
-                      targets='["event-target"]'>
-                      <button class='btn btn-primary'>Create a new person</button>
-                    </mp-event-trigger>
-                  </div>
-                </template>
-                <template id="tuple-template">
-                  <div class="text-center">
-                    This person already exists, do you still want to create a new person?
-                    <mp-event-trigger
-                      id='event-trigger-de'
-                      type='Component.TemplateUpdate'
-                      data='{"newPerson": true}'
-                      targets='["event-target"]'>
-                      <button class='btn btn-primary'>Create new person</button>
-                    </mp-event-trigger>
-                  </div>
-                </template>
-              </semantic-table>
-            </semantic-search-result>
-          </semantic-search-result-holder>
         </div>
+      </div>
+
+      <div style="margin: 5px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-person-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-person-template">
+                <mp-event-trigger
+                  id='event-trigger-de'
+                  type='Component.TemplateUpdate'
+                  data='{"newPerson": true, "hideSearch": true}'
+                  targets='["event-target"]'>
+                  <button class='btn btn-primary'>Create new person</button>
+                </mp-event-trigger>
+              </template>
+              <template id="tuple-template">
+                
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
       </div>
     </semantic-search>
   </div>
@@ -388,7 +407,8 @@
   </div>
   <div>
     <semantic-link
-      iri="[[resolvePrefix "EditPersonForm"]]">
+      iri="[[resolvePrefix "EditPersonForm"]]"
+      target="_blank">
       <button class='btn btn-secondary'>Create new</button>
     </semantic-link>
   </div>
