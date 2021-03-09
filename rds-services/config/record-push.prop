@@ -16,7 +16,7 @@ WHERE { \
   GRAPH ?context { \
 	?subject a ?subjectType . \
   } \
-  BIND(IRI(STRBEFORE(STR(?context), "/context")) as ?container) \
+  BIND(IRI(STRBEFORE(STR(?context)\, "/context")) as ?container) \
   ?container a <http://www.w3.org/ns/ldp#Resource> . \
   <http://www.metaphacts.com/ontologies/platform#formContainer> <http://www.w3.org/ns/ldp#contains> ?container . \
   GRAPH ?context { \
