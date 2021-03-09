@@ -21,11 +21,10 @@
       lookup:type "metaphacts:sparqlLookup";
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
-            ?candidate ?p ?o .
             VALUES(?dataset ?datasetLabel) {
                 (<www.wikidata.org> \"wikidata\")
             }
-        }
+        } 
       """;
       lookup:queryTemplate """
         SELECT
