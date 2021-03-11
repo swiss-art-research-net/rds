@@ -1,4 +1,4 @@
-package net.swissartresearch.rds.records;
+package net.swissartresearch.rds.services;
 
 import javax.inject.Inject;
 
@@ -11,13 +11,15 @@ import com.metaphacts.config.Configuration;
 import com.metaphacts.config.InvalidConfigurationException;
 import com.metaphacts.services.storage.api.PlatformStorage;
 
-public class RecordPushPlugin extends Plugin {
-    private static final Logger logger = LogManager.getLogger(RecordPushPlugin.class);
+import net.swissartresearch.rds.records.RecordPushConfiguration;
+
+public class RDSServicesPlugin extends Plugin {
+    private static final Logger logger = LogManager.getLogger(RDSServicesPlugin.class);
 
     protected Configuration configuration;
     protected PlatformStorage platformStorage;
 
-    public RecordPushPlugin(PluginWrapper wrapper) {
+    public RDSServicesPlugin(PluginWrapper wrapper) {
         super(wrapper);
     }
 
