@@ -1,9 +1,32 @@
-[[> Default:ReadMoreButton]]
 <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
   <style>
     .first-column-only .table.DataTable--table tr td:not(:first-child),
     .first-column-only .table.DataTable--table tr th:not(:first-child) {
       display: none;
+    }
+    .table-header-container.DataTable--header-container button.btn.btn-secondary {
+      font-size: 0;
+    }
+    .table-header-container.DataTable--header-container button.btn.btn-secondary i {
+      font-size: 10pt;
+      display: flex;
+      align-items: center;
+    }
+    .table-header-container.DataTable--header-container button.btn.btn-secondary i::after {
+      display: block;
+      content: "Filter results";
+      font-size: 12pt;
+      margin-left: 5px;
+      font-family: 'Lato';
+      color: gray;
+    }
+    .DataTable--filter-sidebar-title > span {
+      display: none;
+    }
+    .DataTable--filter-sidebar-title::before {
+      content: "Filter results";
+      pointer-events: none;
+      margin-right: 5px;
     }
   </style>
   <div style='max-width: 90vw' class="first-column-only">
@@ -25,22 +48,21 @@
             {"variableName": "datasetId", "displayName": "Dataset", "showFilter": true, "filterType": "multiselect", "cellTemplate": " "},
             {"variableName": "description", "displayName": "Description", "showFilter": true, "filterType": "default", "cellTemplate": " "}
           ]'>
-          [[> readMoreOnRdsGlobal_frontendTemplate]]
           <template id="subjectCellTemplate">
             <div title="{{subject.value}}">
-              <div style="float: right;">
-              {{> readMoreOnRdsGlobal resourceIri=subject.value isWikidata=isWikidata.value}}
-              </div>
               <h4><b>
-                <semantic-query
-                  query='SELECT * WHERE { {{subject}} a ?type }'
-                  template='<semantic-link iri={{subject.value}}></semantic-link>'
-                  no-result-template='<semantic-link
-                    iri="[[resolvePrefix "RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"
-                    urlqueryparam-is-wikidata="{{isWikidata.value}}">
-                    <mp-label iri="{{subject.value}}"><mp-label>
-                  </semantic-link>'>
-                </semantic-query>
+                {{#ifCond isWikidata.value "==" "true"}}
+                  <semantic-link
+                    iri={{subject.value}}
+                    urlqueryparam-repository="wikidata-lookup">
+                  </semantic-link>
+                {{else}}
+                  <semantic-query
+                    query='SELECT * WHERE { {{subject}} a ?type }'
+                    template='<semantic-link iri={{subject.value}}></semantic-link>'
+                    no-result-template='<semantic-link iri="[[resolvePrefix "RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                  </semantic-query>
+                {{/ifCond}}
               </b></h4>
               <div style="font-style:italic; font-size: 16px;">
                 {{#if score}}<span style="color: gray"> (score: {{score.value}})</span>{{/if}}&nbsp;
