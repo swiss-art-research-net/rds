@@ -26,19 +26,19 @@
           ]'>
           <template id="subjectCellTemplate">
             <div title="{{subject.value}}">
-              <div style="float: right;">
-              {{> readMoreOnRdsGlobal resourceIri=subject.value isWikidata=isWikidata.value}}
-              </div>
               <h4><b>
-                <semantic-query
-                  query='SELECT * WHERE { {{subject}} a ?type }'
-                  template='<semantic-link iri={{subject.value}}></semantic-link>'
-                  no-result-template='<semantic-link
-                    iri="[[resolvePrefix "RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"
-                    urlqueryparam-is-wikidata="{{isWikidata.value}}">
-                    <mp-label iri="{{subject.value}}"><mp-label>
-                  </semantic-link>'>
-                </semantic-query>
+                {{#ifCond isWikidata.value "==" "true"}}
+                  <semantic-link
+                    iri={{subject.value}}
+                    urlqueryparam-repository="wikidata-lookup">
+                  </semantic-link>
+                {{else}}
+                  <semantic-query
+                    query='SELECT * WHERE { {{subject}} a ?type }'
+                    template='<semantic-link iri={{subject.value}}></semantic-link>'
+                    no-result-template='<semantic-link iri="[[resolvePrefix "RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                  </semantic-query>
+                {{/ifCond}}
               </b></h4>
               <div style="font-style:italic; font-size: 16px;">
                 {{#if score}}<span style="color: gray"> (score: {{score.value}})</span>{{/if}}&nbsp;
