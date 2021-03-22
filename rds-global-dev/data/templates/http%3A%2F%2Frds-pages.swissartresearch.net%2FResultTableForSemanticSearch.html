@@ -43,10 +43,9 @@
           column-configuration='[
             {"variableName": "subject", "displayName": "Result", "cellTemplate": "{{> subjectCellTemplate}}" },
             {"variableName": "label", "displayName": "Label", "showFilter": true, "filterType": "default", "cellTemplate": " "},
-            {"variableName": "type", "displayName": "Type", "showFilter": true, "filterType": "multiselect", "cellTemplate": " "},
-            {"variableName": "score", "displayName": "Score", "showFilter": true, "filterType": "number", "cellTemplate": " "},
+            {"variableName": "description", "displayName": "Description", "showFilter": true, "filterType": "default", "cellTemplate": " "},
             {"variableName": "datasetId", "displayName": "Dataset", "showFilter": true, "filterType": "multiselect", "cellTemplate": " "},
-            {"variableName": "description", "displayName": "Description", "showFilter": true, "filterType": "default", "cellTemplate": " "}
+            {"variableName": "type", "displayName": "Type", "showFilter": true, "filterType": "multiselect", "cellTemplate": " "}
           ]'>
           <template id="subjectCellTemplate">
             <div title="{{subject.value}}">
