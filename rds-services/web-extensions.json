@@ -1,0 +1,15 @@
+{
+    "components": {
+        "remove-record-button": {
+            "loadScripts": [
+                "/assets/components/remove-record-button.js"
+            ]
+        },
+        "export-records-button": {
+            "loadScripts": [
+                "/assets/components/export-records-button.js"
+            ]
+        }
+    },
+    "extensions": []
+}

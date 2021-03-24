@@ -11,7 +11,7 @@ import com.metaphacts.config.Configuration;
 import com.metaphacts.config.InvalidConfigurationException;
 import com.metaphacts.services.storage.api.PlatformStorage;
 
-import net.swissartresearch.rds.records.RecordPushConfiguration;
+import net.swissartresearch.rds.records.RdsServicesConfiguration;
 
 public class RDSServicesPlugin extends Plugin {
     private static final Logger logger = LogManager.getLogger(RDSServicesPlugin.class);
@@ -39,13 +39,13 @@ public class RDSServicesPlugin extends Plugin {
 
         if ((configuration != null) && (platformStorage != null)) {
             try {
-                logger.info("Registering record push config");
+                logger.info("Registering record services config");
                 // NOTE: ideally we would have had this properly detected and injected, but
                 // unfortunately the PluginFinder for PF4J extensions only loads these instances
                 // when the plugin class is started which is too late in the startup so the
                 // config class will not be loaded properly.
                 // As a workaround we explicitly create and register the configuration here.
-                RecordPushConfiguration pushConfig = new RecordPushConfiguration(platformStorage);
+                RdsServicesConfiguration pushConfig = new RdsServicesConfiguration(platformStorage);
 
                 configuration.registerCustomConfigurationGroup(pushConfig);
             } catch (InvalidConfigurationException e) {
