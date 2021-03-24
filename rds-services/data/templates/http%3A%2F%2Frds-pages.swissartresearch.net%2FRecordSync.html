@@ -1,5 +1,25 @@
 <style>
   .push-result { }
+
+  .custome-download-design {
+    display: flex;
+    align-items: center;
+  }
+
+  .custome-download-design .FileManager--fileIcon {
+    font-size: 14px;
+  }
+
+  .custome-download-design .FileManager--fileIcon::before {
+    content: "Download File";
+    margin-right: 10px;
+  }
+
+  .custome-download-design .FileManager--emptyBody, .FileManager--fileIcon {
+    display: block;
+    width: initial;
+    height: initial;
+  }
 </style>
 
 
@@ -12,8 +32,8 @@
 
     <p>The following tables lists all records in the local system</p>
 
-    <semantic-table 
-      query="PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+    <semantic-table
+            query="PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
     PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
 
     SELECT DISTINCT ?subject ?assignee ?step ?currentState WHERE {
@@ -30,7 +50,7 @@
 
     <h3>Push data to RDS-Global</h3>
     <p>
-      All approved records will be pushed to RDS-Global. 
+      All approved records will be pushed to RDS-Global.
     </p>
     <mp-collapsible-div expanded=false>
       <mp-collapsible-div-trigger>
@@ -38,19 +58,88 @@
       </mp-collapsible-div-trigger>
       <mp-collapsible-div-content>
         <div>
-          <mp-admin-config-manager editable=true group="record-push"></mp-admin-config-manager>
+          <mp-admin-config-manager editable=true group="rds-services"></mp-admin-config-manager>
         </div>
       </mp-collapsible-div-content>
     </mp-collapsible-div>
     <br>
 
-    <form method="POST" action="/rest/extension/records/push" target="pushResults">
-      <button name="submit" class="btn btn-primary">Push records</button>
-    </form>
+    <div style="display: flex">
+      <form method="POST" action="/rest/extension/records/push" target="actionResults">
+        <button name="submit" class="btn btn-primary">Push records</button>
+      </form>
+
+      <form method="POST" action="/rest/extension/records/export" target="actionResults">
+        <button name="submit" class="btn btn-primary" style="margin-left: 10px">Export records</button>
+      </form>
+    </div>
+
     <p>
-      <h4>Push Result</h4>
-      <iframe name="pushResults" height="30" width="300" class="push-result"></iframe>
+    <h4>Action Results</h4>
+    <iframe name="actionResults" height="100" width="300" class="push-result"></iframe>
     </p>
+
+    <mp-event-trigger type="Component.Refresh" targets='["files-table"]'>
+      <button class="btn btn-secondary">Refresh table</button>
+    </mp-event-trigger>
+    <mp-event-target-refresh id='files-table' refresh-interval_disabled='5'>
+      <semantic-table
+              query='
+          PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+          PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+
+          SELECT
+            ?file
+            (SAMPLE(?fileNames) as ?fileName)
+            (SAMPLE(?readyToDownloadState) as ?readyToDownload)
+            (MAX(?timesModified) as ?timeModified)
+          WHERE {
+            ?file a <http://www.metaphacts.com/ontologies/platform#File>.
+            ?file <http://www.w3.org/ns/prov#generatedAtTime> ?timesModified.
+            ?file <http://www.w3.org/2000/01/rdf-schema#label> ?fileNames.
+            OPTIONAL {
+              ?file <http://www.metaphacts.com/ontologies/platform#readyToDownload> ?_readyToDownload .
+              BIND (
+                IRI(CONCAT("http://example.com/", STR(?file)))
+                as ?downloadLink)
+            }
+            BIND (IF(BOUND(?_readyToDownload), true, false) as ?readyToDownloadState)
+          } GROUP BY ?file ORDER BY ?timeModified
+        '
+              no-result-template='There is no exported files'
+              column-configuration='[
+          {"variableName": "file", "displayName": "Result" },
+          {"variableName": "timeModified", "displayName": "Modified"},
+          {"variableName": "downloadLink", "displayName": "Download link", "cellTemplate": "{{> downloadLink}}"},
+          {"variableName": "delete", "displayName": "Delete record", "cellTemplate": "{{> deleteButton}}"}
+        ]' >
+        <template id="downloadLink">
+          {{#ifCond readyToDownload.value "==" "true"}}
+          <mp-file-visualizer
+                  iri='{{file.value}}'
+                  name-predicate-iri='http://www.w3.org/2000/01/rdf-schema#label'
+                  class='custome-download-design'
+                  storage='exportedRecords'>
+          </mp-file-visualizer>
+          {{else}}
+          Exporting...
+          {{/ifCond}}
+          [[!-- <a href="{{downloadLink.value}}">Download</a> --]]
+        </template>
+        <template id="deleteButton">
+          {{#ifCond readyToDownload.value "==" "true"}}
+          <remove-records-file
+                  storage="exportedRecords"
+                  repository="default"
+                  resourceIri="{{file.value}}"
+                  fileName="{{fileName.value}}"
+          ></remove-records-file>
+          {{else}}
+          Exporting...
+          {{/ifCond}}
+        </template>
+      </semantic-table>
+    </mp-event-target-refresh>
 
   </div>
 </div>

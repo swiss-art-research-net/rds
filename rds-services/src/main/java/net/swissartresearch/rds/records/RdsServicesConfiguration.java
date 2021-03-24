@@ -19,18 +19,18 @@ import com.metaphacts.services.storage.api.PlatformStorage;
  *     <span>Record Push Configuration</span>
  *   </mp-collapsible-div-trigger>
  *   <mp-collapsible-div-content>
- *     <mp-admin-config-manager editable=true group="record-push"></mp-admin-config-manager>
+ *     <mp-admin-config-manager editable=true group="rds-services"></mp-admin-config-manager>
  *   </mp-collapsible-div-content>
  * </mp-collapsible-div>
  * </pre>
  * @author wschell
  */
-public class RecordPushConfiguration extends ConfigurationExtension {
-    public static final String ID = "record-push";
+public class RdsServicesConfiguration extends ConfigurationExtension {
+    public static final String ID = "rds-services";
     public static final String DESCRIPTION = "Push configuration for RDS";
 
     @Inject
-    public RecordPushConfiguration(PlatformStorage platformStorage) throws InvalidConfigurationException {
+    public RdsServicesConfiguration(PlatformStorage platformStorage) throws InvalidConfigurationException {
         super(ID, DESCRIPTION, platformStorage);
     }
 
