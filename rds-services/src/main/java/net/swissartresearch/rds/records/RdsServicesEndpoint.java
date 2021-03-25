@@ -2,22 +2,20 @@ package net.swissartresearch.rds.records;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.nio.file.Files;
-import java.time.Instant;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -39,26 +37,29 @@ import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.metaphacts.cache.DescriptionService;
+import com.metaphacts.cache.LabelService;
 import com.metaphacts.repository.MpRepositoryProvider;
-import com.metaphacts.security.PlatformTaskWrapper;
+import com.metaphacts.resource.TypeService;
 import com.metaphacts.services.files.FileManager;
 import com.metaphacts.services.files.ManagedFileName;
 import com.metaphacts.services.storage.api.ObjectKind;
-import com.metaphacts.services.storage.api.ObjectMetadata;
 import com.metaphacts.services.storage.api.ObjectRecord;
 import com.metaphacts.services.storage.api.ObjectStorage;
 import com.metaphacts.services.storage.api.PlatformStorage;
 import com.metaphacts.services.storage.api.SizedStream;
-import com.metaphacts.services.storage.api.StoragePath;
-import com.metaphacts.services.storage.utils.ExactSizeInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.model.Literal;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.impl.LinkedHashModel;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
+import org.eclipse.rdf4j.model.vocabulary.RDFS;
 import org.eclipse.rdf4j.query.GraphQuery;
-import org.eclipse.rdf4j.query.Update;
+import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -87,8 +88,7 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
     private static final Logger logger = LogManager.getLogger(RdsServicesEndpoint.class);
     private static final int THREAD_POOL_SIZE = 20;
     private static final String FILE_STORAGE_ID = "exportedRecords";
-    private static final String FILE_NAME = "exportedRecords.ttl";
-    private static final String REPOSITORY_ID = "default";
+    private static final String FILE_NAME = "exportedRecords";
     private static final String MEDIA_TYPE = "ttl";
     private static final String CONTEXT_URI = "http://rds-extension.com/exportedRecords/context";
     private static final String GENERATE_IRI_QUERY = "SELECT ?resourceIri WHERE {\n" +
@@ -109,6 +109,9 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
     "} WHERE {}";
 
     protected ExecutorService executorService;
+    protected LabelService labelService;
+    protected DescriptionService descriptionService;
+    protected TypeService typeService;
     
     protected NamespaceRegistry namespaceRegistry;
     protected RepositoryManager repositoryManager;
@@ -145,6 +148,21 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
         this.platformStorage = platformStorage;
     }
 
+    @Inject
+    public void setLabelService(LabelService labelService) {
+        this.labelService = labelService;
+    }
+
+    @Inject
+    public void setDescriptionService(DescriptionService descriptionService) {
+        this.descriptionService = descriptionService;
+    }
+
+    @Inject
+    public void setTypeService(TypeService typeService) {
+        this.typeService = typeService;
+    }
+
     /**
      * Push records from RDS-L to RDS-G
      * 
@@ -172,7 +190,7 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
         RDFFormat format = RDFFormat.TURTLE;
         try (Writer out = new FileWriter(tempFile)) {
             // export data
-            exportData(out, format);
+            exportData(out, format, false);
         } catch (Exception e) {
             logger.warn("Failed to create local bufer for named graph in file {}: {}", tempFile.getPath(),
                     e.getMessage());
@@ -241,24 +259,27 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
     public Response exportRecords(
         @Context UriInfo uriInfo,
         @FormParam("subject") String subject,
-        @FormParam("comment") String comment
+        @FormParam("comment") String comment,
+        @FormParam("mediaType") String mediaType
     ) throws Exception {
         logger.info("Exporting records for subject " + subject + " with comment " + comment);
         logger.debug("UriInfo: {}", uriInfo.getRequestUri());
+        RDFFormat rdfFormat = this.mediaTypeToRdfFormat(Strings.isEmpty(mediaType) ? MEDIA_TYPE : mediaType);
         
-        ManagedFileName managedName = ManagedFileName.generateFromFileName(
-                ObjectKind.FILE, FILE_NAME, fileManager::generateSequenceNumber);
-        this.updateMetadata(managedName, false);
-        this.startDownloading(managedName);
+        ManagedFileName managedName = createManagedFilename(rdfFormat);
+        this.updateMetadata(managedName, rdfFormat, false);
+        this.startDownloading(managedName, rdfFormat);
         
         return Response.ok().build();
     }
 
-    public synchronized CompletableFuture<StreamingOutput> startDownloading(ManagedFileName managedName) {
+    public synchronized CompletableFuture<StreamingOutput> startDownloading(
+        ManagedFileName managedName, RDFFormat rdfFormat
+    ) {
         CompletableFuture<StreamingOutput> completableFuture = new CompletableFuture<>();
         getExecutorService().submit(() -> {
             try {
-                completableFuture.complete(this.downloadFileTask(managedName));
+                completableFuture.complete(this.downloadFileTask(managedName, rdfFormat));
             } catch (Throwable t) {
                 logger.warn("Error while downloading file: " + t.getMessage());
                 logger.debug("details:", t);
@@ -290,21 +311,12 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
         return this.executorService;
     }
 
-    protected StreamingOutput downloadFileTask(ManagedFileName managedName) throws IOException {
-        this.storeFile(managedName);
-        this.updateMetadata(managedName, true);
-        ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
-        ObjectRecord records = this.fileManager.fetchFile(storage, managedName).get();
-        return readObjectContent(records);
-    }
-    
-    protected void storeFile(ManagedFileName managedName) throws IOException {
+    protected StreamingOutput downloadFileTask(ManagedFileName managedName, RDFFormat rdfFormat) throws IOException {
         java.nio.file.Path tempFilePath = Files.createTempFile("merged-graph-", ".ttl");
         File file = tempFilePath.toFile();
-        RDFFormat format = RDFFormat.TURTLE;
         try (Writer out = new FileWriter(file)) {
             // export data
-            exportData(out, format);
+            exportData(out, rdfFormat, true);
             ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
 
             FileInputStream inputStream = new FileInputStream(file);
@@ -319,20 +331,24 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             logger.warn("Failed to create file locally for named graph in file {}: {}", file.getPath(), e.getMessage());
             logger.debug("Details: ", e);
         }
+        this.updateMetadata(managedName, rdfFormat, true);
+        ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
+        ObjectRecord records = this.fileManager.fetchFile(storage, managedName).get();
+        return readObjectContent(records);
     }
 
-    protected IRI updateMetadata(ManagedFileName managedName, boolean ready) throws IOException {
+    protected IRI updateMetadata(ManagedFileName managedName, RDFFormat rdfFormat, boolean ready) throws IOException {
         ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
         
         IRI resourceIri;
         try {
             resourceIri = fileManager.createLdpResource(
                     managedName,
-                    new MpRepositoryProvider(this.repositoryManager, REPOSITORY_ID),
+                    new MpRepositoryProvider(this.repositoryManager, this.repositoryManager.DEFAULT_REPOSITORY_ID),
                     GENERATE_IRI_QUERY,
                     ready ? CREATE_RESOURCE_QUERY_READY : CREATE_RESOURCE_QUERY,
                     CONTEXT_URI,
-                    MEDIA_TYPE
+                    rdfFormat.getDefaultMIMEType()
             );
         } catch (Exception e) {
             // try to clean up uploaded file if LDP update failed
@@ -343,7 +359,7 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
         return resourceIri;
     }
 
-    protected void exportData(Writer out, RDFFormat format) {
+    protected void exportData(Writer out, RDFFormat format, boolean enrichData) {
         String queryString = getExportQuery();
         if (queryString == null) {
             logger.warn("No export query provided!");
@@ -360,8 +376,16 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             GraphQuery graphQuery = SparqlOperationBuilder.<GraphQuery>create(queryString, GraphQuery.class)
                 .resolveUser(namespaceRegistry.getUserIRI())
                 .build(con);
-            RDFWriter output = Rio.createWriter(format, out);
-            graphQuery.evaluate(output);
+
+            RDFWriter writer = Rio.createWriter(format, out);
+            if (enrichData) {
+                Model results = this.enrichQueryResults(graphQuery.evaluate());
+                writer.startRDF();
+                results.forEach(statement -> writer.handleStatement(statement));
+                writer.endRDF();
+            } else {
+                graphQuery.evaluate(writer);
+            }
         }
     }
 
@@ -439,5 +463,64 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             }
             output.flush();
         };
+    }
+    
+    // Turtle, rdf/xml, JSON-LD
+    private RDFFormat mediaTypeToRdfFormat(String mediaType) {
+        if (!Strings.isEmpty(mediaType)) {
+            switch (mediaType.toLowerCase()) {
+                case "turtle": return RDFFormat.TURTLE;
+                case "rdf/xml": return RDFFormat.RDFXML;
+                case "json-ld": return RDFFormat.JSONLD;
+                default: return RDFFormat.TURTLE;
+            }
+        } else {
+            return RDFFormat.TURTLE;
+        }
+    }
+
+    private ManagedFileName createManagedFilename(RDFFormat format) {
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        Date date = new Date(System.currentTimeMillis());
+        System.out.println();
+        return ManagedFileName.generateFromFileName(
+            ObjectKind.FILE, FILE_NAME + "." + format.getDefaultFileExtension(), () -> formatter.format(date)
+        );
+    }
+    
+    private Model enrichQueryResults(GraphQueryResult queryResult) {
+        Model model = new LinkedHashModel();
+        List<IRI> irisToEnrich = new ArrayList<>();
+        queryResult.forEach(statement -> {
+            model.add(statement);
+            if (statement.getSubject().isIRI()) {
+                irisToEnrich.add((IRI)statement.getSubject());
+            }
+        });
+        
+        Map<IRI, Optional<Literal>> labels = this.labelService.getLabels(
+            irisToEnrich, repositoryManager.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID), null
+        );
+        Map<IRI, Optional<Literal>> descriptions = this.descriptionService.getDescriptions(
+            irisToEnrich, repositoryManager.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID), null
+        );
+        Map<IRI, Optional<Iterable<IRI>>> types = this.typeService.getAllTypes(
+            irisToEnrich, repositoryManager.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID)
+        );
+        
+        for (IRI iri : irisToEnrich) {
+            if (labels.get(iri).isPresent()) {
+                model.add(iri, RDFS.LABEL, labels.get(iri).get());
+            }
+            if (descriptions.get(iri).isPresent()) {
+                model.add(iri, RDFS.COMMENT, descriptions.get(iri).get());
+            }
+            if (types.get(iri).isPresent()) {
+                for (IRI typeIri : types.get(iri).get()) {
+                    model.add(iri, RDF.TYPE, typeIri);
+                }
+            }
+        }
+        return model;
     }
 }

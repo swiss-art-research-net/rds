@@ -69,22 +69,29 @@
         <button name="submit" class="btn btn-primary">Push records</button>
       </form>
 
-      <form method="POST" action="/rest/extension/records/export" target="actionResults">
+      <!-- <form method="POST" action="/rest/extension/records/export" target="actionResults">
         <button name="submit" class="btn btn-primary" style="margin-left: 10px">Export records</button>
-      </form>
+        <select name="mediaType">
+          <option value="turtle">Turtle</option>
+          <option value="rdf/xml">RDF/XML</option>
+          <option value="json-ld">JSON-LD</option>
+        </select>
+      </form> -->
+      <export-records-button></export-records-button>
     </div>
 
     <p>
-    <h4>Action Results</h4>
+    <h4>Push results</h4>
     <iframe name="actionResults" height="100" width="300" class="push-result"></iframe>
     </p>
 
     <mp-event-trigger type="Component.Refresh" targets='["files-table"]'>
       <button class="btn btn-secondary">Refresh table</button>
     </mp-event-trigger>
-    <mp-event-target-refresh id='files-table' refresh-interval_disabled='5'>
-      <semantic-table
-              query='
+    <mp-event-target-refresh id='files-table' refresh-interval='5'>
+      <div style="width: 100%; height: 500px">
+        <semantic-table
+                query='
           PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
           PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
 
@@ -106,41 +113,40 @@
             BIND (IF(BOUND(?_readyToDownload), true, false) as ?readyToDownloadState)
           } GROUP BY ?file ORDER BY ?timeModified
         '
-              no-result-template='There is no exported files'
-              column-configuration='[
+                no-result-template='There is no exported files'
+                column-configuration='[
           {"variableName": "file", "displayName": "Result" },
           {"variableName": "timeModified", "displayName": "Modified"},
           {"variableName": "downloadLink", "displayName": "Download link", "cellTemplate": "{{> downloadLink}}"},
           {"variableName": "delete", "displayName": "Delete record", "cellTemplate": "{{> deleteButton}}"}
         ]' >
-        <template id="downloadLink">
-          {{#ifCond readyToDownload.value "==" "true"}}
-          <mp-file-visualizer
-                  iri='{{file.value}}'
-                  name-predicate-iri='http://www.w3.org/2000/01/rdf-schema#label'
-                  class='custome-download-design'
-                  storage='exportedRecords'>
-          </mp-file-visualizer>
-          {{else}}
-          Exporting...
-          {{/ifCond}}
-          [[!-- <a href="{{downloadLink.value}}">Download</a> --]]
-        </template>
-        <template id="deleteButton">
-          {{#ifCond readyToDownload.value "==" "true"}}
-          <remove-records-file
-                  storage="exportedRecords"
-                  repository="default"
-                  resourceIri="{{file.value}}"
-                  fileName="{{fileName.value}}"
-          ></remove-records-file>
-          {{else}}
-          Exporting...
-          {{/ifCond}}
-        </template>
-      </semantic-table>
+          <template id="downloadLink">
+            {{#ifCond readyToDownload.value "==" "true"}}
+            <mp-file-visualizer
+                    iri='{{file.value}}'
+                    name-predicate-iri='http://www.w3.org/2000/01/rdf-schema#label'
+                    class='custome-download-design'
+                    storage='exportedRecords'>
+            </mp-file-visualizer>
+            {{else}}
+            Exporting...
+            {{/ifCond}}
+            [[!-- <a href="{{downloadLink.value}}">Download</a> --]]
+          </template>
+          <template id="deleteButton">
+            {{#ifCond readyToDownload.value "==" "true"}}
+            <remove-record-button
+                    storage="exportedRecords"
+                    repository="default"
+                    resourceIri="{{file.value}}"
+                    fileName="{{fileName.value}}"
+            ></remove-record-button>
+            {{else}}
+            Exporting...
+            {{/ifCond}}
+          </template>
+        </semantic-table>
     </mp-event-target-refresh>
 
   </div>
 </div>
-    
