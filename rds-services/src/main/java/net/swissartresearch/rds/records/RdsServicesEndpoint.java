@@ -496,6 +496,9 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             if (statement.getSubject().isIRI()) {
                 irisToEnrich.add((IRI)statement.getSubject());
             }
+            if (statement.getObject().isIRI()) {
+                irisToEnrich.add((IRI)statement.getObject());
+            }
         });
         
         Map<IRI, Optional<Literal>> labels = this.labelService.getLabels(
