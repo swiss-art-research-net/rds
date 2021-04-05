@@ -1,0 +1,103 @@
+<style>
+  .DataTable--table>thead>tr>th {
+    background-color: transparent;
+  }
+  p.match b {
+    color: #dc8a4b;
+    font-weight: normal;
+  }
+
+  p.match b:after {
+    content: " ";
+  }
+
+  .searchinput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .searchinput i {
+    position: relative;
+    left: 12px;
+  }
+  .searchinput .input {
+    flex: 1;
+    margin-left: -12px;
+    box-shadow: 0px 0px 2px #4a9eba;
+    border-color: #4a9eba;
+  }
+  .searchinput input {
+    padding-left: 28px;
+  }
+  .searchinput .form-group {
+    margin-bottom: 0;
+  }
+</style>
+
+<div style="margin-top:10%;">
+  <div data-flex-layout="column center-center">
+    <div style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50%;
+      align-items: stretch;">
+      <h1>Global search</h1>
+      <p>The search will be executed on the RDS-G system (Global system) to fetch all relevant results from the datasets hosted there.</p>
+
+      <bs-tabs id="tabs" class='page__body-navtabs' style="padding-top: 20px; background-color: #f9f9f9;" unmount-on-exit=true>
+        <bs-tab event-key="Global Search" title="All remote datasets">
+          [[> search lookupServiceName="federated-lookup" label="All remote datasets"]]
+        </bs-tab>
+        <bs-tab event-key="AAT" title="AAT">
+          [[> search lookupServiceName="aat-lookup" label="AAT" id="non-typed"]]
+          [[> search lookupServiceName="aat-lookup" label="AAT" id="typed" entityType="http://vocab.getty.edu/ontology#Concept"]]
+        </bs-tab>
+        <bs-tab event-key="ULAN" title="ULAN">
+          [[> search lookupServiceName="ulan-lookup" label="ULAN" id="non-typed"]]
+          [[> search lookupServiceName="ulan-lookup" label="ULAN" id="typed" entityType="http://vocab.getty.edu/ontology#GroupConcept"]]
+        </bs-tab>
+        <bs-tab event-key="Bibliographicdata" title="Bibliographicdata">
+          [[> search lookupServiceName="bibliographicdata-lookup" label="Bibliographicdata" id="non-typed"]]
+          [[> search lookupServiceName="bibliographicdata-lookup" label="Bibliographicdata" id="typed" entityType="http://schema.swissartresearch.net/ontology/rds#BiliographicItem"]]
+        </bs-tab>
+        <bs-tab event-key="Eentityfacts" title="Eentityfacts">
+          [[> search lookupServiceName="entityfacts-lookup" label="Eentityfacts" id="non-typed" ]]
+          [[> search lookupServiceName="entityfacts-lookup" label="Eentityfacts" id="typed" entityType="http://schema.swissartresearch.net/ontology/rds#Person"]]
+        </bs-tab>
+        <bs-tab event-key="Geonames" title="Geonames">
+          [[> search lookupServiceName="geonames-lookup" label="Geonames" id="non-typed"]]
+          [[> search lookupServiceName="geonames-lookup" label="Geonames" id="typed" entityType="http://schema.swissartresearch.net/ontology/rds#Place"]]
+        </bs-tab>
+        <bs-tab event-key="Wikidata" title="Wikidata">
+          [[> search lookupServiceName="wikidata-lookup" label="Wikidata"]]
+        </bs-tab>
+      </bs-tab>
+    </div>
+  </div>
+</div>
+
+[[#*inline "search"]]
+<div>
+  <div data-flex-layout="column center-center">
+    <div style="width: 100%">
+      <h4>[[label]] search[[#if entityType]] ([[entityType]])[[/if]]</h4>
+      [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
+      <semantic-search limit=1000 [[#if id]]id="[[id]]"[[/if]]>
+        <semantic-search-keyword-prefetch
+          style="min-width: 450px"
+          query='{
+            "type": "lookup",
+            "limit": 20,
+            "lookupServiceName": "[[lookupServiceName]]"
+            [[#if entityType]],"entityType": "[[entityType]]"[[/if]]
+          }'>
+        </semantic-search-keyword-prefetch>
+      
+        [[> rdsParts:ResultTableForSemanticSearch]]
+      </semantic-search>
+    </div>
+  </div>
+</div>
+[[/inline]]

@@ -4,3 +4,7 @@ rds = http://schema.swissartresearch.net/ontology/rds#
 sphaera = http://ontologies.mpiwg-berlin.mpg.de/sphaera/
 sphType = http://sphaera.mpiwg-berlin.mpg.de/id/thes/type/
 sphRole = http://sphaera.mpiwg-berlin.mpg.de/id/thes/role/
+Default = https://static.swissartresearch.net/
+rdsPages = https://static.swissartresearch.net/page/
+rdsParts = https://static.swissartresearch.net/partial/
+rdsPlatform = https://platform.swissartresearch.net/

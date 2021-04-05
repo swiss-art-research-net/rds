@@ -1,0 +1,243 @@
+[[> rdsParts:ReadMoreButton]]
+<div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+  <style>
+    .first-column-only .table.DataTable--table tr td:nth-child(1),
+    .first-column-only .table.DataTable--table tr th:nth-child(1) {
+      max-width: 40px;
+    }
+    .first-column-only .table.DataTable--table tr td:nth-child(n+3),
+    .first-column-only .table.DataTable--table tr th:nth-child(n+3) {
+      display: none;
+    }
+    .table-header-container.DataTable--header-container button.btn.btn-secondary {
+      font-size: 0;
+    }
+    .table-header-container.DataTable--header-container button.btn.btn-secondary i {
+      font-size: 10pt;
+      display: flex;
+      align-items: center;
+    }
+    .table-header-container.DataTable--header-container button.btn.btn-secondary i::after {
+      display: block;
+      content: "Filter results";
+      font-size: 12pt;
+      margin-left: 5px;
+      font-family: 'Lato';
+      color: gray;
+    }
+    .DataTable--filter-sidebar-title > span {
+      display: none;
+    }
+    .DataTable--filter-sidebar-title::before {
+      content: "Filter results";
+      pointer-events: none;
+      margin-right: 5px;
+    }
+    .dataset-bubble {
+      margin: 5px;
+      border-radius: 100%;
+      height: 40px;
+      width: 40px;
+      overflow: hidden;
+      border: 1px solid lightgray;
+      background: lightgray;
+      outline: none!important;
+      padding: 0;
+    }
+    .dataset-bubble img {
+      max-height: 100%;
+      min-width: 100%;
+    }
+    .distinct-inline {
+      display: inline;
+    }
+  </style>
+  <div style='max-width: 90vw' class="first-column-only">
+    <semantic-search-result-holder>
+      <semantic-search-result>
+        <semantic-table
+          id='table'
+          options='{
+            "showFilter": false,
+            "groupingOptions": {"groupedBy": ["groupIri"]}
+          }' 
+          query='SELECT * WHERE {
+            BIND(IF(?datasetId = <http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org>, true, false) as ?isWikidata).
+            BIND(IF(BOUND(?reference), ?reference, ?subject) as ?groupIri)
+          } ORDER BY DESC(?score)'
+          number-of-displayed-rows=10
+          no-result-template='No Resources found'
+          column-configuration='[
+            {
+              "variableName": "groupIri",
+              "displayName": "Result",
+              "cellTemplate": " "
+            },   
+            {
+              "variableName": "subject",
+              "displayName": " ",
+              "cellTemplate": "{{> subjectTemplate}}",
+              "aggregationCellTemplate": "{{> subjectAggregationTemplate}}"
+            },
+            {"variableName": "label", "displayName": "Label", "showFilter": true, "filterType": "default", "aggregationCellTemplate": " " },
+            {"variableName": "description", "displayName": "Description", "showFilter": true, "filterType": "default", "aggregationCellTemplate": " " },
+            {"variableName": "datasetId", "displayName": " ", "cellTemplate": " ", "aggregationCellTemplate": " " },
+            {"variableName": "datasetLabel", "displayName": "Dataset", "showFilter": true, "filterType": "multiselect", "aggregationCellTemplate": " " },
+            {"variableName": "type", "displayName": "Type", "showFilter": true, "filterType": "multiselect", "aggregationCellTemplate": " " }
+          ]'>
+          [[> readMoreOnRdsGlobal_frontendTemplate]]
+          <template id="subjectAggregationTemplate">
+            <div title="{{rows.0.groupIri.value}}"  style="display: flex">
+              <div style="flex-grow: 1">
+                <h4><b>
+                  <semantic-query
+                    query='SELECT * WHERE { {{rows.0.groupIri}} a ?type }'
+                    template='<semantic-link iri={{rows.0.groupIri.value}}></semantic-link>'
+                    no-result-template='<semantic-link
+                      iri="[[resolvePrefix "rdsPages:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{rows.0.groupIri.value}}"
+                      urlqueryparam-is-wikidata="{{isWikidata.value}}">
+                      <mp-label iri="{{rows.0.groupIri.value}}"><mp-label>
+                    </semantic-link>'>
+                  </semantic-query>
+                </b></h4>
+                <div style="font-style:italic; font-size: 16px;">
+                  {{#if rows.0.score}}<span style="color: gray"> (score: {{rows.0.score.value}})</span>{{/if}}&nbsp;
+                  <i style="color: blue">{{rows.0.groupIri.value}}</i>
+                </div>
+                <div>
+                    <span>
+                      Type: <b>[[> literal-distinct-helper distinctTarget="typeLabel"]]</b>
+                    </span>
+                    <span>
+                      | Dataset: <b>[[> literal-distinct-helper distinctTarget="datasetLabel"]]</b>
+                    </span>
+                    <span>
+                      | Description: <i> [[> literal-distinct-helper distinctTarget="description"]]</i>
+                    </span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column">
+                <div>
+                  {{> readMoreOnRdsGlobal resourceIri=rows.0.groupIri.value isWikidata=isWikidata.value}}
+                </div>
+                <div style="display: flex; justify-content: flex-end;">
+                  {{#each rows}}
+                    [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </template>
+          <template id="subjectTemplate">
+            <div style="display: flex; align-items: center;">
+              <div>
+              [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
+              </div>
+              <div>
+              [[> rdsParts:LookupCandidateTemplate]]
+              </div>
+            </div>
+          </template>
+        </semantic-table>
+      </semantic-search-result>
+    </semantic-search-result-holder>
+  </div>
+</div>
+
+[[!-- [[linkIri: IRI]] [[isWikidata: IRI]] --]]
+[[#*inline "linkWithFallback"]]
+<semantic-query
+  query='SELECT * WHERE { {{[[linkIri]]}} a ?type }'
+  template='<semantic-link iri={{[[linkIri]].value}}></semantic-link>'
+  no-result-template='<semantic-link
+    iri="[[resolvePrefix "rdsPages:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{[[linkIri]].value}}"
+    urlqueryparam-is-wikidata="{{isWikidata.value}}">
+    <mp-label iri="{{[[linkIri]].value}}"><mp-label>
+  </semantic-link>'>
+</semantic-query>
+[[/inline]]
+
+[[#*inline "rdsParts:LookupCandidateTemplate"]]
+  <semantic-link iri="{{subject.value}}">{{label.value}}</semantic-link>{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: {{score.value}}{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}
+  {{#if description}}
+  Description: {{description.value}}
+  {{/if}}
+[[/inline]]
+
+[[!-- Parameters:
+  [[iri: string]] - string name of iri
+  [[datasetVariableId: string]] - string dataset iri
+  [[datasetName: string]] - dataset Label
+--]]
+[[#*inline "bubbleLink"]]
+  <semantic-query
+    query='SELECT * WHERE { <[[iri]]> a ?type }'
+    template='<semantic-link iri="[[iri]]">{{> bubleTemplate}}</semantic-link>'
+    no-result-template='<semantic-link
+      iri="[[resolvePrefix "rdsPages:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="[[iri]]"
+      urlqueryparam-is-wikidata="{{isWikidata.value}}">
+      {{> bubleTemplate}}
+    </semantic-link>'>
+    <template id="bubleTemplate">
+      <semantic-link iri="[[iri]]">
+        <button class='dataset-bubble' title="Link to the same resource in [[datasetName]]({{[[datasetVariableId]]}}).">
+          {{#ifCond [[datasetVariableId]] "==" "http://vocab.getty.edu/aat/graph"}}
+              <img src='/assets/no_auth/getty-logo.png'/>
+            {{else}}{{#ifCond [[datasetVariableId]] "==" "http://vocab.getty.edu/ulan/graph"}}
+              <img src='/assets/no_auth/getty-logo.png'/>
+            {{else}}{{#ifCond [[datasetVariableId]] "==" "https://d-nb.info/gnd/bibliographicdata/graph"}}
+              <img src='/assets/no_auth/gnd-logo.png'/>
+            {{else}}{{#ifCond [[datasetVariableId]] "==" "https://d-nb.info/gnd/entityfacts/graph"}}
+              <img src='/assets/no_auth/dnb-logo.svg'/>
+            {{else}}{{#ifCond [[datasetVariableId]] "==" "http://sws.geonames.org/graph"}}
+              <img src='/assets/no_auth/geonames-logo.png'/>
+            {{else}}{{#ifCond [[datasetVariableId]] "==" "http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org"}}
+              <img src='/assets/no_auth/wikidata-logo.png'/>
+            {{else}}
+              <img src='/assets/no_auth/unknown-logo.png'/>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/ifCond}}
+        </button>
+      </semantic-link>
+    </template>
+     <template id="bubleTemplate">
+      <button class='dataset-bubble' title="Link to the same resource in [[datasetName]]({{[[datasetVariableId]]}}).">
+        {{#ifCond [[datasetVariableId]] "==" "http://vocab.getty.edu/aat/graph"}}
+            <img src='/assets/no_auth/getty-logo.png'/>
+          {{else}}{{#ifCond [[datasetVariableId]] "==" "http://vocab.getty.edu/ulan/graph"}}
+            <img src='/assets/no_auth/getty-logo.png'/>
+          {{else}}{{#ifCond [[datasetVariableId]] "==" "https://d-nb.info/gnd/bibliographicdata/graph"}}
+            <img src='/assets/no_auth/gnd-logo.png'/>
+          {{else}}{{#ifCond [[datasetVariableId]] "==" "https://d-nb.info/gnd/entityfacts/graph"}}
+            <img src='/assets/no_auth/dnb-logo.svg'/>
+          {{else}}{{#ifCond [[datasetVariableId]] "==" "http://sws.geonames.org/graph"}}
+            <img src='/assets/no_auth/geonames-logo.png'/>
+          {{else}}{{#ifCond [[datasetVariableId]] "==" "http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org"}}
+            <img src='/assets/no_auth/wikidata-logo.png'/>
+          {{else}}
+            <img src='/assets/no_auth/unknown-logo.png'/>
+          {{/ifCond}}
+          {{/ifCond}}
+          {{/ifCond}}
+          {{/ifCond}}
+          {{/ifCond}}
+          {{/ifCond}}
+      </button>
+    </template>
+  </semantic-query>
+[[/inline]]
+
+[[!-- [[distinctTarget]] --]]
+[[#*inline "literal-distinct-helper"]]
+    <semantic-query class="distinct-inline" query='SELECT DISTINCT ?object WHERE {
+      VALUES(?object) {
+        {{#each rows}}
+          {{#if [[distinctTarget]]}} ("""{{[[distinctTarget]].value}}""") {{/if}}
+        {{/each}}
+      }
+    }'></semantic-query>
+[[/inline]]

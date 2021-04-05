@@ -1,2 +1,3 @@
 shiroAuthenticationFilter=authcBasic,authc
 securityConfigStorageId=rds-local
+# resourceUrlMapping=/page/
