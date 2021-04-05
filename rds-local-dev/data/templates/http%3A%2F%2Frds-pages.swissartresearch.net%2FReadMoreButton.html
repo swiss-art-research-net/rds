@@ -6,7 +6,7 @@
 
 [[!-- you should provide '{{resourceIri}}' to this template to be able to render redirectLink correctly,{{isWikidata}} flag can be provided as well --]]
 <template id="readMoreOnRdsGlobal">
-  <button class="btn btn-secondary">
+  <button class="btn btn-secondary" style="width: 175px;">
     {{#ifCond isWikidata "==" "true"}}
       <a href="[[> rdsGlobalUrlTemplate]]{{encodeUriComponent resourceIri}}&repository=wikidata-lookup">Read more on RDS Global</a>
     {{else}}

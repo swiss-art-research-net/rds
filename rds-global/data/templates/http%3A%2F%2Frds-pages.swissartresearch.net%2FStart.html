@@ -42,6 +42,7 @@
 
 <div class="page">
   <bs-tab-container
+    unmount-on-exit=true
     id="start-page"
     class="bs-left-vertical-tabs"
     default-active-key="Global">
@@ -93,7 +94,7 @@
       </div>
 
       <div style="width: 80%; margin: 30px; min-width: 800px; max-width: 1200px"><!--second column of flex layout-->
-        <bs-tab-content animation="false">
+        <bs-tab-content animation="false" >
           <bs-tab-pane event-key="Global">[[> search lookupServiceName="federated-lookup" label="All datasets"]] </bs-tab-pane>
           <bs-tab-pane event-key="Local">[[> search lookupServiceName="default-lookup" label="Hosted datasets"]] </bs-tab-pane>
           <bs-tab-pane event-key="Wikidata-only">[[> search lookupServiceName="wikidata-lookup" label="Wikidata"]] </bs-tab-pane>
