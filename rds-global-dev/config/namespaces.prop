@@ -1,4 +1,7 @@
-Default = http://rds-pages.swissartresearch.net/
+Default = https://static.swissartresearch.net/
+rdsPages = https://static.swissartresearch.net/page/
+rdsParts = https://static.swissartresearch.net/partial/
+rdsPlatform = https://platform.swissartresearch.net/
 aat = http://vocab.getty.edu/aat/
 aat_contrib = http://vocab.getty.edu/aat/contrib/
 aat_rel = http://vocab.getty.edu/aat/rel/

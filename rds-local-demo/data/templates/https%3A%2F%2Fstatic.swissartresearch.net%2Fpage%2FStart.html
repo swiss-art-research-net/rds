@@ -1,0 +1,120 @@
+<style>
+  .DataTable--table>thead>tr>th {
+    background-color: transparent;
+  }
+  p.match b {
+    color: #dc8a4b;
+    font-weight: normal;
+  }
+
+  p.match b:after {
+    content: " ";
+  }
+
+  .searchinput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .searchinput i {
+    position: relative;
+    left: 12px;
+  }
+  .searchinput .input {
+    flex: 1;
+    margin-left: -12px;
+    box-shadow: 0px 0px 2px #4a9eba;
+    border-color: #4a9eba;
+  }
+  .searchinput input {
+    padding-left: 28px;
+  }
+  .searchinput .form-group {
+    margin-bottom: 0;
+  }
+
+  .nav {
+    flex-direction: column;
+  }
+</style>
+
+<div class="page">
+  <bs-tab-container
+    id="start-page"
+    class="bs-left-vertical-tabs"
+    default-active-key="Global">
+
+    <div data-flex-layout="row top-center">
+      <div style="width: auto; margin: 10px; min-width: 200px  "><!--first column of flex layout-->
+        <div class="sidebar" >
+          <bs-nav bs-style="tabs" stacked="true">
+            <bs-nav-item style='border-bottom: 1px solid rgb(3 101 201 / 38%)'>
+              <bs-nav-link event-key="Global"><h3><b>All types</b></h3></bs-nav-link>
+            </bs-nav-item>
+            <bs-nav-item>
+              <bs-nav-link event-key="Persons">
+                Persons
+              </bs-nav-link>
+            </bs-nav-item>
+            <bs-nav-item>
+              <bs-nav-link event-key="Books">
+                Books
+              </bs-nav-link>
+            </bs-nav-item>
+            <bs-nav-item>
+              <bs-nav-link event-key="Examples">
+                Examples
+              </bs-nav-link>
+            </bs-nav-item>
+          </bs-nav>
+        </div>
+      </div>
+
+      <div style="width: 80%; margin: 30px; min-width: 800px; max-width: 1200px"><!--second column of flex layout-->
+        <bs-tab-content animation="false">
+          <bs-tab-pane event-key="Global">[[> search  label="All types"]] </bs-tab-pane>
+          <bs-tab-pane event-key="Persons">[[> search type="http://schema.swissartresearch.net/ontology/rds#Person" label="Persons"]] </bs-tab-pane>
+          <bs-tab-pane event-key="Books">[[> search type="http://schema.swissartresearch.net/ontology/rds#BiliographicItem" label="Books"]] </bs-tab-pane>
+          <bs-tab-pane event-key="Examples">
+            [[> (resolvePrefix "rdsPages:StartExample")]]
+          </bs-tab-pane>
+        </bs-tab-content>
+      </div>
+    </div>
+  </bs-tab-container>
+</div>
+
+[[#*inline "search"]]
+<div>
+  <div data-flex-layout="column center-center">
+    <div style="width: 100%">
+      <h1>Welcome to RDS project ([[label]])</h1>
+      [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
+      <semantic-search limit=1000>
+          <semantic-search-keyword-prefetch
+            query='{
+              "type": "lookup",
+              "limit": 20,
+              [[#if type]]"entityType": "[[type]]",[[/if]]
+              "lookupServiceName": "default-lookup"
+            }'>
+          </semantic-search-keyword-prefetch>
+          <div style="margin-top: -10px; float: left; margin-right: 10px">
+            <semantic-link
+              iri="[[resolvePrefix "rdsPages:DataClientStructuredSearch"]]">
+              Advanced search
+            </semantic-link>
+            |
+            <semantic-link
+              iri="[[resolvePrefix "rdsPages:PrefetchExample"]]">
+              Global search
+            </semantic-link>
+          </div>
+         
+          [[> rdsParts:ResultTableForSemanticSearch]]
+      </semantic-search>
+    </div>
+  </div>
+</div>
+[[/inline]]

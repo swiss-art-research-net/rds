@@ -1,4 +1,4 @@
-[[> "http://rds-pages.swissartresearch.net/editBookFormFields"]]
+[[> "https://static.swissartresearch.net/partial/EditBookFormFields"]]
 
 [[#*inline "dataset-fields"]]
   [[> Short_Title]],
@@ -19,7 +19,7 @@
 <mp-event-target-template-render id='page-body' template='{{> template}}'>
   <template id='template'>
     {{#if edit}}
-      [[> EditBook edit=true]]
+      [[> rdsPages:EditBook edit=true]]
       <mp-event-trigger
         id='edit-trigger'
         type='Component.TemplateUpdate'
@@ -119,7 +119,7 @@
               ]'
               template='{{> property-table}}'>
               <template id="property-table">
-                [[> FieldBasedVisualization]]
+                [[> rdsParts:FieldBasedVisualization]]
               </template>
             </mp-field-visualization>
           </table>
