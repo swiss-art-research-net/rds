@@ -147,26 +147,9 @@
 [[#*inline "bubbleLink"]]
   <semantic-link iri="[[iri]]">
     <button class='dataset-bubble' title="Link to the same resource in [[datasetName]]({{[[datasetVariableId]]}}).">
-       {{#ifCond [[datasetVariableId]] "==" "http://vocab.getty.edu/aat/graph"}}
-          <img src='/assets/no_auth/getty-logo.png'/>
-        {{else}}{{#ifCond [[datasetVariableId]] "==" "http://vocab.getty.edu/ulan/graph"}}
-          <img src='/assets/no_auth/getty-logo.png'/>
-        {{else}}{{#ifCond [[datasetVariableId]] "==" "https://d-nb.info/gnd/bibliographicdata/graph"}}
-          <img src='/assets/no_auth/gnd-logo.png'/>
-        {{else}}{{#ifCond [[datasetVariableId]] "==" "https://d-nb.info/gnd/entityfacts/graph"}}
-          <img src='/assets/no_auth/dnb-logo.svg'/>
-        {{else}}{{#ifCond [[datasetVariableId]] "==" "http://sws.geonames.org/graph"}}
-          <img src='/assets/no_auth/geonames-logo.png'/>
-        {{else}}{{#ifCond [[datasetVariableId]] "==" "http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org"}}
-          <img src='/assets/no_auth/wikidata-logo.png'/>
-        {{else}}
-          <img src='/assets/no_auth/unknown-logo.png'/>
-        {{/ifCond}}
-        {{/ifCond}}
-        {{/ifCond}}
-        {{/ifCond}}
-        {{/ifCond}}
-        {{/ifCond}}
+      <mp-resource-thumbnail
+        iri="{{[[datasetVariableId]]}}" no-image-uri="/assets/no_auth/unknown-logo.png">
+      </mp-resource-thumbnail>
     </button>
   </semantic-link>
 [[/inline]]
