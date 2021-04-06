@@ -7,9 +7,9 @@ SCRIPT_DIR=$(pwd)
 set -e
 # ================================================================
 
-echo "Start script _uploadLabels.sh."
+echo "Start script uploadMetadata.sh."
 echo "Upload labels to the blazegraph"
 # ========================
-curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file "./_datasetLabels.ttl" -X POST "${BLAZEGRAPH_ENDPOINT}"
+curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file "./_datasetsMetadata.ttl" -X POST "${BLAZEGRAPH_ENDPOINT}"
 
-echo "Script _uploadLabels.sh finished."
+echo "Script uploadMetadata.sh finished."

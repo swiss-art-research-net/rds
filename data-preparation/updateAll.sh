@@ -8,4 +8,4 @@ cd ${UPDATE_SCRIPTS_DIR}
 ./updateGndFacts.sh
 ./updateUlan.sh
 cd ${ROOT_DIR}
-./uploadLabels.sh
+./uploadMetadata.sh

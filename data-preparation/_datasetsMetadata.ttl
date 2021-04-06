@@ -1,23 +1,34 @@
 @prefix rs: <http://www.researchspace.org/ontology/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
 
 <http://vocab.getty.edu/ulan/graph> rs:displayLabel "ulan";
  rdfs:label "ulan";
+ schema:thumbnail "/assets/no_auth/getty-logo.png";
  skos:prefLabel "ulan" .
 
 <http://vocab.getty.edu/aat/graph> rs:displayLabel "aat";
  rdfs:label "aat";
+ schema:thumbnail "/assets/no_auth/getty-logo.png";
  skos:prefLabel "aat" .
 
 <https://d-nb.info/gnd/bibliographicdata/graph> rs:displayLabel "bibliographic-data";
  rdfs:label "bibliographic-data";
+ schema:thumbnail "/assets/no_auth/gnd-logo.png";
  skos:prefLabel "bibliographic-data" .
 
 <https://d-nb.info/gnd/entityfacts/graph> rs:displayLabel "entity-facts";
  rdfs:label "entity-facts";
+ schema:thumbnail "/assets/no_auth/dnb-logo.svg";
  skos:prefLabel "entity-facts" .
 
 <http://sws.geonames.org/graph> rs:displayLabel "geonames";
  rdfs:label "geonames";
+ schema:thumbnail "/assets/no_auth/geonames-logo.png";
  skos:prefLabel "geonames" .
+
+<http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org> rs:displayLabel "wikidata";
+ rdfs:label "wikidata";
+ schema:thumbnail "/assets/no_auth/wikidata-logo.png";
+ skos:prefLabel "wikidata" .

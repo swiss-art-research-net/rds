@@ -1,8 +1,0 @@
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-INSERT {
-  <http://vocab.getty.edu/aat/graph> rdfs:label "aat" .
-  <http://vocab.getty.edu/ulan/graph> rdfs:label "ulan" .
-  <https://d-nb.info/gnd/bibliographicdata/graph> rdfs:label "bibliographicdata" .
-  <https://d-nb.info/gnd/entityfacts/graph> rdfs:label "entityfacts" .
-  <http://sws.geonames.org/graph> rdfs:label "geonames" .
-} WHERE {}

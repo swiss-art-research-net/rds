@@ -25,6 +25,6 @@ Mappings for wikidata are hardcoded in the `{root}/rds-global/config/repositorie
 # Update type mappings
 To change mappings update `./manual-preparation/type-mapping.ttl` and then reimport them as it described in the "Import mappings" paragraph.
 
-# Dataset labels
-To assign dataset labels to datasets via SPARQL execute INSERT query from `./manual-preparation/dataset-labels.sparql`.
+# Dataset labels and images
+To assign dataset metadata to datasets via SPARQL execute INSERT query from `./manual-preparation/dataset-metadata.sparql`.
 
