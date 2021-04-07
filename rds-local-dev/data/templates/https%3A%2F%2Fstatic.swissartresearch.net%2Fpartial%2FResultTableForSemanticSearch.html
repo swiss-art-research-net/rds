@@ -85,7 +85,6 @@
             {"variableName": "datasetLabel", "displayName": "Dataset", "showFilter": true, "filterType": "multiselect", "aggregationCellTemplate": " " },
             {"variableName": "type", "displayName": "Type", "showFilter": true, "filterType": "multiselect", "aggregationCellTemplate": " " }
           ]'>
-          [[> readMoreOnRdsGlobal_frontendTemplate]]
           <template id="subjectAggregationTemplate">
             <div title="{{rows.0.groupIri.value}}"  style="display: flex">
               <div style="flex-grow: 1">
@@ -118,7 +117,10 @@
               </div>
               <div style="display: flex; flex-direction: column">
                 <div>
-                  {{> readMoreOnRdsGlobal resourceIri=rows.0.groupIri.value isWikidata=isWikidata.value}}
+                  <semantic-query query="SELECT * WHERE { {{rows.0.groupIri}} a ?type. }" no-result-template='{{> template}}' template=' '>
+                    [[> readMoreOnRdsGlobal_frontendTemplate]]
+                    <template id="template">{{> readMoreOnRdsGlobal resourceIri=rows.0.groupIri.value isWikidata=isWikidata.value}}</template>
+                  </semantic-query>
                 </div>
                 <div style="display: flex; justify-content: flex-end;">
                   {{#each rows}}
@@ -133,8 +135,14 @@
               <div>
               [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
               </div>
-              <div>
+              <div style="margin-right: 10px;">
               [[> rdsParts:LookupCandidateTemplate]]
+              </div>
+              <div>
+                <semantic-query query="SELECT * WHERE { {{subject}} a ?type. }" no-result-template='{{> template}}' template=' '>
+                  [[> readMoreOnRdsGlobal_frontendTemplate]]
+                  <template id="template">{{> readMoreOnRdsGlobal resourceIri=subject.value isWikidata=isWikidata.value}}</template>
+                </semantic-query>
               </div>
             </div>
           </template>
