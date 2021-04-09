@@ -74,3 +74,5 @@ graph-aat = http://aat-explicit
 ontolex = http://www.w3.org/ns/lemon/ontolex#
 lexinfo	= http://www.lexinfo.net/ontology/2.0/lexinfo#
 sari = http://w3id.org/sari/
+crm = http://www.cidoc-crm.org/cidoc-crm/
+crmdig = http://www.ics.forth.gr/isl/CRMdig/

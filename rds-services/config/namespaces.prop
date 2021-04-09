@@ -2,3 +2,4 @@ Default = https://static.swissartresearch.net/
 rdsPages = https://static.swissartresearch.net/page/
 rdsParts = https://static.swissartresearch.net/partial/
 rdsPlatform = https://platform.swissartresearch.net/
+crm = http://www.cidoc-crm.org/cidoc-crm/
