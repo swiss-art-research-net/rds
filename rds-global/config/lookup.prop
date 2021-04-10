@@ -1,1 +1,2 @@
-experimental.defaultLookupServiceName=federated-lookup
+#experimental.defaultLookupServiceName=federated-lookup
+experimental.defaultLookupServiceName=aggregation-lookup
