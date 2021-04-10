@@ -28,7 +28,7 @@
  schema:thumbnail "/assets/no_auth/geonames-logo.png";
  skos:prefLabel "geonames" .
 
-<http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org> rs:displayLabel "wikidata";
+<http://www.wikidata.org> rs:displayLabel "wikidata";
  rdfs:label "wikidata";
  schema:thumbnail "/assets/no_auth/wikidata-logo.png";
  skos:prefLabel "wikidata" .
