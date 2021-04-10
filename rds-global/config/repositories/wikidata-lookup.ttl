@@ -23,7 +23,7 @@
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
             # ?candidate ?p ?o .
             VALUES(?dataset ?datasetLabel) {
-                (<www.wikidata.org> \"wikidata\")
+                (<http://www.wikidata.org> \"wikidata\")
             }
         } 
       """;

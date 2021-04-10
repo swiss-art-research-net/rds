@@ -57,7 +57,7 @@
             "groupingOptions": {"groupedBy": ["groupIri"]}
           }' 
           query='SELECT * WHERE {
-            BIND(IF(?datasetId = <http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org>, true, false) as ?isWikidata).
+            BIND(IF(?datasetId = <http://www.wikidata.org>, true, false) as ?isWikidata).
             BIND(IF(BOUND(?reference), ?reference, ?subject) as ?groupIri)
           } ORDER BY DESC(?score)'
           number-of-displayed-rows=10
