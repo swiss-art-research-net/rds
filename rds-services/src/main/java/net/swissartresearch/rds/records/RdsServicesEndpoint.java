@@ -16,9 +16,9 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -48,6 +48,7 @@ import com.metaphacts.services.storage.api.ObjectRecord;
 import com.metaphacts.services.storage.api.ObjectStorage;
 import com.metaphacts.services.storage.api.PlatformStorage;
 import com.metaphacts.services.storage.api.SizedStream;
+import com.metaphacts.services.storage.api.StorageException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
@@ -64,6 +65,7 @@ import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFWriter;
+import org.eclipse.rdf4j.rio.RDFWriterRegistry;
 import org.eclipse.rdf4j.rio.Rio;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
@@ -84,12 +86,10 @@ import com.metaphacts.secrets.SecretsHelper;
  */
 @Singleton
 @Path("records")
-public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
+public class RdsServicesEndpoint implements RestExtension {
     private static final Logger logger = LogManager.getLogger(RdsServicesEndpoint.class);
-    private static final int THREAD_POOL_SIZE = 20;
     private static final String FILE_STORAGE_ID = "exportedRecords";
     private static final String FILE_NAME = "exportedRecords";
-    private static final String MEDIA_TYPE = "ttl";
     private static final String CONTEXT_URI = "http://rds-extension.com/exportedRecords/context";
     private static final String GENERATE_IRI_QUERY = "SELECT ?resourceIri WHERE {\n" +
         "BIND(URI(CONCAT(STR(?__contextUri__), \"/\", ?__fileName__)) as ?resourceIri)\n" +
@@ -114,11 +114,12 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
     protected TypeService typeService;
     
     protected NamespaceRegistry namespaceRegistry;
-    protected RepositoryManager repositoryManager;
+    protected RepositoryManagerInterface repositoryManager;
     protected SecretResolver secretResolver;
     protected RdsServicesConfiguration servicesConfig;
     protected PlatformStorage platformStorage;
     protected FileManager fileManager = new FileManager();
+    protected Provider<RepositoryManager> repositoryManagerProvider;
 
     public RdsServicesEndpoint() {}
 
@@ -128,8 +129,8 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
     }
 
     @Inject
-    public void setRepositoryManager(RepositoryManagerInterface repositoryManager) {
-        this.repositoryManager = (RepositoryManager) repositoryManager;
+    public void setRepositoryManager(Provider<RepositoryManager> repositoryManagerProvider) {
+        this.repositoryManagerProvider = repositoryManagerProvider;
     }
 
     @Inject
@@ -264,7 +265,10 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
     ) throws Exception {
         logger.info("Exporting records for subject " + subject + " with comment " + comment);
         logger.debug("UriInfo: {}", uriInfo.getRequestUri());
-        RDFFormat rdfFormat = this.mediaTypeToRdfFormat(Strings.isEmpty(mediaType) ? MEDIA_TYPE : mediaType);
+        RDFWriterRegistry resultWriterRegistry = RDFWriterRegistry.getInstance();
+        RDFFormat rdfFormat = Strings.isEmpty(mediaType) ?
+            RDFFormat.TURTLE :
+            resultWriterRegistry.getFileFormatForMIMEType(mediaType).orElse(RDFFormat.TURTLE);
         
         ManagedFileName managedName = createManagedFilename(rdfFormat);
         this.updateMetadata(managedName, rdfFormat, false);
@@ -288,31 +292,24 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
         });
         return completableFuture;
     }
-
-    @Override
-    public synchronized void close() {
-        if (executorService != null) {
-            executorService.shutdown();
-            try {
-                executorService.awaitTermination(30, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                executorService.shutdownNow();
-            }
-        }
-    }
     
     protected synchronized ExecutorService getExecutorService() {
         if (this.executorService == null) {
-            this.executorService = Executors.newFixedThreadPool(
-                THREAD_POOL_SIZE,
-                new ThreadFactoryBuilder().setNameFormat("records-export-%d").build()
+            this.executorService = Executors.newCachedThreadPool(
+                new ThreadFactoryBuilder()
+                    .setNameFormat("records-export-%d")
+                    .setDaemon(true)
+                    .build()
             );
         }
         return this.executorService;
     }
 
     protected StreamingOutput downloadFileTask(ManagedFileName managedName, RDFFormat rdfFormat) throws IOException {
-        java.nio.file.Path tempFilePath = Files.createTempFile("merged-graph-", ".ttl");
+        java.nio.file.Path tempFilePath = Files.createTempFile(
+            "merged-graph-",
+            rdfFormat.getDefaultFileExtension()
+        );
         File file = tempFilePath.toFile();
         try (Writer out = new FileWriter(file)) {
             // export data
@@ -332,9 +329,14 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             logger.debug("Details: ", e);
         }
         this.updateMetadata(managedName, rdfFormat, true);
-        ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
-        ObjectRecord records = this.fileManager.fetchFile(storage, managedName).get();
-        return readObjectContent(records);
+        try {
+            ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
+            ObjectRecord records = this.fileManager.fetchFile(storage, managedName).get();
+            return readObjectContent(records);
+        } catch (StorageException e) {
+            logger.error("Fetching file from the storage failed!");
+            throw e;
+        }
     }
 
     protected IRI updateMetadata(ManagedFileName managedName, RDFFormat rdfFormat, boolean ready) throws IOException {
@@ -344,7 +346,10 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
         try {
             resourceIri = fileManager.createLdpResource(
                     managedName,
-                    new MpRepositoryProvider(this.repositoryManager, this.repositoryManager.DEFAULT_REPOSITORY_ID),
+                    new MpRepositoryProvider(
+                        this.repositoryManagerProvider.get(),
+                        RepositoryManager.DEFAULT_REPOSITORY_ID
+                    ),
                     GENERATE_IRI_QUERY,
                     ready ? CREATE_RESOURCE_QUERY_READY : CREATE_RESOURCE_QUERY,
                     CONTEXT_URI,
@@ -352,7 +357,9 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             );
         } catch (Exception e) {
             // try to clean up uploaded file if LDP update failed
+            logger.error("LDP updated failed." + e.getMessage(), e);
             fileManager.deleteFile(storage, managedName, platformStorage.getDefaultMetadata());
+            logger.info("The temporary file is deleted.");
             throw e;
         }
 
@@ -463,20 +470,6 @@ public class RdsServicesEndpoint implements RestExtension, AutoCloseable {
             }
             output.flush();
         };
-    }
-    
-    // Turtle, rdf/xml, JSON-LD
-    private RDFFormat mediaTypeToRdfFormat(String mediaType) {
-        if (!Strings.isEmpty(mediaType)) {
-            switch (mediaType.toLowerCase()) {
-                case "turtle": return RDFFormat.TURTLE;
-                case "rdf/xml": return RDFFormat.RDFXML;
-                case "json-ld": return RDFFormat.JSONLD;
-                default: return RDFFormat.TURTLE;
-            }
-        } else {
-            return RDFFormat.TURTLE;
-        }
     }
 
     private ManagedFileName createManagedFilename(RDFFormat format) {
