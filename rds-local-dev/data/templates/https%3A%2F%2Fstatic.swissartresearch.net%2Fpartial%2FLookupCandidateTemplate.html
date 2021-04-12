@@ -41,26 +41,33 @@
       min-width: 100%;
     }
   </style>
-  {{#if reference}}
-    <div class="rds-custome-row rds-subrow">
-      [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
-      <div>
-        {{label.value}}{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: <i>{{score.value}}</i>{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}<br>
-        {{#if description}}Description: <i>{{description.value}}</i>{{/if}}
-      </div>
-    </div>
-  {{else}}
-    <div>
-      <div class="rds-custome-row" style="background-color: white">
-        {{label.value}}
-      </div>
-        <div class="rds-custome-row rds-subrow">
+  {{#if datasetId}}
+    {{#if reference}}
+      <div class="rds-custome-row rds-subrow">
         [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
         <div>
           {{label.value}}{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: <i>{{score.value}}</i>{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}<br>
           {{#if description}}Description: <i>{{description.value}}</i>{{/if}}
         </div>
       </div>
+    {{else}}
+      <div>
+        <div class="rds-custome-row" style="background-color: white">
+          {{label.value}}
+        </div>
+          <div class="rds-custome-row rds-subrow">
+          [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
+          <div>
+            {{label.value}}{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: <i>{{score.value}}</i>{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}<br>
+            {{#if description}}Description: <i>{{description.value}}</i>{{/if}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{else}}
+    <div>
+      {{label.value}}{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: <i>{{score.value}}</i>{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}<br>
+      {{#if description}}Description: <i>{{description.value}}</i>{{/if}}
     </div>
   {{/if}}
 </div>
