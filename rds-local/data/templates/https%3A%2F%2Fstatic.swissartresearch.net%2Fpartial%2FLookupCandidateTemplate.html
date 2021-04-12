@@ -1,46 +1,47 @@
 <div>
-    <style>
-      .Select-option {
-        padding: 0;
-      }
-  
-      .Select-option .rds-custome-row {
-        padding: 5px;
-        border-top: 1px solid #e1e1e1;
-        padding-top: 5px;
-      }
-  
-      .Select-option:last-child .rds-custome-row {
-        border-bottom: 1px solid #e1e1e1;
-      }
-  
-      .rds-custome-row.rds-subrow,
-      .Select-option:first-child .rds-custome-row {
-        border-top: none;
-      }
-  
-      .rds-custome-row.rds-subrow {
-        display: flex;
-        font-size: 12px;
-        align-items: center;
-      }
-  
-      .Select-option .dataset-bubble {
-        margin: 5px;
-        border-radius: 100%;
-        height: 25px;
-        width: 25px;
-        overflow: hidden;
-        border: 1px solid lightgray;
-        background: lightgray;
-        outline: none!important;
-        padding: 0;
-      }
-      .Select-option .dataset-bubble img {
-        max-height: 100%;
-        min-width: 100%;
-      }
-    </style>
+  <style>
+    .Select-option {
+      padding: 0;
+    }
+
+    .Select-option .rds-custome-row {
+      padding: 5px;
+      border-top: 1px solid #e1e1e1;
+      padding-top: 5px;
+    }
+
+    .Select-option:last-child .rds-custome-row {
+      border-bottom: 1px solid #e1e1e1;
+    }
+
+    .rds-custome-row.rds-subrow,
+    .Select-option:first-child .rds-custome-row {
+      border-top: none;
+    }
+
+    .rds-custome-row.rds-subrow {
+      display: flex;
+      font-size: 12px;
+      align-items: center;
+    }
+
+    .Select-option .dataset-bubble {
+      margin: 5px;
+      border-radius: 100%;
+      height: 25px;
+      width: 25px;
+      overflow: hidden;
+      border: 1px solid lightgray;
+      background: lightgray;
+      outline: none!important;
+      padding: 0;
+    }
+    .Select-option .dataset-bubble img {
+      max-height: 100%;
+      min-width: 100%;
+    }
+  </style>
+  {{#if datasetId}}
     {{#if reference}}
       <div class="rds-custome-row rds-subrow">
         [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
@@ -54,7 +55,7 @@
         <div class="rds-custome-row" style="background-color: white">
           {{label.value}}
         </div>
-         <div class="rds-custome-row rds-subrow">
+          <div class="rds-custome-row rds-subrow">
           [[> bubbleLink iri="{{subject.value}}" datasetVariableId="datasetId.value" datasetName="{{datasetLabel.value}}"]]
           <div>
             {{label.value}}{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: <i>{{score.value}}</i>{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}<br>
@@ -63,15 +64,21 @@
         </div>
       </div>
     {{/if}}
-  </div>
-  
-  [[!-- Parameters: [[iri]] - string name of iri [[datasetVariableId]] - string dataset iri [[datasetName]] - dataset Label --]]
-  [[#*inline "bubbleLink"]]
-    <semantic-link iri="[[iri]]">
-      <button class="dataset-bubble" title="Link to the same resource in [[datasetName]]({{[[datasetVariableId]]}}).">
-        <mp-resource-thumbnail
-          iri="{{[[datasetVariableId]]}}" no-image-uri="/assets/no_auth/unknown-logo.png">
-        </mp-resource-thumbnail>
-      </button>
-    </semantic-link>
-  [[/inline]]
+  {{else}}
+    <div>
+      {{label.value}}{{#if type}} | type: <b>{{#if typeLabel}}{{typeLabel.value}}{{else}}{{type.value}}{{/if}}</b>{{/if}}{{#if score}} | score: <i>{{score.value}}</i>{{/if}}{{#if datasetId}} | dataset: <b>{{#if datasetLabel}}{{datasetLabel.value}}{{else}}{{datasetId.value}}{{/if}}</b>{{/if}}<br>
+      {{#if description}}Description: <i>{{description.value}}</i>{{/if}}
+    </div>
+  {{/if}}
+</div>
+
+[[!-- Parameters: [[iri]] - string name of iri [[datasetVariableId]] - string dataset iri [[datasetName]] - dataset Label --]]
+[[#*inline "bubbleLink"]]
+  <semantic-link iri="[[iri]]">
+    <button class="dataset-bubble" title="Link to the same resource in [[datasetName]]({{[[datasetVariableId]]}}).">
+      <mp-resource-thumbnail
+        iri="{{[[datasetVariableId]]}}" no-image-uri="/assets/no_auth/unknown-logo.png">
+      </mp-resource-thumbnail>
+    </button>
+  </semantic-link>
+[[/inline]]
