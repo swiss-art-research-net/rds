@@ -22,9 +22,7 @@
   lookup:configuration [
       lookup:type "metaphacts:federatedLookup";
       lookup:serviceMember [
-          lookup:name "wikidata-lookup";
-          lookup:scoreOffset 5.0E-1;
-          lookup:scoreFactor -1.0E0
+          lookup:name "wikidata-lookup"
         ], [
           lookup:name "ulan-lookup"
         ], [

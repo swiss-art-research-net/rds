@@ -24,7 +24,7 @@
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
           GRAPH ?dataset {
-            ?candidate ?p ?o .
+            ?candidate a ?o .
           }
           OPTIONAL { ?dataset rdfs:label ?datasetLabel . }
         }

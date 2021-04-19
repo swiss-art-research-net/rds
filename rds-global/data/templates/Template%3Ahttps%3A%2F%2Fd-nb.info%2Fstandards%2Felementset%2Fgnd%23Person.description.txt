@@ -1,0 +1,1 @@
+[[occupation.[0].value]] [[bio.[0].value]] [[place.[0].value]] [[#if dateOfBirth]]([[date-formatYear dateOfBirth.[0].value "dd. MMMM yyyy" fallback=dateOfBirth.[0].value]][[#if dateOfDeath]] - [[date-formatYear dateOfDeath.[0].value "dd. MMMM yyyy" fallback=dateOfDeath.[0].value]][[/if]])[[/if]]

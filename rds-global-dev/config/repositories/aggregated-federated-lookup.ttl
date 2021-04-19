@@ -11,7 +11,7 @@
 @prefix sparqlr: <http://www.openrdf.org/config/repository/sparql#> .
 
 [] a rep:Repository;
-  rep:repositoryID "aggregated-default-lookup";
+  rep:repositoryID "aggregated-federated-lookup";
   rdfs:label "Aggregation Lookup";
   rep:repositoryImpl [
       rep:repositoryType "openrdf:SailRepository";
@@ -21,7 +21,6 @@
     ];
   lookup:configuration [
       lookup:type "rds:aggregationLookup";
-      lookup:delegateService "default-lookup";
+      lookup:delegateService "federated-lookup";
       lookup:targetRepository "default" ;
-      lookup:sameAsPattern "^<https://static.swissartresearch.net/sameAs>";
     ] .

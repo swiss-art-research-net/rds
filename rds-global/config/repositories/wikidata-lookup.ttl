@@ -21,7 +21,6 @@
       lookup:type "metaphacts:sparqlLookup";
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
-            # ?candidate ?p ?o .
             VALUES(?dataset ?datasetLabel) {
                 (<http://www.wikidata.org> \"wikidata\")
             }
@@ -31,12 +30,12 @@
         SELECT
             ?candidate
             (GROUP_CONCAT(DISTINCT ?type ; separator=\",\") as ?types)
-            (MAX(?score_private) as ?score)
+            (0.7 + ((20 - MAX(?score_private) + 1) / 100.0) as ?score)
         WHERE {
             {{type_block}}
             {{search_block}}
             {{properties_block}}
-        } GROUP BY ?candidate ORDER BY ?score {{limit_block}}
+        } GROUP BY ?candidate ORDER BY ASC(?score_private) {{limit_block}}
       """;
       lookup:searchBlockTemplate """
         {SELECT ?candidate ?type ?score_private WHERE {

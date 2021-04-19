@@ -23,4 +23,5 @@
       lookup:type "rds:aggregationLookup";
       lookup:delegateService "federated-lookup";
       lookup:targetRepository "default" ;
+      lookup:sameAsPattern "^<https://static.swissartresearch.net/sameAs>";
     ] .
