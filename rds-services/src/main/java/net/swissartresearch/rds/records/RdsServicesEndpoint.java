@@ -18,7 +18,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -114,12 +113,11 @@ public class RdsServicesEndpoint implements RestExtension {
     protected TypeService typeService;
     
     protected NamespaceRegistry namespaceRegistry;
-    protected RepositoryManagerInterface repositoryManager;
     protected SecretResolver secretResolver;
     protected RdsServicesConfiguration servicesConfig;
     protected PlatformStorage platformStorage;
     protected FileManager fileManager = new FileManager();
-    protected Provider<RepositoryManager> repositoryManagerProvider;
+    protected RepositoryManagerInterface repositoryManagerInterface;
 
     public RdsServicesEndpoint() {}
 
@@ -129,8 +127,8 @@ public class RdsServicesEndpoint implements RestExtension {
     }
 
     @Inject
-    public void setRepositoryManager(Provider<RepositoryManager> repositoryManagerProvider) {
-        this.repositoryManagerProvider = repositoryManagerProvider;
+    public void setRepositoryManager(RepositoryManagerInterface repositoryManagerInterface) {
+        this.repositoryManagerInterface = repositoryManagerInterface;
     }
 
     @Inject
@@ -272,20 +270,20 @@ public class RdsServicesEndpoint implements RestExtension {
         
         ManagedFileName managedName = createManagedFilename(rdfFormat);
         this.updateMetadata(managedName, rdfFormat, false);
-        this.startDownloading(managedName, rdfFormat);
+        this.startExporting(managedName, rdfFormat);
         
         return Response.ok().build();
     }
 
-    public synchronized CompletableFuture<StreamingOutput> startDownloading(
+    public synchronized CompletableFuture<StreamingOutput> startExporting(
         ManagedFileName managedName, RDFFormat rdfFormat
     ) {
         CompletableFuture<StreamingOutput> completableFuture = new CompletableFuture<>();
         getExecutorService().submit(() -> {
             try {
-                completableFuture.complete(this.downloadFileTask(managedName, rdfFormat));
+                completableFuture.complete(this.exportingFileTask(managedName, rdfFormat));
             } catch (Throwable t) {
-                logger.warn("Error while downloading file: " + t.getMessage());
+                logger.warn("Error while exporting file: " + t.getMessage());
                 logger.debug("details:", t);
                 completableFuture.completeExceptionally(t);
             }
@@ -305,7 +303,7 @@ public class RdsServicesEndpoint implements RestExtension {
         return this.executorService;
     }
 
-    protected StreamingOutput downloadFileTask(ManagedFileName managedName, RDFFormat rdfFormat) throws IOException {
+    protected StreamingOutput exportingFileTask(ManagedFileName managedName, RDFFormat rdfFormat) throws IOException {
         java.nio.file.Path tempFilePath = Files.createTempFile(
             "merged-graph-",
             rdfFormat.getDefaultFileExtension()
@@ -344,17 +342,21 @@ public class RdsServicesEndpoint implements RestExtension {
         
         IRI resourceIri;
         try {
-            resourceIri = fileManager.createLdpResource(
-                    managedName,
-                    new MpRepositoryProvider(
-                        this.repositoryManagerProvider.get(),
-                        RepositoryManager.DEFAULT_REPOSITORY_ID
-                    ),
-                    GENERATE_IRI_QUERY,
-                    ready ? CREATE_RESOURCE_QUERY_READY : CREATE_RESOURCE_QUERY,
-                    CONTEXT_URI,
-                    rdfFormat.getDefaultMIMEType()
-            );
+            if (this.repositoryManagerInterface instanceof RepositoryManager) {
+                resourceIri = fileManager.createLdpResource(
+                        managedName,
+                        new MpRepositoryProvider(
+                                (RepositoryManager) this.repositoryManagerInterface,
+                                RepositoryManager.DEFAULT_REPOSITORY_ID
+                        ),
+                        GENERATE_IRI_QUERY,
+                        ready ? CREATE_RESOURCE_QUERY_READY : CREATE_RESOURCE_QUERY,
+                        CONTEXT_URI,
+                        rdfFormat.getDefaultMIMEType()
+                );
+            } else {
+                throw new IllegalArgumentException("RepositoryManagerInterface is not injected!");
+            }
         } catch (Exception e) {
             // try to clean up uploaded file if LDP update failed
             logger.error("LDP updated failed." + e.getMessage(), e);
@@ -378,7 +380,7 @@ public class RdsServicesEndpoint implements RestExtension {
         }
         logger.debug("Exporting data from repository {} using query {}", repositoryID, queryString);
         // query and export data
-        Repository repository = repositoryManager.getRepository(repositoryID);
+        Repository repository = repositoryManagerInterface.getRepository(repositoryID);
         try (RepositoryConnection con = repository.getConnection()) {
             GraphQuery graphQuery = SparqlOperationBuilder.<GraphQuery>create(queryString, GraphQuery.class)
                 .resolveUser(namespaceRegistry.getUserIRI())
@@ -495,13 +497,13 @@ public class RdsServicesEndpoint implements RestExtension {
         });
         
         Map<IRI, Optional<Literal>> labels = this.labelService.getLabels(
-            irisToEnrich, repositoryManager.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID), null
+            irisToEnrich, repositoryManagerInterface.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID), null
         );
         Map<IRI, Optional<Literal>> descriptions = this.descriptionService.getDescriptions(
-            irisToEnrich, repositoryManager.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID), null
+            irisToEnrich, repositoryManagerInterface.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID), null
         );
         Map<IRI, Optional<Iterable<IRI>>> types = this.typeService.getAllTypes(
-            irisToEnrich, repositoryManager.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID)
+            irisToEnrich, repositoryManagerInterface.getRepository(RepositoryManager.DEFAULT_REPOSITORY_ID)
         );
         
         for (IRI iri : irisToEnrich) {

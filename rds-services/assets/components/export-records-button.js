@@ -16,9 +16,9 @@ class ExportRecordsButton extends HTMLElement {
     this.innerHTML = `<div style="margin-left: 10px">
       <button name="submit" class="btn btn-primary">Export records</button>
       <select id="mediaType">
-        <option value="turtle">Turtle</option>
-        <option value="rdf/xml">RDF/XML</option>
-        <option value="json-ld">JSON-LD</option>
+          <option value="text/turtle">Turtle</option>
+          <option value="application/rdf+xml">RDF/XML</option>
+          <option value="application/ld+json">JSON-LD</option>
       </select>
     </div>`;
     const button = this.querySelector('.btn.btn-primary');
