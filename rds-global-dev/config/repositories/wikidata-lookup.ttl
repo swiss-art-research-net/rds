@@ -38,17 +38,33 @@
         } GROUP BY ?candidate ORDER BY ?score {{limit_block}}
       """;
       lookup:searchBlockTemplate """
-        {SELECT ?candidate ?type ?score_private WHERE {
-            SERVICE wikibase:mwapi {
-                bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
-                                wikibase:api \"EntitySearch\";
-                                mwapi:language \"en\";
-                                mwapi:search ?__token__.
-                ?candidate wikibase:apiOutputItem mwapi:item.
-                ?score_private wikibase:apiOrdinal true.
+      	{
+          {SELECT ?candidate ?type ?score_private WHERE {
+              SERVICE wikibase:mwapi {
+                  bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
+                                  wikibase:api \"EntitySearch\";
+                                  mwapi:language \"en\";
+                                  mwapi:search ?__token__.
+                  ?candidate wikibase:apiOutputItem mwapi:item.
+                  ?score_private wikibase:apiOrdinal true.
+              }
+              ?candidate (wdt:P279|wdt:P31) ?type
+          }}
+        } UNION {
+            VALUES (?prefix ?postfix) {
+                (\"http://www.wikidata.org/entity/statement/\" \"\")
+                (\"http://www.wikidata.org/entity/\" \"\")
+                (\"https://en.wikipedia.org/wiki/\" \"\")
+                (\"https://de.wikipedia.org/wiki/\" \"\")
+                (\"https://ru.wikipedia.org/wiki/\" \"\")
             }
-            ?candidate (wdt:P279|wdt:P31) ?type
-        }}
+            BIND (1 as ?score_private)
+            BIND (IRI(CONCAT(?prefix, ?__token__, ?postfix)) as ?candidate)
+            ?candidate (wdt:P279|wdt:P31) ?type .
+        } UNION {
+          BIND(IRI(?__token__) as ?candidate)
+          ?candidate (wdt:P279|wdt:P31) ?type .
+        }
     """;
       lookup:typeBlockTemplate """
 FILTER EXISTS {
