@@ -51,15 +51,8 @@
               ?candidate (wdt:P279|wdt:P31) ?type
           }}
         } UNION {
-            VALUES (?prefix ?postfix) {
-                (\"http://www.wikidata.org/entity/statement/\" \"\")
-                (\"http://www.wikidata.org/entity/\" \"\")
-                (\"https://en.wikipedia.org/wiki/\" \"\")
-                (\"https://de.wikipedia.org/wiki/\" \"\")
-                (\"https://ru.wikipedia.org/wiki/\" \"\")
-            }
             BIND (1 as ?score_private)
-            BIND (IRI(CONCAT(?prefix, ?__token__, ?postfix)) as ?candidate)
+            BIND (IRI(CONCAT(\"http://www.wikidata.org/entity/\", UCASE(?__token__))) as ?candidate)
             ?candidate (wdt:P279|wdt:P31) ?type .
         } UNION {
           BIND(IRI(?__token__) as ?candidate)
