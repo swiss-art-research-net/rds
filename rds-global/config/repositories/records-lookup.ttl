@@ -31,17 +31,26 @@
         }
       """;
       lookup:searchBlockTemplate """
-        GRAPH <http://example.org/myproject/records> {
-          ?candidate a ?type.
-          ?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label ?key.
-          FILTER ISLITERAL(?key)
-        }
-        SERVICE <http://www.bigdata.com/rdf/search#search> {
-             ?key <http://www.bigdata.com/rdf/search#search> ?__token__;
-             <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
-             <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\";
-             <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\".
-        }
+        {
+          GRAPH <http://example.org/myproject/records> {
+            ?candidate a ?type.
+            ?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label ?key.
+            FILTER ISLITERAL(?key)
+          }
+          SERVICE <http://www.bigdata.com/rdf/search#search> {
+               ?key <http://www.bigdata.com/rdf/search#search> ?__token__;
+               <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+               <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\";
+               <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\".
+          }
+        } UNION {
+          BIND(IRI(?__token__) as ?candidate)
+          FILTER EXISTS {
+          	GRAPH <http://example.org/myproject/records> {
+            	?candidate a ?someType .
+    				}
+          }
+    		}
       """;
       lookup:typeBlockTemplate """
       FILTER EXISTS {

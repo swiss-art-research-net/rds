@@ -29,17 +29,34 @@
         }
       """;
       lookup:searchBlockTemplate """
-        GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
-    				?candidate a ?type.
-            ?candidate ?keyProp ?key.
-    				FILTER ISLITERAL(?key)
-        }
-        SERVICE <http://www.bigdata.com/rdf/search#search> {
-            ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
-            <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
-            <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
-            <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
-        }
+        {
+          GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
+              ?candidate a ?type.
+              ?candidate ?keyProp ?key.
+              FILTER ISLITERAL(?key)
+          }
+          SERVICE <http://www.bigdata.com/rdf/search#search> {
+              ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+              <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+              <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
+              <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
+          }
+        } UNION {
+        		BIND (1 as ?score_private)
+            BIND (IRI(CONCAT(\"https://d-nb.info/gnd/\", ?__token__)) as ?candidate)
+            FILTER EXISTS {
+    					GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
+              	?candidate a ?someType .
+    					}
+            }
+        } UNION {
+          BIND(IRI(?__token__) as ?candidate)
+          FILTER EXISTS {
+          	GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
+            	?candidate a ?someType .
+    				}
+          }
+    		}
     	""";
       lookup:typeBlockTemplate """
       FILTER EXISTS {
