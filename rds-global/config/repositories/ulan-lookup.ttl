@@ -29,15 +29,32 @@
         }
       """;
       lookup:searchBlockTemplate """
-        GRAPH <http://vocab.getty.edu/ulan/graph> {
-    				?candidate a ?type.
-            ?candidate (((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) | rdfs:label) ?key .
-        }
-        SERVICE <http://www.bigdata.com/rdf/search#search> {
-            ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
-            <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
-            <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
-            <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
+        {
+          GRAPH <http://vocab.getty.edu/ulan/graph> {
+              ?candidate a ?type.
+              ?candidate (((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) | rdfs:label) ?key .
+          }
+          SERVICE <http://www.bigdata.com/rdf/search#search> {
+              ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+              <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+              <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
+              <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
+          }
+    		} UNION {
+        		BIND (1 as ?score_private)
+            BIND (IRI(CONCAT(\"http://vocab.getty.edu/ulan/\", ?__token__)) as ?candidate)
+            FILTER EXISTS {
+    					GRAPH <http://vocab.getty.edu/ulan/graph> {
+              	?candidate a ?someType .
+    					}
+            }
+        } UNION {
+          BIND(IRI(?__token__) as ?candidate)
+          FILTER EXISTS {
+          	GRAPH <http://vocab.getty.edu/ulan/graph> {
+            	?candidate a ?someType .
+    				}
+          }
         }
     	""";
       lookup:typeBlockTemplate """

@@ -38,17 +38,26 @@
         } GROUP BY ?candidate ORDER BY ASC(?score_private) {{limit_block}}
       """;
       lookup:searchBlockTemplate """
-        {SELECT ?candidate ?type ?score_private WHERE {
-            SERVICE wikibase:mwapi {
-                bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
-                                wikibase:api \"EntitySearch\";
-                                mwapi:language \"en\";
-                                mwapi:search ?__token__.
-                ?candidate wikibase:apiOutputItem mwapi:item.
-                ?score_private wikibase:apiOrdinal true.
-            }
-            ?candidate (wdt:P279|wdt:P31) ?type
-        }}
+      	{
+          {SELECT ?candidate ?type ?score_private WHERE {
+              SERVICE wikibase:mwapi {
+                  bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
+                                  wikibase:api \"EntitySearch\";
+                                  mwapi:language \"en\";
+                                  mwapi:search ?__token__.
+                  ?candidate wikibase:apiOutputItem mwapi:item.
+                  ?score_private wikibase:apiOrdinal true.
+              }
+              ?candidate (wdt:P279|wdt:P31) ?type
+          }}
+        } UNION {
+            BIND (1 as ?score_private)
+            BIND (IRI(CONCAT(\"http://www.wikidata.org/entity/\", UCASE(?__token__))) as ?candidate)
+            ?candidate (wdt:P279|wdt:P31) ?type .
+        } UNION {
+          BIND(IRI(?__token__) as ?candidate)
+          ?candidate (wdt:P279|wdt:P31) ?type .
+        }
     """;
       lookup:typeBlockTemplate """
 FILTER EXISTS {
