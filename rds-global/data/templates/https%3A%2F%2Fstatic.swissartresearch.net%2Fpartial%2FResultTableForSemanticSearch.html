@@ -84,7 +84,7 @@
             <div title="{{rows.0.groupIri.value}}" style="display: flex">
               <div style="flex-grow: 1">
                 <h4><b>
-                  {{#ifCond isWikidata.value "==" "true"}}
+                  {{#ifCond rows.0.isWikidata.value "==" "true"}}
                     <semantic-link
                       iri={{rows.0.groupIri.value}}
                       urlqueryparam-repository="wikidata-lookup">
