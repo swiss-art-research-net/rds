@@ -331,7 +331,6 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
                 if (sameAsHolder != null && sameAsHolder.isPresent()) {
                     Iterable<IRI> sameAsIRIs = sameAsHolder.get();
                     Iterator<IRI> it = sameAsIRIs.iterator();
-                    boolean hasReference = false;
                     while (it.hasNext()) {
                         IRI sameAsIRI = it.next();
                         String sameAsId = sameAsIRI.stringValue();
@@ -340,31 +339,10 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
                         SameAsRelationships relationships = sameAsMap.computeIfAbsent(sameAsId,
                                 iri -> new SameAsRelationships(sameAsId));
                         relationships.withCandidate(candidateId);
-
-//                        if (hasReference) {
-//                            // there should be only one entity pointing to this one in a same-as relationship
-//                            // log a warning (on level debug) if there are multiple
-//                            logger.debug(
-//                                    "Expecting only one primary entity considered same-as {}, but there are multiple.",
-//                                    candidateId);
-//                        } else if (idMap.containsKey(sameAsId)) {
-//                            // there is no reference yet and the primary entity is part of the candidates
-//                            logger.trace("Primary entity {} considered same-as {}", sameAsId, candidateId);
-//                            candidate.setReference(sameAsId);
-//                            hasReference = true;
-//                        }
-//                        else {
-//                            logger.trace(
-//                                    "Ignoring primary entity {} considered same-as {} as it is not part of the result set",
-//                                    sameAsId, candidateId);
-//                        }
                     }
                 }
             }
         }
-
-        // TODO consolidate/merge sameAsMaps, e.g. if there are multiple entries from
-        // multiple elements?
 
         return sameAsMap;
     }

@@ -10,6 +10,6 @@ INSERT {
   <https://d-nb.info/gnd/entityfacts/graph> <http://schema.org/thumbnail> "/assets/no_auth/dnb-logo.svg" .
   <http://sws.geonames.org/graph> rdfs:label "geonames" .
   <http://sws.geonames.org/graph> <http://schema.org/thumbnail> "/assets/no_auth/geonames-logo.png" .
-  <http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org> rdfs:label "wikidata" .
-  <http://query.wikidata.org/bigdata/namespace/wdq/www.wikidata.org> <http://schema.org/thumbnail> "/assets/no_auth/wikidata-logo.png" .
+  <http://www.wikidata.org> rdfs:label "wikidata" .
+  <http://www.wikidata.org> <http://schema.org/thumbnail> "/assets/no_auth/wikidata-logo.png" .
 } WHERE {}
