@@ -1,0 +1,23 @@
+ARG PLATFORM_VERSION=4.1.0
+FROM metaphacts/glam-community:${PLATFORM_VERSION} AS glam-community
+
+FROM gradle:6.8.3-jdk11 AS build
+
+RUN mkdir /tmp/build
+WORKDIR /tmp/build
+
+COPY --chown=jetty:jetty . /tmp/build
+COPY --chown=jetty:jetty --from=glam-community /var/lib/jetty/webapps/ROOT.war /tmp/build/ROOT.war
+
+RUN echo "platformLocation=/tmp/build/ROOT.war" > /tmp/build/gradle.properties \
+  && gradle --info prepareEnvironment \
+  && gradle --info clean appZip
+
+
+FROM glam-community
+
+COPY --from=build /tmp/build/target/apps/rds-branding.zip \
+                  /tmp/build/target/apps/rds-local.zip \
+                  /tmp/build/target/apps/rds-local-demo.zip \
+                  /tmp/build/target/apps/rds-services.zip \
+                  /apps/
