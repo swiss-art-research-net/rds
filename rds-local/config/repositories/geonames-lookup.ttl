@@ -21,6 +21,6 @@
     ];
   lookup:configuration [
       lookup:type "metaphacts:remoteLookup";
-      lookup:remoteServiceUrl "https://rds-mph.swissartresearch.net/rest/reconciliation/geonames-lookup";
+      lookup:remoteServiceUrl "https://rds-qa.swissartresearch.net/rest/reconciliation/geonames-lookup";
       lookup:remoteQueryMethod "postDataForm"
     ] .
