@@ -29,6 +29,18 @@
 
     <h1>Record Sync</h1>
 
+    <h3>Rds services configuration</h3>
+    <mp-collapsible-div expanded=false>
+      <mp-collapsible-div-trigger>
+        <span>Rds services configuration</span>
+      </mp-collapsible-div-trigger>
+      <mp-collapsible-div-content>
+        <div>
+          <mp-admin-config-manager editable=true group="rds-services"></mp-admin-config-manager>
+        </div>
+      </mp-collapsible-div-content>
+    </mp-collapsible-div>
+
     <h3>Records</h3>
 
     <p>The following tables lists all records in the local system</p>
@@ -49,21 +61,9 @@
     }"
     ></semantic-table>
 
-    <h3>Push data to RDS-Global</h3>
     <p>
       All approved records will be pushed to RDS-Global.
     </p>
-    <mp-collapsible-div expanded=false>
-      <mp-collapsible-div-trigger>
-        <span>Record Push Configuration</span>
-      </mp-collapsible-div-trigger>
-      <mp-collapsible-div-content>
-        <div>
-          <mp-admin-config-manager editable=true group="rds-services"></mp-admin-config-manager>
-        </div>
-      </mp-collapsible-div-content>
-    </mp-collapsible-div>
-    <br>
 
     <div style="display: flex">
       <form method="POST" action="/rest/extension/records/push" target="actionResults">
@@ -82,10 +82,11 @@
     </div>
 
     <p>
-    <h4>Push results</h4>
+    <h5>Push results</h5>
     <iframe name="actionResults" height="100" width="300" class="push-result"></iframe>
     </p>
 
+    <h3>Exported records</h3>
     <mp-event-trigger type="Component.Refresh" targets='["files-table"]'>
       <button class="btn btn-secondary">Refresh table</button>
     </mp-event-trigger>
