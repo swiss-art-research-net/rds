@@ -23,5 +23,5 @@
       lookup:type "rds:aggregationLookup";
       lookup:delegateService "default-lookup";
       lookup:targetRepository "default" ;
-      lookup:sameAsPattern "^<https://static.swissartresearch.net/sameAs>";
+      lookup:sameAsPattern "^<http://schema.swissartresearch.net/ontology/rds#related>";
     ] .

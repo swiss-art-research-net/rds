@@ -8,7 +8,7 @@ const N3 = require('n3');
 const { DataFactory } = N3;
 const { namedNode } = DataFactory;
 
-const SAME_AS_PREDICATE = namedNode("https://static.swissartresearch.net/sameAs");
+const SAME_AS_PREDICATE = namedNode("http://schema.swissartresearch.net/ontology/rds#related");
 const DATA_FOLDER = 'data';
 const OUTPUT_FOLDER = 'output';
 const HEAP_SIZE = 1000000;
