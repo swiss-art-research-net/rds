@@ -1,0 +1,54 @@
+
+<http://schema.swissartresearch.net/workflow_definition/context> {
+  <http://schema.swissartresearch.net/workflow_definition> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowDefinition>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Workflow Definition";
+    <http://www.metaphacts.com/ontologies/platform/workflow#hasStep> <http://schema.swissartresearch.net/step/inProgress>,
+      <http://schema.swissartresearch.net/step/readyToReview>, <http://schema.swissartresearch.net/step/inReview>,
+      <http://schema.swissartresearch.net/step/accepted>, <http://schema.swissartresearch.net/step/rejected>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-30T12:10:33.219Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://schema.swissartresearch.net/step/inProgress> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowStep>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "In progress";
+    <http://www.metaphacts.com/ontologies/platform/workflow#nextStep> <http://schema.swissartresearch.net/step/readyToReview>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#assigneeQuery> <http://schema.swissartresearch.net/anyAssigneeQuery> .
+  
+  <http://schema.swissartresearch.net/step/readyToReview> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowStep>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Ready to review";
+    <http://www.metaphacts.com/ontologies/platform/workflow#nextStep> <http://schema.swissartresearch.net/step/inProgress>,
+      <http://schema.swissartresearch.net/step/inReview>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#assigneeQuery> <http://schema.swissartresearch.net/editorAssigneeQuery> .
+  
+  <http://schema.swissartresearch.net/step/inReview> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowStep>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "In review";
+    <http://www.metaphacts.com/ontologies/platform/workflow#nextStep> <http://schema.swissartresearch.net/step/inProgress>,
+      <http://schema.swissartresearch.net/step/accepted>, <http://schema.swissartresearch.net/step/rejected>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#assigneeQuery> <http://schema.swissartresearch.net/editorAssigneeQuery> .
+  
+  <http://schema.swissartresearch.net/step/accepted> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowStep>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Accepted";
+    <http://www.metaphacts.com/ontologies/platform/workflow#nextStep> <http://schema.swissartresearch.net/step/inReview>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#assigneeQuery> <http://schema.swissartresearch.net/editorAssigneeQuery> .
+  
+  <http://schema.swissartresearch.net/step/rejected> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowStep>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Rejected";
+    <http://www.metaphacts.com/ontologies/platform/workflow#nextStep> <http://schema.swissartresearch.net/step/inReview>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#assigneeQuery> <http://schema.swissartresearch.net/editorAssigneeQuery> .
+  
+  <http://schema.swissartresearch.net/anyAssigneeQuery> a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """PREFIX Platform: <http://www.metaphacts.com/ontologies/platform#>
+            SELECT DISTINCT ?assignee WHERE {
+                ?assignee a Platform:User .
+            }""" .
+  
+  <http://schema.swissartresearch.net/editorAssigneeQuery> a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """PREFIX Platform: <http://www.metaphacts.com/ontologies/platform#>
+            SELECT DISTINCT ?assignee WHERE {
+                ?assignee a Platform:User ;
+                    Platform:hasGroup <https://resources.swissartresearch.net/workflow/editor> .
+            }""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#workflowDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://schema.swissartresearch.net/workflow_definition> .
+}

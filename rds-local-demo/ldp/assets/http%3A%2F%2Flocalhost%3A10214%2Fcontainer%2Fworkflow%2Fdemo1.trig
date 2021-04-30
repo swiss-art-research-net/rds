@@ -1,0 +1,20 @@
+
+<http://localhost:10214/container/workflow/demo1/context> {
+  <http://localhost:10214/container/workflow/demo1> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowInstantiation>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Workflow Instantiation 1";
+    <http://www.metaphacts.com/ontologies/platform/workflow#subject> <http://example.com/workflow/demo1/subject>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#hasState> <http://example.com/workflow/demo1/state1>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#currentState> <http://example.com/workflow/demo1/state1>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#metadata> <http://example.com/workflow/demo1/metadata>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-30T12:10:16.438Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://example.com/workflow/demo1/state1> a <http://www.metaphacts.com/ontologies/platform/workflow#WorkflowState>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#step> <http://example.com/workflow/todo>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#assignee> <http://example.com/assignee2>;
+    <http://www.metaphacts.com/ontologies/platform/workflow#startTime> "2019-04-10T13:30:44+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#workflowContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://localhost:10214/container/workflow/demo1> .
+}

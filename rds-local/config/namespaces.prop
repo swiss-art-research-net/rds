@@ -13,6 +13,7 @@ aat_term = http://vocab.getty.edu/aat/term/
 adms = http://www.w3.org/ns/adms#
 bibo = http://purl.org/ontology/bibo/
 bio = http://purl.org/vocab/bio/0.1/
+bds = http://www.bigdata.com/rdf/search#
 cc = http://creativecommons.org/ns#
 dc = http://purl.org/dc/elements/1.1/
 dcat = http://www.w3.org/ns/dcat#

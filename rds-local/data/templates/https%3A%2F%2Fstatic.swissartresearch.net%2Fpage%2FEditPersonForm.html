@@ -62,7 +62,7 @@
         </semantic-search-result-holder>
       </div>
       <semantic-search-keyword-prefetch
-        query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#Person" }'
+        query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#Person", "lookupServiceName": "federated-lookup" }'
         placeholder='Input the name of the person you want to create'>
       </semantic-search-keyword-prefetch>
 
@@ -202,7 +202,8 @@
               lookup-query='{
                 "type": "lookup",
                 "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-                "limit": 20
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
               }'
               template='{{> autocompletionTemplate}}'
               default-value='{{sameAs}}'>
@@ -215,7 +216,8 @@
               lookup-query='{
                 "type": "lookup",
                 "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-                "limit": 20
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
               }'
               template='{{> autocompletionTemplate}}'>
               [[> autocompletionTemplate]]
@@ -265,8 +267,15 @@
               [[> Person_Birth_Date_earliest]],
               [[> Person_Birth_Date_latest]]
             ]'>
-            <semantic-form-autocomplete-input 
-                for="Mph_Birth_Place">
+            <semantic-form-autocomplete-input for='Mph_Birth_Place'
+                value-binding-name="subject"
+                lookup-query='{
+                    "type": "lookup",
+                    "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                    "limit": 20
+                    }'
+                template='{{> autocompletionTemplate}}'>
+                [[> autocompletionTemplate]]
             </semantic-form-autocomplete-input>
             <semantic-form-datetime-input 
                 for="Person_Birth_Date_earliest">
@@ -284,8 +293,15 @@
                 [[> Death_Date_Earliest]],
                 [[> Death_Date_Latest]]
             ]'>
-            <semantic-form-autocomplete-input 
-                for="Death_Place">
+            <semantic-form-autocomplete-input for='Death_Place'
+                value-binding-name="subject"
+                lookup-query='{
+                    "type": "lookup",
+                    "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                    "limit": 20
+                    }'
+                template='{{> autocompletionTemplate}}'>
+                [[> autocompletionTemplate]]
             </semantic-form-autocomplete-input>
             <semantic-form-datetime-input 
                 for="Death_Date_Earliest">
@@ -303,7 +319,8 @@
               lookup-query='{
                 "type": "lookup",
                 "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-                "limit": 20
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
               }'
               template='{{> autocompletionTemplate}}'>
               [[> autocompletionTemplate]]
@@ -320,7 +337,8 @@
               lookup-query='{
                 "type": "lookup",
                 "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
-                "limit": 20
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
               }'
               template='{{> autocompletionTemplate}}'>
               [[> autocompletionTemplate]]
@@ -333,7 +351,8 @@
             value-binding-name="subject"
             lookup-query='{
               "type": "lookup",
-              "limit": 20
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
             }'>
         </semantic-form-autocomplete-input>
 
