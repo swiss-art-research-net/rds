@@ -10,11 +10,11 @@ Before using this script you should ensure you have 'sed' and 'docker' and 'jq' 
 ```
 export BLAZEGRAPH_ENDPOINT=http://rds-mph-blazegraph:8080/blazegraph/sparql
 
-./uploadAll.sh
+./updateAll.sh
 ```
 or
 ```
-BLAZEGRAPH_ENDPOINT=http://rds-mph-blazegraph:8080/blazegraph/sparql ./uploadAll.sh
+BLAZEGRAPH_ENDPOINT=http://rds-mph-blazegraph:8080/blazegraph/sparql ./updateAll.sh
 ```
 
 ## Import mappings
