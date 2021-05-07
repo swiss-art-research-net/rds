@@ -2,6 +2,8 @@ package net.swissartresearch.rds.lookup;
 
 import static org.eclipse.rdf4j.model.util.Values.iri;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,6 +46,10 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
     private static final Logger logger = LogManager.getLogger(AggregationLookupService.class);
     public static final String SAMEAS_CACHE_ID = "repository.AggregationLookupService.SameAsCache";
     public static final String DEFAULT_SAMEAS_PATTERN = "^owl:sameAs";
+    public static final int SCORE_REFERENCE_DIGITS = 2;
+    public static final int SAME_SCORE_REFERENCE_DIGITS = SCORE_REFERENCE_DIGITS + 4;
+    public static final int SCORE_SAME_AS_DIGITS = SAME_SCORE_REFERENCE_DIGITS + 4;
+    public static final double SCORE_SAME_AS_OFFSET = 1 / Math.pow(10, SCORE_SAME_AS_DIGITS);
 
     protected LookupServiceManager lookupServiceManager;
     protected RepositoryManagerInterface repositoryManager;
@@ -255,6 +261,7 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
         Set<String> aggregatedCandidateIds = new TreeSet<>();
         boolean filterSecondaryResults = config.isFilterSecondaryResults();
         // process in order of score
+        Map<Double, List<LookupCandidate>> sameScoreCandidates = new HashMap<>();
         for (LookupCandidate candidate : orderedCandidates) {
             String candidateId = candidate.getId();
             if (aggregatedCandidateIds.contains(candidateId)) {
@@ -265,6 +272,11 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
                 // ignore secondary results, they
                 // will be added below if desired
             } else {
+                double score = roundScore(candidate.getScore(), SCORE_REFERENCE_DIGITS);
+                List<LookupCandidate> sameScoreCandidateList = sameScoreCandidates.containsKey(score) ?
+                    sameScoreCandidates.get(score) : new ArrayList<>();
+                sameScoreCandidateList.add(candidate);
+                sameScoreCandidates.put(score, sameScoreCandidateList);
                 // add primary and independent entries to results
                 aggregatedCandidates.add(candidate);
                 aggregatedCandidateIds.add(candidateId);
@@ -290,7 +302,38 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
                 }
             }
         }
-        
+
+        /**
+         * Because of the fact that we order elements by the score parameter,
+         * we have to be sure that there is no candidates with the same score
+         * (only has matter for the simpleSearch component)
+         */
+        for (var entry : sameScoreCandidates.entrySet()) {
+            double score = entry.getKey();
+            List<LookupCandidate> candidates = entry.getValue();
+            
+            for (int i = 0; i < candidates.size(); i++) {
+                LookupCandidate candidate = candidates.get(i);
+                double scoreOffset = (candidates.size() - i + 1) / Math.pow(10, SAME_SCORE_REFERENCE_DIGITS);
+                candidate.setScore(score + scoreOffset);
+            }
+        }
+
+        /**
+         * Because of the fact that we order elements by the score parameter,
+         * we have to be sure that all secondary candidates have close score
+         * (only has matter for the simpleSearch component)
+         */
+        for (LookupCandidate sameAsCandidate : aggregatedCandidates) {
+            String reference = sameAsCandidate.getReference();
+            if (reference != null) {
+                LookupCandidate candidate = candidateMap.get(reference);
+                if (sameAsCandidate != candidate) {
+                    sameAsCandidate.setScore(candidate.getScore() - SCORE_SAME_AS_OFFSET);
+                }
+            }
+        }
+
         if (!filterSecondaryResults && (upstreamCandidates.size() != aggregatedCandidateIds.size())) {
             logger.debug("The number of lookup result after aggregation doesn't match: original: {}, aggregated: {}!",
                     upstreamCandidates.size(), aggregatedCandidateIds.size());
@@ -347,4 +390,11 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
         return sameAsMap;
     }
 
+    public static double roundScore(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 }
