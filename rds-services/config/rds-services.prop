@@ -12,6 +12,31 @@ WHERE { \
   ?workflow workflow:subject ?subject . \
   ?workflow workflow:currentState ?currentState . \
   ?currentState workflow:step ?currentStep . \
+  GRAPH ?context { \
+	?subject a ?subjectType . \
+  } \
+  BIND(IRI(STRBEFORE(STR(?context)\, "/context")) as ?container) \
+  ?container a <http://www.w3.org/ns/ldp#Resource> . \
+  <http://www.metaphacts.com/ontologies/platform#formContainer> <http://www.w3.org/ns/ldp#contains> ?container . \
+  GRAPH ?context { \
+	?s ?p ?o . \
+  } \
+  OPTIONAL { ?s a ?sType. } \
+  OPTIONAL { ?o a ?oType. } \
+  FILTER ( \
+    (!BOUND(?sType) || ?sType != <http://www.w3.org/ns/ldp#Resource> && ?sType != <http://www.w3.org/ns/prov#Entity>) && \
+    (!BOUND(?oType) || ?oType != <http://www.w3.org/ns/ldp#Resource> && ?oType != <http://www.w3.org/ns/prov#Entity>) \
+  ) \
+}
+pushQuery=PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> \
+PREFIX wf_steps: <http://schema.swissartresearch.net/step/> \
+CONSTRUCT { \
+	?s ?p ?o . \
+} \
+WHERE { \
+  ?workflow workflow:subject ?subject . \
+  ?workflow workflow:currentState ?currentState . \
+  ?currentState workflow:step ?currentStep . \
   ?currentState workflow:step <http://schema.swissartresearch.net/step/accepted> . \
   GRAPH ?context { \
 	?subject a ?subjectType . \

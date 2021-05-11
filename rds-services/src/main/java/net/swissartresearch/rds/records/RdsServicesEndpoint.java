@@ -189,7 +189,7 @@ public class RdsServicesEndpoint implements RestExtension {
         RDFFormat format = RDFFormat.TURTLE;
         try (Writer out = new FileWriter(tempFile)) {
             // export data
-            exportData(out, format, false);
+            exportGraph(out, format, false, this.getPushQuery());
         } catch (Exception e) {
             logger.warn("Failed to create local bufer for named graph in file {}: {}", tempFile.getPath(),
                     e.getMessage());
@@ -311,7 +311,7 @@ public class RdsServicesEndpoint implements RestExtension {
         File file = tempFilePath.toFile();
         try (Writer out = new FileWriter(file)) {
             // export data
-            exportData(out, rdfFormat, true);
+            exportGraph(out, rdfFormat, true, this.getExportQuery());
             ObjectStorage storage = this.platformStorage.getStorage(FILE_STORAGE_ID);
 
             FileInputStream inputStream = new FileInputStream(file);
@@ -368,9 +368,8 @@ public class RdsServicesEndpoint implements RestExtension {
         return resourceIri;
     }
 
-    protected void exportData(Writer out, RDFFormat format, boolean enrichData) {
-        String queryString = getExportQuery();
-        if (queryString == null) {
+    protected void exportGraph(Writer out, RDFFormat format, boolean enrichData, String graphQueryString) {
+        if (graphQueryString == null) {
             logger.warn("No export query provided!");
             throw new IllegalArgumentException("No export query provided!");
         }
@@ -378,11 +377,11 @@ public class RdsServicesEndpoint implements RestExtension {
         if (repositoryID == null) {
             repositoryID = RepositoryManager.DEFAULT_REPOSITORY_ID;
         }
-        logger.debug("Exporting data from repository {} using query {}", repositoryID, queryString);
+        logger.debug("Exporting data from repository {} using query {}", repositoryID, graphQueryString);
         // query and export data
         Repository repository = repositoryManagerInterface.getRepository(repositoryID);
         try (RepositoryConnection con = repository.getConnection()) {
-            GraphQuery graphQuery = SparqlOperationBuilder.<GraphQuery>create(queryString, GraphQuery.class)
+            GraphQuery graphQuery = SparqlOperationBuilder.<GraphQuery>create(graphQueryString, GraphQuery.class)
                 .resolveUser(namespaceRegistry.getUserIRI())
                 .build(con);
 
@@ -421,6 +420,13 @@ public class RdsServicesEndpoint implements RestExtension {
             return null;
         }
         return servicesConfig.getExportQuery();
+    }
+
+    protected String getPushQuery() {
+        if (servicesConfig == null) {
+            return null;
+        }
+        return servicesConfig.getPushQuery();
     }
 
     protected String getRemoteServiceUrl() {

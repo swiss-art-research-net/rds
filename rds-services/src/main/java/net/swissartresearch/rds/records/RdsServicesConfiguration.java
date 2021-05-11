@@ -64,9 +64,14 @@ public class RdsServicesConfiguration extends ConfigurationExtension {
         return getString("localRepository");
     }
 
-    @ConfigurationParameter(name = "exportQuery", restartRequired = false, desc = "SPARQL CONSTRUCT query which returns the RDF statements to be pushed")
+    @ConfigurationParameter(name = "exportQuery", restartRequired = false, desc = "SPARQL CONSTRUCT query which returns the RDF statements to be exported")
     public String getExportQuery() {
         return getString("exportQuery");
+    }
+
+    @ConfigurationParameter(name = "pushQuery", restartRequired = false, desc = "SPARQL CONSTRUCT query which returns the RDF statements to be pushed")
+    public String getPushQuery() {
+        return getString("pushQuery");
     }
 
     @Override
