@@ -29,6 +29,9 @@ To change mappings update `./manual-preparation/type-mapping.ttl` and then reimp
 # Dataset labels and images
 To assign dataset metadata to datasets via SPARQL execute the `INSERT` query from `./manual-preparation/dataset-metadata.sparql` or upload the file `./data-preparation/_datasetsMetadata.ttl` into your database.
 
+# Workflow definitions for RDS-L
+For the **rds-local** you will need also upload `./example-workflow-container.trig` and `example-workflow-definition.trig` as ldp resource to the platform (use interface on the following page: [example on the rds-mph](https://rds-local-mph.swissartresearch.net/resource/Platform:rootContainer?repository=assets). RDS-L configuration and documentation which describes how to deploy the service is stored here: https://github.com/swiss-art-research-net/rds-local. In case you use rds-local-demo application files `./example-workflow-container.trig` and `example-workflow-definition.trig`should be bootstrapped automatically as ldp resources.
+
 # Grouping feature
 Some Search components support grouping related elements from different datasets. This feature is implemented based on the `same-as` information which is contained in a dedicated namedGraph. 
 
