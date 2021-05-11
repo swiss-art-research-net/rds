@@ -16,6 +16,16 @@ const WRITING_STRING_SIZE = 1000000;
 
 const db = levelup(leveldown('./processing_db'))
 
+// Script work the following way
+// We go by triples, expecting that dataset has only relation triples. All Iris we put in the
+// map stored in the local database
+// For each IRI we create (and put in the map) a list of same as elements.
+// For IRIs from the same sameAs group these lists will be the same.
+// Then we just serialize this map into the ttl, where reference iris for the groups
+// are the first elements from the lists
+// If you want to introduce the custom order you have to change the merging function
+// And make script expect triples with types (not only relation triples as it implemented now)
+
 function getQuadSets(quad) {
     return Promise.all([
         db.get(quad.subject.value).then(string => JSON.parse(string)).catch(() => undefined),
@@ -28,6 +38,9 @@ function getQuadSets(quad) {
     });
 }
 
+// Merges two sameAs lists, then save it to DB
+// Here you can introduce some ordering
+// or implement the ordering before saving to the file
 function mergeSetsAndSaveToDb(fetchedValues) {
     let subjectSet = fetchedValues.subjectSet.set;
     let subjectIri = fetchedValues.subjectSet.iri;
@@ -37,11 +50,7 @@ function mergeSetsAndSaveToDb(fetchedValues) {
     let mergedSet;
     if (subjectSet && objectSet) {
         if (subjectSet[0] !== objectSet[0]) {
-            if (subjectSet.rating > objectSet.rating) {
-                mergedSet = subjectSet.concat(objectSet);
-            } else {
-                mergedSet = objectSet.concat(subjectSet);
-            }
+            mergedSet = objectSet.concat(subjectSet);
         } else {
             mergedSet = subjectSet;
         }
@@ -59,6 +68,8 @@ function mergeSetsAndSaveToDb(fetchedValues) {
     return db.batch(tasks);
 }
 
+// In the first cycle of processing we just parse each file without processing
+// To show errors first without waiting long time
 function checkFile(filePath) {
     // Class
     function Checker(onEnd) {
@@ -77,6 +88,7 @@ function checkFile(filePath) {
     })
 }
 
+// This function is called for each file - parse it, and store to the map
 function processFile(filePath) {
     // Class
     function Processor(onEnd) {
@@ -128,6 +140,7 @@ function processFile(filePath) {
     })
 }
 
+// Stores results to ttl
 function storeToTtl() {
     const createWriter = () => {
         return new N3.Writer({
@@ -155,6 +168,8 @@ function storeToTtl() {
             console.log(`Writing to ${fileId} completed!`);
         });
     };
+
+    // start reading map
     const readStream = db.createReadStream();
         
     let resultIndex = 0;
@@ -176,6 +191,8 @@ function storeToTtl() {
         }
         const key = String.fromCharCode.apply(null, data.key);
         const sameAsSet = JSON.parse(data.value);
+        // Here we get the first element of the list and put as a reference
+        // You can introduce ordering here
         const reference = namedNode(sameAsSet[0]);
         if (key !== sameAsSet[0]) {
             return;
