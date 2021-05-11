@@ -235,6 +235,7 @@
        "range" : [ ], "label" : "Person Gender",
        "insertPattern" : "INSERT {
             ?subject crm:P2_has_type ?value.
+            ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>.
         } WHERE { }",
        "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
        "domain" : [ ],
