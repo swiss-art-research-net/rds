@@ -4,18 +4,7 @@ import static org.eclipse.rdf4j.model.util.Values.iri;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -246,6 +235,7 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
         
         // set of all primary ids
         Set<String> primaryCandidateIds = sameAsMap.keySet();
+        Set<LookupCandidate> primaryCandidates = new HashSet<>();
         // set of all secondary ids
         Set<String> secondaryCandidateIds = sameAsMap.values().stream().flatMap(sameAs -> sameAs.getSameAsIDs().stream()).collect(Collectors.toSet());
         secondaryCandidateIds.removeAll(primaryCandidateIds);
@@ -261,7 +251,6 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
         Set<String> aggregatedCandidateIds = new TreeSet<>();
         boolean filterSecondaryResults = config.isFilterSecondaryResults();
         // process in order of score
-        Map<Double, List<LookupCandidate>> sameScoreCandidates = new HashMap<>();
         for (LookupCandidate candidate : orderedCandidates) {
             String candidateId = candidate.getId();
             if (aggregatedCandidateIds.contains(candidateId)) {
@@ -272,11 +261,7 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
                 // ignore secondary results, they
                 // will be added below if desired
             } else {
-                double score = roundScore(candidate.getScore(), SCORE_REFERENCE_DIGITS);
-                List<LookupCandidate> sameScoreCandidateList = sameScoreCandidates.containsKey(score) ?
-                    sameScoreCandidates.get(score) : new ArrayList<>();
-                sameScoreCandidateList.add(candidate);
-                sameScoreCandidates.put(score, sameScoreCandidateList);
+                primaryCandidates.add(candidate);
                 // add primary and independent entries to results
                 aggregatedCandidates.add(candidate);
                 aggregatedCandidateIds.add(candidateId);
@@ -295,6 +280,7 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
                     // find corresponding candidate and add it
                     LookupCandidate sameAsCandidate = candidateMap.get(sameAsId);
                     if (sameAsCandidate != null) {
+                        candidate.setScore(Math.max(candidate.getScore(), sameAsCandidate.getScore()));
                         sameAsCandidate.setReference(candidateId);
                         aggregatedCandidates.add(sameAsCandidate);
                         aggregatedCandidateIds.add(sameAsId);
@@ -303,6 +289,16 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
             }
         }
 
+        // Collect candidates of the same score
+        Map<Double, List<LookupCandidate>> sameScoreCandidates = new HashMap<>();
+        for (LookupCandidate candidate : orderedCandidates) {
+            double score = roundScore(candidate.getScore(), SCORE_REFERENCE_DIGITS);
+            List<LookupCandidate> sameScoreCandidateList = sameScoreCandidates.containsKey(score) ?
+                    sameScoreCandidates.get(score) : new ArrayList<>();
+            sameScoreCandidateList.add(candidate);
+            sameScoreCandidates.put(score, sameScoreCandidateList);
+        }
+        
         /**
          * Because of the fact that we order elements by the score parameter,
          * we have to be sure that there is no candidates with the same score
@@ -314,7 +310,7 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
             
             for (int i = 0; i < candidates.size(); i++) {
                 LookupCandidate candidate = candidates.get(i);
-                double scoreOffset = (candidates.size() - i + 1) / Math.pow(10, SAME_SCORE_REFERENCE_DIGITS);
+                double scoreOffset = (candidates.size() - (i + 1)) / Math.pow(10, SAME_SCORE_REFERENCE_DIGITS);
                 candidate.setScore(score + scoreOffset);
             }
         }
