@@ -144,7 +144,7 @@ if (( VIAF_PARTS_COUNT == 0 )); then
       {SELECT ?candidate ?sameAsID WHERE {
           ?candidate wdt:P214 ?sameAsID .
       }}
-      FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+      FILTER (!(REGEX(?sameAsID, "[\", ]", "i")))
       BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
   }' ./data/wikidataSameAsVIAF.ttl
 else
@@ -164,7 +164,7 @@ else
       {SELECT ?candidate ?sameAsID WHERE {
           ?candidate wdt:P214 ?sameAsID .
       }$OFFSET_STR LIMIT $VIAF_RESULTS_IN_PART}
-      FILTER (!(REGEX(?sameAsID, \"\\\"\", \"i\") || REGEX(?sameAsID, \" \", \"i\") || REGEX(?sameAsID, \",\", \"i\")))
+      FILTER (!(REGEX(?sameAsID, \"[\\\", ]\", \"i\")))
       BIND (IRI(CONCAT(\"http://viaf.org/viaf/\", ?sameAsID)) as ?sameAs)
     }" ./data/wikidataSameAsVIAF-$n.ttl
   done
@@ -177,7 +177,7 @@ CONSTRUCT {
     ?candidate owl:sameAs ?sameAs .
 } WHERE {
   ?candidate wdt:P227 ?sameAsID .
-  FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+  FILTER (!(REGEX(?sameAsID, "[\", ]", "i")))
   BIND (IRI(CONCAT("https://d-nb.info/gnd/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataGNDSameAs.ttl
 
@@ -188,7 +188,7 @@ CONSTRUCT {
     ?candidate owl:sameAs ?sameAs .
 } WHERE {
   ?candidate wdt:P268 ?sameAsID .
-  FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+  FILTER (!(REGEX(?sameAsID, "[\", ]", "i")))
   BIND (IRI(CONCAT("http://data.bnf.fr/ark:/12148/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataBNFSameAs.ttl
 
@@ -205,7 +205,7 @@ if (( LOC_PARTS_COUNT == 0 )); then
       ?candidate owl:sameAs ?sameAs .
   } WHERE {
     ?candidate wdt:P244 ?sameAsID .
-    FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+    FILTER (!(REGEX(?sameAsID, "[\", ]", "i")))
     BIND (IRI(CONCAT("http://id.loc.gov/authorities/names/", ?sameAsID)) as ?sameAs)
   }' ./data/wikidataLOCSameAs.ttl
 else
@@ -225,7 +225,7 @@ else
       {SELECT ?candidate ?sameAsID WHERE {
         ?candidate wdt:P244 ?sameAsID .
       }$OFFSET_STR LIMIT $LOC_RESULTS_IN_PART}
-      FILTER (!(REGEX(?sameAsID, \"\\\"\", \"i\") || REGEX(?sameAsID, \" \", \"i\") || REGEX(?sameAsID, \",\", \"i\")))
+      FILTER (!(REGEX(?sameAsID, \"[\\\", ]\", \"i\")))
       BIND (IRI(CONCAT(\"http://id.loc.gov/authorities/names/\", ?sameAsID)) as ?sameAs)
     }" ./data/wikidataLOCSameAs-${n}.ttl
   done
@@ -238,6 +238,6 @@ CONSTRUCT {
     ?candidate owl:sameAs ?sameAs .
 } WHERE {
   ?candidate wdt:P245 ?sameAsID .
-  FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+  FILTER (!(REGEX(?sameAsID, "[\", ]", "i")))
   BIND (IRI(CONCAT("http://vocab.getty.edu/ulan/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataUlanSameAs.ttl
