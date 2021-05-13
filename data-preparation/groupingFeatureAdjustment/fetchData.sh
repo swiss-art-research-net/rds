@@ -131,88 +131,44 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
 # ==============================================================
 
 # Wikidata VIAF-1
-fetchData "Wikidata VIAF-1" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_1.ttl
-
-# Wikidata VIAF-2
-fetchData "Wikidata VIAF-2" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } OFFSET 500000 LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_2.ttl
-
-# Wikidata VIAF-3
-fetchData "Wikidata VIAF-3" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } OFFSET 1000000 LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_3.ttl
-
-# Wikidata VIAF-4
-fetchData "Wikidata VIAF-4" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } OFFSET 1500000 LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_4.ttl
-
-# Wikidata VIAF-5
-fetchData "Wikidata VIAF-5" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } OFFSET 2000000 LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_5.ttl
-
-# Wikidata VIAF-6
-fetchData "Wikidata VIAF-6" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } OFFSET 2500000 LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_6.ttl
-
-# Wikidata VIAF-7
-fetchData "Wikidata VIAF-7" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-    {SELECT ?candidate ?sameAsID WHERE {
-        ?candidate wdt:P214 ?sameAsID .
-    } OFFSET 3000000 LIMIT 500000}
-    BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataSameAsVIAF_7.ttl
+# you can add ORDER BY ?candidate ?sameAsID - it should the right decision but
+# in this case the queries never be completed
+VIAF_PARTS_COUNT=14
+VIAF_RESULTS_IN_PART=200000
+if (( VIAF_PARTS_COUNT == 0 )); then
+  fetchData "Wikidata VIAF" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  CONSTRUCT {
+      ?candidate owl:sameAs ?sameAs .
+  } WHERE {
+      {SELECT ?candidate ?sameAsID WHERE {
+          ?candidate wdt:P214 ?sameAsID .
+      }}
+      FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+      BIND (IRI(CONCAT("http://viaf.org/viaf/", ?sameAsID)) as ?sameAs)
+  }' ./data/wikidataSameAsVIAF.ttl
+else
+  for ((n=0; n<=VIAF_PARTS_COUNT; n++)) do
+    OFFSET=$((n * VIAF_RESULTS_IN_PART))
+    if (( n==0 )); then
+      OFFSET_STR=""
+    else
+      OFFSET_STR=" OFFSET $OFFSET"
+    fi
+    echo "Fetching part $n of $VIAF_PARTS_COUNT"
+    fetchData "Wikidata VIAF-${n}" ${WIKIDATA_ENDPOINT} "PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+    CONSTRUCT {
+        ?candidate owl:sameAs ?sameAs .
+    } WHERE {
+      {SELECT ?candidate ?sameAsID WHERE {
+          ?candidate wdt:P214 ?sameAsID .
+      }$OFFSET_STR LIMIT $VIAF_RESULTS_IN_PART}
+      FILTER (!(REGEX(?sameAsID, \"\\\"\", \"i\") || REGEX(?sameAsID, \" \", \"i\") || REGEX(?sameAsID, \",\", \"i\")))
+      BIND (IRI(CONCAT(\"http://viaf.org/viaf/\", ?sameAsID)) as ?sameAs)
+    }" ./data/wikidataSameAsVIAF-$n.ttl
+  done
+fi
 
 # Wikidata GND
 fetchData "Wikidata GND" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -221,6 +177,7 @@ CONSTRUCT {
     ?candidate owl:sameAs ?sameAs .
 } WHERE {
   ?candidate wdt:P227 ?sameAsID .
+  FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
   BIND (IRI(CONCAT("https://d-nb.info/gnd/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataGNDSameAs.ttl
 
@@ -231,18 +188,48 @@ CONSTRUCT {
     ?candidate owl:sameAs ?sameAs .
 } WHERE {
   ?candidate wdt:P268 ?sameAsID .
+  FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
   BIND (IRI(CONCAT("http://data.bnf.fr/ark:/12148/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataBNFSameAs.ttl
 
 # Wikidata LOC
-fetchData "Wikidata LOC" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-CONSTRUCT {
-    ?candidate owl:sameAs ?sameAs .
-} WHERE {
-  ?candidate wdt:P244 ?sameAsID .
-  BIND (IRI(CONCAT("http://id.loc.gov/authorities/names/", ?sameAsID)) as ?sameAs)
-}' ./data/wikidataLOCSameAs.ttl
+# you can add ORDER BY ?candidate ?sameAsID - it should the right decision but
+# in this case the queries never be completed
+echo "Wikidata LOC feetching..."
+LOC_PARTS_COUNT=7
+LOC_RESULTS_IN_PART=200000
+if (( LOC_PARTS_COUNT == 0 )); then
+  fetchData "Wikidata LOC" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  CONSTRUCT {
+      ?candidate owl:sameAs ?sameAs .
+  } WHERE {
+    ?candidate wdt:P244 ?sameAsID .
+    FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
+    BIND (IRI(CONCAT("http://id.loc.gov/authorities/names/", ?sameAsID)) as ?sameAs)
+  }' ./data/wikidataLOCSameAs.ttl
+else
+  for ((n=0; n<=LOC_PARTS_COUNT; n++)) do
+    OFFSET=$((n * LOC_RESULTS_IN_PART))
+    if (( n==0 )); then
+      OFFSET_STR=""
+    else
+      OFFSET_STR=" OFFSET $OFFSET"
+    fi
+    echo "Fetching part $n of $LOC_PARTS_COUNT"
+    fetchData "Wikidata LOC-${n}" ${WIKIDATA_ENDPOINT} "PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+    CONSTRUCT {
+        ?candidate owl:sameAs ?sameAs .
+    } WHERE {
+      {SELECT ?candidate ?sameAsID WHERE {
+        ?candidate wdt:P244 ?sameAsID .
+      }$OFFSET_STR LIMIT $LOC_RESULTS_IN_PART}
+      FILTER (!(REGEX(?sameAsID, \"\\\"\", \"i\") || REGEX(?sameAsID, \" \", \"i\") || REGEX(?sameAsID, \",\", \"i\")))
+      BIND (IRI(CONCAT(\"http://id.loc.gov/authorities/names/\", ?sameAsID)) as ?sameAs)
+    }" ./data/wikidataLOCSameAs-${n}.ttl
+  done
+fi
 
 # Wikidata ULAN
 fetchData "Wikidata ULAN" ${WIKIDATA_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -251,5 +238,6 @@ CONSTRUCT {
     ?candidate owl:sameAs ?sameAs .
 } WHERE {
   ?candidate wdt:P245 ?sameAsID .
+  FILTER (!(REGEX(?sameAsID, "\"", "i") || REGEX(?sameAsID, " ", "i") || REGEX(?sameAsID, ",", "i")))
   BIND (IRI(CONCAT("http://vocab.getty.edu/ulan/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataUlanSameAs.ttl
