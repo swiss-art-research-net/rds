@@ -35,7 +35,7 @@ Some Search components support grouping related elements from different datasets
 To prepare this graph and get the benefits from this feature you have to prepare this data manually using this guide. Use this guide after all datasets have been uploaded into the main data repository. All `same-as` information will be compiled from the main set of the data.
 
 Compiling `same-as` information is performed using the following steps:
-1. Navigate to the folder `./manual-preparation/groupingFeatureAdjustment/`.
+1. Navigate to the folder `./groupingFeatureAdjustment/`.
 2. Find script `start.sh` and set values of the environment variables `BLAZEGRAPH_ENDPOINT` and `WIKIDATA_ENDPOINT`:
 ```
 export BLAZEGRAPH_ENDPOINT="https://rds-qa.swissartresearch.net/sparql"
