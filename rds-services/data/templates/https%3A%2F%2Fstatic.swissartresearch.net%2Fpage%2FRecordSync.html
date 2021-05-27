@@ -115,7 +115,7 @@
             BIND (IF(BOUND(?_readyToDownload), true, false) as ?readyToDownloadState)
           } GROUP BY ?file ORDER BY ?timeModified
         '
-                no-result-template='There is no exported files'
+                no-result-template='There are no exported files'
                 column-configuration='[
           {"variableName": "file", "displayName": "Result" },
           {"variableName": "timeModified", "displayName": "Modified"},

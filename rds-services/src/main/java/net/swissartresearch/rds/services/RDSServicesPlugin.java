@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.pf4j.Plugin;
 import org.pf4j.PluginWrapper;
 
+import com.google.inject.Injector;
 import com.metaphacts.config.Configuration;
 import com.metaphacts.config.InvalidConfigurationException;
 import com.metaphacts.lookup.impl.LookupServiceRegistry;
@@ -20,6 +21,7 @@ public class RDSServicesPlugin extends Plugin {
 
     protected Configuration configuration;
     protected PlatformStorage platformStorage;
+    protected Injector injector;
 
     public RDSServicesPlugin(PluginWrapper wrapper) {
         super(wrapper);
@@ -35,6 +37,11 @@ public class RDSServicesPlugin extends Plugin {
         this.platformStorage = platformStorage;
     }
 
+    @Inject
+    public void setInjector(Injector injector) {
+        this.injector = injector;
+    }
+
     @Override
     public void start() {
         logger.debug("Starting plugin");
@@ -48,6 +55,8 @@ public class RDSServicesPlugin extends Plugin {
                 // config class will not be loaded properly.
                 // As a workaround we explicitly create and register the configuration here.
                 RdsServicesConfiguration pushConfig = new RdsServicesConfiguration(platformStorage);
+                // ensure all dependencies are provided
+                injector.injectMembers(pushConfig);
 
                 configuration.registerCustomConfigurationGroup(pushConfig);
             } catch (InvalidConfigurationException e) {
