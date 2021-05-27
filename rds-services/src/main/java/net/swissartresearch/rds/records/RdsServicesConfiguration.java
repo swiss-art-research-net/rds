@@ -55,8 +55,8 @@ public class RdsServicesConfiguration extends ConfigurationExtension {
     }
 
     @ConfigurationParameter(name = "pushTargetGraphName", restartRequired = false, desc = "Fully-qualified IRI of the named graph to push records to (without enclosing <>).")
-    public String getPushTargetNamedGraphIRI() {
-        return getString("pushTargetNamedGraphIRI");
+    public String getPushTargetGraphName() {
+        return getString("pushTargetGraphName");
     }
 
     @ConfigurationParameter(name = "localRepository", restartRequired = false, desc = "Name of the local repository from which to export data. If unset the default repository is used.")
