@@ -40,7 +40,7 @@ cd ${DATA_DIRECTORY}
 docker stop converting-geonames || true && docker rm converting-geonames || true
 echo "Running a container with the python script"
 docker run -it -v /$(pwd):/usr/src/convertingScriptFolder/ --name converting-geonames rds/converting-geonames:1.0
-split -l 956067 -—additional-suffix '.part.nt' ./geonames.nt
+split -l 956067 --additional-suffix '.part.nt' ./geonames.nt
 # gsplit -l 956067 --additional-suffix '.part.nt' ./geonames.nt # For MacOs
 cd ${SCRIPT_DIR}
 
