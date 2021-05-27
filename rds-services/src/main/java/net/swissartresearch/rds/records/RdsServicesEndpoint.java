@@ -454,7 +454,7 @@ public class RdsServicesEndpoint implements RestExtension {
         if (servicesConfig == null) {
             return null;
         }
-        return servicesConfig.getPushTargetNamedGraphIRI();
+        return servicesConfig.getPushTargetGraphName();
     }
 
     protected String getRemoteRepository() {
