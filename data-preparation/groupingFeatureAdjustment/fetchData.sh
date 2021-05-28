@@ -10,10 +10,13 @@ if [ -z "${WIKIDATA_ENDPOINT}" ]; then
     WIKIDATA_ENDPOINT="https://query.wikidata.org/sparql"
 fi
 
+DOWNLOAD_ATTEMPTS_NUMBER=5
+
 function xfetchData() {
   local dataset="$1"
   echo >&2 "Skipped fetching of dataset $dataset: ignore"
 }
+
 function fetchData() {
   local dataset="$1"
   local endpoint="$2"
@@ -26,13 +29,27 @@ function fetchData() {
   fi
 
   echo >&2 "Fetching dataset $dataset..."
-  curl --location --request POST "$endpoint" \
-    --header 'Content-Type: application/x-www-form-urlencoded' \
-    --header 'Accept: text/turtle' \
-    --data-urlencode "query=$query" > "$outputFile"
-  local rc=$?
+  for ((i=1; i<=DOWNLOAD_ATTEMPTS_NUMBER; i++)) do
+    if [ -f "$outputFile" ]; then
+      # do nothing
+      echo ""
+    else
+      echo "Try $i of $DOWNLOAD_ATTEMPTS_NUMBER"
+      curl --location --request POST "$endpoint" \
+        --header 'Content-Type: application/x-www-form-urlencoded' \
+        --header 'Accept: text/turtle' \
+        --data-urlencode "query=$query" > "$outputFile"
+      local rc=$?
+
+      if [ $rc -ne 0 ]; then
+        echo >&2 "Failed to fetch dataset $dataset: curl returned $rc"
+        rm $outputFile
+      fi
+    fi
+  done
   if [ $rc -ne 0 ]; then
     echo >&2 "Failed to fetch dataset $dataset: curl returned $rc"
+    rm $outputFile
     return $rc
   fi
 }
