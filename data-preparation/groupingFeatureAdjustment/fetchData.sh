@@ -11,6 +11,8 @@ if [ -z "${WIKIDATA_ENDPOINT}" ]; then
 fi
 
 DOWNLOAD_ATTEMPTS_NUMBER=5
+CONNECT_TIMEOUT=10
+MAX_TIME=1200
 
 function xfetchData() {
   local dataset="$1"
@@ -30,12 +32,9 @@ function fetchData() {
 
   echo >&2 "Fetching dataset $dataset..."
   for ((i=1; i<=DOWNLOAD_ATTEMPTS_NUMBER; i++)) do
-    if [ -f "$outputFile" ]; then
-      # do nothing
-      echo ""
-    else
+    if [[ ! -f $outputFile ]]; then
       echo "Try $i of $DOWNLOAD_ATTEMPTS_NUMBER"
-      curl --location --request POST "$endpoint" \
+      curl --location --connect-timeout $CONNECT_TIMEOUT --max-time $MAX_TIME --request POST "$endpoint" \
         --header 'Content-Type: application/x-www-form-urlencoded' \
         --header 'Accept: text/turtle' \
         --data-urlencode "query=$query" > "$outputFile"
