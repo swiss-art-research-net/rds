@@ -1,0 +1,61 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">Administration</li>
+</ol>
+
+
+<div class="page">
+  <div class="page__header">
+    <div class='page__header-thumbnail'>
+      <h2><i class="fa fa-cog fa-2x"></i></h2>
+    </div>
+    <div class='page__header-body'>
+      <h2>Administration</h2>
+      <span>You are in the Administration space. Here you find the items that define very core and important aspects of the platform such as security rules, user permissions, data storage, namespaces, etc.</span>
+    </div>
+  </div>
+  <div class='page__body'>
+    [[>Admin:IconPanelInclude title="Data Import & Export" faIcon="fa fa-cloud-upload fa-5x" pageLink=(resolvePrefix "Admin:DataImportExport")]]
+
+    [[>Admin:Extensions]]
+
+    [[>Admin:IconPanelInclude title="LDP" faIcon="fa fa-archive fa-5x" pageLink="http://www.metaphacts.com/ontologies/platform#rootContainer" assets="true"]]
+		<div style="clear:both;"></div>
+    <hr>
+    
+    [[>Admin:IconPanelInclude title="System Settings" faIcon="fa fa-cogs fa-5x" pageLink=(resolvePrefix "Admin:Configuration")]]
+
+    [[>Admin:IconPanelInclude title="Security" faIcon="fa fa-users fa-5x" pageLink=(resolvePrefix "Admin:Security")]]
+
+		[[>Admin:IconPanelInclude title="Template & Application Pages" faIcon="fa fa-file-text-o fa-5x" pageLink=(resolvePrefix "Admin:Templates")]]
+
+		[[>Admin:IconPanelInclude title="RDF Namespace Prefixes" faIcon="fa fa-code fa-5x" pageLink=(resolvePrefix "Admin:Namespaces")]]
+
+    [[>Admin:IconPanelInclude title="Repositories" faIcon="fa fa-database fa-5x" pageLink=(resolvePrefix "Admin:Repositories")]]
+    
+		[[>Admin:IconPanelInclude title="Cache Invalidation" faIcon="fa fa-history fa-5x" pageLink=(resolvePrefix "Admin:CacheInvalidation")]]
+    
+		[[>Admin:IconPanelInclude title="Apps & Storages" faIcon="fa fa-th-large fa-5x" pageLink=(resolvePrefix "Admin:Apps")]]
+    
+		[[>Admin:IconPanelInclude title="File Upload" faIcon="fa fa-upload fa-5x" pageLink=(resolvePrefix "Admin:FileUpload")]]
+		
+    [[>Admin:IconPanelInclude title="Logs" faIcon="fa fa-medkit fa-5x" pageLink=(resolvePrefix "Admin:Logs")]]
+    
+    [[>Admin:IconPanelInclude title="System Management" faIcon="fa fa-heartbeat fa-5x" pageLink=(resolvePrefix "Admin:System")]]
+    
+    [[>Admin:IconPanelInclude title="API" faIcon="fa fa-plug fa-5x" pageLink=(resolvePrefix "Admin:Api")]]
+    
+    <mp-resource-link title="Read more host" iri="[[resolvePrefix "rdsParts:rdsGlobalHostUrl"]]" urlqueryparam-action="edit">
+      <div class="text-center card admin-icon-panel">
+          <div class="card-body text-color">
+            <span class="fa fa-plug fa-5x" style='color: green'></span>
+          </div>
+          <div class="card-footer" style="position: relative">
+            RDS-G host for templates
+          </div>
+      </div>
+    </mp-resource-link>
+  </div>
+</div>
