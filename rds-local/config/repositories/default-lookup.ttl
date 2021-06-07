@@ -32,12 +32,22 @@
         }
       """;
       lookup:searchBlockTemplate """
-        ?candidate a ?type .
         ?candidate (
           crm:P1_is_identified_by / rdfs:label |
           rdfs:label |
           ecrm:P128_carries / ecrm:P102_has_title / ecrm:P3_has_note
-        ) ?key .  
+        ) ?key .
+    
+      	?candidate a ?type .
+        FILTER EXISTS {
+          GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
+            {
+                ?type rdfs:subClassOf ?anyClass.
+            } UNION {
+                ?anyClass rdfs:subClassOf ?type .
+            }
+          }
+        }
 
         SERVICE <http://www.bigdata.com/rdf/search#search> {
             ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
@@ -47,11 +57,16 @@
         }
       """;
       lookup:typeBlockTemplate """
-      FILTER EXISTS {
-        GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
-          ?targetType rdfs:subClassOf? ?__type__.
+        FILTER EXISTS {
+          GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
+          	?targetType rdfs:subClassOf? ?__type__.
+    				{
+                ?targetType rdfs:subClassOf ?__type__
+            } UNION {
+                ?anyClass rdfs:subClassOf ?targetType .
+            }
+          }
+          ?candidate a ?targetType.
         }
-        ?candidate a ?targetType.
-      }
     """
     ] .

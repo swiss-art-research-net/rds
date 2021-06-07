@@ -45,6 +45,15 @@
     }
 } UNION {
     ?candidate a ?type.
+    FILTER EXISTS {
+    	GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
+        {
+        	?type rdfs:subClassOf ?anyClass.
+        } UNION {
+        	?anyClass rdfs:subClassOf ?type .
+        }
+    	}
+    }
     VALUES (?graph) {
       (<http://vocab.getty.edu/ulan/graph>)
       (<http://vocab.getty.edu/aat/graph>)
@@ -88,11 +97,15 @@
 }
     """;
       lookup:typeBlockTemplate """
-      FILTER EXISTS {
-        GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
-          ?targetType rdfs:subClassOf? ?__type__.
+        FILTER EXISTS {
+          GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
+            {
+                ?targetType rdfs:subClassOf ?__type__.
+            } UNION {
+                ?anyClass rdfs:subClassOf ?targetType
+            }
+          }
+          ?candidate a ?targetType.
         }
-        ?candidate a ?targetType.
-      }
     """
     ] .
