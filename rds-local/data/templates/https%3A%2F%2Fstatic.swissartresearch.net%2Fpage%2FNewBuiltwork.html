@@ -1,0 +1,333 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+
+[[#if (hasPermission "forms:ldp:*")]]
+  <div class="page">
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        [[#if edit]]
+          [[> edit-built-work-form]]
+        [[else]]
+          {{#if hideSearch}}{{else}}
+            [[> search-for-existing]]
+          {{/if}}
+          {{#if newBuiltwork}}
+            [[> edit-built-work-form]]
+          {{/if}}
+        [[/if]]
+      </template>
+    </mp-event-target-template-render>
+  </div>
+[[/if]]
+
+[[#*inline "search-for-existing"]]
+<div class='row' style='max-width: 100%;'>
+  <div class="col-md-8 offset-md-2" style="margin-bottom: 20px; margin-top: 100px">
+    <h2>Creation of a new built-work</h2>
+    <p>
+      Before creating a new built-work, please type in the name to check if such built-work already exists on RDF-Global or locally. If you'd like to create an instance of the existing built-work locally, press the "link" button next to the relevant match in the table below.
+    </p>
+    <semantic-search limit=1000>
+      <div style="margin-bottom: 10px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-built-work-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-built-work-template">
+                
+              </template>
+              <template id="tuple-template">
+                <div class="text-center">
+                  This built-work already exists, do you still want to create a new built-work?
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newBuiltwork": true, "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Create new built-work</button>
+                  </mp-event-trigger>
+                </div>
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
+
+      <semantic-search-keyword-prefetch
+        query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#BuiltWork", "lookupServiceName": "federated-lookup" }'
+        placeholder='Input the name of the built-work you want to create'>
+      </semantic-search-keyword-prefetch>
+
+      <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+        <div style='max-width: 90vw'>
+          <semantic-search-result-holder>
+            <semantic-search-result>
+              <semantic-table
+                id='table'
+                options='{"showFilter": false}' 
+                query='SELECT * WHERE { } ORDER BY DESC(?score)'
+                number-of-displayed-rows=10
+                no-result-template='No existing built-works with this name'
+                column-configuration='[
+                    {"variableName": "subject", "displayName": "Existing built-works with provided name", "cellTemplate": "{{> link-to-subject}}" },
+                    {"variableName": "description", "displayName": "Description" },
+                    {"variableName": "type", "displayName": "Type" },
+                    {"variableName": "datasetLabel", "displayName": "Dataset", "cellTemplate": "{{> dataset-label}}" },
+                    {"variableName": "action", "displayName": "action", "cellTemplate": "{{> create-button}}"  }
+                ]'>
+                <template id="dataset-label">
+                  {{datasetLabel.value}}
+                </template>
+                <template id="link-to-subject">
+                  <semantic-query
+                    query='SELECT * WHERE { {{subject}} a ?type }'
+                    template='<semantic-link iri={{subject.value}}></semantic-link>'
+                    no-result-template='<semantic-link iri="[[resolvePrefix "rdsPages:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                  </semantic-query>
+                </template>
+                <template id="create-button">
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newBuiltwork": true, "sameAs": "{{subject.value}}", "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Link</button>
+                  </mp-event-trigger>
+                </template>
+              </semantic-table>
+            </semantic-search-result>
+          </semantic-search-result-holder>
+        </div>
+      </div>
+
+      <div style="margin: 5px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-built-work-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-built-work-template">
+                <mp-event-trigger
+                  id='event-trigger-de'
+                  type='Component.TemplateUpdate'
+                  data='{"newBuiltwork": true, "hideSearch": true}'
+                  targets='["event-target"]'>
+                  <button class='btn btn-primary'>Create new built-work</button>
+                </mp-event-trigger>
+              </template>
+              <template id="tuple-template">
+                
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
+    </semantic-search>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "edit-built-work-form"]]
+[[#if edit]]
+<div class='row'>
+  <div class="offset-md-4 col-md-4">
+    <mp-workflow-manager
+      iris='[[jsonArrayFromSelect "SELECT ?workflow WHERE { ?workflow <http://www.metaphacts.com/ontologies/platform/workflow#subject> ?? . }" ]]'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      readonly=[[> cant-edit-workflow]]>
+    </mp-workflow-manager>
+  </div>
+</div>
+[[/if]]
+<div class='row'>
+  <div class="text-center col-md-2">
+    <br>
+    <font size="+2">
+        [[#if edit]]
+          Edit <b><mp-label iri='[[this]]'></mp-label></b>
+        [[else]]
+          Add a new <b>Builtwork</b>
+        [[/if]]
+    </font>
+    <br>
+    <img src="http://www.iconarchive.com/download/i91910/icons8/windows-8/Travel-Us-Capitol.ico" width="50%">
+  </div>
+  <div class="col-md-8" style="margin-bottom: 100px">
+    <semantic-form  new-subject-template='http://grp.swissartresearch.net/work/{{UUID}}'
+                    post-action='redirect'
+                    browser-persistence=true
+                    form-id='example-1'
+                    fields='[[fieldDefinitions
+                    built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
+                    built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
+                    built_works_description="https://resource.swissartresearch.net/fieldDefinition/built_works_description"
+                    built_works_construction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from"
+                    built_works_construction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_to"
+                    built_works_destruction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from"
+                    built_works_destruction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_to"
+                    built_works_actor="https://resource.swissartresearch.net/fieldDefinition/built_works_actor"
+
+    ]]'>
+      <bs-panel>
+        <h4>Create new Built Works Instance</h4>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+
+        <semantic-form-text-input for="built_works_appellation"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_type"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_description"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_construction_from"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_construction_to"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_destruction_from"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_destruction_to"></semantic-form-text-input>
+        <semantic-form-text-input for="built_works_actor"></semantic-form-text-input>
+
+        <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button name="submit" class="btn btn-secondary">Save</button>
+        <button name="reset" class="btn btn-secondary">Reset</button>
+      </bs-panel>
+    </semantic-form>
+
+    <mp-workflow-create id='source-workflow'
+      new-subject-template='http://schema.swissartresearch.net/workflow-source-{{UUID}}'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      first-step='http://schema.swissartresearch.net/step/inProgress'
+      assignee_disabled='[[jsonValueFromSelect "SELECT ?assignee WHERE { BIND (?__useruri__ as ?assignee) }"]]'
+      use-event-system=true>
+    </mp-workflow-create>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceCreated'
+      proxy-event-type='Workflow.Create'
+      proxy-targets='["source-workflow"]'>
+    </mp-event-proxy>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceUpdated'
+      proxy-event-type='Component.TemplateUpdate'
+      proxy-targets='["event-target"]'
+      data='{"updated": true}'>
+    </mp-event-proxy>
+
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        {{#if updated}}
+        <bs-alert variant="info">
+          Resource has been updated.
+        </bs-alert>
+        {{/if}}
+      </template>
+    </mp-event-target-template-render>
+
+    <mp-event-proxy id='workflow-proxy'
+      on-event-type='Workflow.SubjectGetInWorkflow'
+      proxy-event-type='RedirectAction.perform'
+      proxy-targets='["redirect-to-resource"]'>
+    </mp-event-proxy>
+
+    <mp-event-target-redirect
+      id='redirect-to-resource'
+      action='redirect'>
+    </mp-event-target-redirect>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "newSubBuiltwork"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "rdsPages:NewBuiltwork"]]"
+      target="_blank">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "cant-edit-workflow"]]
+  [[!--
+  PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+  PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+  ASK { ?workflow workflow:subject ??.
+    ?workflow workflow:currentState ?state.
+    ?state workflow:step ?step.
+    OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+    FILTER(
+        (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
+          ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
+    ) || (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
+    )
+    )
+  }
+  --]]
+  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>))}")]]  
+    false
+  [[else]]
+    true
+  [[/if]]
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> rdsParts:LookupCandidateTemplate]]
+</template>
+[[/inline]]
+
+[[#*inline "showOnRdsGlobalBuiltworkFor"]]
+[[> rdsParts:ReadMoreButton]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1; min-width: 50%;">
+    [[> @partial-block ]]
+  </div>
+  <div style='padding: 5px'>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <mp-description iri="{{node.value}}"></mp-description>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+  <div>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <semantic-query
+                query='SELECT * WHERE { {{node}} a ?type } LIMIT 1'
+                template=' '
+                no-result-template='{{> readMoreOnRdsGlobal resourceIri=node.value}}'>
+                [[> readMoreOnRdsGlobal_frontendTemplate]]
+              </semantic-query>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+</div>
+[[/inline]]

@@ -1,0 +1,458 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+
+[[#if (hasPermission "forms:ldp:*")]]
+  <div class="page">
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        [[#if edit]]
+          [[> edit-group-form]]
+        [[else]]
+          {{#if hideSearch}}{{else}}
+            [[> search-for-existing]]
+          {{/if}}
+          {{#if newGroup}}
+            [[> edit-group-form]]
+          {{/if}}
+        [[/if]]
+      </template>
+    </mp-event-target-template-render>
+  </div>
+[[/if]]
+
+[[#*inline "search-for-existing"]]
+<div class='row' style='max-width: 100%;'>
+  <div class="col-md-8 offset-md-2" style="margin-bottom: 20px; margin-top: 100px">
+    <h2>Creation of a new group</h2>
+    <p>
+      Before creating a new group, please type in the name to check if such group already exists on RDF-Global or locally. If you'd like to create an instance of the existing group locally, press the "link" button next to the relevant match in the table below.
+    </p>
+    <semantic-search limit=1000>
+      <div style="margin-bottom: 10px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-group-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-group-template">
+                
+              </template>
+              <template id="tuple-template">
+                <div class="text-center">
+                  This group already exists, do you still want to create a new group?
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newGroup": true, "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Create new group</button>
+                  </mp-event-trigger>
+                </div>
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
+      <semantic-search-keyword-prefetch
+        query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#Group", "lookupServiceName": "federated-lookup" }'
+        placeholder='Input the name of the group you want to create'>
+      </semantic-search-keyword-prefetch>
+
+      <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+        <div style='max-width: 90vw'>
+          <semantic-search-result-holder>
+            <semantic-search-result>
+              <semantic-table
+                id='table'
+                options='{"showFilter": false}' 
+                query='SELECT * WHERE { } ORDER BY DESC(?score)'
+                number-of-displayed-rows=10
+                no-result-template='No existing groups with this name'
+                column-configuration='[
+                    {"variableName": "subject", "displayName": "Existing groups with provided name", "cellTemplate": "{{> link-to-subject}}" },
+                    {"variableName": "description", "displayName": "Description" },
+                    {"variableName": "type", "displayName": "Type" },
+                    {"variableName": "datasetLabel", "displayName": "Dataset", "cellTemplate": "{{> dataset-label}}" },
+                    {"variableName": "action", "displayName": "action", "cellTemplate": "{{> create-button}}"  }
+                ]'>
+                <template id="dataset-label">
+                  {{datasetLabel.value}}
+                </template>
+                <template id="link-to-subject">
+                  <semantic-query
+                    query='SELECT * WHERE { {{subject}} a ?type }'
+                    template='<semantic-link iri={{subject.value}}></semantic-link>'
+                    no-result-template='<semantic-link iri="[[resolvePrefix "rdsPages:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                  </semantic-query>
+                </template>
+                <template id="create-button">
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newGroup": true, "sameAs": "{{subject.value}}", "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Link</button>
+                  </mp-event-trigger>
+                </template>
+              </semantic-table>
+            </semantic-search-result>
+          </semantic-search-result-holder>
+        </div>
+      </div>
+
+      <div style="margin: 5px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-group-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-group-template">
+                <mp-event-trigger
+                  id='event-trigger-de'
+                  type='Component.TemplateUpdate'
+                  data='{"newGroup": true, "hideSearch": true}'
+                  targets='["event-target"]'>
+                  <button class='btn btn-primary'>Create new group</button>
+                </mp-event-trigger>
+              </template>
+              <template id="tuple-template">
+                
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
+    </semantic-search>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "edit-group-form"]]
+[[#if edit]]
+<div class='row'>
+  <div class="offset-md-4 col-md-4">
+    <mp-workflow-manager
+      iris='[[jsonArrayFromSelect "SELECT ?workflow WHERE { ?workflow <http://www.metaphacts.com/ontologies/platform/workflow#subject> ?? . }" ]]'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      readonly=[[> cant-edit-workflow]]>
+    </mp-workflow-manager>
+  </div>
+</div>
+[[/if]]
+<div class='row'>
+  <div class="text-center col-md-2">
+    <br>
+    <font size="+2">
+        [[#if edit]]
+          Edit <b><mp-label iri='[[this]]'></mp-label></b>
+        [[else]]
+          Add a new <b>Group</b>
+        [[/if]]
+    </font>
+    <br>
+    <img src="https://cdn3.iconfinder.com/data/icons/faticons/32/user-01-512.png" width="50%">
+  </div>
+  <div class="col-md-8" style="margin-bottom: 100px">
+    <semantic-form
+        id="newGroup"
+        new-subject-template='https://resource.swissartresearch.net/group/{{UUID}}'
+        [[#if edit]]
+          subject='[[this]]'
+        [[/if]]
+      	browser-persistence=false
+      	persistence='ldp'
+        form-id='groups'
+        post-action='event'            
+        fields='[[  fieldDefinitions
+                    Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
+                    Rds_dev_National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
+                    Rds_dev_Floruit="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Floruit"
+                    Mph_Group_Alternate_Name="http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name"
+                    Rds_Group_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Group_Name"
+                    Mph_Group_Type="http://www.metaphacts.com/fieldDefinition/Group_Type"
+                    Mph_Group_Formation="http://www.metaphacts.com/fieldDefinition/Group_Formation"
+                    Mph_Group_Dissolution="http://www.metaphacts.com/fieldDefinition/Group_Dissolution"
+                    Mph_Group_Part_Of="http://www.metaphacts.com/fieldDefinition/Group_Part_Of"
+                    Mph_Group_Has_Part="http://www.metaphacts.com/fieldDefinition/Group_Has_Part"
+                    Mph_Group_Location="http://www.metaphacts.com/fieldDefinition/Group_Location"
+                    Mph_Group_Description="http://www.metaphacts.com/fieldDefinition/Group_Description"
+
+    ]]'>
+
+
+      <semantic-form-text-input for="Rds_Group_Name"
+                                languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+      </semantic-form-text-input>
+
+
+      <semantic-form-composite-input 
+          for="Mph_Identifier"
+          new-subject-template="."
+          fields='[[fieldDefinitions
+                    Rds_dev_Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
+                    Rds_Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
+                    Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+                    Rds_Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
+      ]]'>
+        <semantic-form-text-input for="Rds_Identifier_Value"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_dev_Identifier_Source"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Identifier_Type"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Mph_Identifier_Provider"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-text-input for="Mph_Group_Type"></semantic-form-text-input>
+                
+      <semantic-form-composite-input 
+          for="Mph_Group_Alternate_Name"
+          new-subject-template="."
+          fields='[[fieldDefinitions
+                    Rds_dev_Group_Alternate_Name_Value="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Group_Alternate_Name_Value"
+                    Rds_dev_Group_Alternate_Name_Type="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Group_Alternate_Name_Type"
+                    Rds_dev_Alternate_Name_Use_Period_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_earliest"
+                    Rds_dev_Alternate_Name_Use_Period_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest"
+      ]]'>
+        <semantic-form-text-input for="Rds_dev_Group_Alternate_Name_Value"
+                                  languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+        </semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_dev_Group_Alternate_Name_Type"
+                                  languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+        </semantic-form-text-input>
+
+        <semantic-form-datetime-input for="Rds_dev_Alternate_Name_Use_Period_earliest"></semantic-form-datetime-input>
+
+        <semantic-form-datetime-input for="Rds_dev_Alternate_Name_Use_Period_latest"></semantic-form-datetime-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Mph_Group_Formation"
+          new-subject-template="."
+          fields='[[fieldDefinitions
+                    Mph_Formation_Place="http://www.metaphacts.com/fieldDefinition/Place_of_Formation"
+                    Mph_Formation_Date_earliest="http://www.metaphacts.com/fieldDefinition/Formation_Date_earliest"
+                    Mph_Formation_Date_latest="http://www.metaphacts.com/fieldDefinition/Formation_Date_latest"
+                    Mph_Formed_From="http://www.metaphacts.com/fieldDefinition/Formed_From"
+      ]]'>
+        <semantic-form-autocomplete-input for="Mph_Formation_Place"></semantic-form-autocomplete-input>
+
+        <semantic-form-datetime-input for="Mph_Formation_Date_earliest"></semantic-form-datetime-input>
+
+        <semantic-form-datetime-input for="Mph_Formation_Date_latest"></semantic-form-datetime-input>
+
+        <semantic-form-autocomplete-input for="Mph_Formed_From"></semantic-form-autocomplete-input>
+        
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Mph_Group_Dissolution"
+          new-subject-template="."
+          fields='[[fieldDefinitions
+                    Mph_Dissolution_Place="http://www.metaphacts.com/fieldDefinition/Place_of_Dissolution"
+                    Mph_Dissolution_Date_earliest="http://www.metaphacts.com/fieldDefinition/Dissolution_Date_earliest"
+                    Mph_Dissolution_Date_latest="http://www.metaphacts.com/fieldDefinition/Dissolution_Date_latest"
+      ]]'>
+        <semantic-form-autocomplete-input for="Mph_Dissolution_Place"></semantic-form-autocomplete-input>
+
+        <semantic-form-datetime-input for="Mph_Dissolution_Date_earliest"></semantic-form-datetime-input>
+
+        <semantic-form-datetime-input for="Mph_Dissolution_Date_latest"></semantic-form-datetime-input>
+        
+      </semantic-form-composite-input>
+      
+      <semantic-form-autocomplete-input for="Mph_Group_Part_Of"></semantic-form-autocomplete-input>
+      
+      <semantic-form-autocomplete-input for="Mph_Group_Has_Part"></semantic-form-autocomplete-input>
+
+      <semantic-form-text-input for="Rds_dev_National_Affiliation"></semantic-form-text-input>
+        
+      <semantic-form-composite-input 
+          for="Rds_dev_Floruit"
+          new-subject-template="."
+          fields='[[fieldDefinitions
+                    Mph_Floruit_Place="http://www.metaphacts.com/fieldDefinition/Floruit_Place"
+                    Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
+                    Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
+      ]]'>
+        <semantic-form-autocomplete-input for="Mph_Floruit_Place"></semantic-form-autocomplete-input>
+
+        <semantic-form-datetime-input for="Mph_Floruit_Date_earliest"></semantic-form-datetime-input>
+
+        <semantic-form-datetime-input for="Mph_Floruit_Date_latest"></semantic-form-datetime-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Mph_Group_Location"
+          new-subject-template="https://resource.swissartresearch.net/place/{{UUID}}"
+          fields='[[fieldDefinitions
+                    Mph_Group_Location_Address="http://www.metaphacts.com/fieldDefinition/Group_Location_Address"
+                    Mph_Group_Location_Address_Type="http://www.metaphacts.com/fieldDefinition/Group_Location_Address_Type"
+                    Mph_Group_Location_Coordinates="http://www.metaphacts.com/fieldDefinition/Group_Location_Coordinates"
+                    Mph_Group_Location_Type="http://www.metaphacts.com/fieldDefinition/grouplocationtype"
+      ]]'>
+        <semantic-form-text-input for="Mph_Group_Location_Address"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Mph_Group_Location_Address_Type"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Mph_Group_Location_Coordinates"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Mph_Group_Location_Type"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+      
+      <semantic-form-text-input for="Mph_Group_Description" multiline="true"
+                                languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+      </semantic-form-text-input>
+
+      <!-- save and reset button for form -->
+      <button name='submit' class='btn btn-secondary'>Save</button>
+      <button name='reset' class='btn btn-secondary'>Reset</button>
+    </semantic-form>
+
+    <mp-workflow-create id='source-workflow'
+      new-subject-template='http://schema.swissartresearch.net/workflow-source-{{UUID}}'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      first-step='http://schema.swissartresearch.net/step/inProgress'
+      assignee_disabled='[[jsonValueFromSelect "SELECT ?assignee WHERE { BIND (?__useruri__ as ?assignee) }"]]'
+      use-event-system=true>
+    </mp-workflow-create>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceCreated'
+      proxy-event-type='Workflow.Create'
+      proxy-targets='["source-workflow"]'>
+    </mp-event-proxy>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceUpdated'
+      proxy-event-type='Component.TemplateUpdate'
+      proxy-targets='["event-target"]'
+      data='{"updated": true}'>
+    </mp-event-proxy>
+
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        {{#if updated}}
+        <bs-alert variant="info">
+          Resource has been updated.
+        </bs-alert>
+        {{/if}}
+      </template>
+    </mp-event-target-template-render>
+
+    <mp-event-proxy id='workflow-proxy'
+      on-event-type='Workflow.SubjectGetInWorkflow'
+      proxy-event-type='RedirectAction.perform'
+      proxy-targets='["redirect-to-resource"]'>
+    </mp-event-proxy>
+
+    <mp-event-target-redirect
+      id='redirect-to-resource'
+      action='redirect'>
+    </mp-event-target-redirect>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "newSubGroup"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "rdsPages:NewGroup"]]"
+      target="_blank">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "cant-edit-workflow"]]
+  [[!--
+  PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+  PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+  ASK { ?workflow workflow:subject ??.
+    ?workflow workflow:currentState ?state.
+    ?state workflow:step ?step.
+    OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+    FILTER(
+        (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
+          ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
+    ) || (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
+    )
+    )
+  }
+  --]]
+  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>))}")]]  
+    false
+  [[else]]
+    true
+  [[/if]]
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> rdsParts:LookupCandidateTemplate]]
+</template>
+[[/inline]]
+
+[[#*inline "showOnRdsGlobalGroupFor"]]
+[[> rdsParts:ReadMoreButton]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1; min-width: 50%;">
+    [[> @partial-block ]]
+  </div>
+  <div style='padding: 5px'>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <mp-description iri="{{node.value}}"></mp-description>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+  <div>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <semantic-query
+                query='SELECT * WHERE { {{node}} a ?type } LIMIT 1'
+                template=' '
+                no-result-template='{{> readMoreOnRdsGlobal resourceIri=node.value}}'>
+                [[> readMoreOnRdsGlobal_frontendTemplate]]
+              </semantic-query>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+</div>
+[[/inline]]
