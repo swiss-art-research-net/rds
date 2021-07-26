@@ -1,8 +1,11 @@
+[[#if edit]]
+[[else]]
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
   </li>
 </ol>
+[[/if]]
 
 [[#if (hasPermission "forms:ldp:*")]]
   <div class="page">
@@ -165,29 +168,31 @@
   </div>
   <div class="col-md-8" style="margin-bottom: 100px">
     <semantic-form
-        id="newGroup"
+      id="newGroup"
+      [[#if edit]]
+        subject='[[this]]'
+        persistence='sparql'
+      [[else]]
         new-subject-template='https://resource.swissartresearch.net/group/{{UUID}}'
-        [[#if edit]]
-          subject='[[this]]'
-        [[/if]]
-      	browser-persistence=false
-      	persistence='ldp'
-        form-id='groups'
-        post-action='event'            
-        fields='[[  fieldDefinitions
-                    Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
-                    Rds_dev_National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
-                    Rds_dev_Floruit="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Floruit"
-                    Mph_Group_Alternate_Name="http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name"
-                    Rds_Group_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Group_Name"
-                    Mph_Group_Type="http://www.metaphacts.com/fieldDefinition/Group_Type"
-                    Mph_Group_Formation="http://www.metaphacts.com/fieldDefinition/Group_Formation"
-                    Mph_Group_Dissolution="http://www.metaphacts.com/fieldDefinition/Group_Dissolution"
-                    Mph_Group_Part_Of="http://www.metaphacts.com/fieldDefinition/Group_Part_Of"
-                    Mph_Group_Has_Part="http://www.metaphacts.com/fieldDefinition/Group_Has_Part"
-                    Mph_Group_Location="http://www.metaphacts.com/fieldDefinition/Group_Location"
-                    Mph_Group_Description="http://www.metaphacts.com/fieldDefinition/Group_Description"
+        browser-persistence=false
+        persistence='ldp'
+      [[/if]]
+      form-id='groups'
+      post-action='event'
 
+      fields='[[  fieldDefinitions
+                  Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
+                  Rds_dev_National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
+                  Rds_dev_Floruit="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Floruit"
+                  Mph_Group_Alternate_Name="http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name"
+                  Rds_Group_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Group_Name"
+                  Mph_Group_Type="http://www.metaphacts.com/fieldDefinition/Group_Type"
+                  Mph_Group_Formation="http://www.metaphacts.com/fieldDefinition/Group_Formation"
+                  Mph_Group_Dissolution="http://www.metaphacts.com/fieldDefinition/Group_Dissolution"
+                  Mph_Group_Part_Of="http://www.metaphacts.com/fieldDefinition/Group_Part_Of"
+                  Mph_Group_Has_Part="http://www.metaphacts.com/fieldDefinition/Group_Has_Part"
+                  Mph_Group_Location="http://www.metaphacts.com/fieldDefinition/Group_Location"
+                  Mph_Group_Description="http://www.metaphacts.com/fieldDefinition/Group_Description"
     ]]'>
 
 
@@ -320,6 +325,7 @@
                                 languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
       </semantic-form-text-input>
 
+      <semantic-form-errors></semantic-form-errors>
       <!-- save and reset button for form -->
       <button name='submit' class='btn btn-secondary'>Save</button>
       <button name='reset' class='btn btn-secondary'>Reset</button>

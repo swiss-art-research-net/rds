@@ -1,0 +1,112 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+    <mp-label iri='[[this]]'></mp-label>
+  </li>
+</ol>
+
+<div class="page">
+  <div class="page__header page__header--no-image" style="display:block;">
+    <h2><mp-label iri="[[this]]"></mp-label></h2>
+    <div class='panel__uri'>
+      <div title='[[this]]' class='panel__uri-text'>
+        <b>URI:</b> [[this]]
+      </div>
+      <mp-copy-to-clipboard text='[[this]]'>
+        <button class='btn btn-link btn-sm panel__uri-copy-button'>
+          <i class='fa fa-clipboard'></i>
+        </button>
+      </mp-copy-to-clipboard>
+    </div>
+    <div><b>Description: </b></div>
+    <i><mp-description iri="[[this]]"></mp-description></i>
+    <div>
+      <b>Types: </b>
+      <semantic-query
+        style='display:inline;'
+        query='SELECT ?type WHERE { ?? a ?type}'
+        no-result-template='-'>
+      </semantic-query>
+    </div>
+  </div>
+  <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
+    <bs-tab event-key='summary' title='Summary'>
+      <div data-flex-layout='row top-stretch'>
+        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+          [[> rdsPages:RecordImage]]
+        </div>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead role='header'>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+              <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                          Rds_fieldDefinitionContainer/Place_Name_Preferred="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Name_Preferred"
+                          Mph_Place_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Place_Name-readOnly"
+                          Mph_Identifiers_Place_readOnly="http://www.researchspace.org/instances/fields/Identifiers_Place_readOnly"
+                          Rds_fieldDefinitionContainer/Place_Part_of="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of"
+                          Rds_fieldDefinitionContainer/Place_Has_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Has_Part"
+                          Mph_Coordinates-readonly="http://www.metaphacts.com/fieldDefinition/Coordinates-readonly"
+                ]]'
+                template='{{> property-table}}'>
+                <template id="property-table">
+                  [[> rdsParts:FieldBasedVisualization]]
+                </template>
+              </mp-field-visualization>
+          </table>
+          <div> 
+            <semantic-map
+              query='
+                SELECT ?wkt  WHERE {
+                  ?? crm:P168_is_approximated_by ?wkt.
+                }'
+              tuple-template='<b>{{description.value}}</b><br><a href="https://wikidata.metaphacts.com/resource/?uri={{link.value}}" target="_blank">Open in wikidata</a>'
+            ></semantic-map>
+            </div>
+        </div>
+      </div>
+    </bs-tab>
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <bs-tab event-key='authoring' title='Authoring'>
+      <div> 
+        <div data-flex-layout='row top-stretch'>
+          <div class='authoring_section'>
+            [[> rdsPages:NewPlace edit=true]]
+          </div>
+        </div>
+      </div>
+    </bs-tab>
+    [[/if]]
+  </bs-tabs>
+</div>
+<style>
+  .panel__uri {
+    display: flex;
+    align-items: center;
+  }
+
+  .knowledge-pane__uri-copy-button {
+    flex: 0 0 auto;
+    opacity: 0;
+    visibility: visible;
+    transition: opacity 0.3s;
+  }
+
+  .panel__uri:hover .panel__uri-copy-button {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .panel__uri-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

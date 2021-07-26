@@ -1,8 +1,11 @@
+[[#if edit]]
+[[else]]
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
   </li>
 </ol>
+[[/if]]
 
 [[#if (hasPermission "forms:ldp:*")]]
   <div class="page">
@@ -165,33 +168,220 @@
     <img src="http://www.iconarchive.com/download/i91910/icons8/windows-8/Travel-Us-Capitol.ico" width="50%">
   </div>
   <div class="col-md-8" style="margin-bottom: 100px">
-    <semantic-form  new-subject-template='http://grp.swissartresearch.net/work/{{UUID}}'
-                    post-action='redirect'
-                    browser-persistence=true
-                    form-id='example-1'
-                    fields='[[fieldDefinitions
-                    built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
-                    built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
-                    built_works_description="https://resource.swissartresearch.net/fieldDefinition/built_works_description"
-                    built_works_construction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from"
-                    built_works_construction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_to"
-                    built_works_destruction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from"
-                    built_works_destruction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_to"
-                    built_works_actor="https://resource.swissartresearch.net/fieldDefinition/built_works_actor"
-
+    <semantic-form 
+      id="newBuiltwork"
+      [[#if edit]]
+        subject='[[this]]'
+        persistence='sparql'
+      [[else]]
+        new-subject-template='https://resource.swissartresearch.net/builtwork/{{UUID}}'
+        browser-persistence=false
+        persistence='ldp'
+      [[/if]]
+      form-id='builtworks'
+      post-action='event' 
+      fields='[[fieldDefinitions
+                type_hidden="http://www.metaphacts.com/fieldDefinition/AddType"
+                built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
+                Mph_Person_Alternate_Name="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name"
+                Mph_Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
+                built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
+                Rds_Builtwork_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description"
+                Rds_Builtwork_Production="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production"
+                Rds_Builtwork_Destruction="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction"
+                Rds_Builtwork_Material="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Material"
+                Rds_Builtwork_Technique="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Technique"
+                Rds_Builtwork_Dimension="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension"
+                Rds_Builtwork_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Location"
+                Rds_Builtwork_Conservation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation"
+                Rds_Builtwork_Citation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Citation"
+                Rds_Function="http://www.metaphacts.com/fieldDefinition/Function"
     ]]'>
       <bs-panel>
         <h4>Create new Built Works Instance</h4>
         <semantic-form-recover-notification></semantic-form-recover-notification>
+        <semantic-form-hidden-input for='type_hidden'
+                                    default-value='Built Work'>
+        </semantic-form-hidden-input>
+
+        <semantic-form-composite-input 
+            for="Mph_Identifier"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_dev_Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
+                      Rds_Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
+                      Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+                      Rds_Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
+        ]]'>
+          <semantic-form-text-input for="Rds_Identifier_Value"></semantic-form-text-input>
+          <semantic-form-text-input for="Rds_dev_Identifier_Source"></semantic-form-text-input>
+          <semantic-form-text-input for="Rds_Identifier_Type"></semantic-form-text-input>
+          <semantic-form-text-input for="Mph_Identifier_Provider"></semantic-form-text-input>
+        </semantic-form-composite-input>
 
         <semantic-form-text-input for="built_works_appellation"></semantic-form-text-input>
+        
         <semantic-form-text-input for="built_works_type"></semantic-form-text-input>
-        <semantic-form-text-input for="built_works_description"></semantic-form-text-input>
-        <semantic-form-text-input for="built_works_construction_from"></semantic-form-text-input>
-        <semantic-form-text-input for="built_works_construction_to"></semantic-form-text-input>
-        <semantic-form-text-input for="built_works_destruction_from"></semantic-form-text-input>
-        <semantic-form-text-input for="built_works_destruction_to"></semantic-form-text-input>
-        <semantic-form-text-input for="built_works_actor"></semantic-form-text-input>
+
+        <semantic-form-composite-input 
+            for="Mph_Person_Alternate_Name"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_dev_Person_Alternate_Name_Value="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value"
+                      Rds_dev_Person_Alternate_Name_Type="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Type"
+                      Rds_dev_Alternate_Name_Use_Period_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_earliest"
+                      Rds_dev_Alternate_Name_Use_Period_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest"
+        ]]'>
+          <semantic-form-text-input for="Rds_dev_Person_Alternate_Name_Value"
+                                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+          </semantic-form-text-input>
+
+          <semantic-form-text-input for="Rds_dev_Person_Alternate_Name_Type"
+                                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+          </semantic-form-text-input>
+
+          <semantic-form-datetime-input for="Rds_dev_Alternate_Name_Use_Period_earliest"></semantic-form-datetime-input>
+
+          <semantic-form-datetime-input for="Rds_dev_Alternate_Name_Use_Period_latest"></semantic-form-datetime-input>
+
+        </semantic-form-composite-input>
+
+        <semantic-form-composite-input 
+            for="Rds_Builtwork_Description"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_Builtwork_Description_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Value"
+                      Rds_Builtwork_Description_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Type"
+                      Rds_Builtwork_Description_Author="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author"
+        ]]'>
+          <semantic-form-text-input for="Rds_Builtwork_Description_Value"
+                                    multiline='true'
+                                    languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+          </semantic-form-text-input>
+
+          <semantic-form-autocomplete-input for="Rds_Builtwork_Description_Type"></semantic-form-autocomplete-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Description_Author"></semantic-form-text-input>
+
+        </semantic-form-composite-input>
+
+        <semantic-form-composite-input 
+            for="Rds_Builtwork_Production"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_Builtwork_Production_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Location"
+                      Rds_Builtwork_Production_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest"
+                      Rds_Builtwork_Production_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Latest"
+                      Rds_Builtwork_Creator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator"
+                      Rds_Builtwork_Creator_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role"
+        ]]'>
+          <semantic-form-autocomplete-input for="Rds_Builtwork_Production_Location"></semantic-form-autocomplete-input>
+
+          <semantic-form-datetime-input for="Rds_Builtwork_Production_Date_Earliest"></semantic-form-datetime-input>
+
+          <semantic-form-datetime-input for="Rds_Builtwork_Production_Date_Latest"></semantic-form-datetime-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Creator"></semantic-form-text-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Creator_Role"></semantic-form-text-input>
+
+        </semantic-form-composite-input>
+        
+        <semantic-form-composite-input 
+            for="Rds_Builtwork_Destruction"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_Builtwork_Destruction_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Location"
+                      Rds_Builtwork_Destruction_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest"
+                      Rds_Builtwork_Destruction_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Latest"
+        ]]'>
+          <semantic-form-autocomplete-input for="Rds_Builtwork_Destruction_Location"></semantic-form-autocomplete-input>
+
+          <semantic-form-datetime-input for="Rds_Builtwork_Destruction_Date_Earliest"></semantic-form-datetime-input>
+
+          <semantic-form-datetime-input for="Rds_Builtwork_Destruction_Date_Latest"></semantic-form-datetime-input>
+
+        </semantic-form-composite-input>
+
+        <semantic-form-text-input for="Rds_Builtwork_Material"></semantic-form-text-input>
+      
+        <semantic-form-text-input for="Rds_Builtwork_Technique"></semantic-form-text-input>
+        
+        <semantic-form-composite-input 
+            for="Rds_Builtwork_Dimension"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_Builtwork_Dimension_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Type"
+                      Rds_Builtwork_Dimension_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Value"
+                      Rds_Builtwork_Dimension_Unit="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Unit"
+        ]]'>
+          <semantic-form-text-input for="Rds_Builtwork_Dimension_Type"></semantic-form-text-input>
+  
+          <semantic-form-text-input for="Rds_Builtwork_Dimension_Value"></semantic-form-text-input>
+  
+          <semantic-form-text-input for="Rds_Builtwork_Dimension_Unit"></semantic-form-text-input>
+  
+        </semantic-form-composite-input>
+
+        <semantic-form-composite-input
+          for="Rds_Function"
+          new-subject-template="/event/{{UUID}}"
+          fields='[[fieldDefinitions
+                    Rds_Builtwork_Conservation_Event_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest"
+                    Rds_Builtwork_Conservation_Event_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Latest"
+                    Rds_Builtwork_Conservation_Event_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type"
+        ]]'>
+          <semantic-form-datetime-input for="Rds_Builtwork_Conservation_Event_Earliest"></semantic-form-datetime-input>
+            
+          <semantic-form-datetime-input for="Rds_Builtwork_Conservation_Event_Latest"></semantic-form-datetime-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Conservation_Event_Type"></semantic-form-text-input>
+        </semantic-form-composite-input>
+
+        <semantic-form-composite-input 
+            for="Rds_Builtwork_Conservation"
+            new-subject-template="."
+            fields='[[fieldDefinitions
+                      Rds_Builtwork_Conservation_Event_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest"
+                      Rds_Builtwork_Conservation_Event_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Latest"
+                      Rds_Builtwork_Conservation_Event_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type"
+                      Rds_Builtwork_Conservation_Event_Technique="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Technique"
+                      Rds_Builtwork_Conservator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator"
+                      Rds_Builtwork_Conservation_Event_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Description"
+        ]]'>
+          <semantic-form-datetime-input for="Rds_Builtwork_Conservation_Event_Earliest"></semantic-form-datetime-input>
+          
+          <semantic-form-datetime-input for="Rds_Builtwork_Conservation_Event_Latest"></semantic-form-datetime-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Conservation_Event_Type"></semantic-form-text-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Conservation_Event_Technique"></semantic-form-text-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Conservator"></semantic-form-text-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Conservation_Event_Description" multiline="true"></semantic-form-text-input>
+
+        </semantic-form-composite-input>
+
+
+        <semantic-form-composite-input 
+            for="Rds_Builtwork_Location"
+            new-subject-template="."
+            fields='[[fieldDefinitions 
+                    Rds_Builtwork_Present_Location_-_Institution="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution"
+                    Rds_Builtwork_Present_Location_-_Institution_Address="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution_Address"
+                    Rds_Builtwork_Present_Location_-_coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_coordinates"
+        ]]'>
+          
+          <semantic-form-text-input for="Rds_Builtwork_Present_Location_-_Institution"></semantic-form-text-input>
+
+          <semantic-form-text-input for="Rds_Builtwork_Present_Location_-_Institution_Address"></semantic-form-text-input>
+          
+          <semantic-form-text-input for="Rds_Builtwork_Present_Location_-_coordinates"></semantic-form-text-input>
+
+        </semantic-form-composite-input>
+        
+        <semantic-form-text-input for="Rds_Builtwork_Citation" ></semantic-form-text-input>
 
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->

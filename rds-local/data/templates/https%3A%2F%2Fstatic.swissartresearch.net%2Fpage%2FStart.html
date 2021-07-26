@@ -59,7 +59,6 @@
           </bs-nav>
         </div>
       </div>
-
       <div style="width: 80%; margin: 30px; min-width: 800px; max-width: 1200px"><!--second column of flex layout-->
         <bs-tab-content animation="false">
           <bs-tab-pane event-key="Local">[[> search lookupServiceName="default-lookup" label="Local datasets"]] </bs-tab-pane>
@@ -68,6 +67,182 @@
       </div>
     </div>
   </bs-tab-container>
+
+  <div>
+    <bs-tabs id="tabs" unmount-on-exit=true>
+      <bs-tab event-key="1" title="Persons" style="margin-bottom: 50px;">
+        <p><br /><i>Selected artists from the collection of the Institute for Art History.</i></p>
+        <semantic-carousel
+          query="
+          prefix person: <http://example.com/person/>
+          prefix org: <http://example.com/org/>
+          SELECT distinct ?subject (SAMPLE(?thumbnail) AS ?thumbnail) (SAMPLE(?label) AS ?label) WHERE {
+            BIND(IRI('https://cdn3.iconfinder.com/data/icons/faticons/32/user-01-512.png') AS ?image_empty)
+            $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
+            #$subject  <http://www.cidoc-crm.org/cidoc-crm/P138i_has_representation> ?thumb .
+            $subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?id .
+            ?id a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.
+            ?id rdfs:label ?label.
+            BIND(coalesce(?thumb, ?image_empty) as ?thumbnail)
+          } GROUP BY (?subject) limit 40"
+          options='{ "infinite": true, "slidesToShow": 3 }'
+          tuple-template= '{{> carousel}}'
+        >
+          <template id="carousel">
+            <div class="text-center panel panel-default" style="border:none;margin-right:20px;font-size:12px;height:300px;width: 33%;display:inline;">
+              <semantic-link class="grid-resource-link" title="{{label.value}}" iri="{{subject.value}}">
+                <div class="panel-body" style="height:300px;">
+                  <div style="width:280px;height:280px;margin: 50px auto;" class="text-center">
+                    <img src="{{thumbnail.value}}" style="max-height:250px; max-width:250px; margin: 10 auto;" class="img-rounded">
+                  </div>
+                </div>
+                <div class="panel-footer" style="position: relative; border: none;    margin: 20px;">
+                  {{label.value}}
+                </div>
+              </semantic-link>
+              </div>
+          </template>
+        </semantic-carousel>   
+      </bs-tab>
+  
+      <bs-tab event-key="2" title="Groups" style="margin-bottom: 50px;">
+        <p><br/><i>Selected Groups</i></p>
+        <semantic-carousel
+          query="
+            SELECT distinct ?subject (SAMPLE(?label) AS ?label) WHERE {
+              ?subject a <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
+                <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?appellation .
+              ?appellation a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>;
+                rdfs:label ?label       
+            } GROUP BY (?subject) limit 40"
+          options='{ "infinite": true, "slidesToShow": 3 }'
+          tuple-template= '{{> carousel}}'
+          >
+          <template id="carousel">
+            <div class="text-center panel panel-default" style="border:none;margin-right:20px;font-size:12px;height:300px;width: 33%;display:inline;">
+              <semantic-link class="grid-resource-link" title="{{label.value}}" iri="{{subject.value}}">
+                <div class="panel-body" style="height:280px;">
+                  <div style="width:250px;height:300px;margin: 50px auto;" class="text-center">
+                    <img src="https://image.flaticon.com/icons/png/512/32/32441.png" style="max-height:230px; max-width:300px; margin: 10 auto;" class="img-rounded">
+                  </div>
+                </div>
+                <div class="panel-footer" style="position: relative;  border: none;    margin: 20px;">
+                  {{label.value}}
+                </div>
+              </semantic-link>
+            </div>
+          </template>
+        </semantic-carousel>
+      </bs-tab>
+      
+      <bs-tab event-key="3" title="Places" style="margin-bottom: 50px;">
+        <p><br /><i>Selected Places.</i></p>
+        <semantic-carousel
+          query="
+            PREFIX crmdig: <http://www.ics.forth.gr/isl/CRMdig/>
+            PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+            SELECT DISTINCT ?subject (SAMPLE(?label) AS ?label) (SAMPLE(?thumbnail) AS ?thumbnail) WHERE {
+              BIND(IRI('https://cdn4.iconfinder.com/data/icons/standard-free-icons/139/Checkin01-512.png') AS ?image_empty)
+              $subject a <http://www.cidoc-crm.org/cidoc-crm/E53_Place>.
+              ?subject crm:P1_is_identified_by ?id.
+              ?subject rdfs:label ?label.
+              OPTIONAL {
+                ?subject crmdig:L54_is_same-as ?wkt.
+                $wkt  <http://www.cidoc-crm.org/cidoc-crm/P138i_has_representation> ?thumb.
+              }
+              BIND(coalesce(?thumb, ?image_empty) as ?thumbnail)
+            } GROUP BY(?subject) limit 50"
+          options='{ "infinite": true, "slidesToShow": 3 }'
+          tuple-template= '{{> carousel}}'
+        >
+          <template id="carousel">
+            <div class="text-center panel panel-default" style="border:none;margin-right:20px;font-size:12px;height:300px;width: 33%;display:inline;">
+              <semantic-link class="grid-resource-link" title="{{label.value}}" iri="{{subject.value}}">
+                <div class="panel-body" style="height:300px;">
+                  <div style="width:280px;height:280px;margin: 50px auto;" class="text-center">
+                    <img src={{thumbnail.value}} style="height: 100%; width: 100%; object-fit: cover;" class="img-rounded">
+                  </div>
+                </div>
+                <div class="panel-footer" style="position: relative; border: none;    margin: 20px;">
+                  {{label.value}}
+                </div>
+              </semantic-link>
+            </div>
+          </template>
+        </semantic-carousel>
+      </bs-tab>
+  
+      <bs-tab event-key="4" title="Builtworks" style="margin-bottom: 50px;">
+        <p><br /><i>Selected builtworks.</i></p>
+        
+        <semantic-carousel
+          query="
+            SELECT distinct ?subject (SAMPLE(?label) AS ?label) WHERE {
+              ?subject a <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+                <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?appellation .
+              ?appellation a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>;
+                rdfs:label ?label.
+              ?subject crm:P2_has_type ?type.
+              ?type rdfs:label ?type_label.
+              FILTER(STR(?type_label)='Built Work')
+            } GROUP BY (?subject) limit 40"
+          options='{ "infinite": true, "slidesToShow": 3 }'
+          tuple-template= '{{> carousel}}'
+          >
+          <template id="carousel">
+            <div class="text-center panel panel-default" style="border:none;margin-right:20px;font-size:12px;height:300px;width: 33%;display:inline;">
+              <semantic-link class="grid-resource-link" title="{{label.value}}" iri="{{subject.value}}">
+                <div class="panel-body" style="height:280px;">
+                  <div style="width:250px;height:300px;margin: 50px auto;" class="text-center">
+                    <img src="http://www.iconarchive.com/download/i91910/icons8/windows-8/Travel-Us-Capitol.ico" style="max-height:230px; max-width:300px; margin: 10 auto;" class="img-rounded">
+                  </div>
+                </div>
+                <div class="panel-footer" style="position: relative;  border: none;    margin: 20px;">
+                  {{label.value}}
+                </div>
+              </semantic-link>
+            </div>
+          </template>
+        </semantic-carousel>
+      </bs-tab>
+
+      <bs-tab event-key="5" title="Artworks" style="margin-bottom: 50px;">
+        <p><br /><i>Selected Artworks.</i></p>
+        
+        <semantic-carousel
+          query="
+            SELECT distinct ?subject (SAMPLE(?label) AS ?label) WHERE {
+              $subject a <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+                <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?appellation .
+              ?appellation a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>;
+                rdfs:label ?label.
+              ?subject crm:P2_has_type ?type.
+              ?type rdfs:label ?type_label.
+              FILTER(STR(?type_label)='Artwork')
+            } GROUP BY (?subject) limit 40"
+          options='{ "infinite": true, "slidesToShow": 3 }'
+          tuple-template= '{{> carousel}}'
+          >
+          <template id="carousel">
+            <div class="text-center panel panel-default" style="border:none;margin-right:20px;font-size:12px;height:300px;width: 33%;display:inline;">
+              <semantic-link class="grid-resource-link" title="{{label.value}}" iri="{{subject.value}}">
+                <div class="panel-body" style="height:280px;">
+                  <div style="width:250px;height:300px;margin: 50px auto;" class="text-center">
+                    <img src="http://www.iconarchive.com/download/i91910/icons8/windows-8/Travel-Us-Capitol.ico" style="max-height:230px; max-width:300px; margin: 10 auto;" class="img-rounded">
+                  </div>
+                </div>
+                <div class="panel-footer" style="position: relative;  border: none;    margin: 20px;">
+                  {{label.value}}
+                </div>
+              </semantic-link>
+            </div>
+          </template>
+        </semantic-carousel>
+      </bs-tab>
+      
+    </bs-tabs>
+  </div>
+  
 </div>
 
 [[#*inline "search"]]

@@ -6,7 +6,6 @@
     <mp-label iri='[[this]]'></mp-label>
   </li>
 </ol>
-
 <div class="page">
   <div class="page__header page__header--no-image" style="display:block;">
     <h2><mp-label iri="[[this]]"></mp-label></h2>
@@ -34,6 +33,9 @@
   <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
     <bs-tab event-key='summary' title='Summary'>
       <div data-flex-layout='row top-stretch'>
+        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+          [[> rdsPages:RecordImage]]
+        </div>
         <div class='table-responsive'>
           <table class='table'>
             <thead role='header'>
@@ -73,7 +75,7 @@
         </div>
       </div>
     </bs-tab>
-    [[#if (ask 'ASK { ?? owl:sameAs ?getty_uri	. SERVICE <http://vocab.getty.edu/sparql> { ?getty_uri <http://purl.org/dc/elements/1.1/identifier> ?value.  } }')]]
+    [[#if (ask 'ASK { ?? <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?getty_uri	. SERVICE <http://vocab.getty.edu/sparql> { ?getty_uri <http://purl.org/dc/elements/1.1/identifier> ?value.  } }')]]
     <bs-tab event-key='more-from-getty' title='More from Getty'>
       <mp-field-visualization
         subject='[[this]]'
@@ -94,19 +96,39 @@
       </mp-field-visualization>
     </bs-tab>
     [[/if]]
-    [[#if (ask 'ASK { ?? owl:sameAs ?wikidata_uri. SERVICE <https://query.wikidata.org/sparql> {  ?wikidata_uri rdfs:label ?value.  } }')]]
+    [[#if (ask 'ASK { ?? <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?wiki_wikidata. BIND(IRI(REPLACE(STR(?wiki_wikidata),"https://www.wikidata.org/wiki/","http://www.wikidata.org/entity/")) AS ?wikidata_uri) SERVICE <https://query.wikidata.org/sparql> {  ?wikidata_uri rdfs:label ?value.  } }')]]
     <bs-tab event-key='more-from-wikidata' title='More from Wikidata'>
+      <mp-field-visualization
+        subject='[[this]]'
+        fields='[[fieldDefinitions
+                  Mph_Preferred_Label_Wikidata="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Wikidata"
+                  Mph_Name_in_Native_Language_Wikidata="http://www.metaphacts.com/fieldDefinition/Name_in_Native_Language_Wikidata"
+                  Mph_Occupation_Wikidata="http://www.metaphacts.com/fieldDefinition/Occupation_Wikidata"
+                  Mph_Field_of_Work_Wikidata="http://www.metaphacts.com/fieldDefinition/Field_of_Work_Wikidata"
+                  Mph_Description_Wikidata="http://www.metaphacts.com/fieldDefinition/Description_Wikidata"
+                  Mph_Country_of_Citizenship_Wikidata="http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata"
+                  Mph_Movement_Wikidata="http://www.metaphacts.com/fieldDefinition/Movement_Wikidata"
+                  Mph_Spouse_Wikidata="http://www.metaphacts.com/fieldDefinition/Spouse_Wikidata"
+                  Mph_Birth_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata"
+                  Mph_Place_of_Birth_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Birth_Wikidata"
+                  Mph_Death_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Death_Date_Wikidata"
+                  Mph_Place_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata"
+                  Mph_Manner_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata"
+                  Mph_Cause_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Cause_of_Death_Wikidata"
+        ]]'
+        template='{{> property-table}}'>
+        <template id="property-table">
+          [[> rdsParts:FieldBasedVisualization]]
+        </template>
+      </mp-field-visualization>
     </bs-tab>
     [[/if]]
     [[#if (hasPermission "forms:ldp:*")]] 
     <bs-tab event-key='authoring' title='Authoring'>
       <div> 
         <div data-flex-layout='row top-stretch'>
-          <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
-            [[> rdsPages:RecordImage]]
-          </div>
           <div class='authoring_section'>
-            [[> rdsPages:NewPerson]]
+            [[> rdsPages:NewPerson edit=true]]
           </div>
         </div>
       </div>

@@ -1,10 +1,11 @@
-[[> "https://static.swissartresearch.net/partial/EditPersonFormFields"]]
+[[#if edit]]
+[[else]]
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
   </li>
 </ol>
-
+[[/if]]
 [[#if (hasPermission "forms:ldp:*")]]
   <div class="page">
     <mp-event-target-template-render id='event-target' template='{{> template}}'>
@@ -168,12 +169,14 @@
   <div class="col-md-8" style="margin-bottom: 100px">
     <semantic-form
         id="newPerson"
-        new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
         [[#if edit]]
           subject='[[this]]'
+          persistence='sparql'
+        [[else]]
+          new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
+          browser-persistence=false
+      	  persistence='ldp'
         [[/if]]
-      	browser-persistence=false
-      	persistence='ldp'
         form-id='persons'
         post-action='event'            
         fields='[[  fieldDefinitions
@@ -380,7 +383,8 @@
                                 languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'
                                 multiline=true>
       </semantic-form-text-input>
-          
+      
+      <semantic-form-errors></semantic-form-errors>
       <!-- save and reset button for form -->
       <button name='submit' class='btn btn-secondary'>Save</button>
       <button name='reset' class='btn btn-secondary'>Reset</button>

@@ -1,8 +1,11 @@
+[[#if edit]]
+[[else]]
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
   </li>
 </ol>
+[[/if]]
 
 [[#if (hasPermission "forms:ldp:*")]]
   <div class="page">
@@ -166,14 +169,18 @@
   <div class="col-md-8" style="margin-bottom: 100px">
     <semantic-form
       id="newArtwork"
-      new-subject-template='https://resource.swissartresearch.net/artwork/{{UUID}}'
       [[#if edit]]
         subject='[[this]]'
+        persistence='sparql'
+      [[else]]
+        new-subject-template='https://resource.swissartresearch.net/artwork/{{UUID}}'
+        browser-persistence=false
+        persistence='ldp'
       [[/if]]
-      browser-persistence=false
-      persistence='ldp' 
-      form-id='artworks'         
+      form-id='artworks'
+      post-action='event'        
       fields='[[fieldDefinitions
+                type_hidden="http://www.metaphacts.com/fieldDefinition/AddType"
                 Rds_Artwork_Identifier="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier"   
                 Rds_Artwork_Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier_Value"     
                 Rds_Artwork_Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier_Type" 
@@ -231,6 +238,9 @@
                 Rds_Artwork_Citation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Citation"
       ]]'
     >
+      <semantic-form-hidden-input for='type_hidden'
+                                  default-value='Artwork'>
+      </semantic-form-hidden-input>
 
       <semantic-form-composite-input 
           for="Rds_Artwork_Identifier"
@@ -427,7 +437,9 @@
 
       </semantic-form-composite-input>
 
-      <semantic-form-text-input for="Rds_Artwork_Citation"></semantic-form-text-input>   
+      <semantic-form-text-input for="Rds_Artwork_Citation" ></semantic-form-text-input>   
+      
+      <semantic-form-errors></semantic-form-errors>
       
       <button name='submit' class='btn btn-secondary'>Save</button>
       <button name='reset' class='btn btn-secondary'>Reset</button>
