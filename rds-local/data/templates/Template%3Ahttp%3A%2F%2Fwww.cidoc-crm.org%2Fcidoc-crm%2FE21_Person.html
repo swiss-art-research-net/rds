@@ -6,36 +6,43 @@
     <mp-label iri='[[this]]'></mp-label>
   </li>
 </ol>
+
 <div class="page">
-  <div class="page__header page__header--no-image" style="display:block;">
-    <h2><mp-label iri="[[this]]"></mp-label></h2>
-    <div class='panel__uri'>
-      <div title='[[this]]' class='panel__uri-text'>
-        <b>URI:</b> [[this]]
+  <table class='table'>
+    <th>
+      <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+        [[> rdsPages:RecordImage]]
       </div>
-      <mp-copy-to-clipboard text='[[this]]'>
-        <button class='btn btn-link btn-sm panel__uri-copy-button'>
-          <i class='fa fa-clipboard'></i>
-        </button>
-      </mp-copy-to-clipboard>
-    </div>
-    <div><b>Description: </b></div>
-    <i><mp-description iri="[[this]]"></mp-description></i>
-    <div>
-      <b>Types: </b>
-      <semantic-query
-        style='display:inline;'
-        query='SELECT ?type WHERE { ?? a ?type}'
-        no-result-template='-'>
-      </semantic-query>
-    </div>
-  </div>
-  <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
+    </th>
+    <th>
+      <div class="page__header page__header--no-image" style="display:block;">
+        <h2><mp-label iri="[[this]]"></mp-label></h2>
+        <div class='panel__uri'>
+          <div title='[[this]]' class='panel__uri-text'>
+            <b>URI:</b> [[this]]
+          </div>
+          <mp-copy-to-clipboard text='[[this]]'>
+            <button class='btn btn-link btn-sm panel__uri-copy-button'>
+              <i class='fa fa-clipboard'></i>
+            </button>
+          </mp-copy-to-clipboard>
+        </div>
+        <div><b>Description: </b></div>
+        <i><mp-description iri="[[this]]"></mp-description></i>
+        <div>
+          <b>Types: </b>
+          <semantic-query
+            style='display:inline;'
+            query='SELECT ?type WHERE { ?? a ?type}'
+            no-result-template='-'>
+          </semantic-query>
+        </div>
+      </div>
+    </th>
+  </table>
+  <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='summary' unmount-on-exit=true>
     <bs-tab event-key='summary' title='Summary'>
       <div data-flex-layout='row top-stretch'>
-        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
-          [[> rdsPages:RecordImage]]
-        </div>
         <div class='table-responsive'>
           <table class='table'>
             <thead role='header'>
@@ -49,6 +56,7 @@
                 fields='[[fieldDefinitions
                           Mph_Identifiers_readOnly="http://www.researchspace.org/instances/fields/Identifiers_readOnly"
                           Mph_Person_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Name-readOnly"
+                          Person_Name_Part="http://www.metaphacts.com/fieldDefinition/Person_Name_Part-readOnly"
                           Mph_Person_Name_Honorific-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific-readOnly"
                           Mph_Person_Alternate_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly"
                           Rds_dev_Person_Gender-readOnly="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender-readOnly"
@@ -77,50 +85,75 @@
     </bs-tab>
     [[#if (ask 'ASK { ?? <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?getty_uri	. SERVICE <http://vocab.getty.edu/sparql> { ?getty_uri <http://purl.org/dc/elements/1.1/identifier> ?value.  } }')]]
     <bs-tab event-key='more-from-getty' title='More from Getty'>
-      <mp-field-visualization
-        subject='[[this]]'
-        fields='[[fieldDefinitions
-                  Mph_Artist_ID_Getty="http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty"
-                  Mph_Preferred_Label_Getty="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Getty"
-                  Mph_Short_Description_Getty="http://www.metaphacts.com/fieldDefinition/Short_Description_Getty"
-                  Mph_Spouse_of_Getty="http://www.metaphacts.com/fieldDefinition/Spouse_of_Getty"
-                  Mph_Birth_Place_getty_select="http://www.metaphacts.com/fieldDefinition/Birth_Place_getty_select"
-                  Mph_Birth_Date_Getty="http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty"
-                  Mph_Death_Date_Getty="http://www.metaphacts.com/fieldDefinition/Death_Date_Getty"
-                  Mph_Main_Nationality_Getty="http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty"
-        ]]'
-        template='{{> property-table}}'>
-        <template id="property-table">
-          [[> rdsParts:FieldBasedVisualization]]
-        </template>
-      </mp-field-visualization>
+      <div data-flex-layout='row top-stretch'>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead role='header'>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+            </thead> 
+              <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                          Mph_Artist_ID_Getty="http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty"
+                          Mph_Preferred_Label_Getty="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Getty"
+                          Mph_Short_Description_Getty="http://www.metaphacts.com/fieldDefinition/Short_Description_Getty"
+                          Mph_Spouse_of_Getty="http://www.metaphacts.com/fieldDefinition/Spouse_of_Getty"
+                          Mph_Birth_Place_getty_select="http://www.metaphacts.com/fieldDefinition/Birth_Place_getty_select"
+                          Mph_Birth_Date_Getty="http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty"
+                          Mph_Death_Date_Getty="http://www.metaphacts.com/fieldDefinition/Death_Date_Getty"
+                          Mph_Main_Nationality_Getty="http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty"
+                ]]'
+                template='{{> property-table}}'>
+                <template id="property-table">
+                  [[> rdsParts:FieldBasedVisualization]]
+                </template>
+              </mp-field-visualization>
+            </table>
+          </div>
+        </div>
     </bs-tab>
     [[/if]]
-    [[#if (ask 'ASK { ?? <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?wiki_wikidata. BIND(IRI(REPLACE(STR(?wiki_wikidata),"https://www.wikidata.org/wiki/","http://www.wikidata.org/entity/")) AS ?wikidata_uri) SERVICE <https://query.wikidata.org/sparql> {  ?wikidata_uri rdfs:label ?value.  } }')]]
+    [[#if (ask 'ASK { ?? <http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as> ?wiki_wikidata. BIND(IRI(REPLACE(STR(?wiki_wikidata),"https://www.wikidata.org/wiki/","http://www.wikidata.org/entity/")) AS ?wikidata_uri) SERVICE <https://query.wikidata.org/sparql> {  ?wikidata_uri ?x ?value.  } }')]]
     <bs-tab event-key='more-from-wikidata' title='More from Wikidata'>
-      <mp-field-visualization
-        subject='[[this]]'
-        fields='[[fieldDefinitions
-                  Mph_Preferred_Label_Wikidata="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Wikidata"
-                  Mph_Name_in_Native_Language_Wikidata="http://www.metaphacts.com/fieldDefinition/Name_in_Native_Language_Wikidata"
-                  Mph_Occupation_Wikidata="http://www.metaphacts.com/fieldDefinition/Occupation_Wikidata"
-                  Mph_Field_of_Work_Wikidata="http://www.metaphacts.com/fieldDefinition/Field_of_Work_Wikidata"
-                  Mph_Description_Wikidata="http://www.metaphacts.com/fieldDefinition/Description_Wikidata"
-                  Mph_Country_of_Citizenship_Wikidata="http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata"
-                  Mph_Movement_Wikidata="http://www.metaphacts.com/fieldDefinition/Movement_Wikidata"
-                  Mph_Spouse_Wikidata="http://www.metaphacts.com/fieldDefinition/Spouse_Wikidata"
-                  Mph_Birth_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata"
-                  Mph_Place_of_Birth_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Birth_Wikidata"
-                  Mph_Death_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Death_Date_Wikidata"
-                  Mph_Place_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata"
-                  Mph_Manner_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata"
-                  Mph_Cause_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Cause_of_Death_Wikidata"
-        ]]'
-        template='{{> property-table}}'>
-        <template id="property-table">
-          [[> rdsParts:FieldBasedVisualization]]
-        </template>
-      </mp-field-visualization>
+      <div data-flex-layout='row top-stretch'>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead role='header'>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+            </thead> 
+              <mp-field-visualization
+              subject='[[this]]'
+              fields='[[fieldDefinitions
+              Mph_Preferred_Label_Wikidata="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Wikidata"
+              Mph_Name_in_Native_Language_Wikidata="http://www.metaphacts.com/fieldDefinition/Name_in_Native_Language_Wikidata"
+              Mph_Occupation_Wikidata="http://www.metaphacts.com/fieldDefinition/Occupation_Wikidata"
+              Mph_Field_of_Work_Wikidata="http://www.metaphacts.com/fieldDefinition/Field_of_Work_Wikidata"
+              Mph_Description_Wikidata="http://www.metaphacts.com/fieldDefinition/Description_Wikidata"
+              Mph_Country_of_Citizenship_Wikidata="http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata"
+              Mph_Movement_Wikidata="http://www.metaphacts.com/fieldDefinition/Movement_Wikidata"
+              Mph_Spouse_Wikidata="http://www.metaphacts.com/fieldDefinition/Spouse_Wikidata"
+              Mph_Birth_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata"
+              Mph_Place_of_Birth_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Birth_Wikidata"
+              Mph_Death_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Death_Date_Wikidata"
+              Mph_Place_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata"
+              Mph_Manner_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata"
+              Mph_Cause_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Cause_of_Death_Wikidata"
+              ]]'
+              template='{{> property-table}}'>
+              <template id="property-table">
+              [[> rdsParts:FieldBasedVisualization]]
+              </template>
+              </mp-field-visualization>
+            </table>
+          </div>
+        </div>
+
     </bs-tab>
     [[/if]]
     [[#if (hasPermission "forms:ldp:*")]] 
@@ -135,6 +168,9 @@
     </bs-tab>
     [[/if]]
   </bs-tabs>
+  <!-- <div class="page__body">
+    [[> 'http://www.metaphacts.com/ontologies/platform#SourceStatements']]
+  </div> -->
 </div>
 <style>
   .panel__uri {

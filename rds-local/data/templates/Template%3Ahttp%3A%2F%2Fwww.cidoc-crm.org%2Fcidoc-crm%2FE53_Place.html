@@ -8,35 +8,41 @@
 </ol>
 
 <div class="page">
-  <div class="page__header page__header--no-image" style="display:block;">
-    <h2><mp-label iri="[[this]]"></mp-label></h2>
-    <div class='panel__uri'>
-      <div title='[[this]]' class='panel__uri-text'>
-        <b>URI:</b> [[this]]
+  <table class='table'>
+    <th>
+      <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+        [[> rdsPages:RecordImage]]
       </div>
-      <mp-copy-to-clipboard text='[[this]]'>
-        <button class='btn btn-link btn-sm panel__uri-copy-button'>
-          <i class='fa fa-clipboard'></i>
-        </button>
-      </mp-copy-to-clipboard>
-    </div>
-    <div><b>Description: </b></div>
-    <i><mp-description iri="[[this]]"></mp-description></i>
-    <div>
-      <b>Types: </b>
-      <semantic-query
-        style='display:inline;'
-        query='SELECT ?type WHERE { ?? a ?type}'
-        no-result-template='-'>
-      </semantic-query>
-    </div>
-  </div>
+    </th>
+    <th>
+      <div class="page__header page__header--no-image" style="display:block;">
+        <h2><mp-label iri="[[this]]"></mp-label></h2>
+        <div class='panel__uri'>
+          <div title='[[this]]' class='panel__uri-text'>
+            <b>URI:</b> [[this]]
+          </div>
+          <mp-copy-to-clipboard text='[[this]]'>
+            <button class='btn btn-link btn-sm panel__uri-copy-button'>
+              <i class='fa fa-clipboard'></i>
+            </button>
+          </mp-copy-to-clipboard>
+        </div>
+        <div><b>Description: </b></div>
+        <i><mp-description iri="[[this]]"></mp-description></i>
+        <div>
+          <b>Types: </b>
+          <semantic-query
+            style='display:inline;'
+            query='SELECT ?type WHERE { ?? a ?type}'
+            no-result-template='-'>
+          </semantic-query>
+        </div>
+      </div>
+    </th>
+  </table>
   <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
     <bs-tab event-key='summary' title='Summary'>
       <div data-flex-layout='row top-stretch'>
-        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
-          [[> rdsPages:RecordImage]]
-        </div>
         <div class='table-responsive'>
           <table class='table'>
             <thead role='header'>
