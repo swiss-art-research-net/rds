@@ -184,7 +184,7 @@
                     Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
                     Rds_Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
                     Rds_dev_Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
-                    Mph_Person_Alternate_Name="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name"
+                    Alternative_Name="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name"
                     Person_Birth="http://www.metaphacts.com/fieldDefinition/Person_Birth_Place"
                     Person_Death="http://www.metaphacts.com/fieldDefinition/Person_Death_Place"
                     Person_Father="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father"
@@ -203,7 +203,7 @@
 
       <semantic-form-composite-input
           for="Identifier"
-          new-subject-template='/identifier/{{Rds_Identifier_Value}}'
+          new-subject-template='/identifier/{{Identifier_Value}}'
           fields='[[fieldDefinitions
                     Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
                     Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
@@ -234,13 +234,13 @@
       <semantic-form-select-input for="Rds_dev_Person_Gender"></semantic-form-select-input>
       
       <semantic-form-composite-input 
-          for="Mph_Person_Alternate_Name"
+          for="Alternative_Name"
           new-subject-template="/appellation/{{Alternate_Name_Value}}"
           fields='[[fieldDefinitions
                     Alternate_Name_Value="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value"
-                    Rds_dev_Person_Alternate_Name_Type="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Type"
-                    Rds_dev_Alternate_Name_Use_Period_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_earliest"
-                    Rds_dev_Alternate_Name_Use_Period_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest"
+                    Person_Alternate_Name_Type="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Type"
+                    Alternate_Name_Use_Period_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_earliest"
+                    Alternate_Name_Use_Period_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest"
                     Attributed_by="http://www.metaphacts.com/fieldDefinition/Alternate_Name_Attributed_by"
                     Source="http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source"
       ]]'>
@@ -248,11 +248,11 @@
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_dev_Person_Alternate_Name_Type"'></semantic-form-text-input>
+        <semantic-form-text-input for="Person_Alternate_Name_Type"'></semantic-form-text-input>
 
-        <semantic-form-datetime-input for="Rds_dev_Alternate_Name_Use_Period_earliest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Alternate_Name_Use_Period_earliest"></semantic-form-datetime-input>
 
-        <semantic-form-datetime-input for="Rds_dev_Alternate_Name_Use_Period_latest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Alternate_Name_Use_Period_latest"></semantic-form-datetime-input>
 
         <semantic-form-text-input for="Attributed_by"></semantic-form-text-input>
 
