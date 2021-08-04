@@ -54,11 +54,12 @@
               <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                          Mph_Identifiers_Place_readOnly="http://www.researchspace.org/instances/fields/Identifiers_Place_readOnly"
-                          Place_Name_Preferred="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Name_Preferred"
-                          Mph_Place_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Place_Name-readOnly"
+                          Identifiers_vis="http://www.metaphacts.com/fieldDefinition/Identifiers-vis"
+                          Name_vis="http://www.metaphacts.com/fieldDefinition/Name-vis"
+                          Mph_Person_Alternate_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly"
+                          Attributed_by_vis="http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis"
+                          Source_vis="http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis"
                           Place_Type="http://www.metaphacts.com/fieldDefinition/Place_Type"
-                          Place_Alternative_Name="http://www.metaphacts.com/fieldDefinition/Place_Alternate_Name-readOnly"
                           Place_Part_of="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of"
                           Place_Has_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Has_Part"
                           Mph_Coordinates-readonly="http://www.metaphacts.com/fieldDefinition/Coordinates-readonly"
@@ -74,7 +75,6 @@
                           Rds_Historical_Parthood_-_Historically_Has_Part_-_Earliest_Date_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part_-_Earliest_Date_Time"
                           Rds_Historical_Parthood_-_Historically_Has_Part_-_Latest_Date_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part_-_Latest_Date_Time"
                           Rds_Historical_Parthood_-_Historicall_Coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historicall_Coordinates"
-
                 ]]'
                 template='{{> property-table}}'>
                 <template id="property-table">
