@@ -1,4 +1,4 @@
-[[#if (ask 'ASK {{??  crm:P138i_has_representation ?image} UNION {??crmdig:L54_is_same-as ?same_uri. ?same_uri crm:P138i_has_representation ?image} }')]]
+[[#if (ask 'ASK {{??  crm:P138i_has_representation ?image} UNION {?? crmdig:L54_is_same-as ?same_uri. ?same_uri crm:P138i_has_representation ?image} }')]]
 <div class="rs-page__summary-image">
   <img src="[[singleValueFromSelect "SELECT ?image WHERE {{ ?? crm:P138i_has_representation ?image} UNION {?? crmdig:L54_is_same-as ?same_uri. ?same_uri crm:P138i_has_representation ?image} }"]]" style="max-height:200px;height:100%"> 
 </div>
