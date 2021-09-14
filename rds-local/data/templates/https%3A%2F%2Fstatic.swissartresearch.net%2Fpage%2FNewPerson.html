@@ -268,7 +268,16 @@
                     Birth_Date_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest"
                     Birth_Date_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_latest"
       ]]'>
-        <semantic-form-text-input for="Birth_Place"> </semantic-form-text-input>
+        <semantic-form-autocomplete-input for='Birth_Place'
+            value-binding-name="subject"
+            lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                "limit": 20
+                }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
 
         <semantic-form-datetime-input for="Birth_Date_earliest"></semantic-form-datetime-input>
 
@@ -284,17 +293,59 @@
                 Death_Date_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Earliest"
                 Death_Date_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Latest"
       ]]'>
-        <semantic-form-text-input for="Death_Place"></semantic-form-text-input>
-
+      
+        <semantic-form-autocomplete-input for='Death_Place'
+            value-binding-name="subject"
+            lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                "limit": 20
+                }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      
         <semantic-form-datetime-input for="Death_Date_earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Death_Date_latest"></semantic-form-datetime-input>
 
       </semantic-form-composite-input>
 
-      <semantic-form-text-input for="Person_Father"></semantic-form-text-input>
+      [[#> showOnRdsGlobalPersonFor fieldName="Person_Father"]]
+        [[#> newSubPerson]]
+          <semantic-form-autocomplete-input
+            for="Person_Father"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+            
+          </semantic-form-autocomplete-input>
+        [[/newSubPerson]]
+      [[/showOnRdsGlobalPersonFor]]
 
-      <semantic-form-text-input for="Person_Mother"></semantic-form-text-input>
+      [[#> showOnRdsGlobalPersonFor fieldName="Person_Mother"]]
+        [[#> newSubPerson]]
+          <semantic-form-autocomplete-input
+            for="Person_Mother"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+            
+          </semantic-form-autocomplete-input>
+        [[/newSubPerson]]
+      [[/showOnRdsGlobalPersonFor]]
 
       <semantic-form-text-input for="National_Affiliation"></semantic-form-text-input>
       <semantic-form-text-input for="Cultural_Affiliation"></semantic-form-text-input>
@@ -306,8 +357,23 @@
                     Rds_Person_Social_Relations_Relation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation"
                     Rds_Person_Social_Relations_Relation_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type"
       ]]'>
-        <semantic-form-text-input for="Rds_Person_Social_Relations_Relation"></semantic-form-text-input>
-
+        [[#> showOnRdsGlobalPersonFor fieldName="Rds_Person_Social_Relations_Relation"]]
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Rds_Person_Social_Relations_Relation"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]]
+              
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
+        [[/showOnRdsGlobalPersonFor]]
         <semantic-form-text-input for="Rds_Person_Social_Relations_Relation_Type"></semantic-form-text-input>
       </semantic-form-composite-input>
 
@@ -330,7 +396,23 @@
 
       </semantic-form-composite-input>
 
-      <semantic-form-text-input for="Associate"></semantic-form-text-input>
+      [[#> showOnRdsGlobalPersonFor fieldName="Associate"]]
+        [[#> newSubPerson]]
+          <semantic-form-autocomplete-input
+            for="Associate"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+            
+          </semantic-form-autocomplete-input>
+        [[/newSubPerson]]
+      [[/showOnRdsGlobalPersonFor]]
 
       <semantic-form-composite-input 
           for="Rds_dev_Floruit"
@@ -339,8 +421,20 @@
                     Mph_Floruit_Place="http://www.metaphacts.com/fieldDefinition/Floruit_Place"
                     Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
                     Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
-      ]]'>
-        <semantic-form-autocomplete-input for="Mph_Floruit_Place"></semantic-form-autocomplete-input>
+      ]]'> 
+        <semantic-form-autocomplete-input
+          for="Mph_Floruit_Place"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 10,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+          
+        </semantic-form-autocomplete-input>
 
         <semantic-form-datetime-input for="Mph_Floruit_Date_earliest"></semantic-form-datetime-input>
 

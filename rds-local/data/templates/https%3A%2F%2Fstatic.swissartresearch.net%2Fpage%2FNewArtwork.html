@@ -26,6 +26,27 @@
   </div>
 [[/if]]
 
+[[#*inline "newSubPerson"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "rdsPages:NewPerson"]]"
+      target="_blank">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> rdsParts:LookupCandidateTemplate]]
+</template>
+[[/inline]]
+
 [[#*inline "search-for-existing"]]
 <div class='row' style='max-width: 100%;'>
   <div class="col-md-8 offset-md-2" style="margin-bottom: 20px; margin-top: 100px">
@@ -263,7 +284,7 @@
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-        <semantic-form-autocomplete-input for="Rds_Artwork_Description_Type"></semantic-form-autocomplete-input>
+        <semantic-form-text-input for="Rds_Artwork_Description_Type"></semantic-form-text-input>
 
         <semantic-form-text-input for="Rds_Artwork_Description_Author"></semantic-form-text-input>
 
@@ -293,8 +314,17 @@
                     Rds_Artwork_Production_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Latest"
                     Rds_Artwork_Creator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator"
       ]]'>
-        <semantic-form-text-input for="Rds_Artwork_Production_Location"></semantic-form-text-input>
-
+        <semantic-form-autocomplete-input for='Rds_Artwork_Production_Location'
+            value-binding-name="subject"
+            lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                "limit": 20
+                }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+        
         <semantic-form-datetime-input for="Rds_Artwork_Production_Date_Earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Rds_Artwork_Production_Date_Latest"></semantic-form-datetime-input>
@@ -306,7 +336,21 @@
                       Rds_Artwork_Creator_Value="http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value"
                       Artwork_Creator_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role"
         ]]'>
-          <semantic-form-text-input for="Rds_Artwork_Creator_Value"></semantic-form-text-input>
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Rds_Artwork_Creator_Value"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]]
+              
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
           <semantic-form-text-input for="Artwork_Creator_Role"></semantic-form-text-input>
         </semantic-form-composite-input>
 
@@ -320,7 +364,17 @@
                     Rds_Artwork_Destruction_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest"
                     Rds_Artwork_Destruction_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Latest"
       ]]'>
-        <semantic-form-text-input for="Rds_Artwork_Destruction_Location"></semantic-form-text-input>
+    
+        <semantic-form-autocomplete-input for='Rds_Artwork_Destruction_Location'
+            value-binding-name="subject"
+            lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                "limit": 20
+                }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
 
         <semantic-form-datetime-input for="Rds_Artwork_Destruction_Date_Earliest"></semantic-form-datetime-input>
 
@@ -389,7 +443,21 @@
 
         <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Technique"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Conservator"></semantic-form-text-input>
+        [[#> newSubPerson]]
+          <semantic-form-autocomplete-input
+            for="Rds_Artwork_Conservator"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+            
+          </semantic-form-autocomplete-input>
+        [[/newSubPerson]]
 
         <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Description" multiline="true"></semantic-form-text-input>
 

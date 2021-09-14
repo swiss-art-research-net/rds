@@ -256,6 +256,20 @@
                     Mph_Formation_Date_latest="http://www.metaphacts.com/fieldDefinition/Formation_Date_latest"
                     Mph_Formed_From="http://www.metaphacts.com/fieldDefinition/Formed_From"
       ]]'>
+        <semantic-form-autocomplete-input
+          for="Mph_Formation_Place"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 10,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+          
+        </semantic-form-autocomplete-input>
+
         <semantic-form-autocomplete-input for="Mph_Formation_Place"></semantic-form-autocomplete-input>
 
         <semantic-form-datetime-input for="Mph_Formation_Date_earliest"></semantic-form-datetime-input>
@@ -274,8 +288,19 @@
                     Mph_Dissolution_Date_earliest="http://www.metaphacts.com/fieldDefinition/Dissolution_Date_earliest"
                     Mph_Dissolution_Date_latest="http://www.metaphacts.com/fieldDefinition/Dissolution_Date_latest"
       ]]'>
-        <semantic-form-autocomplete-input for="Mph_Dissolution_Place"></semantic-form-autocomplete-input>
-
+        <semantic-form-autocomplete-input
+          for="Mph_Dissolution_Place"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 10,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+          
+        </semantic-form-autocomplete-input>
         <semantic-form-datetime-input for="Mph_Dissolution_Date_earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Mph_Dissolution_Date_latest"></semantic-form-datetime-input>
@@ -296,7 +321,19 @@
                     Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
                     Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
       ]]'>
-        <semantic-form-autocomplete-input for="Mph_Floruit_Place"></semantic-form-autocomplete-input>
+        <semantic-form-autocomplete-input
+          for="Mph_Floruit_Place"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 10,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+          
+        </semantic-form-autocomplete-input>
 
         <semantic-form-datetime-input for="Mph_Floruit_Date_earliest"></semantic-form-datetime-input>
 

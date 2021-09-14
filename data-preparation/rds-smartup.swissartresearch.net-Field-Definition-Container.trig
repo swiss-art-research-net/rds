@@ -113,589 +113,6 @@
     prov:wasAttributedTo User:admin .
 }
 
-<http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly> .
-  
-  <http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly> a ldp:Resource,
-      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-27T09:29:11.738Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056799;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056800;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    rdfs:label "Group Fromation"@en .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Group_Dissolution-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Dissolution-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Founding_Member/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Founding_Member> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Members/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Members> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Scope_Of_Activity/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Scope_Of_Activity> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Place_Alternate_Name-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Place_Alternate_Name-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Parts/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Parts> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Material/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Material> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Technique/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Technique> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Dimension-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Dimension-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Function-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Function-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Conservation-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Conservation-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Provenance-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Provenance-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Identifiers-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Identifiers-vis> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Name-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Name-vis> .
-  
-  <http://www.metaphacts.com/fieldDefinition/Name-vis> a ldp:Resource, prov:Entity,
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-03T10:12:35.714Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056931;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056930;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    rdfs:comment "This field is used to indicate the main name attributed to the documented person. No part break down of name is here implied. The full name of an individual is expected here where available.";
-    rdfs:label "Name"@en .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis> .
-  
-  <http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis> a ldp:Resource,
-      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-03T10:33:02.474Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056949;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056950;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    rdfs:label "Alternative Name - Source"@en .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Intitutional_Affiliation-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Intitutional_Affiliation-vis> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Associate/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Associate> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Period_of_Activity-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Period_of_Activity-vis> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Educational_Training-vis/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Educational_Training-vis> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Same_As/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Same_As> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Type-hidden/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Type-hidden> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Cultural_Affiliation/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Cultural_Affiliation> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Associate-input/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Associate-input> .
-  
-  <http://www.metaphacts.com/fieldDefinition/Associate-input> a ldp:Resource, prov:Entity,
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T07:47:32.615Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057384;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057383;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057385;
-    rdfs:label "Associate"@en .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Languages_Used/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Languages_Used> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Citation/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Citation> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Citation_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Citation_Value> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Citation_Source/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Citation_Source> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Name/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Name> .
-  
-  <http://www.metaphacts.com/fieldDefinition/Name> a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-12T15:51:09.230Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t4896;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t4895;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t4894;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
-    <http://www.metaphacts.com/ontology/fields#domain> crm:E21_Person;
-    rdfs:comment "The name of the person";
-    rdfs:label "Name" .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Part_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Part_Type> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_ULAN_URL/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_ULAN_URL> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata> .
-}
-
-<https://resource.swissartresearch.net/fieldDefinition/built_works_description/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_description> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Long_Biography-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Long_Biography-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Alternative_Name_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Alternative_Name_Type> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Name/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name> .
-}
-
-<http://www.researchspace.org/instances/fields/Place_Name/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Place_Name> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Birth_Place/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Place> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier_Value> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Birth_Place-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Place-readOnly> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Owner/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Owner> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Type> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Value> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Birth_place_getty/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_place_getty> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Citation/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Citation> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Name-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/emxgMWwAjBsmUjgLsHUDyvSoEOMyETPuKAUDvxVy/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/emxgMWwAjBsmUjgLsHUDyvSoEOMyETPuKAUDvxVy> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Mother/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Mother> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts_Value/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts_Value> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_latest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_latest> .
-}
-
-<https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest> .
-}
-
-<http://www.researchspace.org/instances/fields/Group_Identifiers/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Group_Identifiers> .
-}
-
-<https://resource.swissartresearch.net/fieldDefinition/End_Date/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/End_Date> .
-}
-
-<https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place> .
-}
-
-<http://resource.swissartresearch.net/fieldDefinition/Title/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://resource.swissartresearch.net/fieldDefinition/Title> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Biography_Language/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Biography_Language> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Place_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Place_Type> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier> .
-}
-
-<http://www.researchspace.org/instances/fields/Identifiers_readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Identifiers_readOnly> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Role/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Role> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Production_Starting_Date/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Production_Starting_Date> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_End_Date/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_End_Date> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_Qualifying_Description/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_Qualifying_Description> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Event/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Event> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Latest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Latest> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Type> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name-read_only/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name-read_only> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Used_By/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Used_By> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Parts-readonly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Parts-readonly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Birth_Date/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Birth_Date> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender-readOnly> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Short_Biography-readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Short_Biography-readOnly> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference> .
-}
-
-<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest> .
-}
-
-<http://www.researchspace.org/instances/fields/Identifiers_Place_readOnly/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Identifiers_Place_readOnly> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Movement_Wikidata/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Movement_Wikidata> .
-}
-
-<https://resource.swissartresearch.net/fieldDefinition/built_works_type/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_type> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address> .
-}
-
-<http://www.researchspace.org/instances/fields/Event_Description_Author/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Event_Description_Author> .
-}
-
-<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Honorific/context> {
-  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Honorific> .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name/context> {
-  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name> .
-}
-
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production/context> {
   Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production> .
 }
@@ -1304,12 +721,12 @@
   
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-12T14:13:28.528Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:35:51.494Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t4597;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t4598;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t4599;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057958;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057959;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057957;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the biological father of the documented person.";
@@ -1376,12 +793,12 @@
   
   <http://www.metaphacts.com/fieldDefinition/Floruit_Place> a ldp:Resource, prov:Entity,
       <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T08:17:06.163Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:49:59.357Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057404;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057405;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057406;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057979;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057980;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057978;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:label "Floruit Place"@en .
@@ -1568,13 +985,13 @@
   
   <http://www.metaphacts.com/fieldDefinition/Place_of_Formation> a ldp:Resource, prov:Entity,
       <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-22T08:14:10.128Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:55:40.012Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t5068;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t5069;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057987;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057984;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t5066;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t5067;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057985;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1057986;
     rdfs:comment "This field is used to indicate the place of formation of the documented group.";
     rdfs:label "Place of Formation"@en .
 }
@@ -1704,6 +1121,419 @@
 
 <http://www.metaphacts.com/fieldDefinition/Person_Citation/context> {
   Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Citation> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Name/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Name> .
+  
+  <http://www.metaphacts.com/fieldDefinition/Name> a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-07-12T15:51:09.230Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t4896;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t4895;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t4894;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
+    <http://www.metaphacts.com/ontology/fields#domain> crm:E21_Person;
+    rdfs:comment "The name of the person";
+    rdfs:label "Name" .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Part_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Part_Type> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_ULAN_URL/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_ULAN_URL> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata> .
+}
+
+<https://resource.swissartresearch.net/fieldDefinition/built_works_description/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_description> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Long_Biography-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Long_Biography-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Alternative_Name_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Alternative_Name_Type> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Name/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name> .
+}
+
+<http://www.researchspace.org/instances/fields/Place_Name/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Place_Name> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Birth_Place/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Place> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier_Value> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Identifier> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Birth_Place-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Place-readOnly> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Owner/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Owner> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Type> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Value> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Birth_place_getty/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_place_getty> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Citation/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Citation> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Name-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/emxgMWwAjBsmUjgLsHUDyvSoEOMyETPuKAUDvxVy/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/emxgMWwAjBsmUjgLsHUDyvSoEOMyETPuKAUDvxVy> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Mother/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Mother> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts_Value> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_latest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_latest> .
+}
+
+<https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest> .
+}
+
+<http://www.researchspace.org/instances/fields/Group_Identifiers/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Group_Identifiers> .
+}
+
+<https://resource.swissartresearch.net/fieldDefinition/End_Date/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/End_Date> .
+}
+
+<https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place> .
+}
+
+<http://resource.swissartresearch.net/fieldDefinition/Title/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://resource.swissartresearch.net/fieldDefinition/Title> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Biography_Language/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Biography_Language> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Place_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Place_Type> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier> .
+}
+
+<http://www.researchspace.org/instances/fields/Identifiers_readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Identifiers_readOnly> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Role/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Role> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Production_Starting_Date/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Production_Starting_Date> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_End_Date/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_End_Date> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_Qualifying_Description/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type_Qualifying_Description> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Event/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Event> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Wikidata_URL> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Latest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Latest> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Type> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name-read_only/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name-read_only> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Used_By/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Used_By> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Parts-readonly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Parts-readonly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Birth_Date/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Birth_Date> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Short_Biography-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Short_Biography-readOnly> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference> .
+}
+
+<https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest> .
+}
+
+<http://www.researchspace.org/instances/fields/Identifiers_Place_readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Identifiers_Place_readOnly> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Movement_Wikidata/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Movement_Wikidata> .
+}
+
+<https://resource.swissartresearch.net/fieldDefinition/built_works_type/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://resource.swissartresearch.net/fieldDefinition/built_works_type> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address> .
+}
+
+<http://www.researchspace.org/instances/fields/Event_Description_Author/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.researchspace.org/instances/fields/Event_Description_Author> .
+}
+
+<https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Honorific/context> {
+  Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Honorific> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name> .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Latest_Possible_End_Date/context> {
@@ -2106,6 +1936,176 @@
   Platform:fieldDefinitionContainer ldp:contains <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Actor> .
 }
 
+<http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly> .
+  
+  <http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly> a ldp:Resource,
+      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-07-27T09:29:11.738Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056799;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056800;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    rdfs:label "Group Fromation"@en .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Group_Dissolution-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Dissolution-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Founding_Member/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Founding_Member> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Members/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Members> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Scope_Of_Activity/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Scope_Of_Activity> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Place_Alternate_Name-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Place_Alternate_Name-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Parts/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Parts> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Material/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Material> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Technique/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Technique> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Dimension-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Dimension-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Function-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Function-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Conservation-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Conservation-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Provenance-readOnly/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Provenance-readOnly> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Identifiers-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Identifiers-vis> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Name-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Name-vis> .
+  
+  <http://www.metaphacts.com/fieldDefinition/Name-vis> a ldp:Resource, prov:Entity,
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-09-14T07:21:47.224Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057941;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057940;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    rdfs:comment "This field is used to indicate the main name attributed to the documented person. No part break down of name is here implied. The full name of an individual is expected here where available.";
+    rdfs:label "Name"@en .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis> .
+  
+  <http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis> a ldp:Resource,
+      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-08-03T10:33:02.474Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056949;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056950;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    rdfs:label "Alternative Name - Source"@en .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Intitutional_Affiliation-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Intitutional_Affiliation-vis> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Associate/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Associate> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Period_of_Activity-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Period_of_Activity-vis> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Educational_Training-vis/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Educational_Training-vis> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Same_As/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Same_As> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Type-hidden/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Type-hidden> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Cultural_Affiliation/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Cultural_Affiliation> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Associate-input/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Associate-input> .
+  
+  <http://www.metaphacts.com/fieldDefinition/Associate-input> a ldp:Resource, prov:Entity,
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-09-14T08:48:17.075Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057973;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057972;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057974;
+    rdfs:label "Associate"@en .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Languages_Used/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Languages_Used> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Citation/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Citation> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Citation_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Citation_Value> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Citation_Source/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Citation_Source> .
+}
+
+<http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value/context> {
+  Platform:fieldDefinitionContainer ldp:contains <http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value> .
+}
+
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
@@ -2245,12 +2245,12 @@
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Location/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Location>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T12:31:34.750Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T09:10:55.989Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057741;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057740;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057739;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1058010;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1058011;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1058009;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the place of the destruction of the documented artwork.";
@@ -2533,12 +2533,12 @@
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-12T14:13:24.478Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:37:35.779Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t4446;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t4445;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t4444;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057962;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057963;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057964;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the biological mother of the documented person.";
@@ -2679,12 +2679,12 @@
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Type/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Type>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T11:59:22.431Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T09:15:23.023Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057682;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057683;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057681;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1058014;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1058013;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1058012;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the type of description given of the documented work.";
@@ -3325,12 +3325,12 @@
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T07:07:33.402Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:46:11.422Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057295;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057294;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057296;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057968;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057969;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057970;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate another person with whom the documented person has a social relation.";
@@ -3370,12 +3370,12 @@
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Location/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Location>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T12:25:59.900Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T09:02:06.989Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057713;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057715;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057714;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057998;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057999;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1058000;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the place of the creation of the documented artwork.";
@@ -4334,6 +4334,18 @@
     rdfs:label "Person Birth Date" .
 }
 
+<http://www.metaphacts.com/fieldDefinition/Citation_Value/context> {
+  <http://www.metaphacts.com/fieldDefinition/Citation_Value> a ldp:Resource, prov:Entity,
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-08-04T08:26:54.623Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057433;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057432;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057434;
+    rdfs:label "Citation"@en .
+}
+
 <http://www.metaphacts.com/fieldDefinition/Parts-readonly/context> {
   <http://www.metaphacts.com/fieldDefinition/Parts-readonly> a ldp:Resource, prov:Entity,
       <http://www.metaphacts.com/ontology/fields#Field>;
@@ -4345,18 +4357,6 @@
     <http://www.metaphacts.com/ontology/fields#domain> crm:E53_Place;
     <http://www.metaphacts.com/ontology/fields#range> crm:E53_Place;
     rdfs:label "Parts"@en .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Citation_Value/context> {
-  <http://www.metaphacts.com/fieldDefinition/Citation_Value> a ldp:Resource, prov:Entity,
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T08:26:54.623Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057433;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057432;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057434;
-    rdfs:label "Citation"@en .
 }
 
 <http://www.metaphacts.com/fieldDefinition/Formed_From/context> {
@@ -4386,13 +4386,13 @@
 <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place/context> {
   <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-03T15:02:53.410Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:33:15.764Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057245;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057246;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057247;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1057248;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057953;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057954;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057952;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1057951;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     <http://www.metaphacts.com/ontology/fields#domain> crm:E21_Person;
@@ -4458,13 +4458,13 @@
 
 <http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value/context> {
   <http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value> prov:generatedAtTime
-      "2021-08-04T12:44:10.344Z"^^xsd:dateTime;
+      "2021-09-14T09:04:34.758Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057767;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057768;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1058006;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1058005;
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057766;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1058004;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
     rdfs:label "Creator"@en .
@@ -4830,13 +4830,13 @@
 <http://www.metaphacts.com/fieldDefinition/Place_of_Dissolution/context> {
   <http://www.metaphacts.com/fieldDefinition/Place_of_Dissolution> a ldp:Resource, prov:Entity,
       <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-22T08:20:06.524Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:58:25.555Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t5088;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t5089;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057989;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057988;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t5090;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t5087;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057990;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1057991;
     rdfs:comment "This field is used to indicate the place of dissolution of the documented group.";
     rdfs:label "Place of Dissolution"@en .
 }
@@ -4945,6 +4945,16 @@
     rdfs:label "Artwork Parts Value" .
 }
 
+<http://www.metaphacts.com/fieldDefinition/Conservation-readOnly/context> {
+  <http://www.metaphacts.com/fieldDefinition/Conservation-readOnly> a ldp:Resource,
+      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-07-27T14:56:53.708Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056890;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056889;
+    rdfs:label "Conservation"@en .
+}
+
 <http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata/context> {
   <http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata> a ldp:Resource,
       prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
@@ -4954,16 +4964,6 @@
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:t5472;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
     rdfs:label "Country of Citizenship [Wikidata]"@undefined .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Conservation-readOnly/context> {
-  <http://www.metaphacts.com/fieldDefinition/Conservation-readOnly> a ldp:Resource,
-      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-07-27T14:56:53.708Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056890;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056889;
-    rdfs:label "Conservation"@en .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance/context> {
@@ -4990,6 +4990,18 @@
     rdfs:label "Technique"@en .
 }
 
+<http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source/context> {
+  <http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source> a ldp:Resource,
+      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-08-03T14:45:00.189Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057197;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057198;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057196;
+    rdfs:label "Alternative Name - Source"@en .
+}
+
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
@@ -5002,18 +5014,6 @@
     <http://www.metaphacts.com/ontology/fields#domain> crm:E33_Linguistic_Object;
     rdfs:comment "This field is used to indicate the main name attributed to the documented bibliographic item. No part break down of name is here implied. The full name of an individual is expected here where available.";
     rdfs:label "Bilbiographic Item Title Part" .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source/context> {
-  <http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source> a ldp:Resource,
-      prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-03T14:45:00.189Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057197;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057198;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057196;
-    rdfs:label "Alternative Name - Source"@en .
 }
 
 <http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific/context> {
@@ -5083,6 +5083,17 @@
     rdfs:label "Present Location - Institution" .
 }
 
+<http://www.metaphacts.com/fieldDefinition/Identifiers-vis/context> {
+  <http://www.metaphacts.com/fieldDefinition/Identifiers-vis> a ldp:Resource, prov:Entity,
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    prov:generatedAtTime "2021-08-03T09:55:51.980Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056919;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056918;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    rdfs:label "Identifier"@en .
+}
+
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
@@ -5097,17 +5108,6 @@
     <http://www.metaphacts.com/ontology/fields#domain> crm:E5_Event;
     rdfs:comment "This field is used to indicate the earliest possible start date for the event.";
     rdfs:label "Event Earliest Possible Start Date"@en .
-}
-
-<http://www.metaphacts.com/fieldDefinition/Identifiers-vis/context> {
-  <http://www.metaphacts.com/fieldDefinition/Identifiers-vis> a ldp:Resource, prov:Entity,
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-03T09:55:51.980Z"^^xsd:dateTime;
-    prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1056919;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1056918;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    rdfs:label "Identifier"@en .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part/context> {
@@ -5181,12 +5181,12 @@
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator/context> {
   <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator>
     a ldp:Resource, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-04T13:25:23.985Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T09:33:54.813Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057859;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057857;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057858;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1058023;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1058022;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1058021;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the actor the carried out the conservation event performed on the documented artwork.";
@@ -5432,13 +5432,13 @@
 <http://www.metaphacts.com/fieldDefinition/Birth_Place/context> {
   <http://www.metaphacts.com/fieldDefinition/Birth_Place> a ldp:Resource, prov:Entity,
       <http://www.metaphacts.com/ontology/fields#Field>;
-    prov:generatedAtTime "2021-08-03T14:56:29.893Z"^^xsd:dateTime;
+    prov:generatedAtTime "2021-09-14T08:27:40.378Z"^^xsd:dateTime;
     prov:wasAttributedTo User:admin;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057226;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057229;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057228;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1057227;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t1057946;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t1057945;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t1057948;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:t1057947;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the place of birth of the documented person.";
@@ -5915,29 +5915,24 @@ WHERE {
 }
 
 <http://www.metaphacts.com/fieldDefinition/Floruit_Place/context> {
-  _:t1057405 a sp:Query;
+  _:t1057980 a sp:Query;
     sp:text """SELECT ?value ?label 
 WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value_uri . 
-  ?value_uri rdfs:label ?value.
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value
 }""" .
   
-  _:t1057406 a sp:Query;
-    sp:text """DELETE { 
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value_uri
-} WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value_uri . 
-  ?value_uri rdfs:label ?value.
-}""" .
-  
-  _:t1057404 a sp:Query;
+  _:t1057979 a sp:Query;
     sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 INSERT {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value_uri . 
-  ?value_uri rdfs:label ?value.
-  ?value_uri a crm:E53_Place.
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value . 
+  ?value a crm:E53_Place.
+} WHERE {}""" .
+  
+  _:t1057978 a sp:Query;
+    sp:text """DELETE { 
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value
 } WHERE {
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/place/\", MD5(?value))) as ?value_uri).
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value
 }""" .
 }
 
@@ -5965,21 +5960,14 @@ WHERE {
 }
 
 <http://www.metaphacts.com/fieldDefinition/Place_of_Formation/context> {
-  _:t5068 a sp:Query;
-    sp:text """INSERT {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
-  ?value rdfs:label ?label.
+  _:t1057985 a sp:Query;
+    sp:text """DELETE { 
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value
 } WHERE {
-  ?value rdfs:label ?label.
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value . 
 }""" .
   
-  _:t5069 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  $subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
-  ?value rdfs:label ?label.
-}""" .
-  
-  _:t5067 a sp:Query;
+  _:t1057986 a sp:Query;
     sp:text """prefix bds: <http://www.bigdata.com/rdf/search#>
 SELECT ?value ?label WHERE {
     ?value a <http://www.geonames.org/ontology#Feature>.
@@ -5987,12 +5975,14 @@ SELECT ?value ?label WHERE {
     ?label bds:search ?__token__.
 } LIMIT 10""" .
   
-  _:t5066 a sp:Query;
-    sp:text """DELETE { 
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value
-} WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value . 
-  ?value rdfs:label ?label.
+  _:t1057987 a sp:Query;
+    sp:text """INSERT {
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
+} WHERE {}""" .
+  
+  _:t1057984 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  $subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
 }""" .
 }
 
@@ -6158,39 +6148,34 @@ INSERT {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father/context> {
-  _:t4599 a sp:Query;
+  _:t1057958 a sp:Query;
+    sp:text """INSERT { 
+  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?birth_uri a crm:E67_Birth .
+  ?birth_uri crm:P97_from_father ?value.
+  ?value a crm:E21_Person .
+} WHERE { 
+  BIND(IRI(CONCAT(STR($subject),\"/birth\")) as ?birth_uri).  
+} """ .
+  
+  _:t1057959 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?birth_uri a crm:E67_Birth .
+  ?birth_uri crm:P97_from_father ?value.
+  ?value a crm:E21_Person .
+}""" .
+  
+  _:t1057957 a sp:Query;
     sp:text """DELETE {
   #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri crm:P97_from_father ?father_uri.
+  ?birth_uri crm:P97_from_father ?value.
 }
 WHERE {
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?father_uri.
-  ?father_uri a crm:E21_Person .
-  ?father_uri rdfs:label ?value.
-}""" .
-  
-  _:t4597 a sp:Query;
-    sp:text """INSERT { 
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?father_uri.
-  ?father_uri a crm:E21_Person .
-  ?father_uri rdfs:label ?value.
-} 
-WHERE { 
-  BIND(IRI(CONCAT(STR($subject),\"/birth\")) as ?birth_uri).  
-  BIND(IRI(CONCAT(REPLACE(STR(?subject),\"person/[a-zA-Z0-9_-]*\",\"person/\"), MD5(str(?value)))) as ?father_uri).
-} """ .
-  
-  _:t4598 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P97_from_father ?father_uri.
-  ?father_uri a crm:E21_Person .
-  ?father_uri rdfs:label ?value.
+  ?birth_uri crm:P97_from_father ?value.
+  ?value a crm:E21_Person .
 }""" .
 }
 
@@ -6375,38 +6360,36 @@ SELECT ?value ?label WHERE {
 }
 
 <http://www.metaphacts.com/fieldDefinition/Associate-input/context> {
-  _:t1057383 a sp:Query;
+  _:t1057973 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+INSERT {
+  $subject crm:P11i_participated_in ?x.
+  ?x a crm:E5_Event.
+  ?x crm:P11_had_participant ?value.
+  ?value a crm:E21_Person.
+} WHERE {
+  BIND(IRI(CONCAT(STR(?subject),\"/event/\",ENCODE_FOR_URI(LCASE(str(?value))))) AS ?x)
+}""" .
+  
+  _:t1057974 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+DELETE {
+  ?x crm:P11_had_participant ?value.
+} WHERE {
+  $subject crm:P11i_participated_in ?x.
+  ?x a crm:E5_Event.
+  ?x crm:P11_had_participant ?value.
+  ?value a crm:E21_Personvalue.
+}""" .
+  
+  _:t1057972 a sp:Query;
     sp:text """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?value ?label WHERE {
   $subject crm:P11i_participated_in ?x.
   ?x a crm:E5_Event.
-  ?x crm:P11_had_participant ?value_uri.
-  ?value_uri a crm:E21_Person;
-     rdfs:label ?value.
-}""" .
-  
-  _:t1057384 a sp:Query;
-    sp:text """INSERT {
-  $subject crm:P11i_participated_in ?x.
-  ?x a crm:E5_Event.
-  ?x crm:P11_had_participant ?value_uri.
-  ?value_uri a crm:E21_Person;
-     rdfs:label ?value.
-} WHERE {
-   BIND(IRI(CONCAT(STR(?subject),\"/event/\",ENCODE_FOR_URI(LCASE(?value)))) AS ?x)
-   BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/person/\",ENCODE_FOR_URI(LCASE(?value)))) AS ?value_uri)
-}""" .
-  
-  _:t1057385 a sp:Query;
-    sp:text """DELETE {
-  ?x crm:P11_had_participant ?value_uri.
-} WHERE {
-  $subject crm:P11i_participated_in ?x.
-  ?x a crm:E5_Event.
-  ?x crm:P11_had_participant ?value_uri.
-  ?value_uri a crm:E21_Person;
-     rdfs:label ?value.
+  ?x crm:P11_had_participant ?value.
+  ?value a crm:E21_Person.
 }""" .
 }
 
@@ -7216,10 +7199,13 @@ WHERE {  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as 
 }
 
 <http://www.metaphacts.com/fieldDefinition/Name-vis/context> {
-  _:t1056930 a sp:Query;
+  _:t1057941 a sp:Query;
+    sp:text "INSERT { $subject ?predicate $value} WHERE {}" .
+  
+  _:t1057940 a sp:Query;
     sp:text """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-SELECT ?value ?label WHERE {
+SELECT DISTINCT ?value ?label WHERE {
   $subject crm:P1_is_identified_by ?name.
   ?name a crm:E33_E41_Linguistic_Appellation.
   ?name crm:P190_is_expressed_in ?name_label.
@@ -7230,9 +7216,6 @@ SELECT ?value ?label WHERE {
   ?lang rdfs:label ?lang_label.
   BIND(CONCAT(?name_label,\" (\",?lang_label,\")\") AS ?value)
 }""" .
-  
-  _:t1056931 a sp:Query;
-    sp:text "INSERT { $subject ?predicate $value} WHERE {}" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type/context> {
@@ -7503,31 +7486,26 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Location/context> {
-  _:t1057739 a sp:Query;
+  _:t1058009 a sp:Query;
     sp:text """DELETE {  
-   ?subject crm:P7_took_place_at ?value_uri.
+   ?subject crm:P7_took_place_at ?value.
 } WHERE {
-  ?subject crm:P7_took_place_at ?value_uri.
-  ?value_uri a crm:E53_Place;
-    rdfs:label ?value.
+  ?subject crm:P7_took_place_at ?value.
+  ?value a crm:E53_Place.
 }""" .
   
-  _:t1057740 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P7_took_place_at ?value_uri.
-  ?value_uri a crm:E53_Place;
-    rdfs:label ?value.
-}""" .
-  
-  _:t1057741 a sp:Query;
+  _:t1058010 a sp:Query;
     sp:text """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 INSERT { 
-  ?subject crm:P7_took_place_at ?value_uri.
-  ?value_uri a crm:E53_Place;
-    rdfs:label ?value.
-} WHERE {
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/place/\", MD5($value))) as ?value_uri). 
+  ?subject crm:P7_took_place_at ?value.
+  ?value a crm:E53_Place.
+} WHERE { }""" .
+  
+  _:t1058011 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject crm:P7_took_place_at ?value.
+  ?value a crm:E53_Place.
 }""" .
 }
 
@@ -8067,40 +8045,36 @@ WHERE {}""" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother/context> {
-  _:t4444 a sp:Query;
+  _:t1057963 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?birth_uri a crm:E67_Birth .
+  ?birth_uri crm:P96_by_mother ?value.
+  ?value a crm:E21_Person .
+}""" .
+  
+  _:t1057964 a sp:Query;
     sp:text """DELETE {
   #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri crm:P96_by_mother ?mother_uri.
+  ?birth_uri crm:P96_by_mother ?value.
 }
 WHERE {
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P96_by_mother ?mother_uri.
-  ?mother_uri a crm:E21_Person .
-  ?mother_uri rdfs:label ?value.
+  ?birth_uri crm:P96_by_mother ?value.
+  ?value a crm:E21_Person .
 }""" .
   
-  _:t4446 a sp:Query;
+  _:t1057962 a sp:Query;
     sp:text """INSERT { 
   ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P96_by_mother ?mother_uri.
-  ?mother_uri a crm:E21_Person .
-  ?mother_uri rdfs:label ?value.
+  ?birth_uri crm:P96_by_mother ?value.
+  ?value a crm:E21_Person .
 } 
 WHERE { 
   BIND(IRI(CONCAT(STR($subject),\"/birth\")) as ?birth_uri).  
-  BIND(IRI(CONCAT(REPLACE(STR(?subject),\"person/[a-zA-Z0-9_-]*\",\"person/\"), MD5(str(?value)))) as ?mother_uri).
 } """ .
-  
-  _:t4445 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
-  ?birth_uri a crm:E67_Birth .
-  ?birth_uri crm:P96_by_mother ?mother_uri.
-  ?mother_uri a crm:E21_Person .
-  ?mother_uri rdfs:label ?value.
-}""" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Citation/context> {
@@ -8406,16 +8380,7 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Type/context> {
-  _:t1057683 a sp:Query;
-    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-SELECT distinct ?value ?label WHERE {
-  ?subject crm:P2_has_type ?value_uri.
-  ?value_uri a crm:E55_Type.
-  ?value_uri rdfs:label ?value 
-}""" .
-  
-  _:t1057682 a sp:Query;
+  _:t1058014 a sp:Query;
     sp:text """INSERT { 
   ?subject crm:P2_has_type ?value_uri.
   ?value_uri a crm:E55_Type.
@@ -8424,10 +8389,19 @@ SELECT distinct ?value ?label WHERE {
    BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/type/\", MD5($value))) as ?type_uri). 
 }""" .
   
-  _:t1057681 a sp:Query;
+  _:t1058012 a sp:Query;
     sp:text """DELETE {  
   ?subject crm:P2_has_type ?value_uri.
 } WHERE {
+  ?subject crm:P2_has_type ?value_uri.
+  ?value_uri a crm:E55_Type.
+  ?value_uri rdfs:label ?value 
+}""" .
+  
+  _:t1058013 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT distinct ?value ?label WHERE {
   ?subject crm:P2_has_type ?value_uri.
   ?value_uri a crm:E55_Type.
   ?value_uri rdfs:label ?value 
@@ -9607,32 +9581,25 @@ WHERE {}""" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation/context> {
-  _:t1057296 a sp:Query;
+  _:t1057970 a sp:Query;
     sp:text """DELETE {
-  ?subject crm:P02_has_range ?person_uri.
-  ?person_uri rdfs:label ?value.
+  ?subject crm:P02_has_range ?value.
 }
 WHERE {
-  ?subject crm:P02_has_range ?person_uri.
-  ?person_uri a crm:E21_Person .
-  ?person_uri rdfs:label ?value.
+  ?subject crm:P02_has_range ?value.
+  ?value a crm:E21_Person .
 }""" .
   
-  _:t1057295 a sp:Query;
+  _:t1057968 a sp:Query;
     sp:text """INSERT { 
-  ?subject crm:P02_has_range ?person_uri.
-  ?person_uri a crm:E21_Person .
-  ?person_uri rdfs:label ?value.
-} 
-WHERE { 
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/person/\", MD5(str(?value)))) as ?person_uri).  
-} """ .
+  ?subject crm:P02_has_range ?value.
+  ?value a crm:E21_Person .
+} WHERE {} """ .
   
-  _:t1057294 a sp:Query;
+  _:t1057969 a sp:Query;
     sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P02_has_range ?person_uri.
-  ?person_uri a crm:E21_Person .
-  ?person_uri rdfs:label ?value.
+  ?subject crm:P02_has_range ?value.
+  ?value a crm:E21_Person .
 }""" .
 }
 
@@ -9694,32 +9661,27 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Location/context> {
-  _:t1057714 a sp:Query;
-    sp:text """DELETE {  
-   ?subject crm:P7_took_place_at ?value_uri.
-} WHERE {
-  ?subject crm:P7_took_place_at ?value_uri.
-  ?value_uri a crm:E53_Place;
-    rdfs:label ?value.
+  _:t1057999 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject crm:P7_took_place_at ?value.
+  ?value a crm:E53_Place.
 }""" .
   
-  _:t1057713 a sp:Query;
+  _:t1058000 a sp:Query;
+    sp:text """DELETE {  
+  ?subject crm:P7_took_place_at ?value.
+} WHERE {
+  ?subject crm:P7_took_place_at ?value.
+  ?value a crm:E53_Place.
+}""" .
+  
+  _:t1057998 a sp:Query;
     sp:text """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 INSERT { 
-  ?subject crm:P7_took_place_at ?value_uri.
-  ?value_uri a crm:E53_Place;
-    rdfs:label ?value.
-} WHERE {
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/place/\", MD5($value))) as ?value_uri). 
-}""" .
-  
-  _:t1057715 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P7_took_place_at ?value_uri.
-  ?value_uri a crm:E53_Place;
-    rdfs:label ?value.
-}""" .
+  ?subject crm:P7_took_place_at ?value.
+  ?value a crm:E53_Place.
+} WHERE {}""" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name-readonly/context> {
@@ -11671,23 +11633,7 @@ SELECT ?value ?label WHERE {
 }
 
 <https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place/context> {
-  _:t1057246 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P7_took_place_at ?value_uri . 
-  ?value_uri a crm:E53_Place.
-  ?value_uri rdfs:label ?value.
-}""" .
-  
-  _:t1057247 a sp:Query;
-    sp:text """DELETE { 
-  ?subject crm:P7_took_place_at ?value_uri .
-} WHERE {
-  ?subject crm:P7_took_place_at ?value_uri . 
-  ?value_uri a crm:E53_Place.
-  ?value_uri rdfs:label ?value.
-}""" .
-  
-  _:t1057248 a sp:Query;
+  _:t1057951 a sp:Query;
     sp:text """SELECT ?value ?label WHERE {
   ?value a crm:E53_Place.
   ?value rdfs:label ?label .
@@ -11697,15 +11643,28 @@ SELECT ?value ?label WHERE {
   bds:matchAllTerms \"true\" .
 } LIMIT 10""" .
   
-  _:t1057245 a sp:Query;
+  _:t1057953 a sp:Query;
     sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 INSERT {
-  ?subject crm:P7_took_place_at ?value_uri . 
-  ?value_uri a crm:E53_Place.
-  ?value_uri rdfs:label ?value.
+  ?subject crm:P7_took_place_at ?value . 
+  ?value a crm:E53_Place.
+} WHERE {}""" .
+  
+  _:t1057952 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+DELETE { 
+  ?subject crm:P7_took_place_at ?value .
 } WHERE {
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/place/\",ENCODE_FOR_URI(LCASE(?value)))) AS ?value_uri)
+  ?subject crm:P7_took_place_at ?value . 
+  ?value a crm:E53_Place.
+}""" .
+  
+  _:t1057954 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+SELECT ?value ?label WHERE {
+  ?subject crm:P7_took_place_at ?value . 
+  ?value a crm:E53_Place.
 }""" .
 }
 
@@ -11831,30 +11790,25 @@ WHERE {
 }
 
 <http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value/context> {
-  _:t1057766 a sp:Query;
-    sp:text """DELETE {
-  ?subject crm:P02_has_range ?value_uri.
-} WHERE {
-  ?subject crm:P02_has_range ?value_uri.
-  ?value_uri a crm:E39_Actor.
-  ?value_uri rdfs:label ?value.
-}""" .
-  
-  _:t1057767 a sp:Query;
+  _:t1058006 a sp:Query;
     sp:text """INSERT {
-  ?subject crm:P02_has_range ?value_uri.
-  ?value_uri a crm:E39_Actor.
-  ?value_uri rdfs:label ?value.
-} WHERE {
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/actor/\", MD5($value))) as ?value_uri). 
-}""" .
+  ?subject crm:P02_has_range ?value.
+  ?value a crm:E39_Actor.
+} WHERE {}""" .
   
-  _:t1057768 a sp:Query;
+  _:t1058005 a sp:Query;
     sp:text """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?value ?label WHERE {
-  ?subject crm:P02_has_range ?value_uri.
-  ?value_uri a crm:E39_Actor.
-  ?value_uri rdfs:label ?value.
+  ?subject crm:P02_has_range ?value.
+  ?value a crm:E39_Actor.
+}""" .
+  
+  _:t1058004 a sp:Query;
+    sp:text """DELETE {
+  ?subject crm:P02_has_range ?value.
+} WHERE {
+  ?subject crm:P02_has_range ?value.
+  ?value a crm:E39_Actor.
 }""" .
 }
 
@@ -12534,15 +12488,7 @@ WHERE {
 }
 
 <http://www.metaphacts.com/fieldDefinition/Place_of_Dissolution/context> {
-  _:t5088 a sp:Query;
-    sp:text """INSERT {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
-  ?value rdfs:label ?label.
-} WHERE {
-  ?value rdfs:label ?label.
-}""" .
-  
-  _:t5087 a sp:Query;
+  _:t1057991 a sp:Query;
     sp:text """prefix bds: <http://www.bigdata.com/rdf/search#>
 SELECT ?value ?label WHERE {
     ?value a <http://www.geonames.org/ontology#Feature>.
@@ -12550,18 +12496,21 @@ SELECT ?value ?label WHERE {
     ?label bds:search ?__token__.
 } LIMIT 10""" .
   
-  _:t5090 a sp:Query;
+  _:t1057989 a sp:Query;
+    sp:text """INSERT {
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
+} WHERE {}""" .
+  
+  _:t1057990 a sp:Query;
     sp:text """DELETE { 
   ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value
 } WHERE {
   ?subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value . 
-  ?value rdfs:label ?label.
 }""" .
   
-  _:t5089 a sp:Query;
+  _:t1057988 a sp:Query;
     sp:text """SELECT ?value ?label WHERE {
   $subject <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
-  ?value rdfs:label ?label.
 }""" .
 }
 
@@ -13299,31 +13248,27 @@ WHERE {
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator/context> {
-  _:t1057859 a sp:Query;
-    sp:text """INSERT { 
-  ?subject crm:P14_carried_out_by ?conservator_uri.
-  ?conservator_uri a crm:E21_Person.
-  ?conservator_uri rds:label ?value.
-} WHERE { 
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/person/\", MD5(str($value)))) as ?conservator_uri).  
-} """ .
-  
-  _:t1057858 a sp:Query;
-    sp:text """DELETE {
-  ?subject crm:P14_carried_out_by ?conservator_uri.
-  ?conservator_uri rds:label ?value.
-}
-WHERE {
-  ?subject crm:P14_carried_out_by ?conservator_uri.
-  ?conservator_uri a crm:E21_Person.
-  ?conservator_uri rds:label ?value.
+  _:t1058022 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+SELECT ?value ?label WHERE {
+  ?subject crm:P14_carried_out_by ?value.
+  ?value a crm:E21_Person
 }""" .
   
-  _:t1057857 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P14_carried_out_by ?conservator_uri.
-  ?conservator_uri a crm:E21_Person.
-  ?conservator_uri rds:label ?value.
+  _:t1058023 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+INSERT { 
+  ?subject crm:P14_carried_out_by ?value.
+  ?value a crm:E21_Person
+} WHERE {} """ .
+  
+  _:t1058021 a sp:Query;
+    sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+DELETE {
+  ?subject crm:P14_carried_out_by ?value.
+} WHERE {
+  ?subject crm:P14_carried_out_by ?value.
+  ?value a crm:E21_Person
 }""" .
 }
 
@@ -13778,27 +13723,29 @@ WHERE{
 }
 
 <http://www.metaphacts.com/fieldDefinition/Birth_Place/context> {
-  _:t1057228 a sp:Query;
+  _:t1057948 a sp:Query;
     sp:text """DELETE { 
-  ?subject crm:P7_took_place_at ?value_uri .
+  ?subject crm:P7_took_place_at ?value .
 } WHERE {
-  ?subject crm:P7_took_place_at ?value_uri . 
-  ?value_uri a crm:E53_Place.
-  ?value_uri rdfs:label ?value.
+  ?subject crm:P7_took_place_at ?value . 
+  ?value a crm:E53_Place.
 }""" .
   
-  _:t1057226 a sp:Query;
+  _:t1057945 a sp:Query;
+    sp:text """SELECT ?value ?label WHERE {
+  ?subject crm:P7_took_place_at ?value . 
+  ?value a crm:E53_Place.
+}""" .
+  
+  _:t1057946 a sp:Query;
     sp:text """PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 INSERT {
-  ?subject crm:P7_took_place_at ?value_uri . 
-  ?value_uri a crm:E53_Place.
-  ?value_uri rdfs:label ?value.
-} WHERE {
-  BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/place/\",ENCODE_FOR_URI(LCASE(?value)))) AS ?value_uri)
-}""" .
+  ?subject crm:P7_took_place_at ?value . 
+  ?value a crm:E53_Place.
+} WHERE {}""" .
   
-  _:t1057227 a sp:Query;
+  _:t1057947 a sp:Query;
     sp:text """SELECT ?value ?label WHERE {
   ?value a crm:E53_Place.
   ?value rdfs:label ?label .
@@ -13807,13 +13754,6 @@ INSERT {
   bds:relevance ?score ;
   bds:matchAllTerms \"true\" .
 } LIMIT 10""" .
-  
-  _:t1057229 a sp:Query;
-    sp:text """SELECT ?value ?label WHERE {
-  ?subject crm:P7_took_place_at ?value_uri . 
-  ?value_uri a crm:E53_Place.
-  ?value_uri rdfs:label ?value.
-}""" .
 }
 
 <http://www.metaphacts.com/fieldDefinition/Group_Formation/context> {
@@ -14359,9 +14299,9 @@ SELECT ?value ?label WHERE {
 }
 
 <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer/context> {
-  _:node1fc87vsl5x262 ldp:contains Platform:fieldDefinitionContainer .
+  _:node1ffhim462x317 ldp:contains Platform:fieldDefinitionContainer .
 }
 
 {
-  _:node1fc87vsl5x262 a ldp:Container, ldp:Resource .
+  _:node1ffhim462x317 a ldp:Container, ldp:Resource .
 }
