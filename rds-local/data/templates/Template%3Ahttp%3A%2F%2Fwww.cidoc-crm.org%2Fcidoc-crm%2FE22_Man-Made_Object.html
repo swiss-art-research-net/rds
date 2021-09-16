@@ -1,0 +1,171 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+    <mp-label iri='[[this]]'></mp-label>
+  </li>
+</ol>
+
+<div class="page">
+  <table class='table'>
+    <th>
+      <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+        [[> rdsPages:RecordImage]]
+      </div>
+    </th>
+    <th>
+      <div class="page__header page__header--no-image" style="display:block;">
+        <h2><mp-label iri="[[this]]"></mp-label></h2>
+        <div class='panel__uri'>
+          <div title='[[this]]' class='panel__uri-text'>
+            <b>URI:</b> [[this]]
+          </div>
+          <mp-copy-to-clipboard text='[[this]]'>
+            <button class='btn btn-link btn-sm panel__uri-copy-button'>
+              <i class='fa fa-clipboard'></i>
+            </button>
+          </mp-copy-to-clipboard>
+        </div>
+        <div><b>Description: </b></div>
+        <i><mp-description iri="[[this]]"></mp-description></i>
+        <div>
+          <b>Types: </b>
+          <semantic-query
+            style='display:inline;'
+            query='SELECT ?type WHERE { ?? a ?type}'
+            no-result-template='-'>
+          </semantic-query>
+        </div>
+      </div>
+    </th>
+  </table>
+  <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
+    [[#if (ask 'ASK { ?? <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type. ?type rdfs:label ?type_label. FILTER(STR(?type_label)="Built Work")}')]]
+    <bs-tab event-key='summary' title='Summary'>
+      <div data-flex-layout='row top-stretch'>
+        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+          [[> rdsPages:RecordImage]]
+        </div>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead role='header'>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <mp-field-visualization
+            subject='[[this]]'
+            fields='[[fieldDefinitions
+                      built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
+                      built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
+                      built_works_description="https://resource.swissartresearch.net/fieldDefinition/built_works_description"
+                      built_works_construction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from"
+                      built_works_construction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_to"
+                      built_works_destruction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from"
+                      built_works_destruction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_to"
+                      built_works_actor="https://resource.swissartresearch.net/fieldDefinition/built_works_actor"
+                      built_works_actor_uuid="https://resource.swissartresearch.net/fieldDefinition/built_works_actor_uuid"
+            ]]'
+            template='{{> property-table}}'
+            >
+            <template id="property-table">
+              [[> rdsParts:FieldBasedVisualization]]
+            </template>
+          </mp-field-visualization>
+          </table>
+        </div>
+      </div>
+    </bs-tab>
+    [[else]]
+    <bs-tab event-key='summary' title='Summary'>
+      <div data-flex-layout='row top-stretch'>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead role='header'>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <mp-field-visualization
+            subject='[[this]]'
+            fields='[[fieldDefinitions
+                      Mph_Identifiers_readOnly="http://www.researchspace.org/instances/fields/Identifiers_readOnly"
+                      built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
+                      built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
+                      Alternate_Name="http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly"
+                      built_works_description="https://resource.swissartresearch.net/fieldDefinition/built_works_description"
+                      Parts="http://www.metaphacts.com/fieldDefinition/Parts"
+                      built_works_construction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from"
+                      built_works_construction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_to"
+                      built_works_destruction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from"
+                      built_works_destruction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_to"
+                      built_works_actor="https://resource.swissartresearch.net/fieldDefinition/built_works_actor"
+                      built_works_actor_uuid="https://resource.swissartresearch.net/fieldDefinition/built_works_actor_uuid"
+                      Material="http://www.metaphacts.com/fieldDefinition/Material"
+                      Technique="http://www.metaphacts.com/fieldDefinition/Technique"
+                      Dimension="http://www.metaphacts.com/fieldDefinition/Dimension-readOnly"
+                      Function="http://www.metaphacts.com/fieldDefinition/Function-readOnly"
+                      Conservation="http://www.metaphacts.com/fieldDefinition/Conservation-readOnly"
+                      Location="http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly"
+                      Citation="http://www.metaphacts.com/fieldDefinition/Person_Citation"
+                      Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner"
+                      Holder="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Holder"
+                      Subject="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject"
+
+            ]]'
+            template='{{> property-table}}'
+            >
+            <template id="property-table">
+              [[> rdsParts:FieldBasedVisualization]]
+            </template>
+          </mp-field-visualization>
+          </table>
+        </div>
+      </div>
+    </bs-tab>
+    [[/if]]
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <bs-tab event-key='authoring' title='Authoring'>
+      <div> 
+        <div data-flex-layout='row top-stretch'>
+          <div class='authoring_section'>
+            [[#if (ask 'ASK { ?? <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type. ?type rdfs:label ?type_label. FILTER(STR(?type_label)="Built Work")}')]]
+              [[> rdsPages:NewBuiltwork edit=true]]
+            [[else]]
+              [[> rdsPages:NewArtwork edit=true]]
+            [[/if]]
+          </div>
+        </div>
+      </div>
+    </bs-tab>
+    [[/if]]
+  </bs-tabs>
+</div>
+
+<style>
+  .panel__uri {
+    display: flex;
+    align-items: center;
+  }
+
+  .knowledge-pane__uri-copy-button {
+    flex: 0 0 auto;
+    opacity: 0;
+    visibility: visible;
+    transition: opacity 0.3s;
+  }
+
+  .panel__uri:hover .panel__uri-copy-button {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .panel__uri-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

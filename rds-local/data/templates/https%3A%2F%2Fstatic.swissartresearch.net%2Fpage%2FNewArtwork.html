@@ -1,0 +1,632 @@
+[[#if edit]]
+[[else]]
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+[[/if]]
+
+[[#if (hasPermission "forms:ldp:*")]]
+  <div class="page">
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        [[#if edit]]
+          [[> edit-artwork-form]]
+        [[else]]
+          {{#if hideSearch}}{{else}}
+            [[> search-for-existing]]
+          {{/if}}
+          {{#if newArtwork}}
+            [[> edit-artwork-form]]
+          {{/if}}
+        [[/if]]
+      </template>
+    </mp-event-target-template-render>
+  </div>
+[[/if]]
+
+[[#*inline "newSubPerson"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "rdsPages:NewPerson"]]"
+      target="_blank">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> rdsParts:LookupCandidateTemplate]]
+</template>
+[[/inline]]
+
+[[#*inline "search-for-existing"]]
+<div class='row' style='max-width: 100%;'>
+  <div class="col-md-8 offset-md-2" style="margin-bottom: 20px; margin-top: 100px">
+    <h2>Creation of a new artwork</h2>
+    <p>
+      Before creating a new artwork, please type in the name to check if such artwork already exists on RDF-Global or locally. If you'd like to create an instance of the existing artwork locally, press the "link" button next to the relevant match in the table below.
+    </p>
+    <semantic-search limit=1000>
+      <div style="margin-bottom: 10px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-artwork-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-artwork-template">
+                
+              </template>
+              <template id="tuple-template">
+                <div class="text-center">
+                  This artwork already exists, do you still want to create a new artwork?
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newArtwork": true, "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Create new artwork</button>
+                  </mp-event-trigger>
+                </div>
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
+      <semantic-search-keyword-prefetch
+        query='{ "type": "lookup", "limit": 20, "entityType": "http://schema.swissartresearch.net/ontology/rds#Artwork", "lookupServiceName": "federated-lookup" }'
+        placeholder='Input the name of the artwork you want to create'>
+      </semantic-search-keyword-prefetch>
+
+      <div data-flex-layout="row stretch-stretch" style='margin-top: 20px;'>
+        <div style='max-width: 90vw'>
+          <semantic-search-result-holder>
+            <semantic-search-result>
+              <semantic-table
+                id='table'
+                options='{"showFilter": false}' 
+                query='SELECT * WHERE { } ORDER BY DESC(?score)'
+                number-of-displayed-rows=10
+                no-result-template='No existing artworks with this name'
+                column-configuration='[
+                    {"variableName": "subject", "displayName": "Existing artworks with provided name", "cellTemplate": "{{> link-to-subject}}" },
+                    {"variableName": "description", "displayName": "Description" },
+                    {"variableName": "type", "displayName": "Type" },
+                    {"variableName": "datasetLabel", "displayName": "Dataset", "cellTemplate": "{{> dataset-label}}" },
+                    {"variableName": "action", "displayName": "action", "cellTemplate": "{{> create-button}}"  }
+                ]'>
+                <template id="dataset-label">
+                  {{datasetLabel.value}}
+                </template>
+                <template id="link-to-subject">
+                  <semantic-query
+                    query='SELECT * WHERE { {{subject}} a ?type }'
+                    template='<semantic-link iri={{subject.value}}></semantic-link>'
+                    no-result-template='<semantic-link iri="[[resolvePrefix "rdsPages:RemoteResourceVisualisation"]]" urlqueryparam-resource-iri="{{subject.value}}"><mp-label iri="{{subject.value}}"><mp-label></semantic-link>'>
+                  </semantic-query>
+                </template>
+                <template id="create-button">
+                  <mp-event-trigger
+                    id='event-trigger-de'
+                    type='Component.TemplateUpdate'
+                    data='{"newArtwork": true, "sameAs": "{{subject.value}}", "hideSearch": true}'
+                    targets='["event-target"]'>
+                    <button class='btn btn-primary'>Link</button>
+                  </mp-event-trigger>
+                </template>
+              </semantic-table>
+            </semantic-search-result>
+          </semantic-search-result-holder>
+        </div>
+      </div>
+
+      <div style="margin: 5px">
+        <semantic-search-result-holder>
+          <semantic-search-result>
+            <semantic-table
+              id='table'
+              options='{"showFilter": false}' 
+              query='SELECT * WHERE { } ORDER BY DESC(?score) LIMIT 1'
+              number-of-displayed-rows=10
+              no-result-template='{{> no-artwork-template}}'
+              tuple-template='{{> tuple-template}}'>
+              <template id="no-artwork-template">
+                <mp-event-trigger
+                  id='event-trigger-de'
+                  type='Component.TemplateUpdate'
+                  data='{"newArtwork": true, "hideSearch": true}'
+                  targets='["event-target"]'>
+                  <button class='btn btn-primary'>Create new artwork</button>
+                </mp-event-trigger>
+              </template>
+              <template id="tuple-template">
+                
+              </template>
+            </semantic-table>
+          </semantic-search-result>
+        </semantic-search-result-holder>
+      </div>
+    </semantic-search>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "edit-artwork-form"]]
+[[#if edit]]
+<div class='row'>
+  <div class="offset-md-4 col-md-4">
+    <mp-workflow-manager
+      iris='[[jsonArrayFromSelect "SELECT ?workflow WHERE { ?workflow <http://www.metaphacts.com/ontologies/platform/workflow#subject> ?? . }" ]]'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      readonly=[[> cant-edit-workflow]]>
+    </mp-workflow-manager>
+  </div>
+</div>
+[[/if]]
+<div class='row'>
+  <div class="text-center col-md-2">
+    <br>
+    <font size="+2">
+        [[#if edit]]
+          Edit <b><mp-label iri='[[this]]'></mp-label></b>
+        [[else]]
+          Add a new <b>Artwork</b>
+        [[/if]]
+    </font>
+    <br>
+    <img src="https://cdn2.iconfinder.com/data/icons/multimedia-26/24/multimedia-11-512.png" width="50%">
+  </div>
+  <div class="col-md-8" style="margin-bottom: 100px">
+    <semantic-form
+      id="newArtwork"
+      [[#if edit]]
+        subject='[[this]]'
+        persistence='sparql'
+      [[else]]
+        new-subject-template='https://resource.swissartresearch.net/artwork/{{UUID}}'
+        browser-persistence=false
+        persistence='ldp'
+      [[/if]]
+      form-id='artworks'
+      post-action='event'        
+      fields='[[fieldDefinitions
+                crmtype="http://www.metaphacts.com/fieldDefinition/AddType"
+                rdftype="http://www.metaphacts.com/fieldDefinition/Type-hidden"
+                Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
+                Rds_Artwork_Title="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Title"
+                Rds_Artwork_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Type"
+                Rds_Artwork_Alternative_Title="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title"
+                Rds_Artwork_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description"
+                Rds_Artwork_Parts="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts"
+                Rds_Artwork_Style_Movement="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Style_-_Movement"
+                Rds_Artwork_Production="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production"
+                Rds_Artwork_Destruction="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction"
+                Rds_Artwork_Current_Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner"
+                Rds_Artwork_Current_Holder="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Holder"
+                Rds_Artwork_Material="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Material"
+                Rds_Artwork_Technique="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Technique"
+                Rds_Artwork_Dimension="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension"
+                Rds_Artwork_Subject="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject"
+                Rds_Artwork_Provenance="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance"
+                Rds_Artwork_Conservation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation"
+                Rds_Artwork_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Location"
+                Citation="http://www.metaphacts.com/fieldDefinition/Citation"
+      ]]'
+    >
+      <semantic-form-hidden-input for="rdftype" default-value="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"></semantic-form-hidden-input>
+      <semantic-form-hidden-input for='crmtype' default-value='Artwork'></semantic-form-hidden-input>
+
+      <semantic-form-composite-input
+          for="Identifier"
+          new-subject-template='/identifier/{{Identifier_Value}}'
+          fields='[[fieldDefinitions
+                    Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
+                    Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
+                    Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
+                    Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
+      ]]'>
+        <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
+      </semantic-form-composite-input>
+
+       
+      <semantic-form-text-input for="Rds_Artwork_Title"></semantic-form-text-input> 
+      
+      <semantic-form-text-input for="Rds_Artwork_Type"></semantic-form-text-input>
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Alternative_Title"
+          new-subject-template="/appellation/{{Rds_Artwork_Alternative_Title_Value}}"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Alternative_Title_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Value"
+                    Rds_Artwork_Alternative_Title_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Type"
+                    Rds_Artwork_Alternative_Title_Use_Period_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Use_Period_Earliest"
+                    Rds_Artwork_Alternative_Title_Use_Period_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Use_Period_Latest"
+                    Rds_Artwork_Alternative_Title_Used_By="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Used_By"
+			]]'>
+    		<semantic-form-text-input for="Rds_Artwork_Alternative_Title_Value"
+                                  languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+        </semantic-form-text-input>
+
+     		<semantic-form-text-input for="Rds_Artwork_Alternative_Title_Type"></semantic-form-text-input>
+
+     		<semantic-form-datetime-input for="Rds_Artwork_Alternative_Title_Use_Period_Earliest"></semantic-form-datetime-input>
+
+     		<semantic-form-datetime-input for="Rds_Artwork_Alternative_Title_Use_Period_Latest"></semantic-form-datetime-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Alternative_Title_Used_By"></semantic-form-text-input>
+      </semantic-form-composite-input>
+
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Description"
+          new-subject-template="/description/{{Rds_Artwork_Description_Value}}"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Description_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Value"
+                    Rds_Artwork_Description_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Type"
+                    Rds_Artwork_Description_Author="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author"
+      ]]'>
+        <semantic-form-text-input for="Rds_Artwork_Description_Value"
+                                  multiline='true'
+                                  languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
+        </semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Description_Type"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Description_Author"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Parts"
+          new-subject-template="https://resource.swissartresearch.net/artwork/{{Rds_Artwork_Parts_Value}}"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Parts_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts_Value"
+                    Rds_Artwork_Part_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Part_Type"
+      ]]'>
+        <semantic-form-text-input for="Rds_Artwork_Parts_Value"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Part_Type"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-text-input for="Rds_Artwork_Style_Movement"></semantic-form-text-input>
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Production"
+          new-subject-template="/production"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Production_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Location"
+                    Rds_Artwork_Production_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest"
+                    Rds_Artwork_Production_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Latest"
+                    Rds_Artwork_Creator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator"
+      ]]'>
+        <semantic-form-autocomplete-input for='Rds_Artwork_Production_Location'
+            value-binding-name="subject"
+            lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                "limit": 20
+                }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+        
+        <semantic-form-datetime-input for="Rds_Artwork_Production_Date_Earliest"></semantic-form-datetime-input>
+
+        <semantic-form-datetime-input for="Rds_Artwork_Production_Date_Latest"></semantic-form-datetime-input>
+        
+        <semantic-form-composite-input 
+            for="Rds_Artwork_Creator"
+            new-subject-template="/carried_out/{{Rds_Artwork_Creator_Value}}"
+            fields='[[fieldDefinitions
+                      Rds_Artwork_Creator_Value="http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value"
+                      Artwork_Creator_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role"
+        ]]'>
+          [[#> newSubPerson]]
+            <semantic-form-autocomplete-input
+              for="Rds_Artwork_Creator_Value"
+              value-binding-name="subject"
+              lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+                "limit": 20,
+                "lookupServiceName": "federated-lookup"
+              }'
+              template='{{> autocompletionTemplate}}'>
+              [[> autocompletionTemplate]]
+              
+            </semantic-form-autocomplete-input>
+          [[/newSubPerson]]
+          <semantic-form-text-input for="Artwork_Creator_Role"></semantic-form-text-input>
+        </semantic-form-composite-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Destruction"
+          new-subject-template="/destruction"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Destruction_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Location"
+                    Rds_Artwork_Destruction_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest"
+                    Rds_Artwork_Destruction_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Latest"
+      ]]'>
+    
+        <semantic-form-autocomplete-input for='Rds_Artwork_Destruction_Location'
+            value-binding-name="subject"
+            lookup-query='{
+                "type": "lookup",
+                "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+                "limit": 20
+                }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+
+        <semantic-form-datetime-input for="Rds_Artwork_Destruction_Date_Earliest"></semantic-form-datetime-input>
+
+        <semantic-form-datetime-input for="Rds_Artwork_Destruction_Date_Latest"></semantic-form-datetime-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-text-input for="Rds_Artwork_Current_Owner"></semantic-form-text-input>
+      
+      <semantic-form-text-input for="Rds_Artwork_Current_Holder"></semantic-form-text-input>
+      
+      <semantic-form-text-input for="Rds_Artwork_Material"></semantic-form-text-input>
+      
+      <semantic-form-text-input for="Rds_Artwork_Technique"></semantic-form-text-input>
+      
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Dimension"
+          new-subject-template="/dimension/{{Rds_Artwork_Dimension_Value}}"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Dimension_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Type"
+                    Rds_Artwork_Dimension_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Value"
+                    Rds_Artwork_Dimension_Unit="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Unit"
+			]]'>
+        <semantic-form-text-input for="Rds_Artwork_Dimension_Type"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Dimension_Value"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Dimension_Unit"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+      
+      <semantic-form-text-input for="Rds_Artwork_Subject"></semantic-form-text-input>
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Provenance"
+          new-subject-template="/aquisition/{{UUID}}"
+          fields='[[fieldDefinitions 
+                    Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Latest"
+                    Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Owner"
+                    Rds_Artwork_Provenance_Past_Ownership_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Description"
+      ]]'>
+        <semantic-form-datetime-input for="Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Latest"></semantic-form-datetime-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Owner"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Provenance_Past_Ownership_Description" multiline="true"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+    
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Conservation"
+          new-subject-template="/conservation/{{UUID}}"
+          fields='[[fieldDefinitions
+                    Rds_Artwork_Conservation_Event_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest"
+                    Rds_Artwork_Conservation_Event_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Latest"
+                    Rds_Artwork_Conservation_Event_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type"
+                    Rds_Artwork_Conservation_Event_Technique="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Technique"
+                    Rds_Artwork_Conservator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator"
+                    Rds_Artwork_Conservation_Event_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Description"
+      ]]'>
+        <semantic-form-datetime-input for="Rds_Artwork_Conservation_Event_Earliest"></semantic-form-datetime-input>
+        
+        <semantic-form-datetime-input for="Rds_Artwork_Conservation_Event_Latest"></semantic-form-datetime-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Type"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Technique"></semantic-form-text-input>
+
+        [[#> newSubPerson]]
+          <semantic-form-autocomplete-input
+            for="Rds_Artwork_Conservator"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+            
+          </semantic-form-autocomplete-input>
+        [[/newSubPerson]]
+
+        <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Description" multiline="true"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Rds_Artwork_Location"
+          new-subject-template="/location/{{UUID}}"
+          fields='[[fieldDefinitions 
+                  Rds_Artwork_Present_Location_-_Institution="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution"
+                  Rds_Artwork_Present_Location_-_Institution_Address="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution_Address"
+                  Rds_Artwork_Present_Location_-_coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_coordinates"
+      ]]'>
+        
+        <semantic-form-text-input for="Rds_Artwork_Present_Location_-_Institution"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Rds_Artwork_Present_Location_-_Institution_Address"></semantic-form-text-input>
+        
+        <semantic-form-text-input for="Rds_Artwork_Present_Location_-_coordinates"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+
+      <semantic-form-composite-input 
+          for="Citation"
+          new-subject-template="/citation/{{Citation_Value}}"
+          fields='[[fieldDefinitions
+                    Citation_Value="http://www.metaphacts.com/fieldDefinition/Citation_Value"
+                    Citation_Source="http://www.metaphacts.com/fieldDefinition/Citation_Source"
+      ]]'>
+        <semantic-form-text-input for="Citation_Value"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Citation_Source"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+      
+      <semantic-form-errors></semantic-form-errors>
+      
+      <button name='submit' class='btn btn-secondary'>Save</button>
+      <button name='reset' class='btn btn-secondary'>Reset</button>
+   	</semantic-form>
+
+    <mp-workflow-create id='source-workflow'
+      new-subject-template='http://schema.swissartresearch.net/workflow-source-{{UUID}}'
+      definition='http://schema.swissartresearch.net/workflow_definition'
+      first-step='http://schema.swissartresearch.net/step/inProgress'
+      assignee_disabled='[[jsonValueFromSelect "SELECT ?assignee WHERE { BIND (?__useruri__ as ?assignee) }"]]'
+      use-event-system=true>
+    </mp-workflow-create>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceCreated'
+      proxy-event-type='Workflow.Create'
+      proxy-targets='["source-workflow"]'>
+    </mp-event-proxy>
+
+    <mp-event-proxy id='proxy-source-creation'
+      on-event-type='Form.ResourceUpdated'
+      proxy-event-type='Component.TemplateUpdate'
+      proxy-targets='["event-target"]'
+      data='{"updated": true}'>
+    </mp-event-proxy>
+
+    <mp-event-target-template-render id='event-target' template='{{> template}}'>
+      <template id='template'>
+        {{#if updated}}
+        <bs-alert variant="info">
+          Resource has been updated.
+        </bs-alert>
+        {{/if}}
+      </template>
+    </mp-event-target-template-render>
+
+    <mp-event-proxy id='workflow-proxy'
+      on-event-type='Workflow.SubjectGetInWorkflow'
+      proxy-event-type='RedirectAction.perform'
+      proxy-targets='["redirect-to-resource"]'>
+    </mp-event-proxy>
+
+    <mp-event-target-redirect
+      id='redirect-to-resource'
+      action='redirect'>
+    </mp-event-target-redirect>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "newSubArtwork"]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1">
+    [[> @partial-block ]]
+  </div>
+  <div>
+    <semantic-link
+      iri="[[resolvePrefix "rdsPages:NewArtwork"]]"
+      target="_blank">
+      <button class='btn btn-secondary'>Create new</button>
+    </semantic-link>
+  </div>
+</div>
+[[/inline]]
+
+[[#*inline "cant-edit-workflow"]]
+  [[!--
+  PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#>
+  PREFIX wf_steps: <http://schema.swissartresearch.net/step/>
+  ASK { ?workflow workflow:subject ??.
+    ?workflow workflow:currentState ?state.
+    ?state workflow:step ?step.
+    OPTIONAL { ?userGroup foaf:member ?__useruri__ . }
+
+    FILTER(
+        (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) &&
+          ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview))
+    ) || (
+          (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>)
+    )
+    )
+  }
+  --]]
+  [[#if (ask "PREFIX workflow: <http://www.metaphacts.com/ontologies/platform/workflow#> PREFIX wf_steps: <http://schema.swissartresearch.net/step/> ASK { ?workflow workflow:subject ??. ?workflow workflow:currentState ?state. ?state workflow:step ?step. OPTIONAL { ?userGroup foaf:member ?__useruri__ .} FILTER(((BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/editor>) && ((?step = wf_steps:inProgress) || (?step = wf_steps:readyToReview)) ) || (BOUND(?userGroup)) && (?userGroup = <https://resources.swissartresearch.net/workflow/reviewer>))}")]]  
+    false
+  [[else]]
+    true
+  [[/if]]
+[[/inline]]
+
+[[#*inline "autocompletionTemplate"]]
+<template id='autocompletionTemplate'>
+    [[> rdsParts:LookupCandidateTemplate]]
+</template>
+[[/inline]]
+
+[[#*inline "showOnRdsGlobalArtworkFor"]]
+[[> rdsParts:ReadMoreButton]]
+<div style="display: flex; align-items: flex-end;">
+  <div style="flex-grow: 1; min-width: 50%;">
+    [[> @partial-block ]]
+  </div>
+  <div style='padding: 5px'>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <mp-description iri="{{node.value}}"></mp-description>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+  <div>
+    <semantic-form-template template="{{> template}}">
+      <template id="template">
+        {{#if model.fields.[[fieldName]]}}
+          {{#each model.fields.[[fieldName]].values}}
+            {{#if node}}
+              <semantic-query
+                query='SELECT * WHERE { {{node}} a ?type } LIMIT 1'
+                template=' '
+                no-result-template='{{> readMoreOnRdsGlobal resourceIri=node.value}}'>
+                [[> readMoreOnRdsGlobal_frontendTemplate]]
+              </semantic-query>
+            {{/if}}
+          {{/each}}
+        {{/if}}
+      </template>
+    </semantic-form-template>
+  </div>
+</div>
+[[/inline]]
