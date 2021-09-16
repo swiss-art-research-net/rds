@@ -3,3 +3,5 @@ rdsPages = https://static.swissartresearch.net/page/
 rdsParts = https://static.swissartresearch.net/partial/
 rdsPlatform = https://platform.swissartresearch.net/
 crm = http://www.cidoc-crm.org/cidoc-crm/
+crmdig = http://www.ics.forth.gr/isl/CRMdig/
+efrbroo = http://erlangen-crm.org/efrbroo/

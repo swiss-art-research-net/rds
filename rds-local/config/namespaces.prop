@@ -77,6 +77,7 @@ lexinfo	= http://www.lexinfo.net/ontology/2.0/lexinfo#
 sari = http://w3id.org/sari/
 workflow = http://www.metaphacts.com/ontologies/platform/workflow#
 crm = http://www.cidoc-crm.org/cidoc-crm/
+crmdig = http://www.ics.forth.gr/isl/CRMdig/
 ecrm = http://erlangen-crm.org/current/
 efrbroo = http://erlangen-crm.org/efrbroo/
 rds = http://schema.swissartresearch.net/ontology/rds#
