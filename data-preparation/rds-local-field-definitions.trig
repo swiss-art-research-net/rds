@@ -429,7 +429,7 @@
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#minOccurs> "0";
     rdfs:comment "This field is used to indicate the main name attributed to the documented person. No part break down of name is here implied. The full name of an individual is expected here where available.";
-    rdfs:label "Preffered Name" .
+    rdfs:label "Prefered Name" .
 }
 
 <https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Number_of_Pages/context> {
@@ -6547,7 +6547,7 @@ prefix org: <http://example.com/org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT distinct  ?value  WHERE {
 $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
-        <http://www.cidoc-crm.org/cidoc-crm/P48_has_preffered_identifier> ?appellation.
+        <http://www.cidoc-crm.org/cidoc-crm/P48_has_prefered_identifier> ?appellation.
   ?appellation a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>;
     rdfs:label ?value.
 }""" .
@@ -8683,7 +8683,7 @@ WHERE {
 WHERE {
   $subject a <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>.
   ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?value . 
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P48_has_preffered_identifier> ?prefvalue .
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P48_has_prefered_identifier> ?prefvalue .
   ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
   ?prefvalue a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier>.
   ?value  rdfs:label ?label1 .
@@ -13214,7 +13214,7 @@ WHERE {
       ?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
       ?lang rdfs:label ?lang_label.},
       CONCAT(?name,\" (\",?lang_label,\")\"),?name)AS ?value)
-  FILTER EXISTS {?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/type/preffered%20name>.}
+  FILTER EXISTS {?name_identifier <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/type/prefered%20name>.}
 }""" .
 }
 
