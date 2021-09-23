@@ -21,7 +21,7 @@
     ];
   lookup:configuration [
       lookup:type "metaphacts:remoteLookup";
-      lookup:remoteServiceUrl "https://rds-qa.swissartresearch.net/rest/reconciliation";
+      lookup:remoteServiceUrl "https://rds.swissartresearch.net/rest/reconciliation";
       lookup:remoteQueryMethod "postDataForm";
       lookup:remoteInformationServiceEnabled true
     ] .
