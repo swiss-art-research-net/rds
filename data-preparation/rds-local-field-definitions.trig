@@ -6168,7 +6168,6 @@ INSERT {
   
   _:t1057957 a sp:Query;
     sp:text """DELETE {
-  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri crm:P97_from_father ?value.
 }
 WHERE {
@@ -8055,7 +8054,6 @@ WHERE {}""" .
   
   _:t1057964 a sp:Query;
     sp:text """DELETE {
-  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri crm:P96_by_mother ?value.
 }
 WHERE {
@@ -11994,9 +11992,9 @@ INSERT {
     sp:text """SELECT ?value ?label  WHERE {
   SELECT ?value ?label  WHERE {
     VALUES (?value ?label ) {
-      (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)# \"Männlich\"@de)
-      (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)# \"Weiblich\"@de)
-      (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)# \"Neutrale\"@de)
+      (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)
+      (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)
+      (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)
     }
   }
 }""" .
