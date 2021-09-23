@@ -192,12 +192,11 @@
       id="newArtwork"
       [[#if edit]]
         subject='[[this]]'
-        persistence='sparql'
       [[else]]
         new-subject-template='https://resource.swissartresearch.net/artwork/{{UUID}}'
         browser-persistence=false
-        persistence='ldp'
       [[/if]]
+      persistence='ldp'
       form-id='artworks'
       post-action='event'        
       fields='[[fieldDefinitions
