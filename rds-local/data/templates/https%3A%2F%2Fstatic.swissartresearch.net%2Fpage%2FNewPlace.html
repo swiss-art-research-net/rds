@@ -180,6 +180,7 @@
         form-id='places'
         post-action='event'        
         fields='[[fieldDefinitions
+                  Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
                   type="http://www.metaphacts.com/fieldDefinition/Type-hidden"
                   Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
                   Rds_Place_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Type"
@@ -192,8 +193,35 @@
                   Historical_Parthood="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood"
     ]]'>
 
-      <semantic-form-hidden-input for="type" default-value="http://www.cidoc-crm.org/cidoc-crm/E53_Type"></semantic-form-hidden-input>
-      
+      <semantic-form-hidden-input for="type" default-value="http://www.cidoc-crm.org/cidoc-crm/E53_Place"></semantic-form-hidden-input>
+      {{#if sameAs}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 20,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'
+          default-value='{{sameAs}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      {{else}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 20,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      {{/if}}
       <semantic-form-composite-input
           for="Identifier"
           new-subject-template='/identifier/{{Identifier_Value}}'

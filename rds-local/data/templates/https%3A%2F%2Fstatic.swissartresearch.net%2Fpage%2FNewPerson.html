@@ -180,6 +180,7 @@
         form-id='persons'
         post-action='event'            
         fields='[[  fieldDefinitions
+                    Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
                     type="http://www.metaphacts.com/fieldDefinition/Type-hidden"
                     Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
                     Rds_Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
@@ -200,6 +201,36 @@
                     Biography="http://www.metaphacts.com/fieldDefinition/Short_Biography"                
     ]]'>
       <semantic-form-hidden-input for="type" default-value="http://www.cidoc-crm.org/cidoc-crm/E21_Person"></semantic-form-hidden-input>
+      [[#> showOnRdsGlobalPersonFor fieldName="Same_as"]]
+        {{#if sameAs}}
+          <semantic-form-autocomplete-input
+            for="Same_as"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'
+            default-value='{{sameAs}}'>
+            [[> autocompletionTemplate]]
+          </semantic-form-autocomplete-input>
+        {{else}}
+          <semantic-form-autocomplete-input
+            for="Same_as"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+          </semantic-form-autocomplete-input>
+        {{/if}}
+      [[/showOnRdsGlobalPersonFor]]
 
       <semantic-form-composite-input
           for="Identifier"
@@ -215,7 +246,6 @@
         <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
       </semantic-form-composite-input>
-
 
       <semantic-form-composite-input 
           for="Rds_Person_Name"

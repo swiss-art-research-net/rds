@@ -201,6 +201,7 @@
       form-id='artworks'
       post-action='event'        
       fields='[[fieldDefinitions
+                Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
                 crmtype="http://www.metaphacts.com/fieldDefinition/AddType"
                 rdftype="http://www.metaphacts.com/fieldDefinition/Type-hidden"
                 Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
@@ -226,7 +227,35 @@
     >
       <semantic-form-hidden-input for="rdftype" default-value="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"></semantic-form-hidden-input>
       <semantic-form-hidden-input for='crmtype' default-value='Artwork'></semantic-form-hidden-input>
-
+      {{#if sameAs}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Artwork",
+            "limit": 20,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'
+          default-value='{{sameAs}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      {{else}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Artwork",
+            "limit": 20,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      {{/if}}
+      
       <semantic-form-composite-input
           for="Identifier"
           new-subject-template='/identifier/{{Identifier_Value}}'
