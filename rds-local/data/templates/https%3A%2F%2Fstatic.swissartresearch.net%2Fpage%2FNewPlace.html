@@ -293,10 +293,33 @@
 
       </semantic-form-composite-input>
       
+      <semantic-form-autocomplete-input
+        for="Rds_Place_Part_of"
+        value-binding-name="subject"
+        lookup-query='{
+          "type": "lookup",
+          "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+          "limit": 10,
+          "lookupServiceName": "federated-lookup"
+        }'
+        template='{{> autocompletionTemplate}}'>
+        [[> autocompletionTemplate]]
+        
+      </semantic-form-autocomplete-input>
 
-      <semantic-form-text-input for="Rds_Place_Part_of"></semantic-form-text-input>
-
-      <semantic-form-text-input for="Rds_Place_Has_Part"></semantic-form-text-input>
+    <semantic-form-autocomplete-input
+      for="Rds_Place_Has_Part"
+      value-binding-name="subject"
+      lookup-query='{
+        "type": "lookup",
+        "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+        "limit": 10,
+        "lookupServiceName": "federated-lookup"
+      }'
+      template='{{> autocompletionTemplate}}'>
+      [[> autocompletionTemplate]]
+      
+    </semantic-form-autocomplete-input>
 
       <semantic-form-composite-input 
           for="Historical_Parthood"
