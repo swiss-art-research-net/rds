@@ -171,16 +171,16 @@
       id="newGroup"
       [[#if edit]]
         subject='[[this]]'
-        persistence='sparql'
       [[else]]
         new-subject-template='https://resource.swissartresearch.net/group/{{UUID}}'
         browser-persistence=false
-        persistence='ldp'
       [[/if]]
+      persistence='ldp'
       form-id='groups'
       post-action='event'
 
       fields='[[  fieldDefinitions
+                  Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
                   type="http://www.metaphacts.com/fieldDefinition/Type-hidden"
                   Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
                   Rds_dev_National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
@@ -197,7 +197,34 @@
     ]]'>
 
       <semantic-form-hidden-input for="type" default-value="http://www.cidoc-crm.org/cidoc-crm/E74_Group"></semantic-form-hidden-input>
-
+      {{#if sameAs}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Group",
+            "limit": 20,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'
+          default-value='{{sameAs}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      {{else}}
+        <semantic-form-autocomplete-input
+          for="Same_as"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Group",
+            "limit": 20,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+        </semantic-form-autocomplete-input>
+      {{/if}}
       <semantic-form-composite-input
           for="Identifier"
           new-subject-template='/identifier/{{Identifier_Value}}'
@@ -270,8 +297,6 @@
           
         </semantic-form-autocomplete-input>
 
-        <semantic-form-autocomplete-input for="Mph_Formation_Place"></semantic-form-autocomplete-input>
-
         <semantic-form-datetime-input for="Mph_Formation_Date_earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Mph_Formation_Date_latest"></semantic-form-datetime-input>
@@ -315,11 +340,12 @@
         
       <semantic-form-composite-input 
           for="Rds_dev_Floruit"
-          new-subject-template="."
+          new-subject-template="/floruit/{{UUID}}"
           fields='[[fieldDefinitions
                     Mph_Floruit_Place="http://www.metaphacts.com/fieldDefinition/Floruit_Place"
                     Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
                     Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
+                    Mph_Floruit_Subject="http://www.metaphacts.com/fieldDefinition/Educational_Training"
       ]]'>
         <semantic-form-autocomplete-input
           for="Mph_Floruit_Place"
@@ -338,6 +364,8 @@
         <semantic-form-datetime-input for="Mph_Floruit_Date_earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Mph_Floruit_Date_latest"></semantic-form-datetime-input>
+
+        <semantic-form-text-input for="Mph_Floruit_Subject"></semantic-form-text-input>
 
       </semantic-form-composite-input>
 

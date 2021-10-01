@@ -1624,7 +1624,7 @@ WHERE {
 } 
 WHERE {
   BIND(IRI(CONCAT(STR($subject),\"/biography/\", MD5(str(?value)))) as ?info_iri).
-  {SELECT ?lang WHERE {
+  {SELECT ?lang ?lang_label WHERE {
         BIND(LANG(?value) as ?langTag)
         BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
         VALUES ( ?lang ?langTag ?lang_label) {
@@ -2097,7 +2097,7 @@ WHERE {
 } 
 WHERE {
   BIND(IRI(CONCAT(STR($subject),\"/biography/\", MD5(str(?value)))) as ?info_iri).
-  {SELECT ?lang WHERE {
+  {SELECT ?lang ?lang_label WHERE {
         BIND(LANG(?value) as ?langTag)
         BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
         VALUES ( ?lang ?langTag ?lang_label) {
@@ -2449,7 +2449,7 @@ WHERE {
   ?lang rdfs:label ?lang_label
 } WHERE { 
   BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
-  {SELECT ?lang WHERE {
+  {SELECT ?lang ?lang_label WHERE {
         BIND(LANG(?value) as ?langTag)
         BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
         VALUES ( ?lang ?langTag ?lang_label) {
@@ -3123,7 +3123,7 @@ WHERE {
   ?lang rdfs:label ?lang_label
 } WHERE { 
   BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
-  {SELECT ?lang WHERE {
+  {SELECT ?lang ?lang_label WHERE {
         BIND(LANG(?value) as ?langTag)
         BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
         VALUES ( ?lang ?langTag ?lang_label) {
@@ -3339,7 +3339,7 @@ INSERT {
   ?lang rdfs:label ?lang_label
 } WHERE { 
   BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as ?name_identifier).
-      {SELECT ?lang WHERE {
+      {SELECT ?lang ?lang_label WHERE {
         BIND(LANG(?value) as ?langTag)
         VALUES ( ?lang ?langTag ?lang_label) {
           (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
