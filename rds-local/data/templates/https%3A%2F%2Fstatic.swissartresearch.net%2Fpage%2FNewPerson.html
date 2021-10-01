@@ -171,15 +171,15 @@
         id="newPerson"
         [[#if edit]]
           subject='[[this]]'
-          persistence='sparql'
         [[else]]
           new-subject-template='https://resource.swissartresearch.net/person/{{UUID}}'
           browser-persistence=false
-      	  persistence='ldp'
         [[/if]]
+        persistence='ldp'
         form-id='persons'
         post-action='event'            
         fields='[[  fieldDefinitions
+                    Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
                     type="http://www.metaphacts.com/fieldDefinition/Type-hidden"
                     Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
                     Rds_Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
@@ -200,6 +200,36 @@
                     Biography="http://www.metaphacts.com/fieldDefinition/Short_Biography"                
     ]]'>
       <semantic-form-hidden-input for="type" default-value="http://www.cidoc-crm.org/cidoc-crm/E21_Person"></semantic-form-hidden-input>
+      [[#> showOnRdsGlobalPersonFor fieldName="Same_as"]]
+        {{#if sameAs}}
+          <semantic-form-autocomplete-input
+            for="Same_as"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'
+            default-value='{{sameAs}}'>
+            [[> autocompletionTemplate]]
+          </semantic-form-autocomplete-input>
+        {{else}}
+          <semantic-form-autocomplete-input
+            for="Same_as"
+            value-binding-name="subject"
+            lookup-query='{
+              "type": "lookup",
+              "entityType": "http://schema.swissartresearch.net/ontology/rds#Person",
+              "limit": 20,
+              "lookupServiceName": "federated-lookup"
+            }'
+            template='{{> autocompletionTemplate}}'>
+            [[> autocompletionTemplate]]
+          </semantic-form-autocomplete-input>
+        {{/if}}
+      [[/showOnRdsGlobalPersonFor]]
 
       <semantic-form-composite-input
           for="Identifier"
@@ -215,7 +245,6 @@
         <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
       </semantic-form-composite-input>
-
 
       <semantic-form-composite-input 
           for="Rds_Person_Name"
@@ -416,11 +445,12 @@
 
       <semantic-form-composite-input 
           for="Rds_dev_Floruit"
-          new-subject-template="."
+          new-subject-template="/floruit/{{UUID}}"
           fields='[[fieldDefinitions
                     Mph_Floruit_Place="http://www.metaphacts.com/fieldDefinition/Floruit_Place"
                     Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
                     Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
+                    Mph_Floruit_Subject="http://www.metaphacts.com/fieldDefinition/Educational_Training"
       ]]'> 
         <semantic-form-autocomplete-input
           for="Mph_Floruit_Place"
@@ -440,6 +470,8 @@
 
         <semantic-form-datetime-input for="Mph_Floruit_Date_latest"></semantic-form-datetime-input>
 
+        <semantic-form-text-input for="Mph_Floruit_Subject"></semantic-form-text-input>
+
       </semantic-form-composite-input>
 
       <semantic-form-select-input for="Lang_Used"></semantic-form-select-input>
@@ -454,7 +486,6 @@
         <semantic-form-text-input for="Citation_Value"></semantic-form-text-input>
 
         <semantic-form-text-input for="Citation_Source"></semantic-form-text-input>
-
       </semantic-form-composite-input>
 
       <semantic-form-text-input for="Biography"
