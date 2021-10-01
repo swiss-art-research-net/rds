@@ -1,2 +1,2 @@
-# rds
+# RDS
 SARI Reference Data Services
