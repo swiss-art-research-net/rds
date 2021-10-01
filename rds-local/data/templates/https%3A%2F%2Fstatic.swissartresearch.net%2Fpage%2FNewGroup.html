@@ -297,8 +297,6 @@
           
         </semantic-form-autocomplete-input>
 
-        <semantic-form-autocomplete-input for="Mph_Formation_Place"></semantic-form-autocomplete-input>
-
         <semantic-form-datetime-input for="Mph_Formation_Date_earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Mph_Formation_Date_latest"></semantic-form-datetime-input>
@@ -342,11 +340,12 @@
         
       <semantic-form-composite-input 
           for="Rds_dev_Floruit"
-          new-subject-template="."
+          new-subject-template="/floruit/{{UUID}}"
           fields='[[fieldDefinitions
                     Mph_Floruit_Place="http://www.metaphacts.com/fieldDefinition/Floruit_Place"
                     Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
                     Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
+                    Mph_Floruit_Subject="http://www.metaphacts.com/fieldDefinition/Educational_Training"
       ]]'>
         <semantic-form-autocomplete-input
           for="Mph_Floruit_Place"
@@ -365,6 +364,8 @@
         <semantic-form-datetime-input for="Mph_Floruit_Date_earliest"></semantic-form-datetime-input>
 
         <semantic-form-datetime-input for="Mph_Floruit_Date_latest"></semantic-form-datetime-input>
+
+        <semantic-form-text-input for="Mph_Floruit_Subject"></semantic-form-text-input>
 
       </semantic-form-composite-input>
 

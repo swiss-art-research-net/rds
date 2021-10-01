@@ -293,10 +293,33 @@
 
       </semantic-form-composite-input>
       
+      <semantic-form-autocomplete-input
+        for="Rds_Place_Part_of"
+        value-binding-name="subject"
+        lookup-query='{
+          "type": "lookup",
+          "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+          "limit": 10,
+          "lookupServiceName": "federated-lookup"
+        }'
+        template='{{> autocompletionTemplate}}'>
+        [[> autocompletionTemplate]]
+        
+      </semantic-form-autocomplete-input>
 
-      <semantic-form-text-input for="Rds_Place_Part_of"></semantic-form-text-input>
-
-      <semantic-form-text-input for="Rds_Place_Has_Part"></semantic-form-text-input>
+    <semantic-form-autocomplete-input
+      for="Rds_Place_Has_Part"
+      value-binding-name="subject"
+      lookup-query='{
+        "type": "lookup",
+        "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+        "limit": 10,
+        "lookupServiceName": "federated-lookup"
+      }'
+      template='{{> autocompletionTemplate}}'>
+      [[> autocompletionTemplate]]
+      
+    </semantic-form-autocomplete-input>
 
       <semantic-form-composite-input 
           for="Historical_Parthood"
@@ -309,7 +332,20 @@
                     Historical_Parthood_Type_at_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place"
                     Historical_Parthood_Coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historicall_Coordinates"
         ]]'>
-        <semantic-form-text-input for="Historical_Parthood_Part_of_Place"></semantic-form-text-input>
+        
+        <semantic-form-autocomplete-input
+          for="Historical_Parthood_Part_of_Place"
+          value-binding-name="subject"
+          lookup-query='{
+            "type": "lookup",
+            "entityType": "http://schema.swissartresearch.net/ontology/rds#Place",
+            "limit": 10,
+            "lookupServiceName": "federated-lookup"
+          }'
+          template='{{> autocompletionTemplate}}'>
+          [[> autocompletionTemplate]]
+          
+        </semantic-form-autocomplete-input>
 
         <semantic-form-datetime-input for="Historical_Parthood_Start"></semantic-form-datetime-input>
 
