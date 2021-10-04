@@ -40,13 +40,14 @@
         <semantic-link iri="[[resolvePrefix "rdsPages:NewArtwork"]]">
           <button class="btn btn-secondary">Create Artwork</button>
         </semantic-link>
-        <semantic-link iri="[[resolvePrefix "rdsPages:NewBibliographicItem"]]">
+
+        <!-- <semantic-link iri="[[resolvePrefix "rdsPages:NewBibliographicItem"]]">
           <button class="btn btn-secondary">Create Bibliographic Item</button>
         </semantic-link>
 
         <semantic-link iri="[[resolvePrefix "rdsPages:NewEvent"]]">
           <button class="btn btn-secondary">Create Event</button>
-        </semantic-link>
+        </semantic-link> -->
 
         <semantic-search relations='{
           "<http://swissartresearch.net#hasStep>": [{
@@ -899,7 +900,7 @@
         }' no-result-template='No records for you.'>
           </semantic-table>
     </bs-tab>
-    <bs-tab event-key="bibliographicitems" title="Bibliographic Items">
+    <!-- <bs-tab event-key="bibliographicitems" title="Bibliographic Items">
       <div style="margin-bottom: 25px;">
         <h2>Records</h2>
 
@@ -1187,7 +1188,7 @@
             )
         }' no-result-template='No records for you.'>
           </semantic-table>
-    </bs-tab>
+    </bs-tab> -->
 
     [[> rdsParts:DemoExtension]]
   </bs-tabs>
