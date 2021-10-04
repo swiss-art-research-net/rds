@@ -34,20 +34,12 @@
       lookup:searchBlockTemplate """
         ?candidate (
           crm:P1_is_identified_by / rdfs:label |
+    			crm:P1_is_identified_by / crm:P190_is_expressed_in |
           rdfs:label |
           ecrm:P128_carries / ecrm:P102_has_title / ecrm:P3_has_note
         ) ?key .
     
       	?candidate a ?type .
-        FILTER EXISTS {
-          GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
-            {
-                ?type rdfs:subClassOf ?anyClass.
-            } UNION {
-                ?anyClass rdfs:subClassOf ?type .
-            }
-          }
-        }
 
         SERVICE <http://www.bigdata.com/rdf/search#search> {
             ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
