@@ -29,7 +29,7 @@ echo "Prepare AAT data"
 cd ${DATA_DIRECTORY}
 touch "AATOut_WikidataCoref_temp.nt"
 cp -p AATOut_WikidataCoref.nt "AATOut_WikidataCoref_temp.nt"
-sed -e 's/$/./g' "AATOut_WikidataCoref_temp.nt" > AATOut_WikidataCoref.nt
+sed -e 's/>[\x0D|\x0A]/> ./g' "AATOut_WikidataCoref_temp.nt" > AATOut_WikidataCoref.nt
 # sed -e 's/\(Q.*\)>/\1>./g' "AATOut_WikidataCoref_temp.nt" > AATOut_WikidataCoref.nt # For MacOS
 rm "AATOut_WikidataCoref_temp.nt"
 cd ${SCRIPT_DIR}
