@@ -7,7 +7,7 @@
 # The produced N-Triples will be written in geonames.nt file. The final geonames.nt file is approximately 13.21GB
 #!/usr/bin/python
 import rdflib
-fo = open("geonames.nt", "wb")
+fo = open("geonames.nt", "w")
 totalStmt = 0
 with open("all-geonames-rdf.txt", encoding="utf8") as fileobject:
     count = 0
