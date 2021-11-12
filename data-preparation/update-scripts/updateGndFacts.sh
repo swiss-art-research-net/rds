@@ -28,8 +28,7 @@ USE_GUNZIP=true ./_downloadAndUnzip.sh
 echo "Prepare GNDFacts data"
 # ========================
 cd ${DATA_DIRECTORY}
-echo "Arrange data by lines using JQ. It can take quite some time.."
-# NOTE: This operation may fail if the host machine runs out of memory. 
+echo "Arrange data by lines using JQ. It can take quite some time... (Note: if this operation fails, your machin might require more memory)"
 cat data.jsonld | jq -c .[] > data_temp.jsonld
 
 echo "Split file by protions"
