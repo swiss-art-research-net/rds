@@ -29,6 +29,7 @@ echo "Prepare GNDFacts data"
 # ========================
 cd ${DATA_DIRECTORY}
 echo "Arrange data by lines using JQ. It can take quite some time.."
+# NOTE: This operation may fail if the host machine runs out of memory. 
 cat data.jsonld | jq -c .[] > data_temp.jsonld
 
 echo "Split file by protions"
