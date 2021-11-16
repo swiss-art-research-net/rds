@@ -38,7 +38,7 @@ SARI Reference Data Services
                 name: nginx_proxy_network
         ```
 1. In order to update the security configuration, it might be necessary to set the `securityConfigStorageId` environment parameter by editing the `.env` file:
-    1. `METAPHACTORY_OPTS=-Dconfig.storage.rds-global.type=nonVersionedFile -Dconfig.storage.rds-global.mutable=true -Dconfig.storage.rds-global.root=/apps/rds-global`
+    1. `METAPHACTORY_OPTS=-Dconfig.storage.rds-global.type=nonVersionedFile -Dconfig.storage.rds-global.mutable=true -Dconfig.storage.rds-global.root=/rdsapps/rds-global`
 
 ## Data Preparation
 
