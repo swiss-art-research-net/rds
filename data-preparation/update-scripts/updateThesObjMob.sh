@@ -17,6 +17,8 @@ echo "Start script updateThesObjMob.sh."
 # ========================
 ./_downloadAndUnzip.sh
 
+mv ${DATA_DIRECTORY}/data.zip ${DATA_DIRECTORY}/data.ttl
+
 echo "Remove old data from the database"
 curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
 --header 'Content-Type: application/x-www-form-urlencoded' \
