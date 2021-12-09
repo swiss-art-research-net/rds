@@ -43,7 +43,7 @@
           }
     		} UNION {
         		BIND (1 as ?score_private)
-            BIND (IRI(CONCAT(\"http://data.culture.fr/thesaurus/resource/ark:/67717/T69-\", ?__token__)) as ?candidate)
+            BIND (IRI(CONCAT(\"http://data.culture.fr/thesaurus/resource/ark:/67717/\", ?__token__)) as ?candidate)
             FILTER EXISTS {
     					GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
               	?candidate a ?someType .
