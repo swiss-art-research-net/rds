@@ -142,6 +142,25 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
   }
 }' ./data/viafSameAs.ttl
 
+# Thesaurus Objects Mobiliers
+fetchData "thesobjmob" ${BLAZEGRAPH_ENDPOINT} 'PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
+  GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
+    ?candidate2 skos:exactMatch ?candidate1 .
+  }
+}' ./data/thesobjmobSameAs.ttl
+
+# Thesaurus Thésaurus de la désignation des œuvres architecturales et des espaces aménagés
+fetchData "thesarchesp" ${BLAZEGRAPH_ENDPOINT} 'PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
+  GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T96/graph> {
+    ?candidate2 skos:exactMatch ?candidate1 .
+  }
+}' ./data/thesarchespSameAs.ttl
 
 # Wikidata
 # ==============================================================

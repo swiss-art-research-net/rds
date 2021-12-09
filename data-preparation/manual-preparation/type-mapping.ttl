@@ -187,3 +187,13 @@ crm:E53_Place rdf:type rdfs:Class ;
     owl:equivalentClass gvp:AdminPlaceConcept ; #Place defined by administrative boundaries and conditions, including inhabited places, nations, and empires. Used in TGN only. 
     owl:equivalentClass gvp:PhysAdminPlaceConcept ; #Place that is both administrative and physical. Rarely used. Used in TGN only.
     owl:equivalentClass gn:Feature .
+
+# Type equivalences
+
+rds:Type a rdfs:Class;
+    rdfs:label "Type"@en ;
+    rdfs:comment "A Type entity type expressed in RDS. The type class is expressed as superclass of a series of classes from various ontology in the heritage domain"@en .
+
+crm:E55_Type rdfs:subClassOf rds:Type .
+gvp:Concept rdfs:subClassOf rds:Type .
+skos:Concept rdfs:subClassOf rds:Type .
