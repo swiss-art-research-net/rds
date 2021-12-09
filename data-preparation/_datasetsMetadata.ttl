@@ -39,6 +39,6 @@
     skos:prefLabel "Thésaurus de la désignation des objets mobiliers" .
 
  <http://data.culture.fr/thesaurus/resource/ark:/67717/T96/graph> rs:displayLabel "Thésaurus de la désignation des œuvres architecturales et des espaces aménagés" ;
-    rdfs:label "TThésaurus de la désignation des œuvres architecturales et des espaces aménagés" ;
+    rdfs:label "Thésaurus de la désignation des œuvres architecturales et des espaces aménagés" ;
     schema:thumbnail "http://data.culture.fr/thesaurus-banner-resource/images/transversal_mini-logo3.png" ;
     skos:prefLabel "Thésaurus de la désignation des œuvres architecturales et des espaces aménagés" .
