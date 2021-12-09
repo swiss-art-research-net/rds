@@ -147,7 +147,7 @@ fetchData "thesobjmob" ${BLAZEGRAPH_ENDPOINT} 'PREFIX schema: <http://schema.org
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
-  GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/graph> {
+  GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
     ?candidate2 skos:exactMatch ?candidate1 .
   }
 }' ./data/thesobjmobSameAs.ttl

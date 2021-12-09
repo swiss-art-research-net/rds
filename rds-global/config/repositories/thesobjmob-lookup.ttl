@@ -25,13 +25,13 @@
       lookup:targetRepository "default";
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
-         	BIND(<http://data.culture.fr/thesaurus/resource/ark:/67717/graph> as ?dataset)
+         	BIND(<http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> as ?dataset)
     			BIND(\"thesObjMob\" as ?datasetLabel)
         }
       """;
       lookup:searchBlockTemplate """
         {
-          GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/graph> {
+          GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
               ?candidate a ?type.
               ?candidate skos:prefLabel ?key .
           }
@@ -43,16 +43,16 @@
           }
     		} UNION {
         		BIND (1 as ?score_private)
-            BIND (IRI(CONCAT(\"http://data.culture.fr/thesaurus/resource/ark:/67717/\", ?__token__)) as ?candidate)
+            BIND (IRI(CONCAT(\"http://data.culture.fr/thesaurus/resource/ark:/67717/T69-\", ?__token__)) as ?candidate)
             FILTER EXISTS {
-    					GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/graph> {
+    					GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
               	?candidate a ?someType .
     					}
             }
         } UNION {
           BIND(IRI(?__token__) as ?candidate)
           FILTER EXISTS {
-          	GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/graph> {
+          	GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
             	?candidate a ?someType .
     				}
           }
@@ -63,7 +63,7 @@
         GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
           ?targetType rdfs:subClassOf? ?__type__.
         }
-    		GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/graph> {
+    		GRAPH <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> {
         	?candidate a ?targetType.
         }
       }

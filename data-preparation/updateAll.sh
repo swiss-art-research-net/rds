@@ -7,5 +7,6 @@ cd ${UPDATE_SCRIPTS_DIR}
 ./updateGndBibiliographic.sh
 ./updateGndFacts.sh
 ./updateUlan.sh
+./updateThesObjMob.sh
 cd ${ROOT_DIR}
 ./uploadMetadata.sh
