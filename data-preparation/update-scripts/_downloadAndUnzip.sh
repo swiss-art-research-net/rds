@@ -3,6 +3,7 @@
 #   DATA_URL(String)
 #   SKIP_DELETING (true/false)
 #   USE_GUNZIP (true/false)
+#   SKIP_UNZIPPING (true/false)
 #   FILE_FORMAT (String)
 
 set -e
@@ -34,12 +35,14 @@ else
 fi
 echo "Fetching completed."
 
-echo "Unzip datasources..."
-if [ "${USE_GUNZIP}" == true ]; then
-    gunzip data.${FILE_FORMAT}.gz
-else
-    unzip data.zip
+if [ "${SKIP_UNZIPPING}" != true ]; then
+    echo "Unzip datasources..."
+    if [ "${USE_GUNZIP}" == true ]; then
+        gunzip data.${FILE_FORMAT}.gz
+    else
+        unzip data.zip
+    fi
+    echo "Unzipping completed."
 fi
-echo "Unzipping completed."
 
 cd ${CURRENT_DIRECTORY}

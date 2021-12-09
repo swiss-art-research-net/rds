@@ -1,6 +1,7 @@
 export DATA_DIRECTORY=./thes-obj-mob-data
 export DATA_URL="http://data.culture.fr/thesaurus/data/ark:/67717/T69?includeSchemes=true&format=TURTLE"
 export FILE_FORMAT=ttl
+export SKIP_UNZIPPING=true
 DATA_FORMAT="text/turtle"
 NAMED_GRAPH=http%3A%2F%2Fdata.culture.fr%2Fthesaurus%2Fresource%2Fark%3A%2F67717%2Fgraph
 # ================================================================
