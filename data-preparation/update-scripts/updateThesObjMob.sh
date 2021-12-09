@@ -3,7 +3,7 @@ export DATA_URL="http://data.culture.fr/thesaurus/data/ark:/67717/T69?includeSch
 export FILE_FORMAT=ttl
 export SKIP_UNZIPPING=true
 DATA_FORMAT="text/turtle"
-NAMED_GRAPH=http%3A%2F%2Fdata.culture.fr%2Fthesaurus%2Fresource%2Fark%3A%2F67717%2Fgraph
+NAMED_GRAPH=http%3A%2F%2Fdata.culture.fr%2Fthesaurus%2Fresource%2Fark%3A%2F67717%2FT69%2Fgraph
 # ================================================================
 if [ -z "${BLAZEGRAPH_ENDPOINT}" ]; then
     BLAZEGRAPH_ENDPOINT="http://localhost:8080/blazegraph/namespace/kb/sparql"
