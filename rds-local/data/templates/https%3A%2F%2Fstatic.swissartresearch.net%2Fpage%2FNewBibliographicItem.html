@@ -1,3 +1,5 @@
+[[> rdsParts:FieldDefinitions]]
+
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
@@ -175,175 +177,173 @@
       	persistence='ldp'
         form-id='bibliographicitems'
         post-action='event'            
-        fields='[[fieldDefinitions
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Bibliographic_Item="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Bibliographic_Item"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
-        http://www.metaphacts.com/fieldDefinition/Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-        https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Type"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Language="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Language"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Part_Of="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Part_Of"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Place"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Latest"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Number_of_Pages="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Number_of_Pages"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Temporal_Reference="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Temporal_Reference"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Physical_Geographic_Reference="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Physical_Geographic_Reference"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Owner"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Shelf="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Shelf"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address"
-        https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_coordinates"
-      ]]'
+        fields='[
+          [[> Identifier_Bibliographic_Item]],
+          [[> Identifier_Value]],
+          [[> Identifier_Provider]],
+          [[> Identifier_Source]],
+          [[> Identifier_Type]],
+          [[> Bibliographic_Item_Type]],
+          [[> Bibliographic_Item_Title]],
+          [[> Bibliographic_Item_Title_Value]],
+          [[> Bilbiographic_Item_Title_Part]],
+          [[> Bibliographic_Item_Language]],
+          [[> Bibliographic_Item_Part_Of]],
+          [[> Bibliographic_Item_Publication]],
+          [[> Bibliographic_Item_Publication_Place]],
+          [[> Bibliographic_Item_Publication_Date_Earliest]],
+          [[> Bibliographic_Item_Publication_Date_Latest]],
+          [[> Bibliographic_Item_Publisher]],
+          [[> Bibliographic_Item_Author]],
+          [[> Bibliographic_Item_Role]],
+          [[> Bibliographic_Item_Number_of_Pages]],
+          [[> Bibliographic_Item_Temporal_Reference]],
+          [[> Bibliographic_Item_Physical_Geographic_Reference]],
+          [[> Bibliographic_Item_Subject_Reference]],
+          [[> Bibliographic_Item_ID]],
+          [[> Bibliographic_Item_Identifier]],
+          [[> Bibliographic_Item_Owner]],
+          [[> Bibliographic_Item_Present_Item_Location_-_Shelf]],
+          [[> Bibliographic_Item_Present_Item_Location_-_Institution]],
+          [[> Bibliographic_Item_Present_Item_Location_-_Institutional_Address]],
+          [[> Bibliographic_Item_Present_Item_Location_-_coordinates]]
+      ]'
     >
 
       <semantic-form-composite-input 
-        for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Bibliographic_Item"
+        for="Identifier_Bibliographic_Item"
         new-subject-template="."
-        fields='[[fieldDefinitions
-          https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-          https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-          http://www.metaphacts.com/fieldDefinition/Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-          https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
-          
-        ]]'>
+        fields='[
+          [[> Identifier_Source]],
+          [[> Identifier_Type]],
+          [[> Identifier_Provider]],
+          [[> Identifier_Value]]
+        ]'>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value">
+          for="Identifier_Value">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source">
+          for="Identifier_Source">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type">
+          for="Identifier_Type">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="http://www.metaphacts.com/fieldDefinition/Identifier_Provider">
+          for="Identifier_Provider">
         </semantic-form-text-input>
       </semantic-form-composite-input>
       
       <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Type">
+          for="Bibliographic_Item_Type">
      </semantic-form-text-input>
       
       <semantic-form-composite-input 
-        for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title"
+        for="Bibliographic_Item_Title"
         new-subject-template="."
-        fields='[[fieldDefinitions
-          https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value"
-          https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Part"
-          https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part"
-          https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Language="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Language"
-        ]]'>
+        fields='[
+          [[> Bibliographic_Item_Title_Value]],
+          [[> Bilbiographic_Item_Title_Part]],
+          [[> Bibliographic_Item_Language]]
+        ]'>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Title_Value"
+          for="Bibliographic_Item_Title_Value"
 					languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
         
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bilbiographic_Item_Title_Part"
+          for="Bilbiographic_Item_Title_Part"
 					languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
         
       </semantic-form-composite-input>
       
       <semantic-form-select-input 
-				for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Language">
+				for="Bibliographic_Item_Language">
       </semantic-form-select-input>
       
 		  <semantic-form-autocomplete-input  
-				for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Part_Of">
+				for="Bibliographic_Item_Part_Of">
       </semantic-form-autocomplete-input>
       
      <semantic-form-composite-input 
-        for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication"
+        for="Bibliographic_Item_Publication"
         new-subject-template="."
-        fields='[[fieldDefinitions
-         https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Place"
-         https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest"
-         https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Latest"
-         https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher"
-         https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author"
-         https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role"
-        ]]'>
+        fields='[
+          [[> Bibliographic_Item_Publication_Place]],
+          [[> Bibliographic_Item_Publication_Date_Earliest]],
+          [[> Bibliographic_Item_Publication_Date_Latest]],
+          [[> Bibliographic_Item_Publisher]],
+          [[> Bibliographic_Item_Author]],
+          [[> Bibliographic_Item_Role]]
+        ]'>
         <semantic-form-autocomplete-input  
-				for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Place">
+				for="Bibliographic_Item_Publication_Place">
       </semantic-form-autocomplete-input>
         
        <semantic-form-datetime-input 
-        	for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Earliest">
+        	for="Bibliographic_Item_Publication_Date_Earliest">
       </semantic-form-datetime-input>
        
        <semantic-form-datetime-input 
-        	for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publication_Date_Latest">
+        	for="Bibliographic_Item_Publication_Date_Latest">
       </semantic-form-datetime-input>
       
        <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Publisher">
+          for="Bibliographic_Item_Publisher">
         </semantic-form-text-input>
        <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Author">
+          for="Bibliographic_Item_Author">
         </semantic-form-text-input>
        <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Role">
+          for="Bibliographic_Item_Role">
         </semantic-form-text-input>
        
       </semantic-form-composite-input>
       
       <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Number_of_Pages">
+          for="Bibliographic_Item_Number_of_Pages">
         </semantic-form-text-input>
       
       <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Temporal_Reference">
+          for="Bibliographic_Item_Temporal_Reference">
         </semantic-form-text-input>
       
       <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Physical_Geographic_Reference">
+          for="Bibliographic_Item_Physical_Geographic_Reference">
         </semantic-form-text-input>
       
       <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Subject_Reference">
+          for="Bibliographic_Item_Subject_Reference">
         </semantic-form-text-input>
       
       <semantic-form-composite-input 
-        for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_ID"
+        for="Bibliographic_Item_ID"
         new-subject-template="."
-        fields='[[fieldDefinitions
-https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier"
-https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Owner"
-https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Shelf="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Shelf"
-https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution"
-https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address"
-https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_coordinates"
-        ]]'>
+        fields='[
+          [[> Bibliographic_Item_Identifier]],
+          [[> Bibliographic_Item_Owner]],
+          [[> Bibliographic_Item_Present_Item_Location_-_Shelf]],
+          [[> Bibliographic_Item_Present_Item_Location_-_Institution]],
+          [[> Bibliographic_Item_Present_Item_Location_-_Institutional_Address]],
+          [[> Bibliographic_Item_Present_Item_Location_-_coordinates]]
+        ]'>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Identifier">
+          for="Bibliographic_Item_Identifier">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Owner">
+          for="Bibliographic_Item_Owner">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Shelf">
+          for="Bibliographic_Item_Present_Item_Location_-_Shelf">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institution">
+          for="Bibliographic_Item_Present_Item_Location_-_Institution">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_Institutional_Address">
+          for="Bibliographic_Item_Present_Item_Location_-_Institutional_Address">
         </semantic-form-text-input>
         <semantic-form-text-input 
-          for="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Bibliographic_Item_Present_Item_Location_-_coordinates">
+          for="Bibliographic_Item_Present_Item_Location_-_coordinates">
         </semantic-form-text-input>
       </semantic-form-composite-input>
 
