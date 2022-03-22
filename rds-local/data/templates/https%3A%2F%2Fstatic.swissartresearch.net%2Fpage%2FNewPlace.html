@@ -240,27 +240,27 @@
 
       <semantic-form-composite-input 
           for="Person_Name"
-          new-subject-template="/appellation/{{Name_Value}}"
+          new-subject-template="/appellation/{{Person_Name-Value}}"
           fields='[
-            [[> Person_Name]],
+            [[> Person_Name-Value]],
             [[> Person_Name_Part]]
       ]'>
-        <semantic-form-text-input for="Name_Value"
+        <semantic-form-text-input for="Person_Name-Value"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-        <semantic-form-text-input for="Name_Part"></semantic-form-text-input>
+        <semantic-form-text-input for="Person_Name_Part"></semantic-form-text-input>
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
           for="Place_Type"
-          new-subject-template="https://resource.swissartresearch.net/type/{{Type_Value}}"
+          new-subject-template="https://resource.swissartresearch.net/type/{{Place_Type_Qualifying_Description}}"
           fields='[
             [[> Place_Type_Qualifying_Description]],
             [[> Place_Type_Start_Date]],
             [[> Place_Type_End_Date]]
       ]'>
-        <semantic-form-text-input for="Type_Value"></semantic-form-text-input>
+        <semantic-form-text-input for="Place_Type_Qualifying_Description"></semantic-form-text-input>
 
         <semantic-form-datetime-input for="Place_Type_Start_Date"></semantic-form-datetime-input>
 
@@ -270,7 +270,7 @@
 
       <semantic-form-composite-input 
           for="Person_Alternate_Name"
-          new-subject-template="/appellation/{{Alternative_Name_Value}}"
+          new-subject-template="/appellation/{{Person_Alternate_Name_Value}}"
           fields='[
             [[> Person_Alternate_Name_Value]],
             [[> Person_Alternate_Name_Type]],
@@ -279,19 +279,19 @@
             [[> Alternate_Name_Attributed_by]],
             [[> Alternative_Name_-_Source]]
       ]'>
-        <semantic-form-text-input for="Alternative_Name_Value"
+        <semantic-form-text-input for="Person_Alternate_Name_Value"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-        <semantic-form-text-input for="Alternative_Name_Type"'></semantic-form-text-input>
+        <semantic-form-text-input for="Person_Alternate_Name_Type"'></semantic-form-text-input>
 
-        <semantic-form-datetime-input for="Alternative_Name_Use_Period_earliest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Alternate_Name_Use_Period_earliest"></semantic-form-datetime-input>
 
-        <semantic-form-datetime-input for="Alternative_Name_Use_Period_latest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Alternate_Name_Use_Period_latest"></semantic-form-datetime-input>
 
-        <semantic-form-text-input for="Attributed_by"></semantic-form-text-input>
+        <semantic-form-text-input for="Alternate_Name_Attributed_by"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Source"></semantic-form-text-input>
+        <semantic-form-text-input for="Alternative_Name_-_Source"></semantic-form-text-input>
 
       </semantic-form-composite-input>
       
@@ -325,7 +325,7 @@
 
       <semantic-form-composite-input 
           for="Historical_Parthood"
-          new-subject-template="/historical_parthood/{{Historical_Parthood_Part_of_Place}}"
+          new-subject-template="/historical_parthood/{{UUID}}"
           fields='[
             [[> Historical_Parthood_-_Historically_Part_of_Place]],
             [[> Historical_Parthood_-_Historically_part_of_Place_-_Earliest_Date_Time]],
@@ -349,15 +349,15 @@
           
         </semantic-form-autocomplete-input>
 
-        <semantic-form-datetime-input for="Historical_Parthood_Start"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Historical_Parthood_-_Historically_part_of_Place_-_Earliest_Date_Time"></semantic-form-datetime-input>
 
-        <semantic-form-datetime-input for="Historical_Parthood_End"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Historical_Parthood_-_Historically_part_of_Place_-_Latest_Date_Time"></semantic-form-datetime-input>
 
-        <semantic-form-text-input for="Historical_Parthood_Name_at_Time"></semantic-form-text-input>
+        <semantic-form-text-input for="Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Historical_Parthood_Type_at_Time"></semantic-form-text-input>
+        <semantic-form-text-input for="Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Historical_Parthood_Coordinates"></semantic-form-text-input>
+        <semantic-form-text-input for="Historical_Parthood_-_Historicall_Coordinates"></semantic-form-text-input>
       </semantic-form-composite-input>
       
       <semantic-form-text-input for="Coordinates"></semantic-form-text-input>

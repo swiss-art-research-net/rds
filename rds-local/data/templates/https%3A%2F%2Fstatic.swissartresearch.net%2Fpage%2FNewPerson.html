@@ -250,7 +250,7 @@
 
       <semantic-form-composite-input 
           for="Person_Name"
-          new-subject-template="/appellation/{{Person_Name}}"
+          new-subject-template="/appellation/{{Person_Name-Value}}"
           fields='[
         [[> Person_Name-Value ]],
         [[> Person_Name_Part ]]
@@ -266,7 +266,7 @@
       
       <semantic-form-composite-input 
           for="Person_Alternate_Name"
-          new-subject-template="/appellation/{{Alternate_Name_Value}}"
+          new-subject-template="/appellation/{{Person_Alternate_Name_Value}}"
           fields='[
             [[> Person_Alternate_Name_Value ]],
             [[> Person_Alternate_Name_Type ]],
