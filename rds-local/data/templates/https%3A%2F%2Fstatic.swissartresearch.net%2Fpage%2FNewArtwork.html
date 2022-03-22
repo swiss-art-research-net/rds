@@ -1,3 +1,5 @@
+[[> rdsParts:RDSFieldDefinitions]]
+
 [[#if edit]]
 [[else]]
 <ol class="page-breadcrumb">
@@ -52,7 +54,7 @@
   <div class="col-md-8 offset-md-2" style="margin-bottom: 20px; margin-top: 100px">
     <h2>Creation of a new artwork</h2>
     <p>
-      Before creating a new artwork, please type in the name to check if such artwork already exists on RDF-Global or locally. If you'd like to create an instance of the existing artwork locally, press the "link" button next to the relevant match in the table below.
+      Before creating a new artwork, please type in the name to check if such artwork already exists on RDS-Global or locally. If you'd like to create an instance of the existing artwork locally, press the "link" button next to the relevant match in the table below.
     </p>
     <semantic-search limit=1000>
       <div style="margin-bottom: 10px">
@@ -199,36 +201,36 @@
       persistence='ldp'
       form-id='artworks'
       post-action='event'        
-      fields='[[fieldDefinitions
-                Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
-                crmtype="http://www.metaphacts.com/fieldDefinition/AddType"
-                rdftype="http://www.metaphacts.com/fieldDefinition/Type-hidden"
-                Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
-                Rds_Artwork_Title="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Title"
-                Rds_Artwork_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Type"
-                Rds_Artwork_Alternative_Title="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title"
-                Rds_Artwork_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description"
-                Rds_Artwork_Parts="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts"
-                Rds_Artwork_Style_Movement="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Style_-_Movement"
-                Rds_Artwork_Production="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production"
-                Rds_Artwork_Destruction="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction"
-                Rds_Artwork_Current_Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner"
-                Rds_Artwork_Current_Holder="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Holder"
-                Rds_Artwork_Material="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Material"
-                Rds_Artwork_Technique="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Technique"
-                Rds_Artwork_Dimension="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension"
-                Rds_Artwork_Subject="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject"
-                Rds_Artwork_Provenance="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance"
-                Rds_Artwork_Conservation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation"
-                Rds_Artwork_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Location"
-                Citation="http://www.metaphacts.com/fieldDefinition/Citation"
-      ]]'
+      fields='[
+        [[> SameAs]],
+        [[> AddType]],
+        [[> Type-hidden]],
+        [[> Identifier]],
+        [[> Artwork_Title]],
+        [[> Artwork_Type]],
+        [[> Artwork_Alternative_Title]],
+        [[> Artwork_Description]],
+        [[> Artwork_Parts]],
+        [[> Artwork_Style_Movement]],
+        [[> Artwork_Production]],
+        [[> Artwork_Destruction]],
+        [[> Artwork_Current_Owner]],
+        [[> Artwork_Current_Holder]],
+        [[> Artwork_Material]],
+        [[> Artwork_Technique]],
+        [[> Artwork_Dimension]],
+        [[> Artwork_Subject]],
+        [[> Artwork_Provenance]],
+        [[> Artwork_Conservation]],
+        [[> Artwork_Location]],
+        [[> Citation]]
+      ]'
     >
-      <semantic-form-hidden-input for="rdftype" default-value="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"></semantic-form-hidden-input>
-      <semantic-form-hidden-input for='crmtype' default-value='Artwork'></semantic-form-hidden-input>
+      <semantic-form-hidden-input for="Type-hidden" default-value="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"></semantic-form-hidden-input>
+      <semantic-form-hidden-input for='AddType' default-value='Artwork'></semantic-form-hidden-input>
       {{#if sameAs}}
         <semantic-form-autocomplete-input
-          for="Same_as"
+          for="SameAs"
           value-binding-name="subject"
           lookup-query='{
             "type": "lookup",
@@ -242,7 +244,7 @@
         </semantic-form-autocomplete-input>
       {{else}}
         <semantic-form-autocomplete-input
-          for="Same_as"
+          for="SameAs"
           value-binding-name="subject"
           lookup-query='{
             "type": "lookup",
@@ -258,12 +260,12 @@
       <semantic-form-composite-input
           for="Identifier"
           new-subject-template='/identifier/{{Identifier_Value}}'
-          fields='[[fieldDefinitions
-                    Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-                    Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-                    Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-                    Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
-      ]]'>
+          fields='[
+                    [[> Identifier_Source]],
+                    [[> Identifier_Type]],
+                    [[> Identifier_Provider]],
+                    [[> Identifier_Value]]
+      ]'>
         <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
@@ -271,78 +273,78 @@
       </semantic-form-composite-input>
 
        
-      <semantic-form-text-input for="Rds_Artwork_Title"></semantic-form-text-input> 
+      <semantic-form-text-input for="Artwork_Title"></semantic-form-text-input> 
       
-      <semantic-form-text-input for="Rds_Artwork_Type"></semantic-form-text-input>
+      <semantic-form-text-input for="Artwork_Type"></semantic-form-text-input>
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Alternative_Title"
-          new-subject-template="/appellation/{{Rds_Artwork_Alternative_Title_Value}}"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Alternative_Title_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Value"
-                    Rds_Artwork_Alternative_Title_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Type"
-                    Rds_Artwork_Alternative_Title_Use_Period_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Use_Period_Earliest"
-                    Rds_Artwork_Alternative_Title_Use_Period_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Use_Period_Latest"
-                    Rds_Artwork_Alternative_Title_Used_By="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Alternative_Title_Used_By"
-			]]'>
-    		<semantic-form-text-input for="Rds_Artwork_Alternative_Title_Value"
+          for="Artwork_Alternative_Title"
+          new-subject-template="/appellation/{{Artwork_Alternative_Title_Value}}"
+          fields='[
+                    [[> Artwork_Alternative_Title_Value]],
+                    [[> Artwork_Alternative_Title_Type]],
+                    [[> Artwork_Alternative_Title_Use_Period_Earliest]],
+                    [[> Artwork_Alternative_Title_Use_Period_Latest]],
+                    [[> Artwork_Alternative_Title_Used_By]]
+			]'>
+    		<semantic-form-text-input for="Artwork_Alternative_Title_Value"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-     		<semantic-form-text-input for="Rds_Artwork_Alternative_Title_Type"></semantic-form-text-input>
+     		<semantic-form-text-input for="Artwork_Alternative_Title_Type"></semantic-form-text-input>
 
-     		<semantic-form-datetime-input for="Rds_Artwork_Alternative_Title_Use_Period_Earliest"></semantic-form-datetime-input>
+     		<semantic-form-datetime-input for="Artwork_Alternative_Title_Use_Period_Earliest"></semantic-form-datetime-input>
 
-     		<semantic-form-datetime-input for="Rds_Artwork_Alternative_Title_Use_Period_Latest"></semantic-form-datetime-input>
+     		<semantic-form-datetime-input for="Artwork_Alternative_Title_Use_Period_Latest"></semantic-form-datetime-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Alternative_Title_Used_By"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Alternative_Title_Used_By"></semantic-form-text-input>
       </semantic-form-composite-input>
 
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Description"
-          new-subject-template="/description/{{Rds_Artwork_Description_Value}}"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Description_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Value"
-                    Rds_Artwork_Description_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Type"
-                    Rds_Artwork_Description_Author="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Description_Author"
-      ]]'>
-        <semantic-form-text-input for="Rds_Artwork_Description_Value"
+          for="Artwork_Description"
+          new-subject-template="/description/{{Artwork_Description_Value}}"
+          fields='[
+                    [[> Artwork_Description_Value]],
+                    [[> Artwork_Description_Type]],
+                    [[> Artwork_Description_Author]]
+      ]'>
+        <semantic-form-text-input for="Artwork_Description_Value"
                                   multiline='true'
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Description_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Description_Type"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Description_Author"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Description_Author"></semantic-form-text-input>
 
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Parts"
-          new-subject-template="https://resource.swissartresearch.net/artwork/{{Rds_Artwork_Parts_Value}}"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Parts_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Parts_Value"
-                    Rds_Artwork_Part_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Part_Type"
-      ]]'>
-        <semantic-form-text-input for="Rds_Artwork_Parts_Value"></semantic-form-text-input>
+          for="Artwork_Parts"
+          new-subject-template="https://resource.swissartresearch.net/artwork/{{Artwork_Parts_Value}}"
+          fields='[
+                    [[> Artwork_Parts_Value]],
+                    [[> Artwork_Part_Type]]
+      ]'>
+        <semantic-form-text-input for="Artwork_Parts_Value"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Part_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Part_Type"></semantic-form-text-input>
 
       </semantic-form-composite-input>
 
-      <semantic-form-text-input for="Rds_Artwork_Style_Movement"></semantic-form-text-input>
+      <semantic-form-text-input for="Artwork_Style_Movement"></semantic-form-text-input>
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Production"
+          for="Artwork_Production"
           new-subject-template="/production"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Production_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Location"
-                    Rds_Artwork_Production_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Earliest"
-                    Rds_Artwork_Production_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Production_Date_Latest"
-                    Rds_Artwork_Creator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator"
-      ]]'>
-        <semantic-form-autocomplete-input for='Rds_Artwork_Production_Location'
+          fields='[
+                    [[> Artwork_Production_Location]],
+                    [[> Artwork_Production_Date_Earliest]],
+                    [[> Artwork_Production_Date_Latest]],
+                    [[> Artwork_Creator]]
+      ]'>
+        <semantic-form-autocomplete-input for='Artwork_Production_Location'
             value-binding-name="subject"
             lookup-query='{
                 "type": "lookup",
@@ -353,20 +355,20 @@
             [[> autocompletionTemplate]]
         </semantic-form-autocomplete-input>
         
-        <semantic-form-datetime-input for="Rds_Artwork_Production_Date_Earliest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Artwork_Production_Date_Earliest"></semantic-form-datetime-input>
 
-        <semantic-form-datetime-input for="Rds_Artwork_Production_Date_Latest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Artwork_Production_Date_Latest"></semantic-form-datetime-input>
         
         <semantic-form-composite-input 
-            for="Rds_Artwork_Creator"
-            new-subject-template="/carried_out/{{Rds_Artwork_Creator_Value}}"
-            fields='[[fieldDefinitions
-                      Rds_Artwork_Creator_Value="http://www.metaphacts.com/fieldDefinition/Artwork_Creator_Value"
-                      Artwork_Creator_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Creator_Role"
-        ]]'>
+            for="Artwork_Creator"
+            new-subject-template="/carried_out/{{Artwork_Creator_Value}}"
+            fields='[
+                      [[> Artwork_Creator_Value]],
+                      [[> Artwork_Creator_Role]]
+        ]'>
           [[#> newSubPerson]]
             <semantic-form-autocomplete-input
-              for="Rds_Artwork_Creator_Value"
+              for="Artwork_Creator_Value"
               value-binding-name="subject"
               lookup-query='{
                 "type": "lookup",
@@ -385,15 +387,15 @@
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Destruction"
+          for="Artwork_Destruction"
           new-subject-template="/destruction"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Destruction_Location="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Location"
-                    Rds_Artwork_Destruction_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Earliest"
-                    Rds_Artwork_Destruction_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Destruction_Date_Latest"
-      ]]'>
+          fields='[
+                    [[> Artwork_Destruction_Location]],
+                    [[> Artwork_Destruction_Date_Earliest]],
+                    [[> Artwork_Destruction_Date_Latest]]
+      ]'>
     
-        <semantic-form-autocomplete-input for='Rds_Artwork_Destruction_Location'
+        <semantic-form-autocomplete-input for='Artwork_Destruction_Location'
             value-binding-name="subject"
             lookup-query='{
                 "type": "lookup",
@@ -404,76 +406,76 @@
             [[> autocompletionTemplate]]
         </semantic-form-autocomplete-input>
 
-        <semantic-form-datetime-input for="Rds_Artwork_Destruction_Date_Earliest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Artwork_Destruction_Date_Earliest"></semantic-form-datetime-input>
 
-        <semantic-form-datetime-input for="Rds_Artwork_Destruction_Date_Latest"></semantic-form-datetime-input>
-
-      </semantic-form-composite-input>
-
-      <semantic-form-text-input for="Rds_Artwork_Current_Owner"></semantic-form-text-input>
-      
-      <semantic-form-text-input for="Rds_Artwork_Current_Holder"></semantic-form-text-input>
-      
-      <semantic-form-text-input for="Rds_Artwork_Material"></semantic-form-text-input>
-      
-      <semantic-form-text-input for="Rds_Artwork_Technique"></semantic-form-text-input>
-      
-      <semantic-form-composite-input 
-          for="Rds_Artwork_Dimension"
-          new-subject-template="/dimension/{{Rds_Artwork_Dimension_Value}}"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Dimension_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Type"
-                    Rds_Artwork_Dimension_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Value"
-                    Rds_Artwork_Dimension_Unit="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Dimension_Unit"
-			]]'>
-        <semantic-form-text-input for="Rds_Artwork_Dimension_Type"></semantic-form-text-input>
-
-        <semantic-form-text-input for="Rds_Artwork_Dimension_Value"></semantic-form-text-input>
-
-        <semantic-form-text-input for="Rds_Artwork_Dimension_Unit"></semantic-form-text-input>
+        <semantic-form-datetime-input for="Artwork_Destruction_Date_Latest"></semantic-form-datetime-input>
 
       </semantic-form-composite-input>
+
+      <semantic-form-text-input for="Artwork_Current_Owner"></semantic-form-text-input>
       
-      <semantic-form-text-input for="Rds_Artwork_Subject"></semantic-form-text-input>
+      <semantic-form-text-input for="Artwork_Current_Holder"></semantic-form-text-input>
+      
+      <semantic-form-text-input for="Artwork_Material"></semantic-form-text-input>
+      
+      <semantic-form-text-input for="Artwork_Technique"></semantic-form-text-input>
+      
+      <semantic-form-composite-input 
+          for="Artwork_Dimension"
+          new-subject-template="/dimension/{{Artwork_Dimension_Value}}"
+          fields='[
+                    [[> Artwork_Dimension_Type]],
+                    [[> Artwork_Dimension_Value]],
+                    [[> Artwork_Dimension_Unit]]
+			]'>
+        <semantic-form-text-input for="Artwork_Dimension_Type"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Artwork_Dimension_Value"></semantic-form-text-input>
+
+        <semantic-form-text-input for="Artwork_Dimension_Unit"></semantic-form-text-input>
+
+      </semantic-form-composite-input>
+      
+      <semantic-form-text-input for="Artwork_Subject"></semantic-form-text-input>
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Provenance"
+          for="Artwork_Provenance"
           new-subject-template="/aquisition/{{UUID}}"
-          fields='[[fieldDefinitions 
-                    Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Latest"
-                    Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Period_Statement_Owner"
-                    Rds_Artwork_Provenance_Past_Ownership_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Provenance_Past_Ownership_Description"
-      ]]'>
-        <semantic-form-datetime-input for="Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Latest"></semantic-form-datetime-input>
+          fields='[ 
+                    [[> Artwork_Provenance_Past_Ownership_Period_Statement_Latest]],
+                    [[> Artwork_Provenance_Past_Ownership_Period_Statement_Owner]],
+                    [[> Artwork_Provenance_Past_Ownership_Description]]
+      ]'>
+        <semantic-form-datetime-input for="Artwork_Provenance_Past_Ownership_Period_Statement_Latest"></semantic-form-datetime-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Provenance_Past_Ownership_Period_Statement_Owner"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Provenance_Past_Ownership_Period_Statement_Owner"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Provenance_Past_Ownership_Description" multiline="true"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Provenance_Past_Ownership_Description" multiline="true"></semantic-form-text-input>
 
       </semantic-form-composite-input>
     
       <semantic-form-composite-input 
-          for="Rds_Artwork_Conservation"
+          for="Artwork_Conservation"
           new-subject-template="/conservation/{{UUID}}"
-          fields='[[fieldDefinitions
-                    Rds_Artwork_Conservation_Event_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Earliest"
-                    Rds_Artwork_Conservation_Event_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Latest"
-                    Rds_Artwork_Conservation_Event_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Type"
-                    Rds_Artwork_Conservation_Event_Technique="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Technique"
-                    Rds_Artwork_Conservator="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservator"
-                    Rds_Artwork_Conservation_Event_Description="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Conservation_Event_Description"
-      ]]'>
-        <semantic-form-datetime-input for="Rds_Artwork_Conservation_Event_Earliest"></semantic-form-datetime-input>
+          fields='[
+                    [[> Artwork_Conservation_Event_Earliest]],
+                    [[> Artwork_Conservation_Event_Latest]],
+                    [[> Artwork_Conservation_Event_Type]],
+                    [[> Artwork_Conservation_Event_Technique]],
+                    [[> Artwork_Conservator]],
+                    [[> Artwork_Conservation_Event_Description]]
+      ]'>
+        <semantic-form-datetime-input for="Artwork_Conservation_Event_Earliest"></semantic-form-datetime-input>
         
-        <semantic-form-datetime-input for="Rds_Artwork_Conservation_Event_Latest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Artwork_Conservation_Event_Latest"></semantic-form-datetime-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Conservation_Event_Type"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Technique"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Conservation_Event_Technique"></semantic-form-text-input>
 
         [[#> newSubPerson]]
           <semantic-form-autocomplete-input
-            for="Rds_Artwork_Conservator"
+            for="Artwork_Conservator"
             value-binding-name="subject"
             lookup-query='{
               "type": "lookup",
@@ -487,34 +489,34 @@
           </semantic-form-autocomplete-input>
         [[/newSubPerson]]
 
-        <semantic-form-text-input for="Rds_Artwork_Conservation_Event_Description" multiline="true"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Conservation_Event_Description" multiline="true"></semantic-form-text-input>
 
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Rds_Artwork_Location"
+          for="Artwork_Location"
           new-subject-template="/location/{{UUID}}"
-          fields='[[fieldDefinitions 
-                  Rds_Artwork_Present_Location_-_Institution="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution"
-                  Rds_Artwork_Present_Location_-_Institution_Address="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_Institution_Address"
-                  Rds_Artwork_Present_Location_-_coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Present_Location_-_coordinates"
-      ]]'>
+          fields='[ 
+                  [[> Artwork_Present_Location_-_Institution]],
+                  [[> Artwork_Present_Location_-_Institution_Address]],
+                  [[> Artwork_Present_Location_-_coordinates]]
+      ]'>
         
-        <semantic-form-text-input for="Rds_Artwork_Present_Location_-_Institution"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Present_Location_-_Institution"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Artwork_Present_Location_-_Institution_Address"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Present_Location_-_Institution_Address"></semantic-form-text-input>
         
-        <semantic-form-text-input for="Rds_Artwork_Present_Location_-_coordinates"></semantic-form-text-input>
+        <semantic-form-text-input for="Artwork_Present_Location_-_coordinates"></semantic-form-text-input>
 
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
           for="Citation"
           new-subject-template="/citation/{{Citation_Value}}"
-          fields='[[fieldDefinitions
-                    Citation_Value="http://www.metaphacts.com/fieldDefinition/Citation_Value"
-                    Citation_Source="http://www.metaphacts.com/fieldDefinition/Citation_Source"
-      ]]'>
+          fields='[
+                    [[> Citation_Value]],
+                    [[> Citation_Source]]
+      ]'>
         <semantic-form-text-input for="Citation_Value"></semantic-form-text-input>
 
         <semantic-form-text-input for="Citation_Source"></semantic-form-text-input>
