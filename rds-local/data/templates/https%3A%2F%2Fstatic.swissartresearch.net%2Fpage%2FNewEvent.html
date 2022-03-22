@@ -1,3 +1,5 @@
+[[> rdsParts:FieldDefinitions]]
+
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
@@ -175,149 +177,149 @@
       	persistence='ldp'
         form-id='events'
         post-action='event'
-        fields='[[fieldDefinitions
-                  Rds_Identifier_Event="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Event"
-                  Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-                  Rds_dev_Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-                  Rds_Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-                  Rds_Event_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Name"
-                  Rds_Event_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Type"
-                  Rds_Event_Alternate_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name"
-                  Rds_Event_Alternate_Name_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Value"
-                  Rds_Event_Alternate_Name_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Type" 
-                  Rds_Event_Alternate_Name_Use_Period_-_earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_earliest"
-                  Rds_Event_Alternate_Name_Use_Period_-_latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_latest"
-                  Mph_Event_Description="http://www.metaphacts.com/fieldDefinition/Event_Description"
-                  Rds_Event_Description_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Value"
-                  Rds_Event_Description_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Type"
-                  Mph_Event_Description_Author="http://www.researchspace.org/instances/fields/Event_Description_Author"
-                  Rds_Event_Description_Date_-_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Earliest"
-                  Rds_Event_Description_Date_-_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Latest"
-                  Rds_Event_Earliest_Possible_Start_Date="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Earliest_Possible_Start_Date"
-                  Rds_Event_Latest_Possible_End_Date="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Latest_Possible_End_Date"
-                  Rds_Event_Part_Of="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Part_Of"
-                  Rds_Motivating_Event="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Motivating_Event"
-                  Rds_Objects_Employed="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Objects_Employed"
-                  Rds_Documents_Employed="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Documents_Employed"
-                  Rds_Documents_Created="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Documents_Created"
-                  Rds_Event_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place"
-                  Rds_Event_Place_Name_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Name_Value"
-                  Rds_Event_Place_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Type"
-                  Rds_Event_Place_Coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Coordinates"
-                  Rds_Event_Actor="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Actor"
-                  Rds_Event_Actor="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Actor_Value"
-                  Rds_Event_Actor="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Actor_Type"
-      ]]'
+        fields='[
+        [[> Identifier_Event]],
+        [[> Identifier_Provider]],
+        [[> Identifier_Source]],
+        [[> Identifier_Type]],
+        [[> Event_Name]],
+        [[> Event_Type]],
+        [[> Event_Alternate_Name]],
+        [[> Event_Alternate_Name_Value]],
+        [[> Event_Alternate_Name_Type]], 
+        [[> Event_Alternate_Name_Use_Period_-_earliest]],
+        [[> Event_Alternate_Name_Use_Period_-_latest]],
+        [[> Event_Description]],
+        [[> Event_Description_Value]],
+        [[> Event_Description_Type]],
+        [[> Event_Description_Author]],
+        [[> Event_Description_Date_-_Earliest]],
+        [[> Event_Description_Date_-_Latest]],
+        [[> Event_Earliest_Possible_Start_Date]],
+        [[> Event_Latest_Possible_End_Date]],
+        [[> Event_Part_Of]],
+        [[> Motivating_Event]],
+        [[> Objects_Employed]],
+        [[> Documents_Employed]],
+        [[> Documents_Created]],
+        [[> Event_Place]],
+        [[> Event_Place_Name_Value]],
+        [[> Event_Place_Type]],
+        [[> Event_Place_Coordinates]],
+        [[> Event_Actor]],
+        [[> Event_Actor_Value]],
+        [[> Event_Actor_Type]]
+      ]'
     >
 
       <semantic-form-composite-input 
-          for="Rds_Identifier_Event"
+          for="Identifier_Event"
           new-subject-template="."
-          fields='[[fieldDefinitions
-                    Rds_dev_Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-                    Rds_Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-                    Mph_Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-      ]]'>
-        <semantic-form-text-input for="Rds_dev_Identifier_Source"></semantic-form-text-input>
+          fields='[
+        [[> Identifier_Source]],
+        [[> Identifier_Type]],
+        [[> Identifier_Provider]]
+      ]'>
+        <semantic-form-text-input for="Identifier_Source"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Identifier_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Mph_Identifier_Provider"></semantic-form-text-input>
+        <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
 
       </semantic-form-composite-input>
       
-      <semantic-form-text-input for="Rds_Event_Name" 
+      <semantic-form-text-input for="Event_Name" 
                                 languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
 		  </semantic-form-text-input>
       
-      <semantic-form-text-input for="Rds_Event_Type"></semantic-form-text-input>
+      <semantic-form-text-input for="Event_Type"></semantic-form-text-input>
       
       <semantic-form-composite-input 
-				for="Rds_Event_Alternate_Name"
+				for="Event_Alternate_Name"
 				new-subject-template="."
-				fields='[[fieldDefinitions
-                  Rds_Event_Alternate_Name_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Value"
-                  Rds_Event_Alternate_Name_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Type"
-                  Rds_Event_Alternate_Name_Use_Period_-_earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_earliest"
-                  Rds_Event_Alternate_Name_Use_Period_-_latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Use_Period_-_latest"
-			]]'>
-    		<semantic-form-text-input for="Rds_Event_Alternate_Name_Value"
+				fields='[
+        [[> Event_Alternate_Name_Value]],
+        [[> Event_Alternate_Name_Type]],
+        [[> Event_Alternate_Name_Use_Period_-_earliest]],
+        [[> Event_Alternate_Name_Use_Period_-_latest]]
+			]'>
+    		<semantic-form-text-input for="Event_Alternate_Name_Value"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
      		</semantic-form-text-input>
 
-     		<semantic-form-autocomplete-input for="Rds_Event_Alternate_Name_Type"></semantic-form-autocomplete-input>
+     		<semantic-form-autocomplete-input for="Event_Alternate_Name_Type"></semantic-form-autocomplete-input>
 
-     		<semantic-form-datetime-input for="Rds_Event_Alternate_Name_Use_Period_-_earliest"></semantic-form-datetime-input>
+     		<semantic-form-datetime-input for="Event_Alternate_Name_Use_Period_-_earliest"></semantic-form-datetime-input>
 
-     		<semantic-form-datetime-input for="Rds_Event_Alternate_Name_Use_Period_-_latest"></semantic-form-datetime-input>
+     		<semantic-form-datetime-input for="Event_Alternate_Name_Use_Period_-_latest"></semantic-form-datetime-input>
          
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Mph_Event_Description"
+          for="Event_Description"
           new-subject-template="."
-          fields='[[fieldDefinitions
-                    Rds_Event_Description_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Value"
-                    Rds_Event_Description_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Type"
-                    Mph_Event_Description_Author="http://www.researchspace.org/instances/fields/Event_Description_Author"
-                    Rds_Event_Description_Date_-_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Earliest"
-                    Rds_Event_Description_Date_-_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Description_Date_-_Latest"
-			]]'>
-    		<semantic-form-text-input for="Rds_Event_Description_Value" multiline='true'
+          fields='[
+        [[> Event_Description_Value]],
+        [[> Event_Description_Type]],
+        [[> Event_Description_Author]],
+        [[> Event_Description_Date_-_Earliest]],
+        [[> Event_Description_Date_-_Latest]]
+			]'>
+    		<semantic-form-text-input for="Event_Description_Value" multiline='true'
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
      		</semantic-form-text-input>
 
-     		<semantic-form-autocomplete-input for="Rds_Event_Description_Type"></semantic-form-autocomplete-input>
+     		<semantic-form-autocomplete-input for="Event_Description_Type"></semantic-form-autocomplete-input>
 
-        <semantic-form-text-input for="Mph_Event_Description_Author"></semantic-form-text-input>
+        <semantic-form-text-input for="Event_Description_Author"></semantic-form-text-input>
 
-     		<semantic-form-datetime-input for="Rds_Event_Description_Date_-_Earliest"></semantic-form-datetime-input>
+     		<semantic-form-datetime-input for="Event_Description_Date_-_Earliest"></semantic-form-datetime-input>
 
-     		<semantic-form-datetime-input for="Rds_Event_Description_Date_-_Latest"></semantic-form-datetime-input>
+     		<semantic-form-datetime-input for="Event_Description_Date_-_Latest"></semantic-form-datetime-input>
 
       </semantic-form-composite-input>
             
-      <semantic-form-autocomplete-input for="Rds_Event_Part_Of"></semantic-form-autocomplete-input>
+      <semantic-form-autocomplete-input for="Event_Part_Of"></semantic-form-autocomplete-input>
       
-      <semantic-form-autocomplete-input for="Rds_Motivating_Event"></semantic-form-autocomplete-input>
+      <semantic-form-autocomplete-input for="Motivating_Event"></semantic-form-autocomplete-input>
 
-      <semantic-form-datetime-input for="Rds_Event_Earliest_Possible_Start_Date"></semantic-form-datetime-input>
+      <semantic-form-datetime-input for="Event_Earliest_Possible_Start_Date"></semantic-form-datetime-input>
       
-      <semantic-form-datetime-input for="Rds_Event_Latest_Possible_End_Date"></semantic-form-datetime-input>
+      <semantic-form-datetime-input for="Event_Latest_Possible_End_Date"></semantic-form-datetime-input>
 
       <semantic-form-composite-input 
-          for="Rds_Event_Actor"
+          for="Event_Actor"
           new-subject-template="."
-          fields='[[fieldDefinitions 
-                    Rds_Event_Actor_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Actor_Value"
-                    Rds_Event_Actor_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Actor_Type"
-			]]'>
-    		<semantic-form-text-input for="Rds_Event_Actor_Value"></semantic-form-text-input>
+          fields='[ 
+        [[> Event_Actor_Value]],
+        [[> Event_Actor_Type]]
+			]'>
+    		<semantic-form-text-input for="Event_Actor_Value"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Event_Actor_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Event_Actor_Type"></semantic-form-text-input>
 
       </semantic-form-composite-input>
       
-      <semantic-form-text-input for="Rds_Objects_Employed"></semantic-form-text-input>
+      <semantic-form-text-input for="Objects_Employed"></semantic-form-text-input>
       
-      <semantic-form-text-input for="Rds_Documents_Employed"></semantic-form-text-input>
+      <semantic-form-text-input for="Documents_Employed"></semantic-form-text-input>
       
-      <semantic-form-text-input for="Rds_Documents_Created"></semantic-form-text-input>
+      <semantic-form-text-input for="Documents_Created"></semantic-form-text-input>
       
       <semantic-form-composite-input 
-				for="Rds_Event_Place"
+				for="Event_Place"
 				new-subject-template="."
-				fields='[[fieldDefinitions
-                  Rds_Event_Place_Name_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Name_Value"
-                  Rds_Event_Alternate_Name_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Alternate_Name_Type"
-                  Rds_Event_Place_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Type"
-                  Rds_Event_Place_Coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Event_Place_Coordinates"
-			]]'>
-        <semantic-form-text-input for="Rds_Event_Place_Name_Value"></semantic-form-text-input>
+				fields='[
+        [[> Event_Place_Name_Value]],
+        [[> Event_Alternate_Name_Type]],
+        [[> Event_Place_Type]],
+        [[> Event_Place_Coordinates]]
+			]'>
+        <semantic-form-text-input for="Event_Place_Name_Value"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Event_Place_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Event_Place_Type"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Event_Place_Coordinates"></semantic-form-text-input>
+        <semantic-form-text-input for="Event_Place_Coordinates"></semantic-form-text-input>
         
       </semantic-form-composite-input>
           
