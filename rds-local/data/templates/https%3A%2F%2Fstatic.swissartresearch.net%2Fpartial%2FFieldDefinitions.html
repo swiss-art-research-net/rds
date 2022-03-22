@@ -6866,7 +6866,7 @@ WHERE {
   ?value a crm:E21_Person .
 }",
     "deletePattern": "DELETE {
-  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri crm:P97_from_father ?value.
 }
 WHERE {
