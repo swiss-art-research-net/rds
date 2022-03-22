@@ -1,3 +1,5 @@
+[[> rdsParts:FieldDefinitions]]
+
 [[#if edit]]
 [[else]]
 <ol class="page-breadcrumb">
@@ -178,32 +180,32 @@
         persistence='ldp'
         form-id='persons'
         post-action='event'            
-        fields='[[  fieldDefinitions
-                    Same_as="http://www.metaphacts.com/fieldDefinition/SameAs"
-                    type="http://www.metaphacts.com/fieldDefinition/Type-hidden"
-                    Identifier="http://www.metaphacts.com/fieldDefinition/Identifier"
-                    Rds_Person_Name="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name"
-                    Rds_dev_Person_Gender="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender"
-                    Alternative_Name="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name"
-                    Person_Birth="http://www.metaphacts.com/fieldDefinition/Person_Birth_Place"
-                    Person_Death="http://www.metaphacts.com/fieldDefinition/Person_Death_Place"
-                    Person_Father="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Father"
-                    Person_Mother="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Mother"
-                    National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
-                    Cultural_Affiliation="http://www.metaphacts.com/fieldDefinition/Cultural_Affiliation"
-                    Rds_Person_Social_Relations="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations"
-                    Rds_dev_Institutional_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Institutional_Affiliation"
-                    Associate="http://www.metaphacts.com/fieldDefinition/Associate-input"
-                    Lang_Used="http://www.metaphacts.com/fieldDefinition/Languages_Used"
-                    Rds_dev_Floruit="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Floruit"
-                    Citation="http://www.metaphacts.com/fieldDefinition/Citation"
-                    Biography="http://www.metaphacts.com/fieldDefinition/Short_Biography"                
-    ]]'>
-      <semantic-form-hidden-input for="type" default-value="http://www.cidoc-crm.org/cidoc-crm/E21_Person"></semantic-form-hidden-input>
-      [[#> showOnRdsGlobalPersonFor fieldName="Same_as"]]
+        fields='[
+          [[> SameAs ]],
+          [[> Type-hidden ]],
+          [[> Identifier ]],
+          [[> Person_Name ]],
+          [[> Person_Gender ]],
+          [[> Person_Alternate_Name ]],
+          [[> Person_Birth_Place ]],
+          [[> Person_Death_Place ]],
+          [[> Person_Father ]],
+          [[> Person_Mother ]],
+          [[> National_Affiliation ]],
+          [[> Cultural_Affiliation ]],
+          [[> Person_Social_Relations ]],
+          [[> Institutional_Affiliation ]],
+          [[> Associate-input ]],
+          [[> Languages_Used ]],
+          [[> Floruit ]],
+          [[> Citation ]],
+          [[> Short_Biography ]]
+    ]'>
+      <semantic-form-hidden-input for="Type-hidden" default-value="http://www.cidoc-crm.org/cidoc-crm/E21_Person"></semantic-form-hidden-input>
+      [[#> showOnRdsGlobalPersonFor fieldName="SameAs"]]
         {{#if sameAs}}
           <semantic-form-autocomplete-input
-            for="Same_as"
+            for="SameAs"
             value-binding-name="subject"
             lookup-query='{
               "type": "lookup",
@@ -217,7 +219,7 @@
           </semantic-form-autocomplete-input>
         {{else}}
           <semantic-form-autocomplete-input
-            for="Same_as"
+            for="SameAs"
             value-binding-name="subject"
             lookup-query='{
               "type": "lookup",
@@ -234,12 +236,12 @@
       <semantic-form-composite-input
           for="Identifier"
           new-subject-template='/identifier/{{Identifier_Value}}'
-          fields='[[fieldDefinitions
-                    Identifier_Source="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Source"
-                    Identifier_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Type"
-                    Identifier_Provider="http://www.metaphacts.com/fieldDefinition/Identifier_Provider"
-                    Identifier_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Identifier_Value"
-      ]]'>
+          fields='[
+            [[> Identifier_Source ]],
+            [[> Identifier_Type ]],
+            [[> Identifier_Provider ]],
+            [[> Identifier_Value ]]
+      ]'>
         <semantic-form-text-input for="Identifier_Value"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Provider"></semantic-form-text-input>
         <semantic-form-text-input for="Identifier_Type"></semantic-form-text-input>
@@ -247,32 +249,32 @@
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Rds_Person_Name"
+          for="Person_Name"
           new-subject-template="/appellation/{{Mph_Person_Name}}"
-          fields='[[fieldDefinitions
-                    Mph_Person_Name="http://www.metaphacts.com/fieldDefinition/Person_Name"
-                    Rds_Person_Name_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name_Part"
-      ]]'>
+          fields='[
+        [[> Person_Name ]],
+        [[> Person_Name_Part ]]
+      ]'>
         <semantic-form-text-input for="Mph_Person_Name"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Person_Name_Part"></semantic-form-text-input>
+        <semantic-form-text-input for="Person_Name_Part"></semantic-form-text-input>
       </semantic-form-composite-input>
 
-      <semantic-form-select-input for="Rds_dev_Person_Gender"></semantic-form-select-input>
+      <semantic-form-select-input for="Person_Gender"></semantic-form-select-input>
       
       <semantic-form-composite-input 
-          for="Alternative_Name"
+          for="Person_Alternate_Name"
           new-subject-template="/appellation/{{Alternate_Name_Value}}"
-          fields='[[fieldDefinitions
-                    Alternate_Name_Value="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Value"
-                    Person_Alternate_Name_Type="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Alternate_Name_Type"
-                    Alternate_Name_Use_Period_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_earliest"
-                    Alternate_Name_Use_Period_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Alternate_Name_Use_Period_latest"
-                    Attributed_by="http://www.metaphacts.com/fieldDefinition/Alternate_Name_Attributed_by"
-                    Source="http://www.metaphacts.com/fieldDefinition/Alternative%20Name%20-%20Source"
-      ]]'>
+          fields='[
+            [[> Person_Alternate_Name_Value ]],
+            [[> Person_Alternate_Name_Type ]],
+            [[> Alternate_Name_Use_Period_earliest ]],
+            [[> Alternate_Name_Use_Period_latest ]],
+            [[> Alternate_Name_Attributed_by ]],
+            [[> Alternative_Name_-_Source ]]
+      ]'>
         <semantic-form-text-input for="Alternate_Name_Value"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
         </semantic-form-text-input>
@@ -290,13 +292,13 @@
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Person_Birth"
+          for="Person_Birth_Place"
           new-subject-template="/birth"
-          fields='[[fieldDefinitions
-                    Birth_Place="http://www.metaphacts.com/fieldDefinition/Birth_Place"
-                    Birth_Date_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_earliest"
-                    Birth_Date_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Birth_Date_latest"
-      ]]'>
+          fields='[
+            [[> Birth_Place ]],
+            [[> Person_Birth_Date_earliest ]],
+            [[> Person_Birth_Date_latest ]]
+      ]'>
         <semantic-form-autocomplete-input for='Birth_Place'
             value-binding-name="subject"
             lookup-query='{
@@ -315,13 +317,13 @@
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Person_Death"
+          for="Person_Death_Place"
           new-subject-template="/death"
-          fields='[[fieldDefinitions
-                Death_Place="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Place"
-                Death_Date_earliest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Earliest"
-                Death_Date_latest="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Death_Date_Latest"
-      ]]'>
+          fields='[
+          [[> Death_Place ]],
+          [[> Death_Date_Earliest ]],
+          [[> Death_Date_Latest ]]
+      ]'>
       
         <semantic-form-autocomplete-input for='Death_Place'
             value-binding-name="subject"
@@ -380,16 +382,16 @@
       <semantic-form-text-input for="Cultural_Affiliation"></semantic-form-text-input>
 
       <semantic-form-composite-input 
-          for="Rds_Person_Social_Relations"
+          for="Person_Social_Relations"
           new-subject-template="/relation/{{Rds_Person_Social_Relations_Relation}}"
-          fields='[[fieldDefinitions
-                    Rds_Person_Social_Relations_Relation="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation"
-                    Rds_Person_Social_Relations_Relation_Type="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Social_Relations_-_Relation_Type"
-      ]]'>
+          fields='[
+          [[> Person_Social_Relations_-_Relation ]],
+          [[> Person_Social_Relations_-_Relation_Type ]]
+      ]'>
         [[#> showOnRdsGlobalPersonFor fieldName="Rds_Person_Social_Relations_Relation"]]
           [[#> newSubPerson]]
             <semantic-form-autocomplete-input
-              for="Rds_Person_Social_Relations_Relation"
+              for="Person_Social_Relations_Relation"
               value-binding-name="subject"
               lookup-query='{
                 "type": "lookup",
@@ -403,32 +405,32 @@
             </semantic-form-autocomplete-input>
           [[/newSubPerson]]
         [[/showOnRdsGlobalPersonFor]]
-        <semantic-form-text-input for="Rds_Person_Social_Relations_Relation_Type"></semantic-form-text-input>
+        <semantic-form-text-input for="Person_Social_Relations_Relation_Type"></semantic-form-text-input>
       </semantic-form-composite-input>
 
       <semantic-form-composite-input
-          for="Rds_dev_Institutional_Affiliation"
+          for="Institutional_Affiliation"
           new-subject-template="/joining/{{Rds_Person_Institutional_Affiliation_Value}}"
-          fields='[[fieldDefinitions	
-                    Rds_Person_Institutional_Affiliation_Value="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Value"
-                    Rds_Person_Institutional_Affiliation_Role="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Role"
-                    Rds_Person_Institutional_Affiliation_Start_Date_Earliest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Start_Date_Earliest"
-                    Rds_Person_Institutional_Affiliation_Start_Date_Latest="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Institutional_Affiliation_Start_Date_Latest"
-      ]]'>
-        <semantic-form-text-input for="Rds_Person_Institutional_Affiliation_Value"></semantic-form-text-input>
+          fields='[
+          [[> Person_Institutional_Affiliation_Value ]],
+          [[> Person_Institutional_Affiliation_Role ]],
+          [[> Person_Institutional_Affiliation_Start_Date_Earliest ]],
+          [[> Person_Institutional_Affiliation_Start_Date_Latest ]]
+      ]'>
+        <semantic-form-text-input for="Person_Institutional_Affiliation_Value"></semantic-form-text-input>
 
-        <semantic-form-text-input for="Rds_Person_Institutional_Affiliation_Role"></semantic-form-text-input>
+        <semantic-form-text-input for="Person_Institutional_Affiliation_Role"></semantic-form-text-input>
 
-        <semantic-form-datetime-input for="Rds_Person_Institutional_Affiliation_Start_Date_Earliest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Person_Institutional_Affiliation_Start_Date_Earliest"></semantic-form-datetime-input>
 
-        <semantic-form-datetime-input for="Rds_Person_Institutional_Affiliation_Start_Date_Latest"></semantic-form-datetime-input>
+        <semantic-form-datetime-input for="Person_Institutional_Affiliation_Start_Date_Latest"></semantic-form-datetime-input>
 
       </semantic-form-composite-input>
 
       [[#> showOnRdsGlobalPersonFor fieldName="Associate"]]
         [[#> newSubPerson]]
           <semantic-form-autocomplete-input
-            for="Associate"
+            for="Associate-input"
             value-binding-name="subject"
             lookup-query='{
               "type": "lookup",
@@ -444,14 +446,14 @@
       [[/showOnRdsGlobalPersonFor]]
 
       <semantic-form-composite-input 
-          for="Rds_dev_Floruit"
+          for="Floruit"
           new-subject-template="/floruit/{{UUID}}"
-          fields='[[fieldDefinitions
-                    Mph_Floruit_Place="http://www.metaphacts.com/fieldDefinition/Floruit_Place"
-                    Mph_Floruit_Date_earliest="http://www.metaphacts.com/fieldDefinition/Floruit_Date_earliest"
-                    Mph_Floruit_Date_latest="http://www.researchspace.org/instances/fields/Floruit_Date_latest"
-                    Mph_Floruit_Subject="http://www.metaphacts.com/fieldDefinition/Educational_Training"
-      ]]'> 
+          fields='[
+          [[> Floruit_Place ]],
+          [[> Floruit_Date_earliest ]],
+          [[> Floruit_Date_latest ]],
+          [[> Educational_Training ]]
+      ]'> 
         <semantic-form-autocomplete-input
           for="Mph_Floruit_Place"
           value-binding-name="subject"
@@ -474,21 +476,21 @@
 
       </semantic-form-composite-input>
 
-      <semantic-form-select-input for="Lang_Used"></semantic-form-select-input>
+      <semantic-form-select-input for="Languages_Used"></semantic-form-select-input>
 
       <semantic-form-composite-input 
           for="Citation"
           new-subject-template="/citation/{{Citation_Value}}"
-          fields='[[fieldDefinitions
-                    Citation_Value="http://www.metaphacts.com/fieldDefinition/Citation_Value"
-                    Citation_Source="http://www.metaphacts.com/fieldDefinition/Citation_Source"
-      ]]'>
+          fields='[
+        [[> Citation_Value ]],
+        [[> Citation_Source ]]
+      ]'>
         <semantic-form-text-input for="Citation_Value"></semantic-form-text-input>
 
         <semantic-form-text-input for="Citation_Source"></semantic-form-text-input>
       </semantic-form-composite-input>
 
-      <semantic-form-text-input for="Biography"
+      <semantic-form-text-input for="Short_Biography"
                                 languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'
                                 multiline=true>
       </semantic-form-text-input>
