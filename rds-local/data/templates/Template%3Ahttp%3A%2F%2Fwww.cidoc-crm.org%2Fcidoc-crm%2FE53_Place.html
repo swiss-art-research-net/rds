@@ -1,3 +1,5 @@
+[[> rdsParts:FieldDefinitions]]
+
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
@@ -53,29 +55,29 @@
             </thead>
               <mp-field-visualization
                 subject='[[this]]'
-                fields='[[fieldDefinitions
-                          Identifiers_vis="http://www.metaphacts.com/fieldDefinition/Identifiers-vis"
-                          Name_vis="http://www.metaphacts.com/fieldDefinition/Name-vis"
-                          Mph_Person_Alternate_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly"
-                          Attributed_by_vis="http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis"
-                          Source_vis="http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis"
-                          Place_Type="http://www.metaphacts.com/fieldDefinition/Place_Type"
-                          Place_Part_of="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Part_of"
-                          Place_Has_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Place_Has_Part"
-                          Mph_Coordinates-readonly="http://www.metaphacts.com/fieldDefinition/Coordinates-readonly"
-                          Rds_Historical_Parthood="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood"
-                          Rds_Historical_Parthood_-_Historically_Part_of_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Part_of_Place"
-                          Rds_Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place"
-                          Rds_Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place"
-                          Rds_Historical_Parthood_-_Historically_part_of_Place_-_Earliest_Date_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_part_of_Place_-_Earliest_Date_Time"
-                          Rds_Historical_Parthood_-_Historically_part_of_Place_-_Latest_Date_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_part_of_Place_-_Latest_Date_Time"
-                          Rds_Historical_Parthood_-_Historically_Has_Part="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part"
-                          Rds_Historical_Parthood_-_Name_at_Time_of_Containing_Historical_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Name_at_Time_of_Containing_Historical_Place"
-                          Rds_Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place"
-                          Rds_Historical_Parthood_-_Historically_Has_Part_-_Earliest_Date_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part_-_Earliest_Date_Time"
-                          Rds_Historical_Parthood_-_Historically_Has_Part_-_Latest_Date_Time="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historically_Has_Part_-_Latest_Date_Time"
-                          Rds_Historical_Parthood_-_Historicall_Coordinates="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Historical_Parthood_-_Historicall_Coordinates"
-                ]]'
+                fields='[
+                  [[> Identifiers-vis]],
+                  [[> Name-vis]],
+                  [[> Person_Alternate_Name-readOnly]],
+                  [[> Alternative_Name_Attributed_by-vis]],
+                  [[> Alternative_Name_Source-vis]],
+                  [[> Place_Type]],
+                  [[> Place_Part_of]],
+                  [[> Place_Has_Part]],
+                  [[> Coordinates-readonly]],
+                  [[> Historical_Parthood]],
+                  [[> Historical_Parthood_-_Historically_Part_of_Place]],
+                  [[> Historical_Parthood_-_Name_at_Time_of_Parthood_of_Place]],
+                  [[> Historical_Parthood_-_Type_at_Time_of_Parthood_of_Place]],
+                  [[> Historical_Parthood_-_Historically_part_of_Place_-_Earliest_Date_Time]],
+                  [[> Historical_Parthood_-_Historically_part_of_Place_-_Latest_Date_Time]],
+                  [[> Historical_Parthood_-_Historically_Has_Part]],
+                  [[> Historical_Parthood_-_Name_at_Time_of_Containing_Historical_Place]],
+                  [[> Historical_Parthood_-_Type_at_Time_of_Containing_Historical_Place]],
+                  [[> Historical_Parthood_-_Historically_Has_Part_-_Earliest_Date_Time]],
+                  [[> Historical_Parthood_-_Historically_Has_Part_-_Latest_Date_Time]],
+                  [[> Historical_Parthood_-_Historicall_Coordinates]]
+                ]'
                 template='{{> property-table}}'>
                 <template id="property-table">
                   [[> rdsParts:FieldBasedVisualization]]

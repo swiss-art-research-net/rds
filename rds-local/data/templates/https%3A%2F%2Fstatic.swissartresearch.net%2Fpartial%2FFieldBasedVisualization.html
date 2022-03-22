@@ -16,9 +16,9 @@
     {{#if field.values}}
       <tr>
         <td>
-          <semantic-context repository='assets'>
-            <semantic-link iri="{{field.iri}}"></semantic-link> 
-          </semantic-context>
+          {{#each field.label as |label| }}
+            {{label.value}}
+          {{/each}}
         </td>
         <td>
          {{#ifCond "20" ">=" field.values.length  }}

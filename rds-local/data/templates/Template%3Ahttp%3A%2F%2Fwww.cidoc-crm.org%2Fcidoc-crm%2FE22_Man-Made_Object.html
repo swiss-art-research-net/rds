@@ -1,3 +1,5 @@
+[[> rdsParts:FieldDefinitions]]
+
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
@@ -57,18 +59,18 @@
             </thead>
             <mp-field-visualization
             subject='[[this]]'
-            fields='[[fieldDefinitions
-                      built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
-                      built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
-                      built_works_description="https://resource.swissartresearch.net/fieldDefinition/built_works_description"
-                      built_works_construction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from"
-                      built_works_construction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_to"
-                      built_works_destruction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from"
-                      built_works_destruction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_to"
-                      built_works_actor="https://resource.swissartresearch.net/fieldDefinition/built_works_actor"
-                      built_works_actor_uuid="https://resource.swissartresearch.net/fieldDefinition/built_works_actor_uuid"
-                      Citation="http://www.metaphacts.com/fieldDefinition/Person_Citation"
-            ]]'
+            fields='[
+              [[> built_works_appellation]],
+              [[> built_works_type]],
+              [[> built_works_description]],
+              [[> built_works_construction_from]],
+              [[> built_works_construction_to]],
+              [[> built_works_destruction_from]],
+              [[> built_works_destruction_to]],
+              [[> built_works_actor]],
+              [[> built_works_actor_uuid]],
+              [[> Person_Citation]]
+            ]'
             template='{{> property-table}}'
             >
             <template id="property-table">
@@ -92,31 +94,30 @@
             </thead>
             <mp-field-visualization
             subject='[[this]]'
-            fields='[[fieldDefinitions
-                      Mph_Identifiers_readOnly="http://www.researchspace.org/instances/fields/Identifiers_readOnly"
-                      built_works_appellation="https://resource.swissartresearch.net/fieldDefinition/built_works_appellation"
-                      built_works_type="https://resource.swissartresearch.net/fieldDefinition/built_works_type"
-                      Alternate_Name="http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly"
-                      built_works_description="https://resource.swissartresearch.net/fieldDefinition/built_works_description"
-                      Parts="http://www.metaphacts.com/fieldDefinition/Parts"
-                      built_works_construction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_from"
-                      built_works_construction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_construction_to"
-                      built_works_destruction_from="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_from"
-                      built_works_destruction_to="https://resource.swissartresearch.net/fieldDefinition/built_works_destruction_to"
-                      built_works_actor="https://resource.swissartresearch.net/fieldDefinition/built_works_actor"
-                      built_works_actor_uuid="https://resource.swissartresearch.net/fieldDefinition/built_works_actor_uuid"
-                      Material="http://www.metaphacts.com/fieldDefinition/Material"
-                      Technique="http://www.metaphacts.com/fieldDefinition/Technique"
-                      Dimension="http://www.metaphacts.com/fieldDefinition/Dimension-readOnly"
-                      Function="http://www.metaphacts.com/fieldDefinition/Function-readOnly"
-                      Conservation="http://www.metaphacts.com/fieldDefinition/Conservation-readOnly"
-                      Location="http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly"
-                      Citation="http://www.metaphacts.com/fieldDefinition/Person_Citation"
-                      Owner="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Owner"
-                      Holder="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Current_Holder"
-                      Subject="https://rds.swissartresearch.net/container/fieldDefinitionContainer/Artwork_Subject"
-
-            ]]'
+            fields='[
+              [[> Identifiers_readOnly]],
+              [[> built_works_appellation]],
+              [[> built_works_type]],
+              [[> Group_Alternate_Name-readOnly]],
+              [[> built_works_description]],
+              [[> Parts]],
+              [[> built_works_construction_from]],
+              [[> built_works_construction_to]],
+              [[> built_works_destruction_from]],
+              [[> built_works_destruction_to]],
+              [[> built_works_actor]],
+              [[> built_works_actor_uuid]],
+              [[> Material]],
+              [[> Technique]],
+              [[> Dimension-readOnly]],
+              [[> Function-readOnly]],
+              [[> Conservation-readOnly]],
+              [[> Group_Location-readOnly]],
+              [[> Person_Citation]],
+              [[> Artwork_Current_Owner]],
+              [[> Artwork_Current_Holder]],
+              [[> Artwork_Subject]]
+            ]'
             template='{{> property-table}}'
             >
             <template id="property-table">

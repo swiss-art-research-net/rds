@@ -1,3 +1,5 @@
+[[> rdsParts:FieldDefinitions]]
+
 <ol class="page-breadcrumb">
   <li>
     <mp-link title="Home" url="/">Home</mp-link>
@@ -53,23 +55,23 @@
             </thead>
             <mp-field-visualization
             subject='[[this]]'
-            fields='[[fieldDefinitions
-                      Mph_Group_Identifiers="http://www.researchspace.org/instances/fields/Group_Identifiers"
-                      Mph_Group_Name="http://www.metaphacts.com/fieldDefinition/Group_Name"
-                      Mph_Group_Type="http://www.researchspace.org/instances/fields/Group_Type"
-                      Group_Alternate_Name="http://www.metaphacts.com/fieldDefinition/Group_Alternate_Name-readOnly"
-                      Formation="http://www.metaphacts.com/fieldDefinition/Group_Fromation-readOnly"
-                      Dissolution="http://www.metaphacts.com/fieldDefinition/Group_Dissolution-readOnly"
-                      Part_Of="http://www.metaphacts.com/fieldDefinition/Group_Part_Of"
-                      Has_Part="http://www.metaphacts.com/fieldDefinition/Group_Has_Part"
-                      Rds_dev_National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
-                      Founding_Member="http://www.metaphacts.com/fieldDefinition/Founding_Member"
-                      Members="http://www.metaphacts.com/fieldDefinition/Members"
-                      Scope_Of_Activity="http://www.metaphacts.com/fieldDefinition/Scope_Of_Activity"
-                      Mph_Floruit_read_only="http://www.researchspace.org/instances/fields/Floruit_read_only"
-                      Location="http://www.metaphacts.com/fieldDefinition/Group_Location-readOnly"
-                      Mph_Group_Short_Biography="http://www.researchspace.org/instances/fields/Group_Short_Biography"
-            ]]'
+            fields='[
+              [[> Group_Identifiers]],
+              [[> Group_Name]],
+              [[> Group_Type]],
+              [[> Group_Alternate_Name-readOnly]],
+              [[> Group_Fromation-readOnly]],
+              [[> Group_Dissolution-readOnly]],
+              [[> Group_Part_Of]],
+              [[> Group_Has_Part]],
+              [[> National_Affiliation]],
+              [[> Founding_Member]],
+              [[> Members]],
+              [[> Scope_Of_Activity]],
+              [[> Floruit_read_only]],
+              [[> Group_Location-readOnly]],
+              [[> Group_Short_Biography]]
+            ]'
             template='{{> property-table}}'>
                 <template id="property-table">
                   [[> rdsParts:FieldBasedVisualization]]
