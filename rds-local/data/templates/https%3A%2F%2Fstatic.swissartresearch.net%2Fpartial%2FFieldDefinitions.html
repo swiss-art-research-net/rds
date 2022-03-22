@@ -2107,23 +2107,6 @@ WHERE {
 [[/inline]]
 
 
-[[#*inline "Place_Type"]]
-{
-    "id": "Place_Type",
-    "iri": "http://www.metaphacts.com/fieldDefinition/Place_Type",
-    "label": "Place Type",
-    "domain": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
-    "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-    "selectPattern": "SELECT ?value ?label WHERE {
-  $subject crm:P2_has_type ?value.
-  ?value rdfs:label ?label.
-}",
-    "deletePattern": "DELETE { $subject crm:P2_has_type $value} WHERE {}",
-    "insertPattern": "INSERT { $subject crm:P2_has_type $value} WHERE {}"
-}
-[[/inline]]
-
-
 [[#*inline "Long_Biography"]]
 {
     "id": "Long_Biography",
@@ -2427,23 +2410,6 @@ WHERE {
   ?subject crm:P31i_was_modified_by ?value.
   ?value a crm:E11_Modification .
 } WHERE {} "
-}
-[[/inline]]
-
-
-[[#*inline "Person_Mother"]]
-{
-    "id": "Person_Mother",
-    "iri": "http://www.metaphacts.com/fieldDefinition/Person_Mother",
-    "label": "Mother",
-    "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-    "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  	?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_brought_into_life> ?birth.
-	?birth a <http://www.cidoc-crm.org/cidoc-crm/E67_Birth>.
-	?birth <http://www.cidoc-crm.org/cidoc-crm/P96_by_mother> ?value.
-	?value a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-}",
-    "insertPattern": "INSERT { $subject ?predicate $value} WHERE {}"
 }
 [[/inline]]
 
@@ -2990,9 +2956,9 @@ WHERE {  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str(?value)))) as 
 [[/inline]]
 
 
-[[#*inline "Preferred_Label_Getty"]]
+[[#*inline "Preferred_Label_Getty-MPH"]]
 {
-    "id": "Preferred_Label_Getty",
+    "id": "Preferred_Label_Getty-MPH",
     "iri": "http://www.metaphacts.com/fieldDefinition/Preferred_Label_Getty",
     "label": "Preferred Label [Getty]",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
@@ -6659,7 +6625,7 @@ WHERE {
   ?value a crm:E21_Person .
 }",
     "deletePattern": "DELETE {
-  #?birth_uri crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_brought_into_life ?birth_uri.
   ?birth_uri crm:P96_by_mother ?value.
 }
 WHERE {
@@ -6950,9 +6916,9 @@ WHERE {
 [[/inline]]
 
 
-[[#*inline "Person_Name"]]
+[[#*inline "Person_Name-MPH"]]
 {
-    "id": "Person_Name",
+    "id": "Person_Name-MPH",
     "iri": "http://www.metaphacts.com/fieldDefinition/Person_Name",
     "label": "Name",
     "description": "The full name of the person",
@@ -7521,22 +7487,6 @@ INSERT {
 [[/inline]]
 
 
-[[#*inline "Group_Name"]]
-{
-    "id": "Group_Name",
-    "iri": "http://www.metaphacts.com/fieldDefinition/Group_Name",
-    "label": "Group Name",
-    "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
-    "selectPattern": "SELECT ?value ?label WHERE {
-      $subject crm:P1_is_identified_by ?appellation_iri.
-      ?appellation_iri a crm:E41_Appellation.
-      ?appellation_iri rdfs:label ?value.
-}",
-    "insertPattern": "INSERT { $subject ?predicate $value} WHERE {}"
-}
-[[/inline]]
-
-
 [[#*inline "Group_Location_Address_Type"]]
 {
     "id": "Group_Location_Address_Type",
@@ -7786,22 +7736,6 @@ WHERE{
     filter(lang(?value) =\"en\")
   }
 }  ",
-    "insertPattern": "INSERT { $subject ?predicate $value} WHERE {}"
-}
-[[/inline]]
-
-
-[[#*inline "Group_Type"]]
-{
-    "id": "Group_Type",
-    "iri": "http://www.researchspace.org/instances/fields/Group_Type",
-    "label": "Group Type",
-    "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
-    "selectPattern": "SELECT ?value ?label WHERE {
-  $subject crm:P2_has_type ?type_iri.
-      ?type_iri a crm:E55_Type.
-      ?type_iri rdfs:label ?value
-}",
     "insertPattern": "INSERT { $subject ?predicate $value} WHERE {}"
 }
 [[/inline]]
@@ -9421,23 +9355,6 @@ INSERT {
   ?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?value.
   ?value a <http://www.cidoc-crm.org/cidoc-crm/E42_Identifier> .
 } WHERE {}"
-}
-[[/inline]]
-
-
-[[#*inline "Person_Father"]]
-{
-    "id": "Person_Father",
-    "iri": "http://www.metaphacts.com/fieldDefinition/Person_Father",
-    "label": "Father",
-    "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-    "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  	?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_brought_into_life> ?birth.
-	?birth a <http://www.cidoc-crm.org/cidoc-crm/E67_Birth>.
-	?birth <http://www.cidoc-crm.org/cidoc-crm/P97_from_father> ?value.
-	?value a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-}",
-    "insertPattern": "INSERT { $subject ?predicate $value} WHERE {}"
 }
 [[/inline]]
 
