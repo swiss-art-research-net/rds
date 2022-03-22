@@ -1,7 +1,7 @@
 version: "3"
 services:
   rds:
-    image: swissartresearx/rds-local:1.1.0
+    image: swissartresearx/rds-local:1.1.1
     build: 
       context: .
       dockerfile: Dockerfile.rds-local
