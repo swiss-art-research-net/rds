@@ -1562,6 +1562,13 @@ $subject crm:P2_has_type ?type_uri.
  ?subject crm:P2_has_type ?value.
  ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>. 
 }",
+"valueSetPattern": "SELECT ?value ?label WHERE {
+  VALUES (?value ?label) {
+    (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)
+    (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)
+    (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)
+  }
+}",
     "insertPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 INSERT {
@@ -6748,7 +6755,7 @@ SELECT DISTINCT ?value ?label WHERE {
 {
     "id": "Person_Name",
     "iri": "https://rds.swissartresearch.net/container/fieldDefinitionContainer/Person_Name",
-    "label": "Prefered Name",
+    "label": "Preferred Name",
     "description": "This field is used to indicate the main name attributed to the documented person. No part break down of name is here implied. The full name of an individual is expected here where available.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
@@ -6916,9 +6923,9 @@ WHERE {
 [[/inline]]
 
 
-[[#*inline "Person_Name-MPH"]]
+[[#*inline "Person_Name-Value"]]
 {
-    "id": "Person_Name-MPH",
+    "id": "Person_Name-Value",
     "iri": "http://www.metaphacts.com/fieldDefinition/Person_Name",
     "label": "Name",
     "description": "The full name of the person",

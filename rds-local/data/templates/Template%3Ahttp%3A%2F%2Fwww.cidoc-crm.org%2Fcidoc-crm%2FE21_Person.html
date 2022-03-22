@@ -53,32 +53,32 @@
             </thead>
               <mp-field-visualization
                 subject='[[this]]'
-                fields='[[fieldDefinitions
-                          Identifiers_vis="http://www.metaphacts.com/fieldDefinition/Identifiers-vis"
-                          Name_vis="http://www.metaphacts.com/fieldDefinition/Name-vis"
-                          Person_Name_Part="http://www.metaphacts.com/fieldDefinition/Person_Name_Part-readOnly"
-                          Mph_Person_Name_Honorific-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Name_Honorific-readOnly"
-                          Rds_dev_Person_Gender-readOnly="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Person_Gender-readOnly"
-                          Mph_Person_Alternate_Name-readOnly="http://www.metaphacts.com/fieldDefinition/Person_Alternate_Name-readOnly"
-                          Attributed_by_vis="http://www.metaphacts.com/fieldDefinition/Alternative_Name_Attributed_by-vis"
-                          Source_vis="http://www.metaphacts.com/fieldDefinition/Alternative_Name_Source-vis"
-                          Mph_Person_Birth_Date="http://www.metaphacts.com/fieldDefinition/Person_Birth_Date"
-                          Mph_Birth_Place-readOnly="http://www.metaphacts.com/fieldDefinition/Birth_Place-readOnly"
-                          Mph_Person_Death_Date="http://www.metaphacts.com/fieldDefinition/Person_Death_Date"
-                          Mph_Death_Place-readOnly="http://www.metaphacts.com/fieldDefinition/Death_Place-readOnly"
-                          Mph_Person_Mother="http://www.metaphacts.com/fieldDefinition/Person_Mother"
-                          Mph_Person_Father="http://www.metaphacts.com/fieldDefinition/Person_Father"
-                          Rds_dev_National_Affiliation="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/National_Affiliation"
-                          Social_Relations="http://www.metaphacts.com/fieldDefinition/Social_Relations"
-                          Institutional_Affiliation_vis="http://www.metaphacts.com/fieldDefinition/Intitutional_Affiliation-vis"
-                          Associate="http://www.metaphacts.com/fieldDefinition/Associate"
-                          Educational="http://www.metaphacts.com/fieldDefinition/Educational_Training-vis"
-                          Mph_Floruit_read_only="http://www.researchspace.org/instances/fields/Floruit_read_only"
-                          Rds_dev_Occupation_General_Role="https://rds-dev.swissartresearch.net/container/fieldDefinitionContainer/Occupation_General_Role"
-                          Citation="http://www.metaphacts.com/fieldDefinition/Person_Citation"
-                          Mph_Short_Biography-readOnly="http://www.metaphacts.com/fieldDefinition/Short_Biography-readOnly"
-                          Mph_Long_Biography-readOnly="http://www.metaphacts.com/fieldDefinition/Long_Biography-readOnly"
-                          Lang_Used="http://www.metaphacts.com/fieldDefinition/Languages_Used"
+                fields='[
+[[> Identifiers-vis]],
+[[> Name-vis]],
+[[> Person_Name_Part-readOnly]],
+[[> Person_Name_Honorific-readOnly]],
+[[> Person_Gender-readOnly]],
+[[> Person_Alternate_Name-readOnly]],
+[[> Alternative_Name_Attributed_by-vis]],
+[[> Alternative_Name_Source-vis]],
+[[> Person_Birth_Date]],
+[[> Birth_Place-readOnly]],
+[[> Person_Death_Date]],
+[[> Death_Place-readOnly]],
+[[> Person_Mother]],
+[[> Person_Father]],
+[[> National_Affiliation]],
+[[> Social_Relations]],
+[[> Intitutional_Affiliation-vis]],
+[[> Associate]],
+[[> Educational_Training-vis]],
+[[> Floruit_read_only]],
+[[> Occupation_General_Role]],
+[[> Person_Citation]],
+[[> Short_Biography-readOnly]],
+[[> Long_Biography-readOnly]],
+[[> Languages_Used]],
                 ]]'
                 template='{{> property-table}}'>
                 <template id="property-table">
@@ -102,16 +102,16 @@
             </thead> 
               <mp-field-visualization
                 subject='[[this]]'
-                fields='[[fieldDefinitions
-                          Mph_Artist_ID_Getty="http://www.metaphacts.com/fieldDefinition/Artist_ID_Getty"
-                          Mph_Preferred_Label_Getty="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Getty"
-                          Mph_Short_Description_Getty="http://www.metaphacts.com/fieldDefinition/Short_Description_Getty"
-                          Mph_Spouse_of_Getty="http://www.metaphacts.com/fieldDefinition/Spouse_of_Getty"
-                          Mph_Birth_Place_getty_select="http://www.metaphacts.com/fieldDefinition/Birth_Place_getty_select"
-                          Mph_Birth_Date_Getty="http://www.metaphacts.com/fieldDefinition/Birth_Date_Getty"
-                          Mph_Death_Date_Getty="http://www.metaphacts.com/fieldDefinition/Death_Date_Getty"
-                          Mph_Main_Nationality_Getty="http://www.metaphacts.com/fieldDefinition/Main_Nationality_Getty"
-                ]]'
+                fields='[
+                  [[> Artist_ID_Getty]],
+                  [[> Preferred_Label_Getty]],
+                  [[> Short_Description_Getty]],
+                  [[> Spouse_of_Getty]],
+                  [[> Birth_Place_getty_select]],
+                  [[> Birth_Date_Getty]],
+                  [[> Death_Date_Getty]],
+                  [[> Main_Nationality_Getty]]
+                ]'
                 template='{{> property-table}}'>
                 <template id="property-table">
                   [[> rdsParts:FieldBasedVisualization]]
@@ -135,22 +135,22 @@
             </thead> 
               <mp-field-visualization
               subject='[[this]]'
-              fields='[[fieldDefinitions
-              Mph_Preferred_Label_Wikidata="http://www.metaphacts.com/fieldDefinition/Preferred_Label_Wikidata"
-              Mph_Name_in_Native_Language_Wikidata="http://www.metaphacts.com/fieldDefinition/Name_in_Native_Language_Wikidata"
-              Mph_Occupation_Wikidata="http://www.metaphacts.com/fieldDefinition/Occupation_Wikidata"
-              Mph_Field_of_Work_Wikidata="http://www.metaphacts.com/fieldDefinition/Field_of_Work_Wikidata"
-              Mph_Description_Wikidata="http://www.metaphacts.com/fieldDefinition/Description_Wikidata"
-              Mph_Country_of_Citizenship_Wikidata="http://www.metaphacts.com/fieldDefinition/Country_of_Citizenship_Wikidata"
-              Mph_Movement_Wikidata="http://www.metaphacts.com/fieldDefinition/Movement_Wikidata"
-              Mph_Spouse_Wikidata="http://www.metaphacts.com/fieldDefinition/Spouse_Wikidata"
-              Mph_Birth_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Birth_Date_Wikidata"
-              Mph_Place_of_Birth_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Birth_Wikidata"
-              Mph_Death_Date_Wikidata="http://www.metaphacts.com/fieldDefinition/Death_Date_Wikidata"
-              Mph_Place_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Place_of_Death_Wikidata"
-              Mph_Manner_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Manner_of_Death_Wikidata"
-              Mph_Cause_of_Death_Wikidata="http://www.metaphacts.com/fieldDefinition/Cause_of_Death_Wikidata"
-              ]]'
+              fields='[
+                [[> Preferred_Label_Wikidata]],
+                [[> Name_in_Native_Language_Wikidata]],
+                [[> Occupation_Wikidata]],
+                [[> Field_of_Work_Wikidata]],
+                [[> Description_Wikidata]],
+                [[> Country_of_Citizenship_Wikidata]],
+                [[> Movement_Wikidata]],
+                [[> Spouse_Wikidata]],
+                [[> Birth_Date_Wikidata]],
+                [[> Place_of_Birth_Wikidata]],
+                [[> Death_Date_Wikidata]],
+                [[> Place_of_Death_Wikidata]],
+                [[> Manner_of_Death_Wikidata]],
+                [[> Cause_of_Death_Wikidata]]
+              ]'
               template='{{> property-table}}'>
               <template id="property-table">
               [[> rdsParts:FieldBasedVisualization]]
