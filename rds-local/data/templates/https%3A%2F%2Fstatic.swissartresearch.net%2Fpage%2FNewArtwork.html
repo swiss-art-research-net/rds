@@ -202,35 +202,35 @@
       form-id='artworks'
       post-action='event'        
       fields='[
-                [[> Same_As]],
-                [[> AddType]],
-                [[> Type-hidden]],
-                [[> Identifier]],
-                [[> Artwork_Title]],
-                [[> Artwork_Title]],
-                [[> Artwork_Alternative_Title]],
-                [[> Artwork_Description]],
-                [[> Artwork_Parts]],
-                [[> Artwork_Style_Movement]],
-                [[> Artwork_Production]],
-                [[> Artwork_Destruction]],
-                [[> Artwork_Current_Owner]],
-                [[> Artwork_Current_Holder]],
-                [[> Artwork_Material]],
-                [[> Artwork_Technique]],
-                [[> Artwork_Dimension]],
-                [[> Artwork_Subject]],
-                [[> Artwork_Provenance]],
-                [[> Artwork_Conservation]],
-                [[> Artwork_Location]],
-                [[> Citation]]
+        [[> SameAs]],
+        [[> AddType]],
+        [[> Type-hidden]],
+        [[> Identifier]],
+        [[> Artwork_Title]],
+        [[> Artwork_Type]],
+        [[> Artwork_Alternative_Title]],
+        [[> Artwork_Description]],
+        [[> Artwork_Parts]],
+        [[> Artwork_Style_Movement]],
+        [[> Artwork_Production]],
+        [[> Artwork_Destruction]],
+        [[> Artwork_Current_Owner]],
+        [[> Artwork_Current_Holder]],
+        [[> Artwork_Material]],
+        [[> Artwork_Technique]],
+        [[> Artwork_Dimension]],
+        [[> Artwork_Subject]],
+        [[> Artwork_Provenance]],
+        [[> Artwork_Conservation]],
+        [[> Artwork_Location]],
+        [[> Citation]]
       ]'
     >
       <semantic-form-hidden-input for="Type-hidden" default-value="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"></semantic-form-hidden-input>
       <semantic-form-hidden-input for='AddType' default-value='Artwork'></semantic-form-hidden-input>
       {{#if sameAs}}
         <semantic-form-autocomplete-input
-          for="Same_As"
+          for="SameAs"
           value-binding-name="subject"
           lookup-query='{
             "type": "lookup",
@@ -244,7 +244,7 @@
         </semantic-form-autocomplete-input>
       {{else}}
         <semantic-form-autocomplete-input
-          for="Same_As"
+          for="SameAs"
           value-binding-name="subject"
           lookup-query='{
             "type": "lookup",
@@ -275,7 +275,7 @@
        
       <semantic-form-text-input for="Artwork_Title"></semantic-form-text-input> 
       
-      <semantic-form-text-input for="Artwork_Title"></semantic-form-text-input>
+      <semantic-form-text-input for="Artwork_Type"></semantic-form-text-input>
 
       <semantic-form-composite-input 
           for="Artwork_Alternative_Title"
