@@ -7838,7 +7838,7 @@ WHERE {
   ?type_uri a crm:E55_Type.
   ?type rdfs:label \"Name Part\"
 } WHERE { 
-  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str($value)))) as ?appellation_uri).  
+  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str($value)))) as ?part_uri).  
   BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/type/\", ENCODE_FOR_URI(LCASE(\"Name Part\")))) as ?type_uri). 
 } "
 }
