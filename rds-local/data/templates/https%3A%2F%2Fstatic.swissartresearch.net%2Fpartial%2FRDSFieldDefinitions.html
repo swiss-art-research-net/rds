@@ -5074,7 +5074,7 @@ SELECT ?value ?label WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "selectPattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?born_timespan . 
+  ?subject crm:P98i_was_born ?born_timespan . 
   ?born_timespan a crm:E67_Birth.
   ?born_timespan crm:P4_has_time-span ?timespan_uri. 
   ?timespan_uri a crm:E52_Time-Span.
@@ -5088,7 +5088,7 @@ SELECT ?value ?label WHERE {
   BIND(CONCAT(coalesce(?start,?unknown),\"-\",coalesce(?end,?unknown)) AS ?value)
 } limit 1",
     "insertPattern": "INSERT {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_brought_into_life> ?born_timespan . 
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?born_timespan . 
   ?born_timespan a <http://www.cidoc-crm.org/cidoc-crm/E67_Birth>.
   ?born_timespan <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ?timespan_uri. 
   ?timespan_uri rdfs:label ?value
@@ -5626,18 +5626,18 @@ INSERT {
     "minOccurs": "0",
     "selectPattern": "SELECT DISTINCT ?value ?label 
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?value . 
+  ?subject crm:P98i_was_born ?value . 
   ?value a crm:E67_Birth.
 }",
     "deletePattern": "DELETE { 
-  ?subject crm:P98i_was_brought_into_life ?value . 
+  ?subject crm:P98i_was_born ?value . 
 } 
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?value . 
+  ?subject crm:P98i_was_born ?value . 
   ?value a crm:E67_Birth.
 }",
     "insertPattern": "INSERT {
-  ?subject crm:P98i_was_brought_into_life ?value. 
+  ?subject crm:P98i_was_born ?value. 
   ?value a crm:E67_Birth.
 } WHERE {}"
 }
@@ -6626,23 +6626,23 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
     "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
   ?value a crm:E21_Person .
 }",
     "deletePattern": "DELETE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri crm:P96_by_mother ?value.
 }
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
   ?value a crm:E21_Person .
 }",
     "insertPattern": "INSERT { 
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
   ?value a crm:E21_Person .
@@ -6867,23 +6867,23 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
     "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
   ?value a crm:E21_Person .
 }",
     "deletePattern": "DELETE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri crm:P97_from_father ?value.
 }
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
   ?value a crm:E21_Person .
 }",
     "insertPattern": "INSERT { 
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
   ?value a crm:E21_Person .
@@ -7967,7 +7967,7 @@ WHERE {
     "selectPattern": "SELECT DISTINCT ?value ?label 
 WHERE {
   $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_brought_into_life> ?birth_event. 
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth_event. 
   ?birth_event  a <http://www.cidoc-crm.org/cidoc-crm/E67_Birth>.
   ?birth_event <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
   ?value a <http://www.cidoc-crm.org/cidoc-crm/E53_Place>
