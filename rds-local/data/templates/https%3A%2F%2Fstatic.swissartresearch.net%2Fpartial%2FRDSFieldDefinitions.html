@@ -8180,7 +8180,7 @@ WHERE {
   ?timespan_uri a crm:E52_Time-Span.
   ?timespan_uri crm:P82b_end_of_the_end ?value.
 } WHERE {
-  BIND(IRI(CONCAT(STR($subject),\"/timespan/\", MD5(str($subject)))) as ?timespan_uri)
+  BIND(IRI(CONCAT(STR($subject),\"/timespan\")) as ?timespan_uri)
 }"
 }
 [[/inline]]
