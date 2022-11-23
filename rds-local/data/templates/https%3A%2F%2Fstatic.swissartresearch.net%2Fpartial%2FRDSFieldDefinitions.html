@@ -5074,7 +5074,7 @@ SELECT ?value ?label WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "selectPattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?born_timespan . 
+  ?subject crm:P98i_was_born ?born_timespan . 
   ?born_timespan a crm:E67_Birth.
   ?born_timespan crm:P4_has_time-span ?timespan_uri. 
   ?timespan_uri a crm:E52_Time-Span.
@@ -5088,7 +5088,7 @@ SELECT ?value ?label WHERE {
   BIND(CONCAT(coalesce(?start,?unknown),\"-\",coalesce(?end,?unknown)) AS ?value)
 } limit 1",
     "insertPattern": "INSERT {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_brought_into_life> ?born_timespan . 
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?born_timespan . 
   ?born_timespan a <http://www.cidoc-crm.org/cidoc-crm/E67_Birth>.
   ?born_timespan <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ?timespan_uri. 
   ?timespan_uri rdfs:label ?value
@@ -5626,18 +5626,18 @@ INSERT {
     "minOccurs": "0",
     "selectPattern": "SELECT DISTINCT ?value ?label 
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?value . 
+  ?subject crm:P98i_was_born ?value . 
   ?value a crm:E67_Birth.
 }",
     "deletePattern": "DELETE { 
-  ?subject crm:P98i_was_brought_into_life ?value . 
+  ?subject crm:P98i_was_born ?value . 
 } 
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?value . 
+  ?subject crm:P98i_was_born ?value . 
   ?value a crm:E67_Birth.
 }",
     "insertPattern": "INSERT {
-  ?subject crm:P98i_was_brought_into_life ?value. 
+  ?subject crm:P98i_was_born ?value. 
   ?value a crm:E67_Birth.
 } WHERE {}"
 }
@@ -6626,23 +6626,23 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
     "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
   ?value a crm:E21_Person .
 }",
     "deletePattern": "DELETE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri crm:P96_by_mother ?value.
 }
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
   ?value a crm:E21_Person .
 }",
     "insertPattern": "INSERT { 
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P96_by_mother ?value.
   ?value a crm:E21_Person .
@@ -6867,23 +6867,23 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
     "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
   ?value a crm:E21_Person .
 }",
     "deletePattern": "DELETE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri crm:P97_from_father ?value.
 }
 WHERE {
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
   ?value a crm:E21_Person .
 }",
     "insertPattern": "INSERT { 
-  ?subject crm:P98i_was_brought_into_life ?birth_uri.
+  ?subject crm:P98i_was_born ?birth_uri.
   ?birth_uri a crm:E67_Birth .
   ?birth_uri crm:P97_from_father ?value.
   ?value a crm:E21_Person .
@@ -7834,11 +7834,11 @@ WHERE {
   ?subject crm:P106_is_composed_of ?part_uri.
   ?part_uri a crm:E41_Appellation .
   ?part_uri rdfs:label ?value.
-  ?part_uri crm:P2_has_type ?type.
+  ?part_uri crm:P2_has_type ?type_uri.
   ?type_uri a crm:E55_Type.
-  ?type rdfs:label \"Name Part\"
+  ?type_uri rdfs:label \"Name Part\"
 } WHERE { 
-  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str($value)))) as ?appellation_uri).  
+  BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(str($value)))) as ?part_uri).  
   BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/type/\", ENCODE_FOR_URI(LCASE(\"Name Part\")))) as ?type_uri). 
 } "
 }
@@ -7967,7 +7967,7 @@ WHERE {
     "selectPattern": "SELECT DISTINCT ?value ?label 
 WHERE {
   $subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_brought_into_life> ?birth_event. 
+  ?subject <http://www.cidoc-crm.org/cidoc-crm/P98i_was_born> ?birth_event. 
   ?birth_event  a <http://www.cidoc-crm.org/cidoc-crm/E67_Birth>.
   ?birth_event <http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at> ?value.
   ?value a <http://www.cidoc-crm.org/cidoc-crm/E53_Place>
@@ -8180,7 +8180,7 @@ WHERE {
   ?timespan_uri a crm:E52_Time-Span.
   ?timespan_uri crm:P82b_end_of_the_end ?value.
 } WHERE {
-  BIND(IRI(CONCAT(STR($subject),\"/timespan/\", MD5(str($subject)))) as ?timespan_uri)
+  BIND(IRI(CONCAT(STR($subject),\"/timespan\")) as ?timespan_uri)
 }"
 }
 [[/inline]]
@@ -9524,7 +9524,7 @@ WHERE {
   ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
   ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
   ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
-  ?info_iri <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/biographical_note>.
+  ?info_iri <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> <https://resource.swissartresearch.net/type/biographical_note>.
   ?info_iri rdfs:value ?value
 }",
     "insertPattern": "INSERT { $subject ?predicate $value} WHERE {}"
