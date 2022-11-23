@@ -18,3 +18,4 @@ bin
 tmp
 runtime*
 gradle.properties
+docker-compose.override.yml
