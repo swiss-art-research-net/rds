@@ -4421,32 +4421,31 @@ SELECT ?value ?label WHERE {
     "iri": "http://www.metaphacts.com/fieldDefinition/Associate-input",
     "label": "Associate",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-    "selectPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-SELECT ?value ?label WHERE {
-  $subject crm:P11i_participated_in ?x.
-  ?x a crm:E5_Event.
-  ?x crm:P11_had_participant ?value.
-  ?value a crm:E21_Person.
-}",
+    "selectPattern": "
+      SELECT ?value ?label WHERE {
+        $subject crm:P11i_participated_in ?x.
+        ?x a crm:E5_Event.
+        ?x crm:P11_had_participant ?value.
+        ?value a crm:E21_Person.
+    }",
     "deletePattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-DELETE {
-  ?x crm:P11_had_participant ?value.
-} WHERE {
-  $subject crm:P11i_participated_in ?x.
-  ?x a crm:E5_Event.
-  ?x crm:P11_had_participant ?value.
-  ?value a crm:E21_Personvalue.
-}",
+      DELETE {
+        ?x crm:P11_had_participant ?value.
+      } WHERE {
+        $subject crm:P11i_participated_in ?x.
+        ?x a crm:E5_Event.
+        ?x crm:P11_had_participant ?value.
+        ?value a crm:E21_Personvalue.
+    }",
     "insertPattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-INSERT {
-  $subject crm:P11i_participated_in ?x.
-  ?x a crm:E5_Event.
-  ?x crm:P11_had_participant ?value.
-  ?value a crm:E21_Person.
-} WHERE {
-  BIND(IRI(CONCAT(STR(?subject),\"/event/\",ENCODE_FOR_URI(LCASE(str(?value))))) AS ?x)
-}"
+      INSERT {
+        $subject crm:P11i_participated_in ?x.
+        ?x a crm:E5_Event.
+        ?x crm:P11_had_participant ?value.
+        ?value a crm:E21_Person.
+      } WHERE {
+        BIND(IRI(CONCAT(STR(?subject),\"/event/\",ENCODE_FOR_URI(LCASE(str(?value))))) AS ?x)
+    }"
 }
 [[/inline]]
 
