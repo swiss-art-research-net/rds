@@ -1617,7 +1617,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT DISTINCT ?value ?label WHERE {
   $subject crm:P1_is_identified_by ?name.
   ?name a crm:E33_E41_Linguistic_Appellation.
-  ?name crm:P190_is_expressed_in ?name_label.
+  ?name crm:P190_has_symbolic_content ?name_label.
   ?name crm:P2_has_type ?type.
   ?type rdfs:label \"preferred terms\".
   BIND(CONCAT(?name_label,\" (\",LANG(?name_label),\")\") AS ?value)
@@ -1922,7 +1922,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT DISTINCT ?value WHERE {
   $subject crm:P1_is_identified_by ?name.
   ?name a crm:E33_E41_Linguistic_Appellation.
-  ?name crm:P190_is_expressed_in ?name_label.
+  ?name crm:P190_has_symbolic_content ?name_label.
   ?name crm:P2_has_type ?type.
   ?type rdfs:label ?type_label.
   ?name crm:P72_has_language ?lang.
@@ -1957,7 +1957,7 @@ SELECT DISTINCT ?value WHERE {
     "selectPattern": "SELECT ?value ?label WHERE {
   $subject crm:P1_is_identified_by ?name.
   ?name a crm:E33_E41_Linguistic_Appellation.
-  ?name crm:P190_is_expressed_in ?name_label.
+  ?name crm:P190_has_symbolic_content ?name_label.
   ?name crm:P2_has_type ?type.
   ?type rdfs:label ?type_label.
   ?name crm:P37i_was_assigned_by ?assignement.
@@ -4361,7 +4361,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?value ?label WHERE {
   $subject crm:P1_is_identified_by ?name.
   ?name a crm:E33_E41_Linguistic_Appellation.
-  ?name crm:P190_is_expressed_in ?name_label.
+  ?name crm:P190_has_symbolic_content ?name_label.
   ?name crm:P2_has_type ?type.
   ?type rdfs:label ?type_label.
   $name crm:P141i_was_assigned_by ?attr.
@@ -5890,22 +5890,22 @@ WHERE {BIND(IRI(CONCAT(STR($subject),\"/timespan/\")) as ?timespan_uri).
     "xsdDatatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
     "minOccurs": "1",
     "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
 }",
     "deletePattern": "DELETE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
 } WHERE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
 }",
     "insertPattern": "INSERT {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
@@ -6008,15 +6008,15 @@ INSERT {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "minOccurs": "1",
     "selectPattern": "SELECT distinct ?value ?label WHERE {
-  	?subject crm:P190_is_expressed_in ?value.
+  	?subject crm:P190_has_symbolic_content ?value.
 }",
     "deletePattern": "DELETE { 
-	?subject crm:P190_is_expressed_in ?value.
+	?subject crm:P190_has_symbolic_content ?value.
 } WHERE {
-	?subject crm:P190_is_expressed_in ?value.
+	?subject crm:P190_has_symbolic_content ?value.
 }",
     "insertPattern": "INSERT {
-	?subject crm:P190_is_expressed_in ?value.
+	?subject crm:P190_has_symbolic_content ?value.
 } WHERE {
 }"
 }
@@ -6902,17 +6902,17 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
     "minOccurs": "1",
     "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
 }",
     "deletePattern": "DELETE {
   ?root rdfs:label ?value .
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
 } WHERE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
@@ -6920,7 +6920,7 @@ WHERE {
 }",
     "insertPattern": "INSERT {
   ?root rdfs:label ?value.
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
@@ -8796,7 +8796,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?value ?label WHERE {
   ?subject crm:P1_is_identified_by ?identifier.
   ?identifier a crm:E42_Identifier.
-  ?subject crm:P190_is_expressed_in ?expression.
+  ?subject crm:P190_has_symbolic_content ?expression.
   ?identifier crm:P2_has_type ?type.
   ?type rdfs:label ?type_label.
   ?identifier crm:P37i_was_assigned_by ?assignement.
@@ -8946,22 +8946,22 @@ SELECT ?value ?label WHERE {
     "xsdDatatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
     "minOccurs": "1",
     "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
 }",
     "deletePattern": "DELETE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
 } WHERE {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
 }",
     "insertPattern": "INSERT {
-  ?subject crm:P190_is_expressed_in ?value.
+  ?subject crm:P190_has_symbolic_content ?value.
   ?subject crm:P72_has_language ?lang.
   ?lang a crm:E56_Language.
   ?lang rdfs:label ?lang_label.
