@@ -379,7 +379,7 @@ WHERE {
     "description": "This field is used to indicate the type of alternate name that is attributed to the documented person.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "selectPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+
 SELECT DISTINCT ?value ?label WHERE {
   ?subject crm:P2_has_type ?type.
   ?type rdfs:label ?value 
@@ -1511,52 +1511,51 @@ $subject crm:P2_has_type ?type_uri.
     "description": "The type of the alternative name of a person",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
- ?subject a crm:E21_Person.
- ?subject crm:P2_has_type ?value.
- ?value rdfs:label ?label
-} LIMIT 1",
+        ?subject a crm:E21_Person.
+        ?subject crm:P2_has_type ?value.
+        ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender> .
+      } LIMIT 1",
     "deletePattern": "DELETE {
- ?subject crm:P2_has_type ?value.
-} WHERE {
- ?subject a crm:E21_Person.
- ?subject crm:P2_has_type ?value.
- ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>. 
-}",
-"valueSetPattern": "SELECT ?value ?label WHERE {
-  VALUES (?value ?label) {
-    (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)
-    (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)
-    (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)
-  }
-}",
-    "insertPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-INSERT {
-  ?subject crm:P2_has_type ?value.
-  ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender>.
-  ?value a crm:E55_Type .
-  ?value rdfs:label ?label_en.
-  ?value rdfs:label ?label_de.
-}WHERE{
-  ?subject a crm:E21_Person.
-  {
-    SELECT ?label_de ?label_en WHERE {
-      {
-        BIND(\"Male\"@en AS ?label_en)
-        BIND(\"Männlich\"@de AS ?label_de)
-        FILTER (?value=<http://vocab.getty.edu/aat/300411836>)
-      } UNION {
-        BIND(\"Female\"@en AS ?label_en)
-        BIND(\"Weiblich\"@de AS ?label_de)
-        FILTER (?value=<http://vocab.getty.edu/aat/300411837>)
-      } UNION {
-        BIND(\"Neutral\"@en AS ?label_en)
-        BIND(\"Neutrale\"@de AS ?label_de)
-        FILTER (?value=<http://vocab.getty.edu/aat/300417541>)
+      ?subject crm:P2_has_type ?value.
+    } WHERE {
+      ?subject a crm:E21_Person.
+      ?subject crm:P2_has_type ?value.
+      ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender> .
+    }",
+    "valueSetPattern": "SELECT ?value ?label WHERE {
+      VALUES (?value ?label) {
+        (<http://vocab.getty.edu/aat/300411836> \"Male\"@en)
+        (<http://vocab.getty.edu/aat/300411837> \"Female\"@en)
+        (<http://vocab.getty.edu/aat/300417541> \"Neutral\"@en)
       }
-    }
-  }
-}"
+    }",
+    "insertPattern": "
+      INSERT {
+        ?subject crm:P2_has_type ?value.
+        ?value crm:P2_has_type <https://resource.swissartresearch.net/type/gender> .
+        ?value a crm:E55_Type .
+        ?value rdfs:label ?label_en.
+        ?value rdfs:label ?label_de.
+      } WHERE {
+        ?subject a crm:E21_Person.
+        {
+          SELECT ?label_de ?label_en WHERE {
+            {
+              BIND(\"Male\"@en AS ?label_en)
+              BIND(\"Männlich\"@de AS ?label_de)
+              FILTER (?value=<http://vocab.getty.edu/aat/300411836>)
+            } UNION {
+              BIND(\"Female\"@en AS ?label_en)
+              BIND(\"Weiblich\"@de AS ?label_de)
+              FILTER (?value=<http://vocab.getty.edu/aat/300411837>)
+            } UNION {
+              BIND(\"Neutral\"@en AS ?label_en)
+              BIND(\"Neutrale\"@de AS ?label_de)
+              FILTER (?value=<http://vocab.getty.edu/aat/300417541>)
+            }
+        }
+      }
+    }"
 }
 [[/inline]]
 
@@ -9237,22 +9236,22 @@ INSERT {
     "description": "This field is used to indicate additional names under which the documented person is known. This can be linked to the additional name type and earliest and latest date of use of that name.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "selectPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-SELECT distinct ?value WHERE {
-  ?subject crm:P1_is_identified_by ?value.
-  ?value a crm:E33_41_Linguistic_Appellation.
-  FILTER NOT EXISTS { ?value crm:P2_has_type ?type. ?type rdfs:label \"preferred terms\"}  
-}",
+      SELECT distinct ?value WHERE {
+        ?subject crm:P1_is_identified_by ?value.
+        ?value a crm:E33_41_Linguistic_Appellation.
+        FILTER NOT EXISTS { ?value crm:P2_has_type aat:300404670 }  
+      }",
     "deletePattern": "DELETE {  
-  ?subject crm:P1_is_identified_by ?value.
-} WHERE {
-  ?subject crm:P1_is_identified_by ?value.
-  ?value a crm:E33_41_Linguistic_Appellation.
-}",
-    "insertPattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-INSERT { 
-  ?subject crm:P1_is_identified_by ?value.
-  ?value a crm:E33_41_Linguistic_Appellation.
-} WHERE {}"
+      ?subject crm:P1_is_identified_by ?value.
+    } WHERE {
+      ?subject crm:P1_is_identified_by ?value.
+      ?value a crm:E33_41_Linguistic_Appellation.
+    }",
+    "insertPattern": "
+      INSERT { 
+        ?subject crm:P1_is_identified_by ?value.
+        ?value a crm:E33_41_Linguistic_Appellation.
+    } WHERE {}"
 }
 [[/inline]]
 
