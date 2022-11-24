@@ -1,4 +1,4 @@
-ARG PLATFORM_VERSION=4.1.2
+ARG PLATFORM_VERSION=4.2.2
 FROM swissartresearx/metaphacts-community:${PLATFORM_VERSION} AS glam-community
 
 FROM gradle:6.8.3-jdk11 AS build
