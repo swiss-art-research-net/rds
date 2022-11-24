@@ -1115,43 +1115,35 @@ INSERT {
     "iri": "http://www.metaphacts.com/fieldDefinition/Cultural_Affiliation",
     "label": "Cultural Affiliation",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
-    "selectPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> 
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#>
-
-SELECT ?value ?label WHERE {
-  ?subject crm:P107i_is_current_or_former_member_of ?value_uri.
-  ?value_uri a crm:E74_Group.
-  ?value_uri crm:P2_has_type ?type.
-  ?type rdfs:label \"Cultural Group\".
-  ?value_uri rdfs:label ?value.
-}",
+    "selectPattern": "
+      SELECT ?value WHERE {
+        ?subject crm:P107i_is_current_or_former_member_of ?value_uri.
+        ?value_uri a crm:E74_Group.
+        ?value_uri crm:P2_has_type  aat:300162135 ;
+          rdfs:label ?value .
+      }",
     "deletePattern": "DELETE {
-  ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
-  ?group_iri rdfs:label ?value.
-  ?group_iri crm:P2_has_type ?type_uri .
-} 
-WHERE {
-  ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
-  ?group_iri a crm:E74_Group.
-  ?group_iri rdfs:label ?value.
-  ?group_iri crm:P2_has_type ?type_uri .
-  ?type_uri a crm:E55_Type.
-  ?type_uri rdfs:label \"Cultural Group\".
-}",
+      ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
+      ?group_iri rdfs:label ?value.
+      ?group_iri crm:P2_has_type aat:300162135  .
+    } 
+    WHERE {
+      ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
+      ?group_iri a crm:E74_Group.
+      ?group_iri rdfs:label ?value.
+      ?group_iri crm:P2_has_type aat:300162135  .
+    }",
     "insertPattern": "INSERT { 
-  ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
-  ?group_iri a crm:E74_Group.
-  ?group_iri rdfs:label ?value.
-  ?group_iri crm:P2_has_type ?type_uri .
-  ?type_uri a crm:E55_Type.
-  ?type_uri rdfs:label \"Cultural Group\".
-} 
-WHERE {
-  	BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/type/\", MD5(\"Cultural Group\"))) as ?type_uri).  
-	BIND(IRI(CONCAT(STR(\"http://resource.swissartresearch.net/group/\"),ENCODE_FOR_URI(LCASE(?value)))) as ?group_iri).
-}"
+      ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
+      ?group_iri a crm:E74_Group.
+      ?group_iri rdfs:label ?value.
+      ?group_iri crm:P2_has_type aat:300162135 .
+      aat:300162135 a crm:E55_Type;
+        rdfs:label \"Cultural Group\".
+    } 
+    WHERE {
+      BIND(IRI(CONCAT(STR(\"http://resource.swissartresearch.net/group/\"),ENCODE_FOR_URI(LCASE(?value)))) as ?group_iri).
+    }"
 }
 [[/inline]]
 
@@ -6229,27 +6221,27 @@ WHERE {
       SELECT ?value WHERE {
         ?subject crm:P107i_is_current_or_former_member_of ?value_uri.
         ?value_uri a crm:E74_Group ;
-          crm:P2_has_type <http://vocab.getty.edu/aat/300379842> ;
-          rdfs:label ?label
+          crm:P2_has_type aat:300379842 ;
+          rdfs:label ?value .
       }",
     "deletePattern": "DELETE {
       ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
       ?group_iri rdfs:label ?value.
-      ?group_iri crm:P2_has_type <http://vocab.getty.edu/aat/300379842> .
+      ?group_iri crm:P2_has_type aat:300379842 .
     } 
     WHERE {
       ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
       ?group_iri a crm:E74_Group.
       ?group_iri rdfs:label ?value.
-      ?group_iri crm:P2_has_type <http://vocab.getty.edu/aat/300379842> .
+      ?group_iri crm:P2_has_type aat:300379842 .
 
     }",
     "insertPattern": "INSERT { 
       ?subject crm:P107i_is_current_or_former_member_of ?group_iri.
       ?group_iri a crm:E74_Group.
       ?group_iri rdfs:label ?value.
-      ?group_iri crm:P2_has_type <http://vocab.getty.edu/aat/300379842> .
-      <http://vocab.getty.edu/aat/300379842> rdfs:label \"nationality\".
+      ?group_iri crm:P2_has_type aat:300379842 .
+      aat:300379842 rdfs:label \"nationality\".
     } 
     WHERE {
       BIND(IRI(CONCAT(STR(\"http://resource.swissartresearch.net/group/\"),ENCODE_FOR_URI(LCASE(?value)))) as ?group_iri).
