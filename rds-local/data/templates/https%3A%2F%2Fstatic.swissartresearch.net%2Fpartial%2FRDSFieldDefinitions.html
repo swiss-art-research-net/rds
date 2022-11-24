@@ -1079,16 +1079,16 @@ INSERT {
     "selectPattern": "SELECT ?value ?label WHERE {
   ?subject crm:P01i_is_domain_of ?join_uri.
   ?join_uri a crm:PC144_joined_with.
-  ?join_uri crm:P144_1_kind_of_member ?role.
+  ?join_uri crm:P144.1_kind_of_member ?role.
   ?role a crm:E55_Type.
   ?role rdfs:label ?value.
 }",
     "deletePattern": "DELETE {
-  ?join_uri crm:P144_1_kind_of_member ?role.
+  ?join_uri crm:P144.1_kind_of_member ?role.
 } WHERE {
   ?subject crm:P01i_is_domain_of ?join_uri.
   ?join_uri a crm:PC144_joined_with.
-  ?join_uri crm:P144_1_kind_of_member ?role.
+  ?join_uri crm:P144.1_kind_of_member ?role.
   ?role a crm:E55_Type.
   ?role rdfs:label ?value.
 }",
@@ -1097,7 +1097,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 INSERT { 
   ?subject crm:P01i_is_domain_of ?join_uri.
   ?join_uri a crm:PC144_joined_with.
-  ?join_uri crm:P144_1_kind_of_member ?role.
+  ?join_uri crm:P144.1_kind_of_member ?role.
   ?role a crm:E55_Type.
   ?role rdfs:label ?value.
 } WHERE { 
@@ -7313,7 +7313,7 @@ SELECT ?value ?label WHERE {
   ?join_uri crm:P02_has_range ?group.
   ?group rdfs:label ?group_label.
   OPTIONAL {
-  	?join_uri crm:P144_1_kind_of_member ?role.
+  	?join_uri crm:P144.1_kind_of_member ?role.
   	?role rdfs:label ?role_label.
   }
   OPTIONAL {
