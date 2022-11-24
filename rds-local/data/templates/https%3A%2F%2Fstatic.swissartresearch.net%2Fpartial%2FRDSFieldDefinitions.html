@@ -3852,6 +3852,7 @@ WHERE {
 }",
     "deletePattern": "DELETE {
   ?subject crm:P1_is_identified_by ?value.
+  ?value a crm:E42_Identifier .
 } WHERE {
   ?subject crm:P1_is_identified_by ?value.
   ?value a crm:E42_Identifier.
