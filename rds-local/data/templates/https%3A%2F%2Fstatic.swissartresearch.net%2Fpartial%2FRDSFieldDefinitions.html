@@ -4157,21 +4157,21 @@ INSERT {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
     "selectPattern": "SELECT ?value ?label 
-WHERE {
-  ?subject crm:P100i_died_in ?value . 
-  ?value a crm:E69_Death.
-} ",
+      WHERE {
+        ?subject crm:P100i_died_in ?value . 
+        ?value a crm:E69_Death.
+      } ",
     "deletePattern": "DELETE { 
-  ?subject crm:P100i_died_in ?value . 
-} 
-WHERE {
-  ?subject crm:P100i_died_in ?value . 
-  ?value a crm:E69_Death.
-}",
+        ?subject crm:P100i_died_in ?value . 
+      } 
+      WHERE {
+        ?subject crm:P100i_died_in ?value . 
+        ?value a crm:E69_Death.
+      }",
     "insertPattern": "INSERT {
-  ?subject crm:P100i_died_in ?value . 
-  ?value a crm:E69_Death.
-} WHERE {}"
+        ?subject crm:P100i_died_in ?value . 
+        ?value a crm:E69_Death.
+    } WHERE {}"
 }
 [[/inline]]
 
