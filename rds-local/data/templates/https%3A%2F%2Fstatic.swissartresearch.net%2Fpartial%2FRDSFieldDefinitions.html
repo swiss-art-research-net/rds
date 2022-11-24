@@ -781,46 +781,45 @@ WHERE {
     "label": "Biography",
     "xsdDatatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
     "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-  ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/type/biographical_note>.
-  ?info_iri rdfs:value ?value.
-}",
+      ?subject crm:P67i_is_referred_to_by ?info_iri.
+      ?info_iri crm:P2_has_type aat:300435422 .
+      ?info_iri rdfs:label ?value.
+    }",
     "deletePattern": "DELETE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-} WHERE {
-  ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-  ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
-  ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/type/biographical_note>.
-  ?info_iri rdfs:value ?value.
-}",
-    "insertPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-INSERT { 
-  ?subject a <http://www.cidoc-crm.org/cidoc-crm/E21_Person>.
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by> ?info_iri.
-  ?info_iri a <http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object>.
-  ?info_iri crm:P2_has_type <https://resource.swissartresearch.net/type/biographical_note>.
-  <https://resource.swissartresearch.net/type/biographical_note> a crm:E55_Type;
-    rdfs:label \"Biography\".
-  ?info_iri rdfs:value ?value.
-  ?infor_iri <http://www.cidoc-crm.org/cidoc-crm/P72_has_language> ?lang.
-  ?lang a <http://www.cidoc-crm.org/cidoc-crm/E56_Language>.
-  ?lang rdfs:label ?lang_label
-} 
-WHERE {
-  BIND(IRI(CONCAT(STR($subject),\"/biography/\", MD5(str(?value)))) as ?info_iri).
-  {	SELECT ?lang ?lang_label  WHERE {
-      BIND(LANG(?value) as ?langTag)
-      VALUES ( ?lang ?langTag ?lang_label) {
-        (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
-        (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
-        (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
-        (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
-        (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
-      }
-	} LIMIT 1
-  }
+      ?subject crm:P67i_is_referred_to_by ?info_iri.
+      ?info_iri crm:P2_has_type aat:300435422 .
+      ?info_iri rdfs:label ?value .
+    } WHERE {
+      ?subject a crm:E21_Person.
+      ?subject crm:P67i_is_referred_to_by ?info_iri.
+      ?info_iri a crm:E73_Information_Object.
+      ?info_iri crm:P2_has_type aat:300435422.
+      ?info_iri rdfs:label ?value.
+    }",
+    "insertPattern": "INSERT { 
+      ?subject a crm:E21_Person.
+      ?subject crm:P67i_is_referred_to_by ?info_iri.
+      ?info_iri a crm:E73_Information_Object.
+      ?info_iri crm:P2_has_type aat:300435422.
+      aat:300435422 a crm:E55_Type;
+        rdfs:label \"Biography\".
+      ?info_iri rdfs:label ?value.
+      ?info_iri crm:P72_has_language ?lang.
+      ?lang a crm:E56_Language.
+      ?lang rdfs:label ?lang_label
+    } WHERE {
+      BIND(IRI(CONCAT(STR($subject),\"/biography/\", MD5(str(?value)))) as ?info_iri).
+      {	SELECT ?lang ?lang_label  WHERE {
+        BIND(LANG(?value) as ?langTag)
+        VALUES ( ?lang ?langTag ?lang_label) {
+          (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
+          (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
+          (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
+          (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
+          (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+        }
+      } LIMIT 1
+    }
 }"
 }
 [[/inline]]
