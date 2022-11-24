@@ -6008,17 +6008,17 @@ INSERT {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "minOccurs": "1",
     "selectPattern": "SELECT distinct ?value ?label WHERE {
-  	?subject crm:P190_has_symbolic_content ?value.
-}",
+      ?subject crm:P190_has_symbolic_content ?value.
+    }",
     "deletePattern": "DELETE { 
-	?subject crm:P190_has_symbolic_content ?value.
-} WHERE {
-	?subject crm:P190_has_symbolic_content ?value.
-}",
+      ?subject crm:P190_has_symbolic_content ?value.
+    } WHERE {
+      ?subject crm:P190_has_symbolic_content ?value.
+    }",
     "insertPattern": "INSERT {
-	?subject crm:P190_has_symbolic_content ?value.
-} WHERE {
-}"
+      ?subject crm:P190_has_symbolic_content ?value.
+    } WHERE {
+  }"
 }
 [[/inline]]
 
