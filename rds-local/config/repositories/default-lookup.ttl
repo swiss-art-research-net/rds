@@ -34,7 +34,7 @@
       lookup:searchBlockTemplate """
         ?candidate (
           crm:P1_is_identified_by / rdfs:label |
-    			crm:P1_is_identified_by / crm:P190_is_expressed_in |
+    			crm:P1_is_identified_by / crm:P190_has_symbolic_content |
           rdfs:label |
           ecrm:P128_carries / ecrm:P102_has_title / ecrm:P3_has_note
         ) ?key .

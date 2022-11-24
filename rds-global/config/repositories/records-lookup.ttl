@@ -34,7 +34,7 @@
         {
           GRAPH <http://example.org/myproject/records> {
             ?candidate a ?type.
-            ?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label | <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/<http://www.cidoc-crm.org/cidoc-crm/P190_is_expressed_in> ?key.
+            ?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label | <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/<http://www.cidoc-crm.org/cidoc-crm/P190_has_symbolic_content> ?key.
             FILTER ISLITERAL(?key)
           }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
