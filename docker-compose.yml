@@ -1,11 +1,9 @@
 version: "3"
 services:
   rds:
-    image: swissartresearx/rds-local:1.1.1
+    image: swissartresearx/rds-local:1.2.0
     build: 
       context: .
       dockerfile: Dockerfile.rds-local
-    volumes:
-    - ./rds-local:/apps/rds-local
     ports:
     - 10214:8080

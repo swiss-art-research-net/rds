@@ -187,8 +187,8 @@
           [[> Person_Name ]],
           [[> Person_Gender ]],
           [[> Person_Alternate_Name ]],
-          [[> Person_Birth_Place ]],
-          [[> Person_Death_Place ]],
+          [[> Person_Birth ]],
+          [[> Person_Death ]],
           [[> Person_Father ]],
           [[> Person_Mother ]],
           [[> National_Affiliation ]],
@@ -235,7 +235,7 @@
 
       <semantic-form-composite-input
           for="Identifier"
-          new-subject-template='/identifier/{{Identifier_Value}}'
+          new-subject-template='/identifier/{{UUID}}'
           fields='[
             [[> Identifier_Source ]],
             [[> Identifier_Type ]],
@@ -252,8 +252,8 @@
           for="Person_Name"
           new-subject-template="/appellation/{{Person_Name-Value}}"
           fields='[
-        [[> Person_Name-Value ]],
-        [[> Person_Name_Part ]]
+            [[> Person_Name-Value ]],
+            [[> Person_Name_Part ]]
       ]'>
         <semantic-form-text-input for="Person_Name-Value"
                                   languages='["en","de","fr","it","sp","ca","cs","da","nl","fi","gr","hu","no","pt","sv","ru","jp","ko"]'>
@@ -291,7 +291,7 @@
 
       </semantic-form-composite-input>
       <semantic-form-composite-input 
-          for="Person_Birth_Place"
+          for="Person_Birth"
           new-subject-template="/birth"
           fields='[
             [[> Birth_Place ]],
@@ -316,7 +316,7 @@
       </semantic-form-composite-input>
 
       <semantic-form-composite-input 
-          for="Person_Death_Place"
+          for="Person_Death"
           new-subject-template="/death"
           fields='[
           [[> Death_Place ]],
