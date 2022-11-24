@@ -5559,10 +5559,10 @@ INSERT {
 [[/inline]]
 
 
-[[#*inline "Person_Birth_Place"]]
+[[#*inline "Person_Birth"]]
 {
-    "id": "Person_Birth_Place",
-    "iri": "http://www.metaphacts.com/fieldDefinition/Person_Birth_Place",
+    "id": "Person_Birth",
+    "iri": "http://www.metaphacts.com/fieldDefinition/Person_Birth",
     "label": "Person Birth",
     "description": "This field is used to indicate the birth of the documented person.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
@@ -5582,7 +5582,8 @@ INSERT {
     "insertPattern": "INSERT {
         ?subject crm:P98i_was_born ?value. 
         ?value a crm:E67_Birth.
-    } WHERE {}"
+    } WHERE {
+    }"
 }
 [[/inline]]
 
