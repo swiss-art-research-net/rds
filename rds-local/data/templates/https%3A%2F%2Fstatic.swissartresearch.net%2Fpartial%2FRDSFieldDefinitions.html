@@ -5567,22 +5567,22 @@ INSERT {
     "description": "This field is used to indicate the birth of the documented person.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "minOccurs": "0",
-    "selectPattern": "SELECT DISTINCT ?value ?label 
-WHERE {
-  ?subject crm:P98i_was_born ?value . 
-  ?value a crm:E67_Birth.
-}",
+    "selectPattern": "SELECT DISTINCT ?value
+      WHERE {
+        ?subject crm:P98i_was_born ?value . 
+        ?value a crm:E67_Birth.
+      }",
     "deletePattern": "DELETE { 
-  ?subject crm:P98i_was_born ?value . 
-} 
-WHERE {
-  ?subject crm:P98i_was_born ?value . 
-  ?value a crm:E67_Birth.
-}",
+      ?subject crm:P98i_was_born ?value . 
+    } 
+      WHERE {
+      ?subject crm:P98i_was_born ?value . 
+      ?value a crm:E67_Birth.
+    }",
     "insertPattern": "INSERT {
-  ?subject crm:P98i_was_born ?value. 
-  ?value a crm:E67_Birth.
-} WHERE {}"
+        ?subject crm:P98i_was_born ?value. 
+        ?value a crm:E67_Birth.
+    } WHERE {}"
 }
 [[/inline]]
 
