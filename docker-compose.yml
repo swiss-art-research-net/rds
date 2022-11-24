@@ -5,7 +5,5 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.rds-local
-    volumes:
-    - ./rds-local:/apps/rds-local
     ports:
     - 10214:8080
