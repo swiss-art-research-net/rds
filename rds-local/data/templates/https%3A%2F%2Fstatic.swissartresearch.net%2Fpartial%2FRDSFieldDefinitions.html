@@ -4259,25 +4259,25 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "minOccurs": "0",
     "selectPattern": "SELECT distinct ?value WHERE {
-  ?subject crm:P2_has_type ?type_uri.
-  ?type_uri a crm:E55_Type.
-  ?type_uri rdfs:label ?value.
-}",
+      ?subject crm:P2_has_type ?type_uri.
+      ?type_uri a crm:E55_Type.
+      ?type_uri rdfs:label ?value.
+    }",
     "deletePattern": "DELETE {
-  ?subject crm:P2_has_type ?type_uri.
-  ?type_uri rdfs:label ?value. 
-} WHERE {
-  ?subject crm:P2_has_type ?type_uri.
-  ?type_uri a crm:E55_Type.
-  ?type_uri rdfs:label ?value. 
-}",
+      ?subject crm:P2_has_type ?type_uri.
+      ?type_uri rdfs:label ?value. 
+    } WHERE {
+      ?subject crm:P2_has_type ?type_uri.
+      ?type_uri a crm:E55_Type.
+      ?type_uri rdfs:label ?value. 
+    }",
     "insertPattern": "INSERT {
-  ?subject crm:P2_has_type ?type_uri.
-  ?type_uri a crm:E55_Type.
-  ?type_uri rdfs:label ?value. 
-} WHERE {
-   BIND(IRI(CONCAT(STR($subject),\"/types/\", MD5(str($value)))) as ?type_uri).
-}"
+      ?subject crm:P2_has_type ?type_uri.
+      ?type_uri a crm:E55_Type.
+      ?type_uri rdfs:label ?value. 
+    } WHERE {
+      BIND(IRI(CONCAT(STR($subject),\"/types/\", MD5(str($value)))) as ?type_uri).
+    }"
 }
 [[/inline]]
 
