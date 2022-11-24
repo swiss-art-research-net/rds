@@ -6179,31 +6179,35 @@ WHERE {
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#string",
     "minOccurs": "0",
     "selectPattern": "SELECT DISTINCT ?value ?label WHERE {
-  ?subject crm:P37i_was_assigned_by ?assignement.
-  ?assignement a crm:E15_Identifier_Assignment.
-  ?assignement crm:P16_used_specific_object ?object.
-  ?object a crm:E73_Information_Object.
-  ?object rdfs:label ?value.
-}",
+      ?subject crm:P37i_was_assigned_by ?assignment.
+      ?assignment a crm:E15_Identifier_Assignment.
+      ?assignment crm:P16_used_specific_object ?object.
+      ?object a crm:E73_Information_Object.
+      ?object rdfs:label ?value.
+    }",
     "deletePattern": "DELETE {
-  ?assignement crm:P16_used_specific_object ?object.
-} WHERE {
-  ?subject crm:P37i_was_assigned_by ?assignement.
-  ?assignement a crm:E15_Identifier_Assignment.
-  ?assignement crm:P16_used_specific_object ?object.
-  ?object a crm:E73_Information_Object.
-  ?object rdfs:label ?value.
-}",
+      ?subject crm:P37i_was_assigned_by ?assignment.
+      ?assignment a crm:E15_Identifier_Assignment.
+      ?assignment crm:P16_used_specific_object ?object.
+      ?object a crm:E73_Information_Object.
+      ?object rdfs:label ?value.
+    } WHERE {
+      ?subject crm:P37i_was_assigned_by ?assignment.
+      ?assignment a crm:E15_Identifier_Assignment.
+      ?assignment crm:P16_used_specific_object ?object.
+      ?object a crm:E73_Information_Object.
+      ?object rdfs:label ?value.
+    }",
     "insertPattern": "INSERT {
-  ?subject crm:P37i_was_assigned_by ?assignement.
-  ?assignement a crm:E15_Identifier_Assignment.
-  ?assignement crm:P16_used_specific_object ?object.
-  ?object a crm:E73_Information_Object.
-  ?object rdfs:label ?value.
-} WHERE {
-  BIND(IRI(CONCAT(STR(?subject),\"/identifier_assignment\")) AS ?assignement)
-  BIND (IRI(CONCAT(\"https://resource.swissartresearch.net/info_object/\",ENCODE_FOR_URI(?value))) AS ?object)
-}"
+      ?subject crm:P37i_was_assigned_by ?assignment.
+      ?assignment a crm:E15_Identifier_Assignment.
+      ?assignment crm:P16_used_specific_object ?object.
+      ?object a crm:E73_Information_Object.
+      ?object rdfs:label ?value.
+    } WHERE {
+      BIND(IRI(CONCAT(STR(?subject),\"/identifier_assignment\")) AS ?assignment)
+      BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/info_object/\",ENCODE_FOR_URI(?value))) AS ?object)
+  }"
 }
 [[/inline]]
 
