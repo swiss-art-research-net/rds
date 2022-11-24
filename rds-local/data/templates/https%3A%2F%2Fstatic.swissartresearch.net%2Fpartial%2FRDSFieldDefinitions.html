@@ -7442,28 +7442,26 @@ INSERT {
     "domain": "http://www.cidoc-crm.org/cidoc-crm/E21_Person",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#date",
     "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P14i_performed> ?value.
-  ?value a <http://iflastandards.info/ns/fr/frbr/frbroo/F51_Pursuit>.
-  ?value <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type.
-  ?type a <http://www.cidoc-crm.org/cidoc-crm/E55_Type>.
-  ?type rdfs:label \"Floruit\".
-}",
-    "deletePattern": "DELETE { ?value <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type} WHERE {
-?subject <http://www.cidoc-crm.org/cidoc-crm/P14i_performed> ?value.
-  ?value a <http://iflastandards.info/ns/fr/frbr/frbroo/F51_Pursuit>.
-  ?value <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type.
-  ?type a <http://www.cidoc-crm.org/cidoc-crm/E55_Type>.
-  ?type rdfs:label \"Floruit\".
-}",
+      ?subject crm:P14i_performed ?value.
+      ?value a frbr:F51_Pursuit.
+      ?value crm:P2_has_type aat:300393178.
+    }",
+    "deletePattern": "DELETE { 
+      ?subject crm:P14i_performed ?value.
+      ?value a frbr:F51_Pursuit.
+      ?value crm:P2_has_type aat:300393178.
+    } WHERE {
+      ?subject crm:P14i_performed ?value .
+      ?value a frbr:F51_Pursuit .
+      ?value crm:P2_has_type aat:300393178 .
+    }",
     "insertPattern": "INSERT { 
-  ?subject <http://www.cidoc-crm.org/cidoc-crm/P14i_performed> ?value.
-  ?value a <http://iflastandards.info/ns/fr/frbr/frbroo/F51_Pursuit>.
-  ?value <http://www.cidoc-crm.org/cidoc-crm/P2_has_type> ?type.
-  ?type a <http://www.cidoc-crm.org/cidoc-crm/E55_Type>.
-  ?type rdfs:label \"Floruit\".
-} WHERE {
-      BIND(IRI(CONCAT(\"https://resource.swissartresearch.net/type/\", MD5(\"Floruit\"))) as ?type).
-}"
+      ?subject crm:P14i_performed ?value .
+      ?value a frbr:F51_Pursuit .
+      ?value crm:P2_has_type aat:300393178 .
+      aat:300393178 rdfs:label \"Floruit\".
+    } WHERE {
+    }"
 }
 [[/inline]]
 
