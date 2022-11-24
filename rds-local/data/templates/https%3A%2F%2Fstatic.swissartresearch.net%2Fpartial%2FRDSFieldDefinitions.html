@@ -1446,25 +1446,26 @@ WHERE {
     "iri": "http://www.metaphacts.com/fieldDefinition/Citation",
     "label": "Citation",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-    "selectPattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-SELECT DISTINCT ?value WHERE {
-  ?subject crm:P129i_is_subject_of ?value.
-}",
+    "selectPattern": "
+      SELECT DISTINCT ?value WHERE {
+        ?subject crm:P129i_is_subject_of ?value.
+        ?value crm:P2_has_type aat:300435423 .
+    }",
     "deletePattern": "DELETE {
-  ?subject crm:P129i_is_subject_of ?value.
-} WHERE {
-  ?subject crm:P129i_is_subject_of ?value.
-  ?value a crm:E33_Linguistic_Object.
-}",
-    "insertPattern": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-INSERT { 
-  ?subject crm:P129i_is_subject_of ?value.
-  ?value a crm:E33_Linguistic_Object.
-  ?value crm:P2_has-type <https://resource.swissartresearch.net/type/citation>.
-  <https://resource.swissartresearch.net/type/citation> a crm:E55_Type.
-  <https://resource.swissartresearch.net/type/citation> rdfs:label \"Citation\"
-} WHERE {}"
+      ?subject crm:P129i_is_subject_of ?value.
+      ?value a crm:E33_Linguistic_Object ; 
+        crm:P2_has_type aat:300435423 .
+    } WHERE {
+      ?subject crm:P129i_is_subject_of ?value.
+      ?value a crm:E33_Linguistic_Object ;
+        crm:P2_has_type aat:300435423 .
+    }",
+    "insertPattern": "INSERT { 
+      ?subject crm:P129i_is_subject_of ?value.
+      ?value a crm:E33_Linguistic_Object.
+      ?value crm:P2_has-type aat:300435423 .
+      aat:300435423 rdfs:label \"Citation\" .
+    } WHERE {}"
 }
 [[/inline]]
 
