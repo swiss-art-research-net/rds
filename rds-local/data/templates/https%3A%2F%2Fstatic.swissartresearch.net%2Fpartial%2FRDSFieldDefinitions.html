@@ -1255,20 +1255,20 @@ INSERT {
     "description": "This field is used to indicate the social relations of a person.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject crm:P01_has_domain ?value.
-  ?value a sari:SRPC3_in_social_relation.
-}",
+      ?subject crm:P01_has_domain ?value.
+      ?value a sari:SRPC3_in_social_relation.
+    }",
     "deletePattern": "DELETE {
-  ?subject crm:P01_has_domain ?value.
-}
-WHERE {
-  ?subject crm:P01_has_domain ?value.
-  ?value a sari:SRPC3_in_social_relation.
-}",
+      ?subject crm:P01_has_domain ?value.
+    }
+    WHERE {
+      ?subject crm:P01_has_domain ?value.
+      ?value a sari:SRPC3_in_social_relation.
+    }",
     "insertPattern": "INSERT { 
-  ?subject crm:P01_has_domain ?value.
-  ?value a sari:SRPC3_in_social_relation.
-} WHERE {} "
+      ?subject crm:P01_has_domain ?value.
+      ?value a sari:SRPC3_in_social_relation.
+    } WHERE {} "
 }
 [[/inline]]
 
