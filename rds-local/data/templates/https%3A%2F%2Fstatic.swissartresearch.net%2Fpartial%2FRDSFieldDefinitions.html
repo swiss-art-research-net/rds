@@ -6257,20 +6257,20 @@ WHERE {
     "label": "Institutional Affiliation",
     "description": "This field is used to indicate the membership of the documented person in an institution. The referenced entity should be an institution.",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-    "selectPattern": "SELECT ?value ?label WHERE {
-  ?subject crm:P143i_was_joined_by ?value.
-  ?value a crm:E85_Joining.
-}",
+    "selectPattern": "SELECT ?value WHERE {
+      ?subject crm:P143i_was_joined_by ?value.
+      ?value a crm:E85_Joining.
+    }",
     "deletePattern": "DELETE { 
-  ?subject crm:P143i_was_joined_by ?value.
-} WHERE {
-  ?subject crm:P143i_was_joined_by ?value.
-  ?value a crm:E85_Joining.
-}",
+      ?subject crm:P143i_was_joined_by ?value.
+    } WHERE {
+      ?subject crm:P143i_was_joined_by ?value.
+      ?value a crm:E85_Joining.
+    }",
     "insertPattern": "INSERT {
-  ?subject crm:P143i_was_joined_by ?value.
-  ?value a crm:E85_Joining.
-} WHERE {}"
+      ?subject crm:P143i_was_joined_by ?value.
+      ?value a crm:E85_Joining.
+    } WHERE {}"
 }
 [[/inline]]
 
