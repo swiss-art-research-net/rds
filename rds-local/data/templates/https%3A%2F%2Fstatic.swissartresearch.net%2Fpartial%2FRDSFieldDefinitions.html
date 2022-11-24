@@ -8961,23 +8961,23 @@ SELECT ?value ?label WHERE {
   ?lang rdfs:label ?lang_label.
 }",
     "insertPattern": "INSERT {
-  ?subject crm:P190_has_symbolic_content ?value.
-  ?subject crm:P72_has_language ?lang.
-  ?lang a crm:E56_Language.
-  ?lang rdfs:label ?lang_label.
-} WHERE {
-  {	SELECT ?lang ?lang_label  WHERE {
-      BIND(LANG(?value) as ?langTag)
-      VALUES ( ?lang ?langTag ?lang_label) {
-        (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
-        (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
-        (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
-        (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
-        (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
-      }
-	} LIMIT 1
-  }
-}"
+      ?subject crm:P190_has_symbolic_content ?value.
+      ?subject crm:P72_has_language ?lang.
+      ?lang a crm:E56_Language.
+      ?lang rdfs:label ?lang_label.
+      } WHERE {
+    {	SELECT ?lang ?lang_label  WHERE {
+          BIND(LANG(?value) as ?langTag)
+          VALUES ( ?lang ?langTag ?lang_label) {
+            (<https://glottolog.org/resource/languoid/id/stan1293> \"\" \"English\")
+            (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
+            (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
+            (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
+            (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+          }
+      } LIMIT 1
+    }
+  }"
 }
 [[/inline]]
 
