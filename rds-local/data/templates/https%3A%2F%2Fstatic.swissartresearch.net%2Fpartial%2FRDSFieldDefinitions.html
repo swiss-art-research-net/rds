@@ -9796,35 +9796,37 @@ WHERE{
     "label": "Languages Used",
     "xsdDatatype": "http://www.w3.org/2001/XMLSchema#anyURI",
     "selectPattern": "SELECT ?value ?label WHERE {
-	?subject sari:SRP1_used_language ?value.
-    ?value a crm:E56_Language.
-}",
+      ?subject sari:SRP1_used_language ?value.
+      ?value a crm:E56_Language.
+    }",
     "deletePattern": "DELETE { 
-	?subject sari:SRP1_used_language ?value.
-} WHERE {
-	?subject sari:SRP1_used_language ?value.
-    ?value a crm:E56_Language.
-}",
-    "insertPattern": "PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX sari: <http://w3id.org/sari/>
-INSERT { 
-	?subject sari:SRP1_used_language ?value.
-  	?value rdfs:label ?label.
-    ?value a crm:E56_Language.
-} WHERE {
-  
-SELECT ?lang ?langTag ?label WHERE {
-    BIND(?value as ?lang) 
- VALUES ( ?lang ?langTag ?label) {
-    (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
-    (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
-    (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
-    (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+      ?subject sari:SRP1_used_language ?value.
+    } WHERE {
+      ?subject sari:SRP1_used_language ?value.
+      ?value a crm:E56_Language.
+    }",
+    "insertPattern": "
+      INSERT { 
+        ?subject sari:SRP1_used_language ?value.
+        ?language rdfs:label ?label ;
+          a crm:E56_Language.
+      } WHERE {
+        VALUES ( ?language ?langTag ?label) {
+          (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
+          (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
+          (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
+          (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+        }
+    }",
+    "valueSetPattern": "SELECT ?value ?label WHERE {
+      VALUES ( ?value ?langTag ?label) {
+        (<https://glottolog.org/resource/languoid/id/stan1293> \"en\" \"English\")
+        (<https://glottolog.org/resource/languoid/id/stan1290> \"fr\" \"French\")
+        (<https://glottolog.org/resource/languoid/id/stan1295> \"de\" \"German\")
+        (<https://glottolog.org/resource/languoid/id/ital1282> \"it\" \"Italian\")
+      }
+    }"
   }
-}
-}"
-}
 [[/inline]]
 
 
