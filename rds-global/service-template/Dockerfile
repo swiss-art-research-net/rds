@@ -1,0 +1,34 @@
+ARG PLATFORM_VERSION=4.1.1
+FROM swissartresearx/metaphacts-community:${PLATFORM_VERSION} AS glam-community
+
+FROM gradle:6.8.3-jdk11 AS build
+
+RUN mkdir /tmp/build \
+  && mkdir /tmp/build/rdsapps \
+	&& chown -R 100:0 "/tmp/build/rdsapps" \
+  && chmod -R g=u "/tmp/build/rdsapps" \
+  && chmod -R g+ws "/tmp/build/rdsapps"
+
+WORKDIR /tmp/build
+
+COPY --chown=jetty:jetty . /tmp/build
+COPY --chown=jetty:jetty --from=glam-community /var/lib/jetty/webapps/ROOT.war /tmp/build/ROOT.war
+
+RUN echo "platformLocation=/tmp/build/ROOT.war" > /tmp/build/gradle.properties \
+  && gradle --info prepareEnvironment \
+  && gradle --info clean appZip \
+  && unzip /tmp/build/target/apps/rds-branding.zip -d /tmp/build/rdsapps/rds-branding/ \
+  && unzip /tmp/build/target/apps/rds-global.zip -d /tmp/build/rdsapps/rds-global/ \
+  && unzip /tmp/build/target/apps/rds-global-demo.zip -d /tmp/build/rdsapps/rds-global-demo/ \
+  && unzip /tmp/build/target/apps/rds-services.zip -d /tmp/build/rdsapps/rds-services/ 
+
+
+FROM glam-community
+
+# copy built and extracted RDS apps from /tmp/build/rdsapps in "build" image
+COPY --from=build --chown=jetty:root  /tmp/build/rdsapps /rdsapps
+
+ENV MP_APP_1=/rdsapps/rds-branding \
+    MP_APP_2=/rdsapps/rds-services \
+    MP_APP_3=/rdsapps/rds-global \
+    MP_APP_4=/rdsapps/rds-global-demo
