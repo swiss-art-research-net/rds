@@ -1,5 +1,5 @@
 export DATA_DIRECTORY=./gnd-bibliographic-data
-export DATA_URL=https://data.dnb.de/opendata/authorities-werk_lds.ttl.gz
+export DATA_URL=https://data.dnb.de/opendata/authorities-gnd-werk_lds.ttl.gz
 # For the test in the platform put content of 'assets_to_tests' to
 # 'runtime/assets' folder, then use follwoing line instead
 # export DATA_URL=http://localhost:10214/assets/no_auth/bibliographical-data/bibliographical-data.ttl.gz

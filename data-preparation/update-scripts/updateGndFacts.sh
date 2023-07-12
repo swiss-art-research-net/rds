@@ -1,5 +1,5 @@
 export DATA_DIRECTORY=$(pwd)/gnd-facts-data
-export DATA_URL=https://data.dnb.de/opendata/authorities_entityfacts.jsonld.gz
+export DATA_URL=https://data.dnb.de/opendata/authorities-gnd_entityfacts.jsonld.gz
 # For the test in the platform put content of 'assets_to_tests' to
 # 'runtime/assets' folder, then use follwoing line instead
 # export DATA_URL=http://localhost:10214/assets/no_auth/gnd-facts-data/data.jsonld.gz
@@ -29,8 +29,8 @@ echo "Prepare GNDFacts data"
 # ========================
 cd ${DATA_DIRECTORY}
 echo "Arrange data by lines using JQ. It can take quite some time... (Note: if this operation fails, your machine might require more memory)"
-cat data.jsonld | jq -c .[] > data_temp.jsonld
-
+#cat data.jsonld | jq -c .[] > data_temp.jsonld
+python jm/bin/jm.py | jq -c > data_temp.jsonld
 echo "Split file by protions"
 split --additional-suffix '.part' -l 7000 data_temp.jsonld
 # gsplit --additional-suffix '.part' -l 7000 data_temp.jsonld # For MacOs

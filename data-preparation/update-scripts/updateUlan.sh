@@ -1,5 +1,5 @@
 export DATA_DIRECTORY=./ulan-data
-export DATA_URL=http://vocab.getty.edu/dataset/ulan/full.zip
+export DATA_URL=http://ulandownloads.getty.edu/VocabData/full.zip
 # For the test in the platform put content of 'assets_to_tests' to
 # 'runtime/assets' folder, then use follwoing line instead
 # export DATA_URL=http://localhost:10214/assets/no_auth/ulan-data/data.zip

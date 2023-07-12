@@ -1,5 +1,5 @@
 export DATA_DIRECTORY=./aat-data
-export DATA_URL=http://vocab.getty.edu/dataset/aat/explicit.zip
+export DATA_URL=http://aatdownloads.getty.edu/VocabData/explicit.zip
 # For the test in the platform put content of 'assets_to_tests' to
 # 'runtime/assets' folder, then use follwoing line instead
 # export DATA_URL=http://localhost:10214/assets/no_auth/aat-data/aat-data.zip
