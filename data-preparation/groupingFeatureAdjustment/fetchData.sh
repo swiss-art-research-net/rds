@@ -95,7 +95,7 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
       GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
       ?candidate2 ?predicate ?candidate1 .
       }
-  } LIMIT 20000000}
+  } LIMIT 10397743}
 }' ./data/entityfactsSameAs_1.ttl
 
 fetchData "Entityfacts-2" ${BLAZEGRAPH_ENDPOINT} 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -112,7 +112,7 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
       GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
       ?candidate2 ?predicate ?candidate1 .
       }
-  } OFFSET 20000000 LIMIT 20000000}
+  } OFFSET 10397743 LIMIT 10397750}
 }' ./data/entityfactsSameAs_2.ttl
 
 # LOC

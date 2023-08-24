@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export BLAZEGRAPH_ENDPOINT="http://localhost:8080/blazegraph/sparql"
+export BLAZEGRAPH_ENDPOINT="http://localhost:8081/blazegraph/sparql"
 export NAMED_GRAPH="http%3A%2F%2Frds.named-graph.com%2Fexact-match-statements"
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export BLAZEGRAPH_ENDPOINT="http://localhost:8080/blazegraph/sparql"
+export BLAZEGRAPH_ENDPOINT="http://localhost:8081/blazegraph/sparql"
 export WIKIDATA_ENDPOINT="https://query.wikidata.org/sparql"
 
 echo "Build Image if not exists"

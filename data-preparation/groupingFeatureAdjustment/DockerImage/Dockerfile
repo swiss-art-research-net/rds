@@ -1,6 +1,6 @@
 FROM node:14
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR usr/src/app
 # COPY ./entryPoint.sh ./
 COPY ./package.json ./
 COPY ./transform.js ./
