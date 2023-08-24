@@ -38,6 +38,9 @@
     }
     FILTER ISLITERAL(?key)
     FILTER (?graph != <http://vocab.getty.edu/ulan/graph> && ?graph != <http://vocab.getty.edu/aat/graph> && ?graph != <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> && ?graph != <http://data.culture.fr/thesaurus/resource/ark:/67717/T96/graph>)
+    FILTER NOT EXISTS {
+      ?candidate a/rdfs:subClassOf* <http://schema.swissartresearch.net/ontology/rds#Person> .
+    }
     SERVICE <http://www.bigdata.com/rdf/search#search> {
       ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
       <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
@@ -68,6 +71,9 @@
     GRAPH ?graph {
         ?candidate (((gvp:prefLabelGVP | xl:prefLabel)/xl:literalForm) | rdfs:label) ?key .
     }
+    FILTER NOT EXISTS {
+      ?candidate a/rdfs:subClassOf* <http://schema.swissartresearch.net/ontology/rds#Person> .
+    } 
     SERVICE <http://www.bigdata.com/rdf/search#search> {
       ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
       <http://www.bigdata.com/rdf/search#relevance> ?score_private ;

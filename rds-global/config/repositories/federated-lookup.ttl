@@ -26,6 +26,7 @@
         ], [
           lookup:name "wikidata-lookup";
         ], [
-          lookup:name "records-lookup"
-        ]
+	  lookup:name "person-lookup";
+	  lookup:scoreOffset 0.1
+	]
     ] .
