@@ -24,9 +24,15 @@
       lookup:serviceMember [
           lookup:name "default-other-lookup"
         ], [
-          lookup:name "wikidata-lookup";
+          lookup:name "default-person-lookup";
+          lookup:scoreOffset 1.0E-1;
+          lookup:scoreFactor 1.0E0
         ], [
-	  lookup:name "default-person-lookup";
-	  lookup:scoreOffset 0.1
-	]
+          lookup:name "wikidata-other-lookup"
+        ], [
+          lookup:name "wikidata-person-lookup";
+          lookup:scoreOffset 1.0E-1;
+          lookup:scoreFactor 1.0E0
+        ]
     ] .
+
