@@ -22,11 +22,11 @@
   lookup:configuration [
       lookup:type "metaphacts:federatedLookup";
       lookup:serviceMember [
-          lookup:name "default-lookup"
+          lookup:name "default-other-lookup"
         ], [
           lookup:name "wikidata-lookup";
         ], [
-	  lookup:name "person-lookup";
+	  lookup:name "default-person-lookup";
 	  lookup:scoreOffset 0.1
 	]
     ] .

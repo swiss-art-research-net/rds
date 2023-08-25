@@ -1,0 +1,77 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sparql: <http://www.openrdf.org/config/repository/sparql#> .
+@prefix lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#> .
+@prefix rep: <http://www.openrdf.org/config/repository#> .
+@prefix sail: <http://www.openrdf.org/config/sail#> .
+@prefix sr: <http://www.openrdf.org/config/repository/sail#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mph: <http://www.metaphacts.com/ontologies/platform/repository#> .
+@prefix ephedra: <http://www.metaphacts.com/ontologies/platform/ephedra#> .
+@prefix fedsail: <http://www.openrdf.org/config/sail/federation#> .
+
+[] a rep:Repository;
+  rep:repositoryID "wikidata-person-lookup";
+  rdfs:label "SPARQL repository";
+  rep:repositoryImpl [
+      rep:repositoryType "metaphactory:SPARQLRepository";
+      sparql:query-endpoint <https://query.wikidata.org/sparql>;
+      mph:quadMode true
+    ];
+  lookup:configuration [
+      lookup:type "metaphacts:sparqlLookup";
+      lookup:datasetQuery """
+        SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
+            VALUES(?dataset ?datasetLabel) {
+                (<http://www.wikidata.org> \"wikidata\")
+            }
+        } 
+      """;
+      lookup:queryTemplate """
+        SELECT
+            ?candidate
+            (GROUP_CONCAT(DISTINCT ?type ; separator=\",\") as ?types)
+            (0.7 + ((20 - MAX(?score_private) + 1) / 100.0) as ?score)
+        WHERE {
+            {{type_block}}
+            {{search_block}}
+            {{properties_block}}
+        } GROUP BY ?candidate ORDER BY ASC(?score_private) {{limit_block}}
+      """;
+      lookup:searchBlockTemplate """
+      	{
+          {SELECT ?candidate ?type ?score_private WHERE {
+              SERVICE wikibase:mwapi {
+                  bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
+                                  wikibase:api \"EntitySearch\";
+                                  mwapi:language \"en\";
+                                  mwapi:search ?__token__.
+                  ?candidate wikibase:apiOutputItem mwapi:item.
+                  ?score_private wikibase:apiOrdinal true.
+              }
+              ?candidate (wdt:P279|wdt:P31) ?type .
+    					?type wdt:P279* ?mappedType .
+              VALUES(?mappedType) {
+                ( <http://vocab.getty.edu/ontology#PersonConcept> )
+    						(  <http://www.wikidata.org/entity/Q3778211> )
+                ( <http://vocab.getty.edu/ontology#UnknownPersonConcept> )
+                ( <https://d-nb.info/standards/elementset/gnd#Person> )
+                ( <http://www.cidoc-crm.org/cidoc-crm/E21_Person> )
+                ( <http://www.wikidata.org/entity/Q1415187> )
+                ( <http://www.wikidata.org/entity/Q154954> )
+                ( <http://www.wikidata.org/entity/Q5> )
+                ( <http://www.wikidata.org/entity/Q215627> )
+                ( <https://d-nb.info/standards/elementset/gnd#DifferentiatedPerson> )
+                ( <https://d-nb.info/standards/elementset/gnd#UndifferentiatedPerson> )
+               }
+          }}
+        } UNION {
+            BIND (1 as ?score_private)
+            BIND (IRI(CONCAT(\"http://www.wikidata.org/entity/\", UCASE(?__token__))) as ?candidate)
+            ?candidate (wdt:P279|wdt:P31) ?type .
+        } UNION {
+          BIND(IRI(?__token__) as ?candidate)
+          ?candidate (wdt:P279|wdt:P31) ?type .
+        }
+    """
+    ] .
+

@@ -11,8 +11,8 @@
 @prefix sparqlr: <http://www.openrdf.org/config/repository/sparql#> .
 
 [] a rep:Repository;
-  rep:repositoryID "aggregated-default-lookup";
-  rdfs:label "Aggregation Lookup";
+  rep:repositoryID "default-ranked-lookup";
+  rdfs:label "Federated Lookup";
   rep:repositoryImpl [
       rep:repositoryType "openrdf:SailRepository";
       sr:sailImpl [
@@ -20,8 +20,13 @@
         ]
     ];
   lookup:configuration [
-      lookup:type "rds:aggregationLookup";
-      lookup:delegateService "default-ranked-lookup";
-      lookup:targetRepository "default" ;
-      lookup:sameAsPattern "^<http://schema.swissartresearch.net/ontology/rds#related>";
+      lookup:type "metaphacts:federatedLookup";
+      lookup:serviceMember [
+          lookup:name "default-person-lookup";
+          lookup:scoreOffset 1.0E-1;
+          lookup:scoreFactor 1.0E0
+        ], [
+          lookup:name "default-other-lookup"
+        ]
     ] .
+
