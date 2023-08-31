@@ -10,10 +10,8 @@ import org.pf4j.PluginWrapper;
 import com.google.inject.Injector;
 import com.metaphacts.config.Configuration;
 import com.metaphacts.config.InvalidConfigurationException;
-import com.metaphacts.lookup.impl.LookupServiceRegistry;
 import com.metaphacts.services.storage.api.PlatformStorage;
 
-import net.swissartresearch.rds.lookup.AggregationLookupServiceFactory;
 import net.swissartresearch.rds.records.RdsServicesConfiguration;
 
 public class RDSServicesPlugin extends Plugin {
@@ -65,9 +63,6 @@ public class RDSServicesPlugin extends Plugin {
                 throw new RuntimeException("Failed to load record push config: " + e.getMessage(), e);
             }
         }
-
-        // register LookupServiceFactories
-        LookupServiceRegistry.getInstance().add(new AggregationLookupServiceFactory());
 
         super.start();
     }
