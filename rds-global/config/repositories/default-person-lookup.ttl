@@ -29,7 +29,7 @@
         ?candidate ?keyProp ?key.
     }
     FILTER ISLITERAL(?key)
-    FILTER (?graph != <http://vocab.getty.edu/ulan/graph> && ?graph != <http://vocab.getty.edu/aat/graph> && ?graph != <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> && ?graph != <http://data.culture.fr/thesaurus/resource/ark:/67717/T96/graph>)
+    FILTER (?graph != <http://vocab.getty.edu/ulan/graph> && ?graph != <http://vocab.getty.edu/aat/graph> && ?graph != <http://data.culture.fr/thesaurus/resource/ark:/67717/T69/graph> && ?graph != <http://data.culture.fr/thesaurus/resource/ark:/67717/T96/graph> && ?graph != <http://recherche.sik-isea/graph>)
     	?candidate a/rdfs:subClassOf* <http://schema.swissartresearch.net/ontology/rds#Person> .   
       ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
       <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
@@ -49,6 +49,16 @@
         <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
         <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
         <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
+} UNION {
+  GRAPH <http://recherche.sik-isea/graph> {
+  ?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?appel .
+  ?appel rdfs:label ?key .
+    }
+  ?candidate a/rdfs:subClassOf* <http://schema.swissartresearch.net/ontology/rds#Person>.
+  ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
+   <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+   <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
+    <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
 }
     """;
       lookup:typeBlockTemplate """
