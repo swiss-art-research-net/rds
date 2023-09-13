@@ -162,6 +162,17 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
   }
 }' ./data/thesarchespSameAs.ttl
 
+# SIKART
+fetchData "sikart" ${BLAZEGRAPH_ENDPOINT} 'PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX crmdig: <http://www.ics.forth.gr/isl/CRMdig/>
+CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
+GRAPH <http://recherche.sik-isea/graph> {
+  ?candidate2 crmdig:L54_same_as ?candidate1 .
+  }
+}' ./data/sikartSameAs.ttl
+
 # Wikidata
 # ==============================================================
 
@@ -276,3 +287,18 @@ CONSTRUCT {
   FILTER (!(REGEX(?sameAsID, "[\", ]", "i")))
   BIND (IRI(CONCAT("http://vocab.getty.edu/ulan/", ?sameAsID)) as ?sameAs)
 }' ./data/wikidataUlanSameAs.ttl
+
+#Wikidata Sikart (persons)
+fetchData "Wikidata Sikart" ${WIKIDATA_ENDPOINT} 'PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+CONSTRUCT {
+    ?candidate owl:sameAs ?sameAs .
+} WHERE {
+  ?candidate wdt:P781 ?sameAsID .
+  FILTER EXISTS {
+    ?candidate wdt:P31 wd:Q5 .
+  }
+  FILTER (!(REGEX(?sameAsID, "[\", ]", "i"))) .
+  BIND (IRI(CONCAT("https://recherche.sik-isea.ch/person-", ?sameAsID)) as ?sameAs) .
+}' ./data/wikidataSikartSameAs.ttl
