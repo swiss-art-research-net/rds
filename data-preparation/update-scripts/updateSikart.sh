@@ -30,26 +30,6 @@ echo "Start script updateSikart.sh."
 # ========================
 ./_downloadSecureLfsAndUnzip.sh
 
-#echo "Prepare Geonames data"
-# ========================
-#if [ -d "${DATA_DIRECTORY}/dockerFolder" ]; then
-#    rm -r -d ${DATA_DIRECTORY}/dockerFolder
-#fi
-#mkdir ${DATA_DIRECTORY}/dockerFolder
-#cp _convert2ntriples.py ${DATA_DIRECTORY}/convert2ntriples.py
-#cp _dockerfile_to_execute_python ${DATA_DIRECTORY}/dockerFolder/Dockerfile
-#cd ${DATA_DIRECTORY}/dockerFolder
-#echo "Building image"
-#docker build -t rds/converting-geonames:1.0 .
-#cd ${DATA_DIRECTORY}
-#docker stop converting-geonames || true && docker rm converting-geonames || true
-#echo "Running a container with the python script"
-#docker run -it -v /$(pwd):/usr/src/convertingScriptFolder/ --name converting-geonames rds/converting-geonames:1.0
-#cd ${DATA_DIRECTORY}
-#split -l 956067 --additional-suffix ".part.nt" ./geonames.nt
-# gsplit -l 956067 --additional-suffix '.part.nt' ./geonames.nt # For MacOs
-#cd ${SCRIPT_DIR}
-
 echo "Remove old data from the database"
 curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
 --header 'Content-Type: application/x-www-form-urlencoded' \

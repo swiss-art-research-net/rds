@@ -1,0 +1,3 @@
+[submodule "data-preparation/labelAdjustment/utils/blazegraph-runner"]
+	path = data-preparation/labelAdjustment/utils/blazegraph-runner
+	url = https://github.com/balhoff/blazegraph-runner.git
