@@ -19,7 +19,7 @@ def main(predicate_file, blazegraph_journal):
         counter = 0
         while counter <= nb:
             query = """
-            INSERT {{ GRAPH <http://schema.swissartresearch.net/rds/labels> {{
+            INSERT DATA {{ GRAPH <http://schema.swissartresearch.net/rds/labels> {{
             ?subject <http://schema.swissartresearch.net/ontology/rds#label> ?label . 
             }} 
             }} WHERE {{
