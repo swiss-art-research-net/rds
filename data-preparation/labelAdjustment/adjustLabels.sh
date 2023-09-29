@@ -6,7 +6,6 @@ predicates=$(<$2) #predicates that are used in order to attach labels to entitie
 #set up folders and blazegraph runner
 mkdir requests
 mkdir responses
-mkdir output
 cd utils/blazegraph-runner
 sbt stage
 cd ../..
@@ -27,7 +26,7 @@ utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner select --jo
 #USE THIS TO MATERIALIZE TTL FILES
 #mkdir output
 #python get_label_ttl_files.py --predicate_file $2 --blazegraph_journal $1
-utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner load --journal=$1 --graph="http://schema.swissartresearch.net/rds/labels" --informat=turtle output/*.ttl
+#utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner load --journal=$1 --graph="http://schema.swissartresearch.net/rds/labels" --informat=turtle output/*.ttl
 
 
 #USE THIS TO INSERT LABELS DIRECTLY IN JOURNAL FILE (NO TTL FILES WILL BE GENERATED)
