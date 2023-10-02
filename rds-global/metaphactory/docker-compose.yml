@@ -16,6 +16,8 @@ services:
 
  metaphactory:
   image: "${METAPHACTORY_IMAGE}"
+  volumes:
+    - /mnt/rds-global-test/rds-global/config:/rdsapps/rds-global/config
   environment:
      - PLATFORM_OPTS=-Dconfig.environment.sparqlEndpoint=http://${COMPOSE_PROJECT_NAME}-blazegraph:8080/blazegraph/sparql ${METAPHACTORY_OPTS}
   depends_on:
