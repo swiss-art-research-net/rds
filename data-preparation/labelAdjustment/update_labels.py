@@ -8,13 +8,18 @@ def main(predicate_file, blazegraph_journal):
     with open(predicate_file, 'r') as f:
         predicates = f.read()
         
-    #graph_create_query = 'CREATE GRAPH <http://schema.swissartresearch.net/rds/labels>'
-    #with open('requests/graph_create_query.rq', 'w') as f:
-    #    f.write(graph_create_query)    
-    #bash_command = 'utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner update --journal={0} requests/graph_create_query.rq'.format(blazegraph_journal)
-    
+    graph_create_query = 'CREATE GRAPH <http://schema.swissartresearch.net/rds/labels>'
+    with open('requests/graph_create_query.rq', 'w') as f:
+        f.write(graph_create_query)    
+    bash_command = 'utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner update --journal={0} requests/graph_create_query.rq'.format(blazegraph_journal)
+    try:
+        os.system(bash_command)
+    except:
+        pass
+
     file_num = 0
     graph2nb = {count_json['results']['bindings'][i]['graph_name']['value'] : int(count_json['results']['bindings'][i]['count']['value']) for i in range(len(count_json['results']['bindings']))}
+    #print(graph2nb) 
     for graph, nb in graph2nb.items():
         counter = 0
         while counter <= nb:

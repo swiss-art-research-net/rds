@@ -1,4 +1,4 @@
 templateIncludeQuery = SELECT ?type WHERE { { BIND (IF(strstarts(str(??)\\, "http://www.wikidata.org/entity")\\, <http://wikidata.org/ontology/Item>\\, ?undef) AS ?type) . FILTER(BOUND(?type)) } UNION { ?? a ?type } } ORDER BY DESC(str(?type))
-preferredLabels = <http://www.w3.org/2000/01/rdf-schema#label>,<http://schema.swissartresearch.net/ontology/rds#label>,{?subject <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> ?identifier . ?identifier rdfs:label ?value . ?identifier a <http://www.cidoc-crm.org/cidoc-crm/E41_Appellation>.},^<http://wikiba.se/ontology#directClaim>/<http://www.w3.org/2000/01/rdf-schema#label>
+preferredLabels = <http://www.w3.org/2000/01/rdf-schema#label>,<http://schema.swissartresearch.net/ontology/rds#label>
 preferredDescriptions = <http://www.w3.org/2000/01/rdf-schema#comment>,<http://schema.org/description>,<http://www.w3.org/2004/02/skos/core#definition>
 deploymentTitle = RDS Platform
