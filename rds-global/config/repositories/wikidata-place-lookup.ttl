@@ -10,7 +10,7 @@
 @prefix fedsail: <http://www.openrdf.org/config/sail/federation#> .
 
 [] a rep:Repository;
-  rep:repositoryID "wikidata-person-lookup";
+  rep:repositoryID "wikidata-place-lookup";
   rdfs:label "SPARQL repository";
   rep:repositoryImpl [
       rep:repositoryType "metaphactory:SPARQLRepository";
@@ -48,12 +48,13 @@
                   ?candidate wikibase:apiOutputItem mwapi:item.
                   ?score_private wikibase:apiOrdinal true.
               }
-            ?candidate (wdt:P279|wdt:P31) ?type .
-    				?type wdt:P279* ?mappedType .
+              ?candidate (wdt:P279|wdt:P31) ?type .
+    					?type wdt:P279* ?mappedType .
               VALUES(?mappedType) {
-									( <http://www.wikidata.org/entity/Q5> )
+                  ( <http://www.wikidata.org/entity/Q82794> ) # geographic region
+                  ( <http://www.wikidata.org/entity/Q17334923> ) # physical location 
+                  
                }
-
     }
         } UNION {
             BIND (1 as ?score_private)

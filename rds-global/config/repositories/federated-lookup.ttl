@@ -33,6 +33,14 @@
           lookup:name "wikidata-person-lookup";
           lookup:scoreOffset 1.0E-1;
           lookup:scoreFactor 1.0E0
+        ], [
+          lookup:name "wikidata-place-lookup";
+          lookup:scoreOffset 1.0E-1;
+          lookup:scoreFactor 1.0E0
+        ], [
+          lookup:name "default-place-lookup";
+          lookup:scoreOffset 1.0E-1;
+          lookup:scoreFactor 1.0E0
         ]
     ] .
 
