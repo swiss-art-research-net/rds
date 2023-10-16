@@ -99,8 +99,10 @@
             ?candidate (wdt:P279|wdt:P31) ?badType .
             ?badType wdt:P279* ?badMappedType .
             VALUES(?badMappedType) {
-    					( <http://www.wikidata.org/entity/Q5> )
-            }
+    	    	( <http://www.wikidata.org/entity/Q5> ) # human
+            	( <http://www.wikidata.org/entity/Q82794> ) # geographic region
+                ( <http://www.wikidata.org/entity/Q17334923> ) # physical location 				
+		}
 
         }
           }}
