@@ -2,7 +2,6 @@
 #   GITHUB_USERNAME (String)
 #   GITHUB_TOKEN (String)
 
-
 export DATA_DIRECTORY=$(pwd)/sikart-data
 export DATA_URL="https://raw.githubusercontent.com/swiss-art-research-net/sikart-data/main/source/SIK_20210616_2300.ttl.zip"
 # For the test in the platform put content of 'assets_to_tests' to
@@ -29,17 +28,20 @@ NAMED_GRAPH_DECODED="$(urldecode ${NAMED_GRAPH})"
 echo "Start script updateSikart.sh."
 # ========================
 ./_downloadSecureLfsAndUnzip.sh
-
+#start=`date +%`
 echo "Remove old data from the database"
 curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode "update=DROP GRAPH <${NAMED_GRAPH_DECODED}>"
-
+#end=`date +%s`
+#echo Execution time for deletion was `expr $end - $start` seconds.
 echo "Upload data to the database"
+#start=`date +%s`
 # ========================
 for filename in ${DATA_DIRECTORY}/*.${FILE_FORMAT}; do
     echo "\nUploading: ".${filename}
     curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file ${filename} -X POST "${BLAZEGRAPH_ENDPOINT}?context-uri=${NAMED_GRAPH}"
 done
-
+#end=`date +%s`
 echo "Script updateSikart.sh finished."
+#echo Execution time for graph uplodad was `expr $end - $start` seconds.

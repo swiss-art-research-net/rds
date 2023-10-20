@@ -46,15 +46,20 @@
                                   mwapi:language \"en\";
                                   mwapi:search ?__token__.
                   ?candidate wikibase:apiOutputItem mwapi:item.
-                  ?score_private wikibase:apiOrdinal true.
+                  ?score wikibase:apiOrdinal true.
               }
-              ?candidate (wdt:P279|wdt:P31) ?type
+              #BIND( 1 AS ?score_private) .
+              ?candidate (wdt:P279|wdt:P31) ?type .
+              ?type wdt:P279* ?mappedType .
+              # prioritising Q5/human, Q82794/geographic region and Q17334923/physical location
+              BIND(IF(?mappedType = <http://www.wikidata.org/entity/Q5> || ?mappedType = <http://www.wikidata.org/entity/Q82794> || ?mappedType = <http://www.wikidata.org/entity/Q17334923>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
           }}
         } UNION {
             BIND (1 as ?score_private)
             BIND (IRI(CONCAT(\"http://www.wikidata.org/entity/\", UCASE(?__token__))) as ?candidate)
             ?candidate (wdt:P279|wdt:P31) ?type .
         } UNION {
+    			BIND (1 as ?score_private)
           BIND(IRI(?__token__) as ?candidate)
           ?candidate (wdt:P279|wdt:P31) ?type .
         }
@@ -108,3 +113,4 @@ FILTER EXISTS {
 }
     """
     ] .
+

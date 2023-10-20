@@ -37,10 +37,12 @@
           }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
               ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
-              <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+              <http://www.bigdata.com/rdf/search#relevance> ?score ;
               <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
               <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
           }
+          ?candidate a/rdfs:subClassOf*  ?supertype .
+          BIND(IF(?supertype = <http://schema.swissartresearch.net/ontology/rds#Person> || ?supertype = <http://schema.swissartresearch.net/ontology/rds#Place>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
         } UNION {
         	VALUES (?prefix) {
     					(\"https://d-nb.info/gnd/\")
@@ -57,6 +59,7 @@
     				}
         	}
         } UNION {
+        	BIND (1 as ?score_private)
           BIND(IRI(?__token__) as ?candidate)
           FILTER EXISTS {
           	GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
@@ -76,3 +79,4 @@
       }
     """
     ] .
+

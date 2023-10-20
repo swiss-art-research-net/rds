@@ -11,7 +11,7 @@
 @prefix sparqlr: <http://www.openrdf.org/config/repository/sparql#> .
 
 [] a rep:Repository;
-  rep:repositoryID "geonames-lookup";
+  rep:repositoryID "sikart-lookup";
   rdfs:label "Default HTTP SPARQL Repository";
   rep:repositoryImpl [
       rep:repositoryType "openrdf:SailRepository";
@@ -24,40 +24,45 @@
       lookup:targetRepository "default";
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
-         	BIND(<http://sws.geonames.org/graph> as ?dataset)
-    			BIND(\"geonames\" as ?datasetLabel)
+         	BIND(<http://recherche.sik-isea/graph> as ?dataset)
+    			BIND(\"sikart\" as ?datasetLabel)
         }
       """;
       lookup:searchBlockTemplate """
-        {
-          GRAPH <http://sws.geonames.org/graph> {
-              ?candidate a ?type.
-              ?candidate ?keyProp ?key.
-              FILTER ISLITERAL(?key)
+       	{
+          GRAPH <http://recherche.sik-isea/graph> {
+						?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label|rdfs:label ?key .
           }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
               ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
-              <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
+              <http://www.bigdata.com/rdf/search#relevance> ?score ;
               <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
               <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
           }
+   				FILTER (!CONTAINS(STR(?candidate), \"/appellation-\")) .
+    			FILTER (!CONTAINS(STR(?candidate), \"/note-\")) .	
           ?candidate a/rdfs:subClassOf*  ?supertype .
-          BIND(IF(?supertype = <http://schema.swissartresearch.net/ontology/rds#Place>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
+          BIND(IF(?supertype = <http://schema.swissartresearch.net/ontology/rds#Person> || ?supertype = <http://schema.swissartresearch.net/ontology/rds#Place>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
         } UNION {
-        		BIND (1 as ?score_private)
-            BIND (IRI(CONCAT(\"http://sws.geonames.org/\", ?__token__, \"/\")) as ?candidate)
-            FILTER EXISTS {
-    					GRAPH <http://sws.geonames.org/graph> {
-              	?candidate a ?someType .
-    					}
+        	VALUES (?prefix) {
+    					(\"https://recherche.sik-isea.ch/person-\")
+              (\"https://recherche.sik-isea.ch/place-\")
             }
-        } UNION {
-          BIND(IRI(?__token__) as ?candidate)
-          FILTER EXISTS {
-          	GRAPH <http://sws.geonames.org/graph> {
+            BIND (1 as ?score_private)
+            BIND (IRI(CONCAT(?prefix, ?__token__)) as ?candidate)
+ 						FILTER EXISTS {
+          	GRAPH <http://recherche.sik-isea/graph> {
             	?candidate a ?someType .
     				}
-          }
+        	}
+        } UNION {
+        	BIND (1 as ?score_private)
+          BIND(IRI(?__token__) as ?candidate)
+          FILTER EXISTS {
+          	GRAPH <http://recherche.sik-isea/graph> {
+            	?candidate a ?someType .
+    				}
+        	}
     		}
     	""";
       lookup:typeBlockTemplate """
@@ -65,7 +70,7 @@
         GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
           ?targetType rdfs:subClassOf? ?__type__.
         }
-    		GRAPH <http://sws.geonames.org/graph> {
+    		GRAPH <http://recherche.sik-isea/graph> {
         	?candidate a ?targetType.
         }
       }

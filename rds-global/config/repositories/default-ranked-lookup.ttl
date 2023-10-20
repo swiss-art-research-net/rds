@@ -22,11 +22,21 @@
   lookup:configuration [
       lookup:type "metaphacts:federatedLookup";
       lookup:serviceMember [
-          lookup:name "default-person-lookup";
-          lookup:scoreOffset 1.0E-1;
-          lookup:scoreFactor 1.0E0
+          lookup:name "ulan-lookup"
         ], [
-          lookup:name "default-other-lookup"
+          lookup:name "sikart-lookup"
+        ], [
+          lookup:name "entityfacts-lookup"
+        ], [
+          lookup:name "geonames-lookup"
+        ], [
+          lookup:name "aat-lookup"
+        ], [
+          lookup:name "bibliographicdata-lookup"
+        ], [
+          lookup:name "thesarchesp-lookup"
+        ], [
+          lookup:name "thesobjmob-lookup"
         ]
     ] .
 

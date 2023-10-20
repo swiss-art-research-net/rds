@@ -11,7 +11,7 @@
 @prefix sparqlr: <http://www.openrdf.org/config/repository/sparql#> .
 
 [] a rep:Repository;
-  rep:repositoryID "federated-lookup-2";
+  rep:repositoryID "federated-lookup";
   rdfs:label "Federated Lookup";
   rep:repositoryImpl [
       rep:repositoryType "openrdf:SailRepository";
@@ -22,18 +22,23 @@
   lookup:configuration [
       lookup:type "metaphacts:federatedLookup";
       lookup:serviceMember [
-          lookup:name "wikidata-lookup"
+          lookup:name "thesobjmob-lookup"
         ], [
-          lookup:name "ulan-lookup"
+          lookup:name "sikart-lookup"
         ], [
           lookup:name "entityfacts-lookup"
         ], [
           lookup:name "bibliographicdata-lookup"
         ], [
-          lookup:name "aat-lookup"
+          lookup:name "wikidata-lookup"
+        ], [
+          lookup:name "ulan-lookup"
         ], [
           lookup:name "geonames-lookup"
         ], [
-          lookup:name "records-lookup"
+          lookup:name "aat-lookup"
+        ], [
+          lookup:name "thesarchesp-lookup"
         ]
     ] .
+

@@ -40,6 +40,8 @@
               <http://www.bigdata.com/rdf/search#minRelevance> \"0.1\" ;
               <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
           }
+          ?candidate a/rdfs:subClassOf*  ?supertype .
+          BIND(IF(?supertype = <http://schema.swissartresearch.net/ontology/rds#Person>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
     		} UNION {
         		BIND (1 as ?score_private)
             BIND (IRI(CONCAT(\"http://vocab.getty.edu/ulan/\", ?__token__)) as ?candidate)
@@ -68,3 +70,4 @@
       }
     """
     ] .
+
