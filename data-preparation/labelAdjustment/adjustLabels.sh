@@ -36,9 +36,9 @@ fi
 #set up folders and blazegraph runner
 mkdir requests
 mkdir responses
-cd utils/blazegraph-runner
+cd ../utils/blazegraph-runner
 sbt stage
-cd ../..
+cd ../../labelAdjustment
 #get number of triples for labels
 #echo "SELECT (COUNT(*) AS ?count) WHERE { ?entity $predicates  ?ext . }" > requests/label_count.rq
 
@@ -70,12 +70,12 @@ else
         GROUP BY ?graph_name" > requests/label_count_by_graph.rq
 fi
 
-utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner select --journal=$3 --outformat=json requests/label_count_by_graph.rq  "responses/label_count_by_graph.json"
+../utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner select --journal=$3 --outformat=json requests/label_count_by_graph.rq  "responses/label_count_by_graph.json"
 
 #USE THIS TO MATERIALIZE TTL FILES
 #mkdir output
 #python get_label_ttl_files.py --predicate_file $4 --blazegraph_journal $3
-#utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner load --journal=$3 --graph="http://schema.swissartresearch.net/rds/labels" --informat=turtle output/*.ttl
+#../utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner load --journal=$3 --graph="http://schema.swissartresearch.net/rds/labels" --informat=turtle output/*.ttl
 
 
 #USE THIS TO INSERT LABELS DIRECTLY IN JOURNAL FILE (NO TTL FILES WILL BE GENERATED)
