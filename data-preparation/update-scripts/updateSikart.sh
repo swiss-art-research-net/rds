@@ -29,19 +29,39 @@ echo "Start script updateSikart.sh."
 # ========================
 ./_downloadSecureLfsAndUnzip.sh
 #start=`date +%`
+
 echo "Remove old data from the database"
-curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode "update=DROP GRAPH <${NAMED_GRAPH_DECODED}>"
+
+#blazegraph-runner method
+echo "DROP GRAPH <${NAMED_GRAPH_DECODED}>" > tmp.rq
+../utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner update --journal=${BLAZEGRAPH_PATH} tmp.rq
+rm tmp.rq
+
+#HTTP method
+#echo "Remove old data from the database"
+#curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
+#--header 'Content-Type: application/x-www-form-urlencoded' \
+#--data-urlencode "update=DROP GRAPH <${NAMED_GRAPH_DECODED}>"
+
 #end=`date +%s`
 #echo Execution time for deletion was `expr $end - $start` seconds.
+
 echo "Upload data to the database"
+
 #start=`date +%s`
 # ========================
-for filename in ${DATA_DIRECTORY}/*.${FILE_FORMAT}; do
-    echo "\nUploading: ".${filename}
-    curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file ${filename} -X POST "${BLAZEGRAPH_ENDPOINT}?context-uri=${NAMED_GRAPH}"
-done
+
+#blazegraph-runner method
+../utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner load --journal=${BLAZEGRAPH_PATH} --graph=${NAMED_GRAPH_DECODED} ${DATA_DIRECTORY}/*.${FILE_FORMAT}
+
+#HTTP method
+#for filename in ${DATA_DIRECTORY}/*.${FILE_FORMAT}; do
+#    echo "\nUploading: ".${filename}
+#    curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file ${filename} -X POST "${BLAZEGRAPH_ENDPOINT}?context-uri=${NAMED_GRAPH}"
+#done
+
 #end=`date +%s`
+
 echo "Script updateSikart.sh finished."
+
 #echo Execution time for graph uplodad was `expr $end - $start` seconds.

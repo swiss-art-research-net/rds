@@ -21,15 +21,27 @@ echo "Start script updateThesObjMob.sh."
 mv ${DATA_DIRECTORY}/data.zip ${DATA_DIRECTORY}/data.ttl
 
 echo "Remove old data from the database"
-curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode "update=DROP GRAPH <${NAMED_GRAPH_DECODED}>"
+
+#blazegraph-runner method
+echo "DROP GRAPH <${NAMED_GRAPH_DECODED}>" > tmp.rq
+../utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner update --journal=${BLAZEGRAPH_PATH} tmp.rq
+rm tmp.rq
+
+#HTTP method
+#curl --location --request POST "${BLAZEGRAPH_ENDPOINT}" \
+#--header 'Content-Type: application/x-www-form-urlencoded' \
+#--data-urlencode "update=DROP GRAPH <${NAMED_GRAPH_DECODED}>"
 
 echo "Upload data to the database"
 # ========================
-for filename in ${DATA_DIRECTORY}/*.${FILE_FORMAT}; do
-    echo "\nUploading: ".${filename}
-    curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file ${filename} -X POST "${BLAZEGRAPH_ENDPOINT}?context-uri=${NAMED_GRAPH}"
-done
+
+#blazegraph-runner method
+../utils/blazegraph-runner/target/universal/stage/bin/blazegraph-runner load --journal=${BLAZEGRAPH_PATH} --graph=${NAMED_GRAPH_DECODED} ${DATA_DIRECTORY}/*.${FILE_FORMAT}
+
+#HTTP method
+#for filename in ${DATA_DIRECTORY}/*.${FILE_FORMAT}; do
+#    echo "\nUploading: ".${filename}
+#    curl -D- -L -u guest:guest -H "Content-Type: ${DATA_FORMAT}" --upload-file ${filename} -X POST "${BLAZEGRAPH_ENDPOINT}?context-uri=${NAMED_GRAPH}"
+#done
 
 echo "Script updateThesObjMob.sh finished."
