@@ -11,7 +11,7 @@
 @prefix sparqlr: <http://www.openrdf.org/config/repository/sparql#> .
 
 [] a rep:Repository;
-  rep:repositoryID "federated-lookup";
+  rep:repositoryID "federated-lookup-2";
   rdfs:label "Federated Lookup";
   rep:repositoryImpl [
       rep:repositoryType "openrdf:SailRepository";
