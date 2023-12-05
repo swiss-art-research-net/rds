@@ -35,9 +35,10 @@
     margin-bottom: 0;
   }
 
-  .nav {
+  .vertical  {
     flex-direction: column;
   }
+
 </style>
 
 <div class="page">
@@ -50,7 +51,7 @@
     <div data-flex-layout="row top-center">
       <div style="width: auto; margin: 10px; min-width: 200px  "><!--first column of flex layout-->
         <div class="sidebar" >
-          <bs-nav bs-style="tabs" stacked="true">
+          <bs-nav class="vertical" bs-style="tabs" stacked="true">
             <bs-nav-item style='border-bottom: 1px solid rgb(3 101 201 / 38%)'>
               <bs-nav-link event-key="Global"><h3><b>All datasets</b></h3></bs-nav-link>
             </bs-nav-item>
@@ -99,11 +100,6 @@
                 Thésaurus de la désignation des œuvres architecturales et des espaces aménagés
               </bs-nav-link>
             </bs-nav-item>
-	    <bs-nav-item>
-              <bs-nav-link event-key="sikart-only">
-                SIKART only
-              </bs-nav-link>
-            </bs-nav-item>
           </bs-nav>
         </div>
       </div>
@@ -120,30 +116,69 @@
           <bs-tab-pane event-key="geonames-only">[[> search lookupServiceName="geonames-lookup" label="Geonames"]] </bs-tab-pane>
           <bs-tab-pane event-key="thesobjmob-only">[[> search lookupServiceName="thesobjmob-lookup" label="Thésaurus de la désignation des objets mobiliers"]]</bs-tab-pane>
           <bs-tab-pane event-key="thesarchesp-only">[[> search lookupServiceName="thesarchesp-lookup" label="Thésaurus de la désignation des œuvres architecturales et des espaces aménagés"]]</bs-tab-pane>
-          <bs-tab-pane event-key="sikart-only">[[> search lookupServiceName="sikart-lookup" label="SIKART"]]</bs-tab-pane>
-	</bs-tab-content>
+        </bs-tab-content>
       </div>
     </div>
   </bs-tab-container>
 </div>
 
+[[#*inline "searchByType"]]
+
+<semantic-search limit=1000>
+        <semantic-search-keyword-prefetch
+            query='{
+              "type": "lookup",
+              "limit": 20,
+              "lookupServiceName": "[[lookupServiceName]]",
+              "entityType": "[[entityType]]"
+            }'>
+         </semantic-search-keyword-prefetch>
+          [[> rdsParts:ResultTableForSemanticSearch]]
+</semantic-search>
+
+[[/inline]]
+
+[[#*inline "searchByTypeTab"]]
+<bs-tab event-key="[[eventKey]]" title="[[tabTitle]]">
+	[[> searchByType lookupServiceName=[lookupServiceName] entityType=[entityType] ]]
+</bs-tab>
+[[/inline]]
+
 [[#*inline "search"]]
-<div>
+<div> 
   <div data-flex-layout="column center-center">
     <div style="width: 100%">
       <h1>Welcome to RDS project ([[label]])</h1>
+    </div>
+
       [[!-- This template is uses next parameters set: 'localSourcesOnly' --]]
-      <semantic-search limit=1000>
-          <semantic-search-keyword-prefetch
+      <div style="width: 100%">
+      
+
+        <bs-tabs id="type-tabs" class="type-tab" >
+          <bs-tab event-key="all" title="All">
+            <semantic-search limit=1000>
+            <semantic-search-keyword-prefetch
             query='{
               "type": "lookup",
               "limit": 20,
               "lookupServiceName": "[[lookupServiceName]]"
             }'>
-          </semantic-search-keyword-prefetch>
-        
-          [[> rdsParts:ResultTableForSemanticSearch]]
-      </semantic-search>
+            </semantic-search-keyword-prefetch>
+            [[> rdsParts:ResultTableForSemanticSearch]]
+            </semantic-search>
+	  </bs-tab>
+	  
+	  [[> searchByTypeTab eventKey="person" tabTitle="Person" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#Person" ]]	
+	  [[> searchByTypeTab eventKey="place" tabTitle="Place" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#Place" ]]
+	  [[> searchByTypeTab eventKey="artwork" tabTitle="Artwork" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#Artwork" ]]
+	  [[> searchByTypeTab eventKey="bibItem" tabTitle="Bibliographic Item" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#BibliographicItem" ]]
+	  [[> searchByTypeTab eventKey="builtWork" tabTitle="Built Work" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#BuiltWork" ]]
+	  [[> searchByTypeTab eventKey="group" tabTitle="Group" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#Group" ]]
+	  [[> searchByTypeTab eventKey="event" tabTitle="Event" lookupServiceName=[lookupServiceName] entityType="http://schema.swissartresearch.net/ontology/rds#Event" ]]
+          
+        </bs-tabs>
+       
     </div>
   </div>
 </div>
