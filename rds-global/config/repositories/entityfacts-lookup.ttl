@@ -55,7 +55,10 @@
             BIND (IRI(CONCAT(?prefix, ?__token__)) as ?candidate)
  						FILTER EXISTS {
           	GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
-            	?candidate a ?someType .
+            	?candidate ?prop ?obj .
+		Optional {
+			?candidate a ?someType .
+			}
     				}
         	}
         } UNION {
@@ -63,7 +66,10 @@
           BIND(IRI(?__token__) as ?candidate)
           FILTER EXISTS {
           	GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
-            	?candidate a ?someType .
+            	?candidate ?prop ?obj .
+                Optional {
+                        ?candidate a ?someType .
+                        }
     				}
         	}
     		}

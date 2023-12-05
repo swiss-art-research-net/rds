@@ -31,11 +31,12 @@
             ?candidate
             (GROUP_CONCAT(DISTINCT ?type ; separator=\",\") as ?types)
             (0.7 + ((20 - MAX(?score_private) + 1) / 100.0) as ?score)
+    				(MAX(?score_private) as ?rank)
         WHERE {
             {{type_block}}
             {{search_block}}
             {{properties_block}}
-        } GROUP BY ?candidate ORDER BY ASC(?score_private) {{limit_block}}
+        } GROUP BY ?candidate ORDER BY ASC(?rank) {{limit_block}}
       """;
       lookup:searchBlockTemplate """
       	{
@@ -85,7 +86,8 @@ FILTER EXISTS {
         ( <http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q5946290> ) 
         ( <http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q6256> ) 
         ( <http://schema.swissartresearch.net/ontology/rds#BibliographicItem> <http://www.wikidata.org/entity/Q732577> ) 
-        ( <http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q8436> )
+        ( <http://schema.swissartresearch.net/ontology/rds#Person> <http://www.wikidata.org/entity/Q115537581> )
+	( <http://schema.swissartresearch.net/ontology/rds#Group> <http://www.wikidata.org/entity/Q8436> )
     }
     ?targetType wdt:P279* ?mappedType.
     ?candidate (wdt:P279|wdt:P31) ?targetType.
