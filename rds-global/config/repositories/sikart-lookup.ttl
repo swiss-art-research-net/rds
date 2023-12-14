@@ -45,8 +45,7 @@
           BIND(IF(?supertype = <http://schema.swissartresearch.net/ontology/rds#Person> || ?supertype = <http://schema.swissartresearch.net/ontology/rds#Place>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
         } UNION {
         	VALUES (?prefix) {
-    					(\"https://recherche.sik-isea.ch/person-\")
-              (\"https://recherche.sik-isea.ch/place-\")
+    					(\"https://recherche.sik-isea.ch/\")
             }
             BIND (1 as ?score_private)
             BIND (IRI(CONCAT(?prefix, ?__token__)) as ?candidate)

@@ -51,7 +51,8 @@
     					}
             }
         } UNION {
-          BIND(IRI(?__token__) as ?candidate)
+          BIND (1 as ?score_private)
+	  BIND(IRI(?__token__) as ?candidate)
           FILTER EXISTS {
           	GRAPH <http://vocab.getty.edu/ulan/graph> {
             	?candidate a ?someType .

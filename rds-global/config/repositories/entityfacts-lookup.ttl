@@ -43,9 +43,9 @@
           }
           ?candidate a/rdfs:subClassOf*  ?supertype .
           BIND(IF(?supertype = <http://schema.swissartresearch.net/ontology/rds#Person> || ?supertype = <http://schema.swissartresearch.net/ontology/rds#Place>, xsd:float(?score) + 0.1, ?score) as ?score_private) .
-        } UNION {
+        } UNION 		{
         	VALUES (?prefix) {
-    					(\"https://d-nb.info/gnd/\")
+    		  (\"https://d-nb.info/gnd/\")
               (\"http://www.wikidata.org/entity/\")
               (\"https://hub.culturegraph.org/entityfacts/\")
               (\"https://d-nb.info/standards/elementset/gnd#\")
@@ -53,26 +53,42 @@
             }
             BIND (1 as ?score_private)
             BIND (IRI(CONCAT(?prefix, ?__token__)) as ?candidate)
- 						FILTER EXISTS {
-          	GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
-            	?candidate ?prop ?obj .
-		Optional {
-			?candidate a ?someType .
-			}
-    				}
+   			FILTER EXISTS {
+      		GRAPH ?g {
+        		VALUES (?g) {
+    			  (<http://rds.named-graph.com/exact-match-statements>)
+          		  (<https://d-nb.info/gnd/entityfacts/graph>)
+   				 }
+      			{
+        		?candidate ?prop ?obj .
+      			} UNION {
+                ?subj ?prop ?candidate .
+              }
+              Optional {
+                ?candidate a ?someType .
+              }
         	}
+    	  }
         } UNION {
         	BIND (1 as ?score_private)
           BIND(IRI(?__token__) as ?candidate)
-          FILTER EXISTS {
-          	GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
-            	?candidate ?prop ?obj .
-                Optional {
-                        ?candidate a ?someType .
-                        }
-    				}
+   		   FILTER EXISTS {
+      		GRAPH ?g {
+        		VALUES (?g) {
+    			  (<http://rds.named-graph.com/exact-match-statements>)
+          		  (<https://d-nb.info/gnd/entityfacts/graph>)
+   				 }
+      			{
+        		?candidate ?prop ?obj .
+      			} UNION {
+                ?subj ?prop ?candidate .
+              }
+              Optional {
+                ?candidate a ?someType .
+              }
         	}
-    		}
+    	  }
+    }
     	""";
       lookup:typeBlockTemplate """
       FILTER EXISTS {

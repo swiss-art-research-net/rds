@@ -44,18 +44,41 @@
         } UNION {
         		BIND (1 as ?score_private)
             BIND (IRI(CONCAT(\"https://d-nb.info/gnd/\", ?__token__)) as ?candidate)
+            
             FILTER EXISTS {
-    					GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
-              	?candidate a ?someType .
-    					}
-            }
-        } UNION {
+      		GRAPH ?g {
+        		VALUES (?g) {
+    			  (<https://d-nb.info/gnd/bibliographicdata/graph>)
+   				 }
+      			{
+        		?candidate ?prop ?obj .
+      			} UNION {
+                ?subj ?prop ?candidate .
+              }
+              Optional {
+                ?candidate a ?someType .
+              }
+        	}
+    	  }   
+        
+    } UNION {
+    			BIND (1 as ?score_private)
           BIND(IRI(?__token__) as ?candidate)
           FILTER EXISTS {
-          	GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
-            	?candidate a ?someType .
-    				}
-          }
+      		GRAPH ?g {
+        		VALUES (?g) {
+    			  (<https://d-nb.info/gnd/bibliographicdata/graph>)
+   				 }
+      			{
+        		?candidate ?prop ?obj .
+      			} UNION {
+                ?subj ?prop ?candidate .
+              }
+              Optional {
+                ?candidate a ?someType .
+              }
+        	}
+    	  }
     		}
     	""";
       lookup:typeBlockTemplate """
@@ -69,3 +92,4 @@
       }
     """
     ] .
+

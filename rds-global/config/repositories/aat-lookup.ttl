@@ -44,17 +44,28 @@
         		BIND (1 as ?score_private)
             BIND (IRI(CONCAT(\"http://vocab.getty.edu/aat/\", ?__token__)) as ?candidate)
             FILTER EXISTS {
-    					GRAPH <http://vocab.getty.edu/aat/graph> {
-              	?candidate a ?someType .
-    					}
-            }
+      			{
+        		?candidate ?prop ?obj .
+      			} UNION {
+                ?subj ?prop ?candidate .
+              }
+              Optional {
+                ?candidate a ?someType .
+              }
+        	}
         } UNION {
+   	 			BIND (1 as ?score_private)
           BIND(IRI(?__token__) as ?candidate)
           FILTER EXISTS {
-          	GRAPH <http://vocab.getty.edu/aat/graph> {
-            	?candidate a ?someType .
-    				}
-          }
+      			{
+        		?candidate ?prop ?obj .
+      			} UNION {
+                ?subj ?prop ?candidate .
+              }
+              Optional {
+                ?candidate a ?someType .
+              }
+        	}
         }
     	""";
       lookup:typeBlockTemplate """
@@ -68,3 +79,4 @@
       }
     """
     ] .
+
