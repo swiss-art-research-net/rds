@@ -8,5 +8,6 @@ cd ${UPDATE_SCRIPTS_DIR}
 ./updateGndFacts.sh
 ./updateUlan.sh
 ./updateThesObjMob.sh
+./updateSikart.sh
 cd ${ROOT_DIR}
 ./uploadMetadata.sh
