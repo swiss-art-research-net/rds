@@ -355,7 +355,7 @@ public class AggregationLookupService extends AbstractLookupService<AggregationL
         // create a map from the candidate's id to the corresponding IRI as we need this
         // conversion multiple times
         Map<String, IRI> idMap = candidates.stream().map(candidate -> candidate.getId())
-                .collect(Collectors.toMap(id -> id, id -> iri(id)));
+                .collect(Collectors.toMap(id -> id, id -> iri(id), (a, b) -> a));
         // fetch all candidate IRIs
         Collection<IRI> resourceIRIs = idMap.values();
 
