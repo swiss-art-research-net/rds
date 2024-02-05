@@ -11,8 +11,8 @@ RUN mkdir /tmp/build \
 
 WORKDIR /tmp/build
 
-COPY --chown=jetty:jetty . /tmp/build
-COPY --chown=jetty:jetty --from=glam-community /var/lib/jetty/webapps/ROOT.war /tmp/build/ROOT.war
+COPY --chown=100:101 . /tmp/build
+COPY --chown=100:101 --from=glam-community /var/lib/jetty/webapps/ROOT.war /tmp/build/ROOT.war
 
 RUN echo "platformLocation=/tmp/build/ROOT.war" > /tmp/build/gradle.properties \
   && gradle --info prepareEnvironment \
