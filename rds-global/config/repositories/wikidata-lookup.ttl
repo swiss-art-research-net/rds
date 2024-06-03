@@ -96,16 +96,6 @@
                   ( <https://d-nb.info/standards/elementset/gnd#DifferentiatedPerson> )
                   ( <https://d-nb.info/standards/elementset/gnd#UndifferentiatedPerson> )
                }
-        FILTER NOT EXISTS {
-            ?candidate (wdt:P279|wdt:P31) ?badType .
-            ?badType wdt:P279* ?badMappedType .
-            VALUES(?badMappedType) {
-    					( <http://www.wikidata.org/entity/Q5> ) # human
-              ( <http://www.wikidata.org/entity/Q82794> ) # geographic region
-              ( <http://www.wikidata.org/entity/Q17334923> ) # physical location 
-            }
-
-        }
           }}
         } UNION {
             BIND (1 as ?score_private)
