@@ -10,7 +10,7 @@
 @prefix fedsail: <http://www.openrdf.org/config/sail/federation#> .
 
 [] a rep:Repository;
-  rep:repositoryID "wikidata-other-lookup";
+  rep:repositoryID "wikidata-lookup";
   rdfs:label "SPARQL repository";
   rep:repositoryImpl [
       rep:repositoryType "metaphactory:SPARQLRepository";
