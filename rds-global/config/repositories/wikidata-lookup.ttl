@@ -39,40 +39,41 @@
       """;
       lookup:searchBlockTemplate """
       	{
-          {SELECT ?candidate ?type ?score_private WHERE {
+          {
+            SELECT ?candidate ?type ?score_private WHERE {
               SERVICE wikibase:mwapi {
-                  bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
-                                  wikibase:api \"EntitySearch\";
-                                  mwapi:language \"en\";
-                                  mwapi:search ?__token__.
-                  ?candidate wikibase:apiOutputItem mwapi:item.
-                  ?score_private wikibase:apiOrdinal true.
+                bd:serviceParam wikibase:endpoint \"www.wikidata.org\";
+                  wikibase:api \"EntitySearch\";
+                  mwapi:language \"en\";
+                  mwapi:search ?__token__.
+                ?candidate wikibase:apiOutputItem mwapi:item.
+                ?score_private wikibase:apiOrdinal true.
               }
               ?candidate (wdt:P279|wdt:P31) ?type .
               ?type wdt:P279* ?mappedType .
               VALUES(?mappedType) {
-    		  ( <http://www.wikidata.org/entity/Q16334295> ) #group of humans
-                  ( <http://vocab.getty.edu/ontology#Concept> )
-                  ( <http://www.wikidata.org/entity/Q2342494> ) #collectible
-                  ( <http://www.wikidata.org/entity/Q838948> ) #work of art
-                  ( <https://d-nb.info/standards/elementset/gnd#Work> )
-                  ( <http://vocab.getty.edu/ontology#GroupConcept> )
-                  ( <http://www.cidoc-crm.org/cidoc-crm/E5_Event> )
-                  ( <http://www.cidoc-crm.org/cidoc-crm/E55_Type> )
-                  ( <https://d-nb.info/standards/elementset/gnd#CorporateBody> )
-                  ( <http://iflastandards.info/ns/fr/frbr/frbroo/F24_Publication_Expression> )
-                  ( <http://schema.swissartresearch.net/ontology/rds#crmArtwork> )
-                  ( <http://schema.swissartresearch.net/ontology/rds#crmBuiltWork> )
-      	   	  ( <http://www.wikidata.org/entity/Q1190554> ) #occurrence
-                  (  <http://www.wikidata.org/entity/Q18593264> ) #item of collection or exhibition
-                  (  <http://www.wikidata.org/entity/Q47461344> ) #written work
-                  ( <http://www.wikidata.org/entity/Q732577> ) #publication
-                  ( <http://www.wikidata.org/entity/Q8436> ) #family
-                  ( <https://d-nb.info/standards/elementset/gnd#ConferenceOrEvent> )
-                  #relating to places
-		  ( <http://www.geonames.org/ontology#Feature> )
-		  ( <https://d-nb.info/standards/elementset/gnd#BuildingOrMemorial> )
-		  ( <http://www.wikidata.org/entity/Q811979> ) #architectural structure
+                ( <http://www.wikidata.org/entity/Q16334295> ) #group of humans
+                ( <http://vocab.getty.edu/ontology#Concept> )
+                ( <http://www.wikidata.org/entity/Q2342494> ) #collectible
+                ( <http://www.wikidata.org/entity/Q838948> ) #work of art
+                ( <https://d-nb.info/standards/elementset/gnd#Work> )
+                ( <http://vocab.getty.edu/ontology#GroupConcept> )
+                ( <http://www.cidoc-crm.org/cidoc-crm/E5_Event> )
+                ( <http://www.cidoc-crm.org/cidoc-crm/E55_Type> )
+                ( <https://d-nb.info/standards/elementset/gnd#CorporateBody> )
+                ( <http://iflastandards.info/ns/fr/frbr/frbroo/F24_Publication_Expression> )
+                ( <http://schema.swissartresearch.net/ontology/rds#crmArtwork> )
+                ( <http://schema.swissartresearch.net/ontology/rds#crmBuiltWork> )
+                ( <http://www.wikidata.org/entity/Q1190554> ) #occurrence
+                ( <http://www.wikidata.org/entity/Q18593264> ) #item of collection or exhibition
+                ( <http://www.wikidata.org/entity/Q47461344> ) #written work
+                ( <http://www.wikidata.org/entity/Q732577> ) #publication
+                ( <http://www.wikidata.org/entity/Q8436> ) #family
+                ( <https://d-nb.info/standards/elementset/gnd#ConferenceOrEvent> )
+                ## relating to places
+                ( <http://www.geonames.org/ontology#Feature> )
+                ( <https://d-nb.info/standards/elementset/gnd#BuildingOrMemorial> )
+                ( <http://www.wikidata.org/entity/Q811979> ) #architectural structure
             	  ( <http://www.cidoc-crm.org/cidoc-crm/E53_Place> )
             	  ( <https://d-nb.info/standards/elementset/gnd#PlaceOrGeographicName> )
             	  ( <http://vocab.getty.edu/ontology#AdminPlaceConcept> )
@@ -83,24 +84,25 @@
             	  ( <http://www.wikidata.org/entity/Q570116> ) #tourist attraction
             	  ( <http://www.wikidata.org/entity/Q5946290> ) #South China Botanical Garden, Chinese Academy of Sciences
             	  ( <http://www.wikidata.org/entity/Q6256> ) #country
-    		  #relating to persons
-                  ( <http://vocab.getty.edu/ontology#PersonConcept> )
-    		  (  <http://www.wikidata.org/entity/Q3778211> ) #legal person 
-                  ( <http://vocab.getty.edu/ontology#UnknownPersonConcept> )
-                  ( <https://d-nb.info/standards/elementset/gnd#Person> )
-                  ( <http://www.cidoc-crm.org/cidoc-crm/E21_Person> )
-                  ( <http://www.wikidata.org/entity/Q1415187> ) #economic agent
-                  ( <http://www.wikidata.org/entity/Q154954> ) #natural person
-                  ( <http://www.wikidata.org/entity/Q5> ) #human
-                  ( <http://www.wikidata.org/entity/Q215627> ) #person
-                  ( <https://d-nb.info/standards/elementset/gnd#DifferentiatedPerson> )
-                  ( <https://d-nb.info/standards/elementset/gnd#UndifferentiatedPerson> )
-               }
-          }}
+                ## relating to persons
+                ( <http://vocab.getty.edu/ontology#PersonConcept> )
+                ( <http://www.wikidata.org/entity/Q3778211> ) #legal person 
+                ( <http://vocab.getty.edu/ontology#UnknownPersonConcept> )
+                ( <https://d-nb.info/standards/elementset/gnd#Person> )
+                ( <http://www.cidoc-crm.org/cidoc-crm/E21_Person> )
+                ( <http://www.wikidata.org/entity/Q1415187> ) #economic agent
+                ( <http://www.wikidata.org/entity/Q154954> ) #natural person
+                ( <http://www.wikidata.org/entity/Q5> ) #human
+                ( <http://www.wikidata.org/entity/Q215627> ) #person
+                ( <https://d-nb.info/standards/elementset/gnd#DifferentiatedPerson> )
+                ( <https://d-nb.info/standards/elementset/gnd#UndifferentiatedPerson> )
+              }
+            }
+          }
         } UNION {
-            BIND (1 as ?score_private)
-            BIND (IRI(CONCAT(\"http://www.wikidata.org/entity/\", UCASE(?__token__))) as ?candidate)
-            ?candidate (wdt:P279|wdt:P31) ?type .
+          BIND (1 as ?score_private)
+          BIND (IRI(CONCAT(\"http://www.wikidata.org/entity/\", UCASE(?__token__))) as ?candidate)
+          ?candidate (wdt:P279|wdt:P31) ?type .
         } UNION {
           BIND(IRI(?__token__) as ?candidate)
           ?candidate (wdt:P279|wdt:P31) ?type .
