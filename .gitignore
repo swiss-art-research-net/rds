@@ -8,6 +8,7 @@ data-preparation/groupingFeatureAdjustment/output*
 .idea
 *.war
 *.DS_Store
+.env
 .gradle
 .settings
 target
