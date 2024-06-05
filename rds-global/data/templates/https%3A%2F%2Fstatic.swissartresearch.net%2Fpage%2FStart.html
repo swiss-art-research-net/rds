@@ -136,8 +136,10 @@
               "type": "lookup",
               "limit": 20,
               "lookupServiceName": "[[lookupServiceName]]",
-              "entityType": "[[entityType]]"
-            }'>
+              "entityType": "[[entityType]]",
+              "tokenizeLuceneQuery": true
+            }'
+          >
          </semantic-search-keyword-prefetch>
           [[> rdsParts:ResultTableForSemanticSearch]]
 </semantic-search>
@@ -168,7 +170,8 @@
             query='{
               "type": "lookup",
               "limit": 20,
-              "lookupServiceName": "[[lookupServiceName]]"
+              "lookupServiceName": "[[lookupServiceName]]",
+              "tokenizeLuceneQuery": true
             }'>
             </semantic-search-keyword-prefetch>
             [[> rdsParts:ResultTableForSemanticSearch]]
