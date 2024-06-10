@@ -26,9 +26,7 @@
         ], [
           lookup:name "sikart-lookup"
         ], [
-          lookup:name "entityfacts-lookup"
-        ], [
-          lookup:name "bibliographicdata-lookup"
+          lookup:name "gnd-lookup"
         ], [
           lookup:name "wikidata-lookup"
         ], [

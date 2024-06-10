@@ -32,8 +32,30 @@
         {
           GRAPH <https://d-nb.info/gnd/authorities/graph> {
               ?candidate a ?type.
-              ?candidate ?keyProp ?key.
-              FILTER ISLITERAL(?key)
+              ?candidate ?keyProp ?key .
+              VALUES (?keyProp) {
+                ( <https://d-nb.info/standards/elementset/gnd#abbreviatedNameForTheConferenceOrEvent> )
+                ( <https://d-nb.info/standards/elementset/gnd#abbreviatedNameForTheCorporateBody> )
+                ( <https://d-nb.info/standards/elementset/gnd#abbreviatedNameForThePlaceOrGeographicName> )
+                ( <https://d-nb.info/standards/elementset/gnd#abbreviatedNameForTheWork> )
+                ( <https://d-nb.info/standards/elementset/gnd#gndIdentifier> )
+                ( <https://d-nb.info/standards/elementset/gnd#oldAuthorityNumber> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForTheConferenceOrEvent> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForTheCorporateBody> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForTheFamily> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForThePlaceOrGeographicName> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> )
+                ( <https://d-nb.info/standards/elementset/gnd#preferredNameForTheWork> )
+                ( <https://d-nb.info/standards/elementset/gnd#professionOrOccupationAsLiteral> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForTheConferenceOrEvent> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForTheCorporateBody> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForTheFamily> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForThePerson> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForThePlaceOrGeographicName> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForTheSubjectHeading> )
+                ( <https://d-nb.info/standards/elementset/gnd#variantNameForTheWork> )
+              }
           }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
               ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
@@ -42,44 +64,14 @@
               <http://www.bigdata.com/rdf/search#matchAllTerms> \"true\"  .
           }
         } UNION {
-        		BIND (1 as ?score_private)
-            BIND (IRI(CONCAT(\"https://d-nb.info/gnd/\", ?__token__)) as ?candidate)
-            
-            FILTER EXISTS {
-      		GRAPH ?g {
-        		VALUES (?g) {
-    			  (<https://d-nb.info/gnd/authorities/graph>)
-   				 }
-      			{
-        		?candidate ?prop ?obj .
-      			} UNION {
-                ?subj ?prop ?candidate .
-              }
-              Optional {
-                ?candidate a ?someType .
-              }
-        	}
-    	  }   
-        
-    } UNION {
-    			BIND (1 as ?score_private)
-          BIND(IRI(?__token__) as ?candidate)
+          BIND (1 as ?score_private)
+          BIND (IRI(CONCAT(\"https://d-nb.info/gnd/\", REPLACE(?__token__, \"\\\\*\", \"\"))) as ?candidate)
           FILTER EXISTS {
-      		GRAPH ?g {
-        		VALUES (?g) {
-    			  (<https://d-nb.info/gnd/authorities/graph>)
-   				 }
-      			{
-        		?candidate ?prop ?obj .
-      			} UNION {
-                ?subj ?prop ?candidate .
-              }
-              Optional {
-                ?candidate a ?someType .
-              }
-        	}
-    	  }
-    		}
+            GRAPH <https://d-nb.info/gnd/authorities/graph> {
+              ?candidate a ?someType
+            }
+          }
+        } 
     	""";
       lookup:typeBlockTemplate """
       FILTER EXISTS {
