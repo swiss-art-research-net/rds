@@ -17,6 +17,7 @@ target
 .classpath
 .vscode
 bin
+!utils/blazegraph-runner/target/universal/stage/bin
 tmp
 runtime*
 gradle.properties

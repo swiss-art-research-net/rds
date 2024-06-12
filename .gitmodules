@@ -1,3 +1,0 @@
-[submodule "data-preparation/utils/blazegraph-runner"]
-	path = data-preparation/utils/blazegraph-runner
-	url = https://github.com/andreghattas13/extended-blazegraph-runner.git
