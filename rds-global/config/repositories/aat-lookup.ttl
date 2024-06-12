@@ -42,7 +42,7 @@
           }
     		} UNION {
           BIND (1 as ?score_private)
-          BIND (IRI(CONCAT(\"http://vocab.getty.edu/aat/\", ?__token__)) as ?candidate)
+          BIND (IRI(CONCAT(\"http://vocab.getty.edu/aat/\", REPLACE(?__token__, \"\\\\\\\\*\", \"\"))) as ?candidate)
           FILTER EXISTS {
             ?candidate ?prop ?obj .
         	}
