@@ -140,8 +140,10 @@
               "type": "lookup",
               "limit": 20,
               "lookupServiceName": "[[lookupServiceName]]",
-              "entityType": "[[entityType]]",
-              "tokenizeLuceneQuery": true
+              [[#if tokenize]]
+                "tokenizeLuceneQuery": true,
+              [[/if]]
+              "entityType": "[[entityType]]"
             }'
           >
          </semantic-search-keyword-prefetch>
