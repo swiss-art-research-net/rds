@@ -22,25 +22,22 @@
   lookup:configuration [
       lookup:type "metaphacts:federatedLookup";
       lookup:serviceMember [
-          lookup:name "default-other-lookup"
+          lookup:name "wikidata-lookup"
+        ],
+        [
+          lookup:name "ulan-lookup"
         ], [
-          lookup:name "default-person-lookup";
-          lookup:scoreOffset 1.0E-1;
-          lookup:scoreFactor 1.0E0
+          lookup:name "sikart-lookup"
         ], [
-          lookup:name "wikidata-other-lookup"
+          lookup:name "gnd-lookup"
         ], [
-          lookup:name "wikidata-person-lookup";
-          lookup:scoreOffset 1.0E-1;
-          lookup:scoreFactor 1.0E0
+          lookup:name "geonames-lookup"
         ], [
-          lookup:name "wikidata-place-lookup";
-          lookup:scoreOffset 1.0E-1;
-          lookup:scoreFactor 1.0E0
+          lookup:name "aat-lookup"
         ], [
-          lookup:name "default-place-lookup";
-          lookup:scoreOffset 1.0E-1;
-          lookup:scoreFactor 1.0E0
+          lookup:name "thesarchesp-lookup"
+        ], [
+          lookup:name "thesobjmob-lookup"
         ]
     ] .
 

@@ -21,7 +21,7 @@
     ];
   lookup:configuration [
       lookup:type "rds:aggregationLookup";
-      lookup:delegateService "federated-lookup-2";
+      lookup:delegateService "federated-lookup";
       lookup:targetRepository "default" ;
       lookup:sameAsPattern "^<http://schema.swissartresearch.net/ontology/rds#related>";
     ] .

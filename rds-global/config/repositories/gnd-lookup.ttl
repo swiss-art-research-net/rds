@@ -25,7 +25,7 @@
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
          	BIND(<https://d-nb.info/gnd/authorities/graph> as ?dataset)
-    			BIND(\"bibliographicdata\" as ?datasetLabel)
+    			BIND(\"GND\" as ?datasetLabel)
         }
       """;
       lookup:searchBlockTemplate """
