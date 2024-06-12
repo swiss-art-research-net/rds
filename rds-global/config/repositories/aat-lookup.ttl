@@ -25,7 +25,7 @@
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
          	BIND(<http://vocab.getty.edu/aat/graph> as ?dataset)
-    			BIND(\"aat\" as ?datasetLabel)
+    			BIND(\"Getty AAT\" as ?datasetLabel)
         }
       """;
       lookup:searchBlockTemplate """

@@ -25,7 +25,7 @@
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
          	BIND(<http://vocab.getty.edu/ulan/graph> as ?dataset)
-    			BIND(\"ulan\" as ?datasetLabel)
+    			BIND(\"Getty ULAN\" as ?datasetLabel)
         }
       """;
       lookup:searchBlockTemplate """

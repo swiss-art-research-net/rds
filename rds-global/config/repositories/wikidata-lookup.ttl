@@ -22,7 +22,7 @@
       lookup:datasetQuery """
         SELECT DISTINCT ?candidate ?dataset ?datasetLabel WHERE {
             VALUES(?dataset ?datasetLabel) {
-                (<http://www.wikidata.org> \"wikidata\")
+                (<http://www.wikidata.org> \"Wikidata\")
             }
         } 
       """;
