@@ -119,11 +119,9 @@
           <bs-tab-pane event-key="Global">[[> search lookupServiceName="aggregated-federated-lookup" label="All datasets"]] </bs-tab-pane>
           <bs-tab-pane event-key="Local">[[> search lookupServiceName="aggregated-default-lookup" label="Hosted datasets"]] </bs-tab-pane>
           <bs-tab-pane event-key="Wikidata-only">[[> search lookupServiceName="wikidata-lookup" label="Wikidata"]] </bs-tab-pane>
-          <bs-tab-pane event-key="aat-only">[[> search lookupServiceName="aat-lookup" label="AAT"]] </bs-tab-pane>
+          <bs-tab-pane event-key="aat-only">[[> search lookupServiceName="aat-lookup" label="AAT" tokenize="true"]] </bs-tab-pane>
           <bs-tab-pane event-key="ulan-only">[[> search lookupServiceName="ulan-lookup" label="ULAN"]] </bs-tab-pane>
           <bs-tab-pane event-key="gnd-only">[[> search lookupServiceName="gnd-lookup" label="GND"]] </bs-tab-pane>
-          <bs-tab-pane event-key="bibliographicdata-only">[[> search lookupServiceName="bibliographicdata-lookup" label="Bibliographic data"]] </bs-tab-pane>
-          <bs-tab-pane event-key="entityfacts-only">[[> search lookupServiceName="entityfacts-lookup" label="Entityfacts"]] </bs-tab-pane>
           <bs-tab-pane event-key="geonames-only">[[> search lookupServiceName="geonames-lookup" label="Geonames"]] </bs-tab-pane>
           <bs-tab-pane event-key="thesobjmob-only">[[> search lookupServiceName="thesobjmob-lookup" label="Thésaurus de la désignation des objets mobiliers"]]</bs-tab-pane>
           <bs-tab-pane event-key="thesarchesp-only">[[> search lookupServiceName="thesarchesp-lookup" label="Thésaurus de la désignation des œuvres architecturales et des espaces aménagés"]]</bs-tab-pane>
@@ -176,8 +174,10 @@
             query='{
               "type": "lookup",
               "limit": 20,
-              "lookupServiceName": "[[lookupServiceName]]",
-              "tokenizeLuceneQuery": true
+              [[#if tokenize]]
+                "tokenizeLuceneQuery": true,
+              [[/if]]
+              "lookupServiceName": "[[lookupServiceName]]"
             }'>
             </semantic-search-keyword-prefetch>
             [[> rdsParts:ResultTableForSemanticSearch]]
