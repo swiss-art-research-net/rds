@@ -72,16 +72,8 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
   }
 }' ./data/ulanSameAs.ttl
 
-# Bibliographic data
-fetchData "Bibliographic data" ${BLAZEGRAPH_ENDPOINT} 'PREFIX owl: <http://www.w3.org/2002/07/owl#>
-CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
-  GRAPH <https://d-nb.info/gnd/bibliographicdata/graph> {
-    ?candidate2 owl:sameAs ?candidate1 .
-  }
-}' ./data/bibliographicDataSameAs.ttl
-
-# Entityfacts
-fetchData "Entityfacts-1" ${BLAZEGRAPH_ENDPOINT} 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# GND
+fetchData "Gnd-1" ${BLAZEGRAPH_ENDPOINT} 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -92,13 +84,13 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
           (rdfs:seeAlso)
           (skos:exactMatch)
       }
-      GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
+      GRAPH <https://d-nb.info/gnd/authorities/graph> {
       ?candidate2 ?predicate ?candidate1 .
       }
   } LIMIT 10397743}
-}' ./data/entityfactsSameAs_1.ttl
+}' ./data/gndSameAs_1.ttl
 
-fetchData "Entityfacts-2" ${BLAZEGRAPH_ENDPOINT} 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+fetchData "Gnd-2" ${BLAZEGRAPH_ENDPOINT} 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -109,11 +101,11 @@ CONSTRUCT { ?candidate2 owl:sameAs ?candidate1 . } WHERE {
           (rdfs:seeAlso)
           (skos:exactMatch)
       }
-      GRAPH <https://d-nb.info/gnd/entityfacts/graph> {
+      GRAPH <https://d-nb.info/gnd/authorities/graph> {
       ?candidate2 ?predicate ?candidate1 .
       }
   } OFFSET 10397743 LIMIT 10397750}
-}' ./data/entityfactsSameAs_2.ttl
+}' ./data/gndSameAs_2.ttl
 
 # LOC
 fetchData "LOC" ${BLAZEGRAPH_ENDPOINT} 'PREFIX loc: <http://www.loc.gov/mads/rdf/v1#>
