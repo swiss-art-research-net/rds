@@ -65,7 +65,7 @@
           }
         } UNION {
           BIND (1 as ?score_private)
-          BIND (IRI(CONCAT(\"https://d-nb.info/gnd/\", REPLACE(?__token__, \"\\\\*\", \"\"))) as ?candidate)
+          BIND (IRI(CONCAT(\"https://d-nb.info/gnd/\", REPLACE(?__token__, \"\\\\\\\\*\", \"\"))) as ?candidate)
           FILTER EXISTS {
             GRAPH <https://d-nb.info/gnd/authorities/graph> {
               ?candidate a ?someType
@@ -84,4 +84,3 @@
       }
     """
     ] .
-
