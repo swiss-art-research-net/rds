@@ -31,6 +31,7 @@
       lookup:searchBlockTemplate """
        	{
           GRAPH <http://recherche.sik-isea.ch/graph> {
+            ?candidate a ?type.
 						?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label|rdfs:label ?key .
           }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
