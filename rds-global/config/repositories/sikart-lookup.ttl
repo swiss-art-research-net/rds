@@ -34,6 +34,9 @@
             ?candidate a ?type.
 						?candidate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by>/rdfs:label|rdfs:label ?key .
           }
+          GRAPH <http://schema.swissartresearch.net/rds/type-mapping> {
+            ?type rdfs:subClassOf* rds:Entity .
+          }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
               ?key <http://www.bigdata.com/rdf/search#search> ?__token__ ;
               <http://www.bigdata.com/rdf/search#relevance> ?score_private ;
