@@ -126,11 +126,11 @@
 
 [[#*inline "searchByType"]]
 
-<semantic-search limit=1000>
+<semantic-search limit=10>
         <semantic-search-keyword-prefetch
             query='{
               "type": "lookup",
-              "limit": 20,
+              "limit": 10,
               "lookupServiceName": "[[lookupServiceName]]",
               [[#if tokenize]]
                 "tokenizeLuceneQuery": true,
@@ -163,11 +163,11 @@
 
         <bs-tabs id="type-tabs" class="type-tab" >
           <bs-tab event-key="all" title="All">
-            <semantic-search limit=1000>
+            <semantic-search limit=10>
             <semantic-search-keyword-prefetch
             query='{
               "type": "lookup",
-              "limit": 20,
+              "limit": 10,
               [[#if tokenize]]
                 "tokenizeLuceneQuery": true,
               [[/if]]
