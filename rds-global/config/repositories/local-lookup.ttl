@@ -24,7 +24,9 @@
       lookup:serviceMember [
           lookup:name "ulan-lookup"
         ], [
-          lookup:name "sikart-lookup"
+          lookup:name "sikart-lookup";
+          lookup:scoreOffset -1.0E-2;
+          lookup:scoreFactor 1.0E0
         ], [
           lookup:name "gnd-lookup"
         ], [
