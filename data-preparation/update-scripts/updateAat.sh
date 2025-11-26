@@ -1,5 +1,5 @@
 export DATA_DIRECTORY=./aat-data
-export DATA_URL=http://vocab.getty.edu/dataset/aat/explicit.zip
+export DATA_URL=http://aatdownloads.getty.edu/VocabData/explicit.zip
 # For the test in the platform put content of 'assets_to_tests' to
 # 'runtime/assets' folder, then use follwoing line instead
 # export DATA_URL=http://localhost:10214/assets/no_auth/aat-data/aat-data.zip
@@ -26,13 +26,6 @@ echo "Start script updateAat.sh."
 
 echo "Prepare AAT data"
 # ========================
-cd ${DATA_DIRECTORY}
-touch "AATOut_WikidataCoref_temp.nt"
-cp -p AATOut_WikidataCoref.nt "AATOut_WikidataCoref_temp.nt"
-sed -e 's/>[\x0D|\x0A]/> ./g' "AATOut_WikidataCoref_temp.nt" > AATOut_WikidataCoref.nt
-echo " ." >> AATOut_WikidataCoref.nt
-# sed -e 's/\(Q.*\)>/\1>./g' "AATOut_WikidataCoref_temp.nt" > AATOut_WikidataCoref.nt # For MacOS
-rm "AATOut_WikidataCoref_temp.nt"
 cd ${SCRIPT_DIR}
 
 echo "Remove old data from the database"
